@@ -16,6 +16,9 @@ Route::middleware('can:admin')->group( function () {
     Route::get('/socios/{socio}/edit', 'SocioController@edit')->name('socios.edit');
 });
 
+// Generate Carnet PDF
+Route::get('carnet/{anverso}', 'Report\CarnetController@anverso')->name('carnet.anverso');
+
 Route::get('/socios/{socio}', 'SocioController@show')->name('socios.show');
 
 Auth::routes(["register" => false]);

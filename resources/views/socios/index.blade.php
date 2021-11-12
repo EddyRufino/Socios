@@ -66,7 +66,7 @@
                         >
                             @include('icons.qr')
                         </a>
-                        <a href="#"
+                        <a href="{{ route('carnet.anverso', $socio->id) }}"
                             class="ml-3 text-decoration-none"
                             data-toggle="tooltip"
                             data-placement="top"
