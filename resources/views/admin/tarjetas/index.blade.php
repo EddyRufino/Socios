@@ -2,14 +2,8 @@
 
 @section('content')
 <div class="container">
-    <div class="d-flex align-items-center justify-content-between mb-3">
-        <h3><a href="{{ route('socios.index') }}" class="text-dark">Socios</a></h3>
-        {{-- <a href="{{ route('socios.create') }}" class="btn btn-primary">Nuevo</a> --}}
-        <div>
-            <a href="{{ route('socios.create') }}" class="btn btn-primary">Nueva Tarjeta</a>
-            <a href="{{ route('socios.create') }}" class="btn btn-primary">Nuevo Fotocheck</a>
-        </div>
-    </div>
+
+    @include('partials.nav')
 
     <div class="d-flex justify-content-center">
         <div class="mb-4">
@@ -33,6 +27,7 @@
             </form>
         </div>
     </div>
+        <h3><a href="{{ route('tarjetas.index') }}" class="text-dark font-weight-bold">Socios - Tarjetas Circulación</a></h3>
 
     <table class="table table-striped">
         <thead>
@@ -50,19 +45,19 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($tarejtas as $socio)
+            @forelse ($tarjetas as $tarjeta)
                 <tr>
-                    <td>{{ $socio->nombre_socio }}</td>
-                    <td>{{ $socio->dni_socio }}</td>
-                    <td>{{ $socio->nombre_propietario }}</td>
-                    <td>{{ $socio->num_placa }}</td>
-                    <td>{{ $socio->nombre_asociacion }}</td>
-                    {{-- <td>{{ $socio->expedicion }}</td> --}}
-                    {{-- <td>{{ $socio->revalidacion }}</td> --}}
-                    <td>{{ $socio->num_operacion }}</td>
-                    {{-- <td>{{ $socio->vigencia_operacion }}</td> --}}
+                    <td>{{ $tarjeta->nombre_socio }}</td>
+                    <td>{{ $tarjeta->dni_socio }}</td>
+                    <td>{{ $tarjeta->nombre_propietario }}</td>
+                    <td>{{ $tarjeta->num_placa }}</td>
+                    <td>{{ $tarjeta->asociacione->nombre }}</td>
+                    {{-- <td>{{ $tarjeta->expedicion }}</td> --}}
+                    {{-- <td>{{ $tarjeta->revalidacion }}</td> --}}
+                    <td>{{ $tarjeta->num_operacion }}</td>
+                    {{-- <td>{{ $tarjeta->vigencia_operacion }}</td> --}}
                     <td>
-                        <a href="{{ route('socios.show', $socio->url) }}"
+                        <a href="{{ route('socios.show', $tarjeta->url) }}"
                             class="text-decoration-none"
                             data-toggle="tooltip"
                             data-placement="top"
@@ -70,7 +65,7 @@
                         >
                             @include('icons.qr')
                         </a>
-                        <a href="{{ route('carnet.anverso', $socio->id) }}"
+                        <a href="{{ route('carnet.anverso', $tarjeta->id) }}"
                             class="ml-3 text-decoration-none"
                             data-toggle="tooltip"
                             data-placement="top"
@@ -78,7 +73,7 @@
                         >
                             @include('icons.download')
                         </a>
-                        <a href="{{ route('socios.edit', $socio) }}"
+                        <a href="{{ route('socios.edit', $tarjeta) }}"
                             class="ml-3 text-decoration-none"
                             data-toggle="tooltip"
                             data-placement="top"
@@ -86,7 +81,7 @@
                         >
                             @include('icons.edit')
                         </a>
-                        <form id="myform" method="POST" action="{{ route('socios.destroy', $socio) }}" style="display: inline">
+                        <form id="myform" method="POST" action="{{ route('socios.destroy', $tarjeta) }}" style="display: inline">
                             @csrf
                             @method('DELETE')
 
@@ -108,7 +103,7 @@
     </table>
 
     <div class="overflow-auto mt-2">
-        {{ $socios->links() }}
+        {{ $tarjetas->links() }}
     </div>
 </div>
 @endsection

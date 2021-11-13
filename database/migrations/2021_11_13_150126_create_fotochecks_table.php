@@ -17,11 +17,12 @@ class CreateFotochecksTable extends Migration
             $table->id();
             $table->string('nombre_socio', 120);
             $table->string('dni_socio', 8);
+            $table->string('url')->nullable();
             $table->date('expedicion');
             $table->date('revalidacion');
             $table->string('image')->nullable();
             $table->foreignId('vehiculo_id')->constrained('vehiculos')->nullable();
-            $table->foreignId('asociacione_id')->constrained('asociaciones');
+            $table->foreignId('asociacione_id')->constrained('asociaciones')->nullable();
             $table->timestamps();
         });
     }

@@ -11,13 +11,14 @@ use Faker\Generator as Faker;
 $factory->define(Tarjeta::class, function (Faker $faker) {
 
     $letter = ['P', 'G', 'T', 'M', 'D'];
+    $num = 1;
 
     return [
         'nombre_socio' => $faker->name,
         'nombre_propietario' => $faker->name,
         'dni_socio' => $faker->randomNumber(8),
         'dni_propietario' => $faker->randomNumber(8),
-        'url' => $faker->slug(),
+        'url' => $faker->slug(3),
         'num_placa' => $faker->randomNumber(3). '-' .$faker->randomNumber(2). $letter[mt_rand(0,count($letter)-1)] . $faker->randomNumber(2),
         'expedicion' => $faker->date(),
         'revalidacion' => $faker->date(),
@@ -25,6 +26,7 @@ $factory->define(Tarjeta::class, function (Faker $faker) {
         'vigencia_operacion' => $faker->randomNumber(8),
         'num_autorizacion' => $faker->randomNumber(4).'-2021-'.$faker->randomNumber(4),
         'vigencia_autorizacion' => $faker->randomNumber(8),
+        'num_correlativo' => $num + 1,
         'status' => 0,
         'vehiculo_id' => Vehiculo::all()->random()->id,
         'asociacione_id' => Asociacione::all()->random()->id,

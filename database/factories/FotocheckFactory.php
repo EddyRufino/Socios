@@ -11,6 +11,7 @@ $factory->define(Fotocheck::class, function (Faker $faker) {
     return [
         'nombre_socio' => $faker->name,
         'dni_socio' => $faker->randomNumber(8),
+        'url' => $faker->slug(3),
         'expedicion' => $faker->date(),
         'revalidacion' => $faker->date(),
         'image' => 'https://previews.123rf.com/images/dolgachov/dolgachov1604/dolgachov160401829/54866409-personas-el-cuidado-de-la-salud-de-la-vista-de-negocios-y-concepto-de-la-educaci%C3%B3n-la-cara-de-mujer-.jpg',

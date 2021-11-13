@@ -27,10 +27,11 @@ class CreateTarjetasTable extends Migration
             $table->string('vigencia_operacion', 120)->unique();
             $table->string('num_autorizacion', 120)->nullable();
             $table->string('vigencia_autorizacion', 120)->nullable();
+            $table->integer('num_correlativo')->nullable();
             $table->integer('status')->nullable()->default(0);
             $table->foreignId('vehiculo_id')->constrained('vehiculos');
-            $table->foreignId('asociacione_id')->constrained('asociaciones');
-            $table->foreignId('correlativo_id')->constrained('correlativos')->onDelete('cascade');;
+            $table->foreignId('asociacione_id')->constrained('asociaciones')->nullable();
+            $table->foreignId('correlativo_id')->constrained('correlativos')->onDelete('cascade')->nullable();
             $table->timestamps();
         });
     }
