@@ -4,7 +4,11 @@
 <div class="container">
     <div class="d-flex align-items-center justify-content-between mb-3">
         <h3><a href="{{ route('socios.index') }}" class="text-dark">Socios</a></h3>
-        <a href="{{ route('socios.create') }}" class="btn btn-primary">Nuevo</a>
+        {{-- <a href="{{ route('socios.create') }}" class="btn btn-primary">Nuevo</a> --}}
+        <div>
+            <a href="{{ route('socios.create') }}" class="btn btn-primary">Nueva Tarjeta</a>
+            <a href="{{ route('socios.create') }}" class="btn btn-primary">Nuevo Fotocheck</a>
+        </div>
     </div>
 
     <div class="d-flex justify-content-center">
