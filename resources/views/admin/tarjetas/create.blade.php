@@ -7,8 +7,8 @@
             @include('partials.nav')
 
             <div class="card mt-4">
-                <div class="card-header">
-                    <h6 class="font-weight-bold">Nueva Tarjeta Circulación</h6>
+                <div class="card-header bg-info text-white">
+                    <h6 class="font-weight-bold">Nueva Tarjeta De Circulación</h6>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('tarjetas.store') }}">

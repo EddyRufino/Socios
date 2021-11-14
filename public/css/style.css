@@ -8,16 +8,28 @@
     padding: 1rem 1.25rem 0rem 0.5rem;
 }
 
+.card {
+    border-top: 0px solid!important;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    color: #6c757d;
+}
+
 .legend {
     width: 120px !important;
     font-size: 0.9rem !important;
-    font-weight: 600;
+    color: rgba(107, 114, 128, 1);
+    font-weight: bolder;
 }
 
 .text-legend-transportador {
     width: 255px !important;
     font-size: 0.9rem !important;
-    font-weight: 600;
+    color: rgba(107, 114, 128, 1);
+    font-weight: bolder;
 }
 
 .text-legend {
@@ -26,4 +38,11 @@
 
 .boder-1 {
     border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+@media (max-width: 768px) {
+  .mobil {
+    margin-left: 0px !important;
+    margin-top: 0.5rem;
+  }
 }

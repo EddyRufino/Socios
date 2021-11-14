@@ -281,7 +281,7 @@
 
 </div>
 
-<button class="btn btn-primary form-group mt-3 btn-lg" type="submit">Guardar</button>
+<button class="btn btn-info text-white form-group mt-3 btn-lg" type="submit">Guardar</button>
 
 @push('scripts')
 <script>
