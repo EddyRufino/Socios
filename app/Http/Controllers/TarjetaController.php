@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Asociacione;
 use App\Tarjeta;
+use App\Vehiculo;
 use Illuminate\Http\Request;
 
 class TarjetaController extends Controller
@@ -17,12 +19,15 @@ class TarjetaController extends Controller
 
     public function create()
     {
-        return view('admin.tarjetas.create');
+        $vehiculos = Vehiculo::all();
+        $asociaciones = Asociacione::all();
+
+        return view('admin.tarjetas.create', compact('vehiculos', 'asociaciones'));
     }
 
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     public function show(Tarjeta $tarjeta)
