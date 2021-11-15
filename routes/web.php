@@ -24,8 +24,8 @@ Route::get('/socios/{socio}', 'SocioController@show')->name('socios.show');
 
 // Tarjetas
 Route::middleware('can:admin')->group( function () {
-    //Route::get('/buscar-socio', 'Search\SearchSocioController')->name('search.socio');
-    //Route::post('/check-qr/{socio}', 'CheckQrSocioController')->name('check.socio');
+    Route::get('/buscar-tarjeta-circulacion', 'Search\SearchTarjetaController')->name('search.tarjeta');
+    Route::post('/check-qr-tarjeta/{tarjeta}', 'Checks\CheckQrTarjetaController')->name('check.tarjeta');
     // Socios
     Route::get('/socios-tarjetas', 'TarjetaController@index')->name('tarjetas.index');
     Route::post('/socios-tarjetas', 'TarjetaController@store')->name('tarjetas.store');

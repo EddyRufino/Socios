@@ -40,7 +40,7 @@
                 <!--<th scope="col">Expedición</th>-->
                 <!--<th scope="col">Revalicación</th>-->
                 <th scope="col">N. Operación</th>
-                {{-- <th scope="col">Vigencia Operación</th> --}}
+                <th scope="col">QR</th>
                 <th scope="col">Actividad</th>
             </tr>
         </thead>
@@ -55,7 +55,11 @@
                     {{-- <td>{{ $tarjeta->expedicion }}</td> --}}
                     {{-- <td>{{ $tarjeta->revalidacion }}</td> --}}
                     <td>{{ $tarjeta->num_operacion }}</td>
-                    {{-- <td>{{ $tarjeta->vigencia_operacion }}</td> --}}
+                    @if ($tarjeta->status == 1)
+                        <td><span class="badge badge-info text-white">Generado</span></td>
+                    @else
+                        <td></td>
+                    @endif
                     <td>
                         <a href="{{ route('tarjetas.show', $tarjeta->url) }}"
                             class="text-decoration-none"
@@ -81,19 +85,7 @@
                         >
                             @include('icons.edit')
                         </a>
-{{--                         <form id="myform" method="POST" action="{{ route('socios.destroy', $tarjeta) }}" style="display: inline">
-                            @csrf
-                            @method('DELETE')
 
-                            <button class="btn btn-xs btn-transparent "
-                                onclick="return confirm('¿Seguro de querer eliminar este socio?')"
-                                data-toggle="tooltip"
-                                data-placement="top"
-                                title="Eliminar Socio"
-                            >
-                                @include('icons.delete')
-                            </button>
-                        </form> --}}
                     </td>
                 </tr>
             @empty
@@ -107,3 +99,4 @@
     </div>
 </div>
 @endsection
+

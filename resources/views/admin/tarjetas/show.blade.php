@@ -54,17 +54,12 @@
             <li class="list-group-item border-0 m-0 pt-0 text-center bg-transparent">
                 <strong><h5 class="font-weight-bold">TARJETA DE CIRCULACIÓN VEHICULAR</h5></strong>
             </li>
-<!--             <img
-                src="{{ asset($socio->image) }}"
-                alt="{{ $socio->nombre_socio }}"
-                class='img-thumbnail mb-4' style="width: 180px; height: 200px;"
-            > -->
         </div>
 
-{{--         @admin
+        @admin
             <div class="d-flex justify-content-center align-items-center mb-3">
                 <div class="form-check">
-                    <form  method="POST" action="{{ route('check.socio', $socio) }}">
+                    <form  method="POST" action="{{ route('check.tarjeta', $socio) }}">
                         @csrf
                             <input class="form-check-input"
                                 name="status"
@@ -80,7 +75,7 @@
                     </form>
                 </div>
             </div>
-        @endadmin --}}
+        @endadmin
 
         <div class="d-flex justify-content-center flex-column align-items-center">
             <ul class="list-group col-md-3">

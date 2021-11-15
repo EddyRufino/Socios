@@ -12,9 +12,8 @@ class TarjetaController extends Controller
 {
     public function index()
     {
-       $tarjetas = Tarjeta::latest()->paginate();
+       $tarjetas = Tarjeta::where('status', 0)->latest()->paginate();
 
-       //dd($tarejetas);
         return view('admin.tarjetas.index', compact('tarjetas'));
     }
 
