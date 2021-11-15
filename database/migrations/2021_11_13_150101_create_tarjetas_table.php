@@ -17,21 +17,21 @@ class CreateTarjetasTable extends Migration
             $table->id();
             $table->string('nombre_socio', 120);
             $table->string('nombre_propietario', 120)->nullable();
-            $table->string('dni_socio', 8)->nullable();
-            $table->string('dni_propietario', 8)->nullable();
+            $table->string('dni_socio', 8)->nullable()->unique();
+            $table->string('dni_propietario', 8)->nullable()->unique();
             $table->string('url')->nullable();
             $table->string('num_placa', 30)->nullable()->unique();
             $table->date('expedicion');
             $table->date('revalidacion');
-            $table->string('num_operacion', 120)->unique();
-            $table->string('vigencia_operacion', 120)->unique();
+            $table->string('num_operacion', 120)->nullable();
+            $table->string('vigencia_operacion', 120)->nullable();
             $table->string('num_autorizacion', 120)->nullable();
             $table->string('vigencia_autorizacion', 120)->nullable();
             $table->integer('num_correlativo')->nullable();
             $table->integer('status')->nullable()->default(0);
             $table->foreignId('vehiculo_id')->constrained('vehiculos');
-            $table->foreignId('asociacione_id')->constrained('asociaciones')->nullable();
-            $table->foreignId('correlativo_id')->constrained('correlativos')->onDelete('cascade')->nullable();
+            $table->foreignId('asociacione_id')->constrained('asociaciones')->nullable(); // Modifica en la DB que es NULL - no lo agarra
+            //$table->foreignId('correlativo_id')->constrained('correlativos')->onDelete('cascade')->nullable();
             $table->timestamps();
         });
     }

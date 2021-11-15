@@ -171,117 +171,226 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6" id="juridica">
-        <fieldset class="boder-1">
-            <legend class="text-legend-transportador legend p-2">
-                Transportador Autorizado
-            </legend>
+    @if (request()->routeIs('tarjetas.create'))
+        <div class="col-md-6" id="juridica">
+            <fieldset class="boder-1">
+                <legend class="text-legend-transportador legend p-2">
+                    Transportador Autorizado
+                </legend>
 
-            <div class="form-group pl-2 pr-2">
-                <label for="inputEmail2">Asociación</label>
-                <select class="form-control @error('asociacione_id') is-invalid  @enderror" name="asociacione_id">
-                    <option value="">Selecciona una asociación</option>
-                    @foreach ($asociaciones as $asociacione)
-                      <option value="{{ $asociacione->id }}"
-                              {{ old('asociacione_id', $tarjeta->asociacione_id) == $asociacione->id ? 'selected' : '' }}>
-                        {{ $asociacione->nombre }}</option>
-                    @endforeach
-                </select>
+                <div class="form-group pl-2 pr-2">
+                    <label for="inputEmail2">Asociación</label>
+                    <select class="form-control @error('asociacione_id') is-invalid  @enderror" name="asociacione_id">
+                        <option value="">Selecciona una asociación</option>
+                        @foreach ($asociaciones as $asociacione)
+                          <option value="{{ $asociacione->id }}"
+                                  {{ old('asociacione_id', $tarjeta->asociacione_id) == $asociacione->id ? 'selected' : '' }}>
+                            {{ $asociacione->nombre }}</option>
+                        @endforeach
+                    </select>
 
-                @error('asociacione_id')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                @enderror
-            </div>
+                    @error('asociacione_id')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
 
-            <div class="form-group pl-2 pr-2">
-                <label for="inputEmail1">N. Operación</label>
-                <input type="text"
-                    name="num_operacion"
-                    class="form-control @error('num_operacion') is-invalid  @enderror"
-                    value="{{ old('num_operacion', $tarjeta->num_operacion) }}"
-                    id="inputEmail1"
-                    placeholder="Ejm: 036-2019"
-                >
+                <div class="form-group pl-2 pr-2">
+                    <label for="inputEmail1">N. Operación</label>
+                    <input type="text"
+                        name="num_operacion"
+                        class="form-control @error('num_operacion') is-invalid  @enderror"
+                        value="{{ old('num_operacion', $tarjeta->num_operacion) }}"
+                        id="inputEmail1"
+                        placeholder="Ejm: 036-2019"
+                    >
 
-                @error('num_operacion')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                @enderror
-            </div>
+                    @error('num_operacion')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
 
-            <div class="form-group pl-2 pr-2">
-                <label for="inputEmail1">Vigencia Operación</label>
-                <input type="text"
-                    name="vigencia_operacion"
-                    class="form-control @error('vigencia_operacion') is-invalid  @enderror"
-                    value="{{ old('vigencia_operacion', $tarjeta->vigencia_operacion) }}"
-                    id="inputEmail1"
-                    placeholder="Ejm: 19/09/2019 AL 19/09/2025"
-                >
+                <div class="form-group pl-2 pr-2">
+                    <label for="inputEmail1">Vigencia Operación</label>
+                    <input type="text"
+                        name="vigencia_operacion"
+                        class="form-control @error('vigencia_operacion') is-invalid  @enderror"
+                        value="{{ old('vigencia_operacion', $tarjeta->vigencia_operacion) }}"
+                        id="inputEmail1"
+                        placeholder="Ejm: 19/09/2019 AL 19/09/2025"
+                    >
 
-                @error('vigencia_operacion')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                @enderror
-            </div>
-        </fieldset>
-    </div>
+                    @error('vigencia_operacion')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
 
-    <div class="col-md-6">
-        <fieldset class="boder-1" id="natural" style="display:none">
-            <legend class="text-legend-transportador legend p-2">
-                Persona Natural
-            </legend>
-
-            <div class="form-group pl-2 pr-2">
-                <label for="inputEmail3">N. Autorización</label>
-                <input type="text"
-                    name="num_autorizacion"
-                    class="form-control @error('num_autorizacion') is-invalid  @enderror"
-                    value="{{ old('num_autorizacion', $tarjeta->num_autorizacion) }}"
-                    id="inputEmail1"
-                    placeholder="Ejm: 5816-4P"
-                >
-
-                @error('num_autorizacion')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                @enderror
-            </div>
-
-            <div class="form-group pl-2 pr-2">
-                <label for="inputEmail3">Vigencia Autorización</label>
-                <input type="text"
-                    name="vigencia_autorizacion"
-                    class="form-control @error('vigencia_autorizacion') is-invalid  @enderror"
-                    value="{{ old('vigencia_autorizacion', $tarjeta->vigencia_autorizacion) }}"
-                    id="inputEmail1"
-                    placeholder="Ejm: 26/08 AL 26/09"
-                >
-
-                @error('vigencia_autorizacion')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                @enderror
-            </div>
-
-        </fieldset>
-
-        <div class="custom-control custom-checkbox mt-3">
-            <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
-            <label class="custom-control-label" for="myCheck">Persona Natural</label>
+            </fieldset>
         </div>
-    </div>
+
+        <div class="col-md-6">
+            <fieldset class="boder-1" id="natural" style="display:none">
+                <legend class="text-legend-transportador legend p-2">
+                    Persona Natural
+                </legend>
+
+                <div class="form-group pl-2 pr-2">
+                    <label for="inputEmail3">N. Autorización</label>
+                    <input type="text"
+                        name="num_autorizacion"
+                        class="form-control @error('num_autorizacion') is-invalid  @enderror"
+                        value="{{ old('num_autorizacion', $tarjeta->num_autorizacion) }}"
+                        id="inputEmail1"
+                        placeholder="Ejm: 5816-4P"
+                    >
+
+                    @error('num_autorizacion')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="form-group pl-2 pr-2">
+                    <label for="inputEmail3">Vigencia Autorización</label>
+                    <input type="text"
+                        name="vigencia_autorizacion"
+                        class="form-control @error('vigencia_autorizacion') is-invalid  @enderror"
+                        value="{{ old('vigencia_autorizacion', $tarjeta->vigencia_autorizacion) }}"
+                        id="inputEmail1"
+                        placeholder="Ejm: 26/08 AL 26/09"
+                    >
+
+                    @error('vigencia_autorizacion')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
+
+            </fieldset>
+
+            <div class="custom-control custom-checkbox mt-3">
+                <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
+                <label class="custom-control-label" for="myCheck">Persona Natural</label>
+            </div>
+        </div>
+    @endif
+
+    @if (request()->routeIs('tarjetas.edit') )
+        <div class="col-md-6" id="juridica">
+            <fieldset class="boder-1">
+                <legend class="text-legend-transportador legend p-2">
+                    Transportador Autorizado
+                </legend>
+
+                <div class="form-group pl-2 pr-2">
+                    <label for="inputEmail2">Asociación</label>
+                    <select class="form-control @error('asociacione_id') is-invalid  @enderror" name="asociacione_id">
+                        <option value="">Selecciona una asociación</option>
+                        @foreach ($asociaciones as $asociacione)
+                          <option value="{{ $asociacione->id }}"
+                                  {{ old('asociacione_id', $tarjeta->asociacione_id) == $asociacione->id ? 'selected' : '' }}>
+                            {{ $asociacione->nombre }}</option>
+                        @endforeach
+                    </select>
+
+                    @error('asociacione_id')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="form-group pl-2 pr-2">
+                    <label for="inputEmail1">N. Operación</label>
+                    <input type="text"
+                        name="num_operacion"
+                        class="form-control @error('num_operacion') is-invalid  @enderror"
+                        value="{{ old('num_operacion', $tarjeta->num_operacion) }}"
+                        id="inputEmail1"
+                        placeholder="Ejm: 036-2019"
+                    >
+
+                    @error('num_operacion')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="form-group pl-2 pr-2">
+                    <label for="inputEmail1">Vigencia Operación</label>
+                    <input type="text"
+                        name="vigencia_operacion"
+                        class="form-control @error('vigencia_operacion') is-invalid  @enderror"
+                        value="{{ old('vigencia_operacion', $tarjeta->vigencia_operacion) }}"
+                        id="inputEmail1"
+                        placeholder="Ejm: 19/09/2019 AL 19/09/2025"
+                    >
+
+                    @error('vigencia_operacion')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
+
+            </fieldset>
+        </div>
+
+        <div class="col-md-6">
+            <fieldset class="boder-1" id="natural">
+                <legend class="text-legend-transportador legend p-2">
+                    Persona Natural
+                </legend>
+
+                <div class="form-group pl-2 pr-2">
+                    <label for="inputEmail3">N. Autorización</label>
+                    <input type="text"
+                        name="num_autorizacion"
+                        class="form-control @error('num_autorizacion') is-invalid  @enderror"
+                        value="{{ old('num_autorizacion', $tarjeta->num_autorizacion) }}"
+                        id="inputEmail1"
+                        placeholder="Ejm: 5816-4P"
+                    >
+
+                    @error('num_autorizacion')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="form-group pl-2 pr-2">
+                    <label for="inputEmail3">Vigencia Autorización</label>
+                    <input type="text"
+                        name="vigencia_autorizacion"
+                        class="form-control @error('vigencia_autorizacion') is-invalid  @enderror"
+                        value="{{ old('vigencia_autorizacion', $tarjeta->vigencia_autorizacion) }}"
+                        id="inputEmail1"
+                        placeholder="Ejm: 26/08 AL 26/09"
+                    >
+
+                    @error('vigencia_autorizacion')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
+
+            </fieldset>
+        </div>
+    @endif
 
 </div>
 
-<button class="btn btn-info text-white form-group mt-3 btn-lg" type="submit">Guardar</button>
+<button class="btn btn-info text-white form-group mt-3 btn-lg" type="submit">{{ $btn }}</button>
 
 @push('scripts')
 <script>

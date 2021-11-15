@@ -29,7 +29,7 @@ $factory->define(Tarjeta::class, function (Faker $faker) {
         'num_correlativo' => $num + 1,
         'status' => 0,
         'vehiculo_id' => Vehiculo::all()->random()->id,
-        'asociacione_id' => Asociacione::all()->random()->id,
-        'correlativo_id' => Correlativo::all()->random()->id
+        'asociacione_id' => Asociacione::all()->random()->id
+        //'correlativo_id' => Correlativo::all()->random()->id
     ];
 });

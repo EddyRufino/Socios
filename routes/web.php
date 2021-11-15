@@ -30,12 +30,12 @@ Route::middleware('can:admin')->group( function () {
     Route::get('/socios-tarjetas', 'TarjetaController@index')->name('tarjetas.index');
     Route::post('/socios-tarjetas', 'TarjetaController@store')->name('tarjetas.store');
     Route::get('/socios-tarjetas/create', 'TarjetaController@create')->name('tarjetas.create');
-    Route::put('/socios-tarjetas/{socio}', 'TarjetaController@update')->name('tarjetas.update');
-    Route::delete('/socios-tarjetas/{socio}', 'TarjetaController@destroy')->name('tarjetas.destroy');
-    Route::get('/socios-tarjetas/{socio}/edit', 'TarjetaController@edit')->name('tarjetas.edit');
+    Route::put('/socios-tarjetas/{tarjeta}', 'TarjetaController@update')->name('tarjetas.update');
+    //Route::delete('/socios-tarjetas/{socio}', 'TarjetaController@destroy')->name('tarjetas.destroy');
+    Route::get('/socios-tarjetas/{tarjeta}/edit', 'TarjetaController@edit')->name('tarjetas.edit');
 });
 
-Route::get('/socios-tarjetas/{socio}', 'TarjetaController@show')->name('tarjetas.show');
+Route::get('/tarjeta-circulacion/{socio}', 'TarjetaController@show')->name('tarjetas.show');
 
 // Fotochecks
 Route::middleware('can:admin')->group( function () {

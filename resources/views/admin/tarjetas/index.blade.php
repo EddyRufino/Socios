@@ -51,13 +51,13 @@
                     <td>{{ $tarjeta->dni_socio }}</td>
                     <td>{{ $tarjeta->nombre_propietario }}</td>
                     <td>{{ $tarjeta->num_placa }}</td>
-                    <td>{{ $tarjeta->asociacione->nombre }}</td>
+                    <td>{{ optional($tarjeta->asociacione)->nombre }}</td>
                     {{-- <td>{{ $tarjeta->expedicion }}</td> --}}
                     {{-- <td>{{ $tarjeta->revalidacion }}</td> --}}
                     <td>{{ $tarjeta->num_operacion }}</td>
                     {{-- <td>{{ $tarjeta->vigencia_operacion }}</td> --}}
                     <td>
-                        <a href="{{ route('socios.show', $tarjeta->url) }}"
+                        <a href="{{ route('tarjetas.show', $tarjeta->url) }}"
                             class="text-decoration-none"
                             data-toggle="tooltip"
                             data-placement="top"
@@ -73,7 +73,7 @@
                         >
                             @include('icons.download')
                         </a>
-                        <a href="{{ route('socios.edit', $tarjeta) }}"
+                        <a href="{{ route('tarjetas.edit', $tarjeta) }}"
                             class="ml-3 text-decoration-none"
                             data-toggle="tooltip"
                             data-placement="top"
@@ -81,7 +81,7 @@
                         >
                             @include('icons.edit')
                         </a>
-                        <form id="myform" method="POST" action="{{ route('socios.destroy', $tarjeta) }}" style="display: inline">
+{{--                         <form id="myform" method="POST" action="{{ route('socios.destroy', $tarjeta) }}" style="display: inline">
                             @csrf
                             @method('DELETE')
 
@@ -93,7 +93,7 @@
                             >
                                 @include('icons.delete')
                             </button>
-                        </form>
+                        </form> --}}
                     </td>
                 </tr>
             @empty
