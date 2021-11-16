@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container">
-    <h4 class="text-dark font-weight-bold">Socios - Fotochecks</h4>
+    <h4 class="text-dark font-weight-bold"><a href="{{ route('fotochecks.index') }}" class="text-dark font-weight-bold">Socios - Fotochecks</a></h4>
 
     <h2 id="dds"></h2>
     <div class="d-flex justify-content-center">
         <div id="search" class="mb-4" style="display: none;">
-            {{-- {{ route('search.fotocheck') }} --}}
+
             <form action="{{ route('search.fotocheck') }}" class="form-inline">
                 @csrf
                 <div class="input-group input-group-md">
@@ -16,6 +16,7 @@
                         name="search" type="search"
                         placeholder="Socio - DNI"
                         aria-label="Search"
+                        value="{{ request()->search }}"
                         required
                     >
 
@@ -60,6 +61,7 @@
                         <th scope="col">DNI Socio</th>
                         <th scope="col">Asociación</th>
                         <th scope="col">Vehículo</th>
+                        <th scope="col">QR</th>
                         <th scope="col">Actividad</th>
                     </tr>
                 </thead>
@@ -76,6 +78,12 @@
                                 <td class="text-primary">{{ $fotocheck->vehiculo->nombre }}</td>
                             @else
                                 <td class="text-secondary">{{ $fotocheck->vehiculo->nombre }}</td>
+                            @endif
+
+                            @if ($fotocheck->status == 1)
+                                <td><span class="badge badge-info text-white">Generado</span></td>
+                            @else
+                                <td></td>
                             @endif
 
                             <td>

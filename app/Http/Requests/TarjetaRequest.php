@@ -27,8 +27,8 @@ class TarjetaRequest extends FormRequest
         return [
             'nombre_socio' => ['required', 'max:120'],
             'nombre_propietario' => ['nullable', 'max:120'],
-            'dni_socio' => ['required', 'min:8', 'max:8', Rule::unique('tarjetas')->ignore($this->tarjeta, 'dni_socio')],
-            'dni_propietario' => ['nullable', 'min:8', 'max:8', Rule::unique('tarjetas')->ignore($this->tarjeta, 'dni_propietario')],
+            'dni_socio' => ['required', 'min:8', 'max:8'],
+            'dni_propietario' => ['nullable', 'min:8', 'max:8'],
             'url' => ['nullable'],
             'num_placa' => ['required', 'max:30', Rule::unique('tarjetas')->ignore($this->tarjeta, 'num_placa')],
             'expedicion' => ['required', 'date'],

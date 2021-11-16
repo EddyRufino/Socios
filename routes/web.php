@@ -42,18 +42,18 @@ Route::get('/tarjeta-circulacion/{socio}', 'TarjetaController@show')->name('tarj
 
 // Fotochecks
 Route::middleware('can:admin')->group( function () {
-    //Route::get('/buscar-socio', 'Search\SearchSocioController')->name('search.socio');
-    //Route::post('/check-qr/{socio}', 'CheckQrSocioController')->name('check.socio');
+    Route::get('/buscar-fotocheck', 'Search\SearchFotocheckController')->name('search.fotocheck');
+    Route::post('/check-qr-fotocheck/{fotocheck}', 'Checks\CheckQrFotocheckController')->name('check.fotocheck');
     // Socios
     Route::get('/socios-fotochecks', 'FotocheckController@index')->name('fotochecks.index');
     Route::post('/socios-fotochecks', 'FotocheckController@store')->name('fotochecks.store');
     Route::get('/socios-fotochecks/create', 'FotocheckController@create')->name('fotochecks.create');
-    Route::put('/socios-fotochecks/{socio}', 'FotocheckController@update')->name('fotochecks.update');
-    Route::delete('/socios-fotochecks/{socio}', 'FotocheckController@destroy')->name('fotochecks.destroy');
-    Route::get('/socios-fotochecks/{socio}/edit', 'FotocheckController@edit')->name('fotochecks.edit');
+    Route::put('/socios-fotochecks/{fotocheck}', 'FotocheckController@update')->name('fotochecks.update');
+    Route::delete('/socios-fotochecks/{fotocheck}', 'FotocheckController@destroy')->name('fotochecks.destroy');
+    Route::get('/socios-fotochecks/{fotocheck}/edit', 'FotocheckController@edit')->name('fotochecks.edit');
 });
 
-Route::get('/socios-fotochecks/{socio}', 'FotocheckController@show')->name('fotochecks.show');
+Route::get('/socios-fotochecks/{fotocheck}', 'FotocheckController@show')->name('fotochecks.show');
 
 Auth::routes(["register" => false]);
 

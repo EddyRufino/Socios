@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Fotocheck extends Model
@@ -11,6 +12,22 @@ class Fotocheck extends Model
     public function getRouteKeyName()
     {
       return 'url';
+    }
+
+    public function setNombreSocioAttribute($nombre_socio) {
+
+        $this->attributes['nombre_socio'] = $nombre_socio;
+
+        $url = Str::of($nombre_socio)->slug('-');
+
+        if (static::whereUrl($url)->exists()) {
+
+            $this->attributes['url'] = Str::of($nombre_socio .'-'. now()->format('d'))->slug('-');
+
+        } else {
+
+            $this->attributes['url'] = Str::of($nombre_socio)->slug('-');
+        }
     }
 
     public function vehiculo()
