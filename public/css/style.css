@@ -1,4 +1,13 @@
+/** selectpicker **/
+.bootstrap-select > .dropdown-toggle.bs-placeholder, .bootstrap-select > .dropdown-toggle.bs-placeholder:hover, .bootstrap-select > .dropdown-toggle.bs-placeholder:focus, .bootstrap-select > .dropdown-toggle.bs-placeholder:active {
+    color: #495057 !important;
+}
 
+.btn-light {
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+}
 
 
 .col-md-10 {

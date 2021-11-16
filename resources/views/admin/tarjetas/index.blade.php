@@ -104,7 +104,7 @@
                         <th scope="col">DNI Socio</th>
                         <th scope="col">N. Placa</th>
                         <th scope="col">Asociación</th>
-                        <th scope="col">Vehúculo</th>
+                        <th scope="col">Vehículo</th>
                         <th scope="col">Actividad</th>
                     </tr>
                 </thead>
@@ -121,7 +121,7 @@
                             @elseif($tarjeta->vehiculo_id === 2)
                                 <td class="text-primary">{{ $tarjeta->vehiculo->nombre }}</td>
                             @else
-                                <td class="text-warnning">{{ $tarjeta->vehiculo->nombre }}</td>
+                                <td class="text-secondary">{{ $tarjeta->vehiculo->nombre }}</td>
                             @endif
 
                             <td>

@@ -1,3 +1,7 @@
+@push('styles')
+    <link rel="stylesheet" href="https://www.jqueryscript.net/demo/Bootstrap-4-Dropdown-Select-Plugin-jQuery/dist/css/bootstrap-select.css" />
+@endpush
+
 <div class="row">
     <div class="col-md-6">
         <fieldset class="boder-1 p-2">
@@ -180,7 +184,7 @@
 
                 <div class="form-group pl-2 pr-2">
                     <label for="inputEmail2">Asociación</label>
-                    <select class="form-control @error('asociacione_id') is-invalid  @enderror" name="asociacione_id">
+                    <select data-size="7" class="form-control selectpicker @error('asociacione_id') is-invalid  @enderror" name="asociacione_id" data-live-search="true">
                         <option value="">Selecciona una asociación</option>
                         @foreach ($asociaciones as $asociacione)
                           <option value="{{ $asociacione->id }}"
@@ -291,7 +295,7 @@
 
                 <div class="form-group pl-2 pr-2">
                     <label for="inputEmail2">Asociación</label>
-                    <select class="form-control @error('asociacione_id') is-invalid  @enderror" name="asociacione_id">
+                    <select data-size="7" class="form-control selectpicker @error('asociacione_id') is-invalid  @enderror" data-live-search="true" name="asociacione_id">
                         <option value="">Selecciona una asociación</option>
                         @foreach ($asociaciones as $asociacione)
                           <option value="{{ $asociacione->id }}"
@@ -408,4 +412,7 @@
         }
     }
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://www.jqueryscript.net/demo/Bootstrap-4-Dropdown-Select-Plugin-jQuery/dist/js/bootstrap-select.js"></script>
 @endpush
