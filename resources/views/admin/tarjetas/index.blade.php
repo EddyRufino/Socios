@@ -1,19 +1,60 @@
 @extends('layouts.app')
 
+@push('styles')
+<style type="text/css">
+    .tooltipw {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltipw .tooltiptext {
+      visibility: hidden;
+      width: 120px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -60px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltipw .tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
+    }
+    .tooltipw:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+</style>
+@endpush
+
 @section('content')
 <div class="container">
 
-    @include('partials.nav')
+    {{-- @include('partials.nav') --}}
+    <h4 class="text-dark font-weight-bold">Socios - Tarjetas Circulación</h4>
 
+    <h2 id="dds"></h2>
     <div class="d-flex justify-content-center">
-        <div class="mb-4">
+        <div id="search" class="mb-4" style="display: none;">
             <form action="{{ route('search.tarjeta') }}" class="form-inline">
                 @csrf
                 <div class="input-group input-group-md">
 
                     <input class="form-control form-control-navbar"
                         name="search" type="search"
-                        placeholder="Nombre - DNI - Placa"
+                        placeholder="Socio - DNI - Placa"
                         aria-label="Search"
                         required
                     >
@@ -27,83 +68,114 @@
             </form>
         </div>
     </div>
-        <h3><a href="{{ route('tarjetas.index') }}" class="text-dark font-weight-bold">Socios - Tarjetas Circulación</a></h3>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Nombre Socio</th>
-                <th scope="col">DNI Socio</th>
-                <th scope="col">Nombre Propietario</th>
-                <th scope="col">N. Placa</th>
-                <th scope="col">Asociación</th>
-                <!--<th scope="col">Expedición</th>-->
-                <!--<th scope="col">Revalicación</th>-->
-                <th scope="col">N. Operación</th>
-                {{-- <th scope="col">Vigencia Operación</th> --}}
-                <th scope="col">Actividad</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($tarjetas as $tarjeta)
-                <tr>
-                    <td>{{ $tarjeta->nombre_socio }}</td>
-                    <td>{{ $tarjeta->dni_socio }}</td>
-                    <td>{{ $tarjeta->nombre_propietario }}</td>
-                    <td>{{ $tarjeta->num_placa }}</td>
-                    <td>{{ optional($tarjeta->asociacione)->nombre }}</td>
-                    {{-- <td>{{ $tarjeta->expedicion }}</td> --}}
-                    {{-- <td>{{ $tarjeta->revalidacion }}</td> --}}
-                    <td>{{ $tarjeta->num_operacion }}</td>
-                    {{-- <td>{{ $tarjeta->vigencia_operacion }}</td> --}}
-                    <td>
-                        <a href="{{ route('tarjetas.show', $tarjeta->url) }}"
-                            class="text-decoration-none"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Ver Socio"
-                        >
-                            @include('icons.qr')
-                        </a>
-                        <a href="{{ route('carnet.anverso', $tarjeta->id) }}"
-                            class="ml-3 text-decoration-none"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Descarga Carnet"
-                        >
-                            @include('icons.download')
-                        </a>
-                        <a href="{{ route('tarjetas.edit', $tarjeta) }}"
-                            class="ml-3 text-decoration-none"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Editar Socio"
-                        >
-                            @include('icons.edit')
-                        </a>
-{{--                         <form id="myform" method="POST" action="{{ route('socios.destroy', $tarjeta) }}" style="display: inline">
-                            @csrf
-                            @method('DELETE')
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center">
+{{--             <h6><a href="{{ route('tarjetas.index') }}" class="text-dark ml-3 tooltipw">
+                <span id="tooltipw" class="tooltiptext">Listar Tarjetas</span>
+                @include('icons.tarjeta')
+            </a></h6> --}}
+            <h6><a href="{{ route('fotochecks.index') }}" class="text-dark ml-3 tooltipw">
+                <span id="tooltipw" class="tooltiptext">Listar Fotochecks</span>
+                @include('icons.fotocheck')
+            </a></h6>
+            <h6><a href="{{ route('tarjetas.create') }}" class="text-dark ml-3 tooltipw">
+                <span id="tooltipw" class="tooltiptext">Nueva Tarjeta Circulación</span>
+                @include('icons.add')
+            </a></h6>
+            <h6><a href="{{ route('fotochecks.create') }}" class="text-dark ml-3 tooltipw">
+                <span id="tooltipw" class="tooltiptext">Nuevo Fotocheck</span>
+                @include('icons.new')
+            </a></h6>
+        </div>
+        <div class="custom-control custom-checkbox ">
+            <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
+            <label class="custom-control-label text-dark" for="myCheck">Mostrar Buscador</label>
+        </div>
 
-                            <button class="btn btn-xs btn-transparent "
-                                onclick="return confirm('¿Seguro de querer eliminar este socio?')"
-                                data-toggle="tooltip"
-                                data-placement="top"
-                                title="Eliminar Socio"
-                            >
-                                @include('icons.delete')
-                            </button>
-                        </form> --}}
-                    </td>
-                </tr>
-            @empty
-                <li class="list-group-item border-0 mb-3 shadow-sm">No hay nada para mostrar</li>
-            @endforelse
-        </tbody>
-    </table>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre Socio</th>
+                        <th scope="col">DNI Socio</th>
+                        <th scope="col">N. Placa</th>
+                        <th scope="col">Asociación</th>
+                        <th scope="col">Vehúculo</th>
+                        <th scope="col">Actividad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($tarjetas as $tarjeta)
+                        <tr>
+                            <td>{{ $tarjeta->nombre_socio }}</td>
+                            <td>{{ $tarjeta->dni_socio }}</td>
+                            <td>{{ $tarjeta->num_placa }}</td>
+                            <td>{{ optional($tarjeta->asociacione)->nombre ? optional($tarjeta->asociacione)->nombre : 'Persona Natural' }}</td>
+
+                            @if ($tarjeta->vehiculo_id === 1)
+                                <td class="text-info">{{ $tarjeta->vehiculo->nombre }}</td>
+                            @elseif($tarjeta->vehiculo_id === 2)
+                                <td class="text-primary">{{ $tarjeta->vehiculo->nombre }}</td>
+                            @else
+                                <td class="text-warnning">{{ $tarjeta->vehiculo->nombre }}</td>
+                            @endif
+
+                            <td>
+                                <div class="d-flex">
+                                    <h6><a href="{{ route('tarjetas.show', $tarjeta->url) }}"
+                                        class="text-decoration-none tooltipw"
+                                    >
+                                        <span id="tooltipw" class="tooltiptext">Ver QR</span>
+                                        @include('icons.qr')
+                                    </a></h6>
+                                    <h6><a href="{{ route('tarjeta.anverso', $tarjeta->id) }}"
+                                        class="ml-3 text-decoration-none tooltipw"
+                                    >
+                                        <span id="tooltipw" class="tooltiptext">Descargar Carnet</span>
+                                        @include('icons.download')
+                                    </a></h6>
+
+                                    <h6><a href="{{ route('tarjetas.edit', $tarjeta) }}"
+                                        class="ml-3 text-decoration-none tooltipw"
+                                    >
+                                        <span id="tooltipw" class="tooltiptext">Editar</span>
+                                        @include('icons.edit')
+                                    </a></h6>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <li class="list-group-item border-0 mb-3 shadow-sm">No hay nada para mostrar</li>
+                    @endforelse
+                </tbody>
+            </table>
+
+        </div>
+    </div>
 
     <div class="overflow-auto mt-2">
         {{ $tarjetas->links() }}
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    function myFunction() {
+        let check = document.getElementById("myCheck");
+        let search = document.getElementById("search");
+
+        if (check.checked == true){
+            search.style.display = "block";
+            // juridica.style.display = "none";
+        } else {
+            search.style.display = "none";
+            // juridica.style.display = "block";
+        }
+    }
+</script>
+@endpush

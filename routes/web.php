@@ -24,6 +24,9 @@ Route::get('/socios/{socio}', 'SocioController@show')->name('socios.show');
 
 // Tarjetas
 Route::middleware('can:admin')->group( function () {
+    // Generate Carnet Circulación PDF
+    Route::get('tarjeta/{anverso}', 'Report\CarnetTarjetaController@anverso')->name('tarjeta.anverso');
+
     Route::get('/buscar-tarjeta-circulacion', 'Search\SearchTarjetaController')->name('search.tarjeta');
     Route::post('/check-qr-tarjeta/{tarjeta}', 'Checks\CheckQrTarjetaController')->name('check.tarjeta');
     // Socios

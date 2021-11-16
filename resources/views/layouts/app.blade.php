@@ -15,10 +15,12 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,700,700i,800,800i,900" rel="stylesheet"> --}}
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    @stack('styles')
 </head>
 <body>
     <div id="app">
@@ -77,7 +79,7 @@
             @include('partials.session')
         </div>
 
-        <main class="py-4">
+        <main class="py-3">
             @yield('content')
         </main>
     </div>
