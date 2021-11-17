@@ -42,6 +42,9 @@ Route::get('/tarjeta-circulacion/{socio}', 'TarjetaController@show')->name('tarj
 
 // Fotochecks
 Route::middleware('can:admin')->group( function () {
+    // Generate Fotocheck PDF
+    Route::get('fotocheck/{anverso}', 'Report\CarnetFotocheckController@anverso')->name('fotocheck.anverso');
+
     Route::get('/buscar-fotocheck', 'Search\SearchFotocheckController')->name('search.fotocheck');
     Route::post('/check-qr-fotocheck/{fotocheck}', 'Checks\CheckQrFotocheckController')->name('check.fotocheck');
     // Socios
@@ -51,6 +54,14 @@ Route::middleware('can:admin')->group( function () {
     Route::put('/socios-fotochecks/{fotocheck}', 'FotocheckController@update')->name('fotochecks.update');
     Route::delete('/socios-fotochecks/{fotocheck}', 'FotocheckController@destroy')->name('fotochecks.destroy');
     Route::get('/socios-fotochecks/{fotocheck}/edit', 'FotocheckController@edit')->name('fotochecks.edit');
+
+    //Asociaciones
+    Route::get('/asociaciones', 'AsociacioneController@index')->name('asociaciones.index');
+    Route::post('/asociaciones', 'AsociacioneController@store')->name('asociaciones.store');
+    Route::get('/asociaciones/create', 'AsociacioneController@create')->name('asociaciones.create');
+    Route::put('/asociaciones/{asociacione}', 'AsociacioneController@update')->name('asociaciones.update');
+    //Route::delete('/asociaciones/{socio}', 'AsociacioneController@destroy')->name('asociaciones.destroy');
+    Route::get('/asociaciones/{asociacione}/edit', 'AsociacioneController@edit')->name('asociaciones.edit');
 });
 
 Route::get('/socios-fotochecks/{fotocheck}', 'FotocheckController@show')->name('fotochecks.show');

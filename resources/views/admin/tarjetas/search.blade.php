@@ -62,11 +62,11 @@
                 <thead>
                     <tr>
                         <th scope="col">Nombre Socio</th>
+                        <th scope="col">Propietario</th>
                         <th scope="col">DNI Socio</th>
-                        <th scope="col">Nombre Propietario</th>
                         <th scope="col">N. Placa</th>
                         <th scope="col">Asociación</th>
-                        <th scope="col">N. Operación</th>
+                        <th scope="col">Vehículo</th>
                         <th scope="col">QR</th>
                         <th scope="col">Actividad</th>
                     </tr>
@@ -75,12 +75,24 @@
                     @forelse ($tarjetas as $tarjeta)
                         <tr>
                             <td>{{ $tarjeta->nombre_socio }}</td>
+                            @if ($tarjeta->nombre_propietario)
+                                <td>{{ $tarjeta->nombre_propietario }}</td>
+                            @else
+                                <td>El Mismo Socio</td>
+                            @endif
                             <td>{{ $tarjeta->dni_socio }}</td>
-                            <td>{{ $tarjeta->nombre_propietario }}</td>
                             <td>{{ $tarjeta->num_placa }}</td>
-                            <td>{{ optional($tarjeta->asociacione)->nombre }}</td>
-                            <td>{{ $tarjeta->num_operacion }}</td>
-                            @if ($tarjeta->status == 1)
+                            <td>{{ optional($tarjeta->asociacione)->nombre ? optional($tarjeta->asociacione)->nombre : 'Persona Natural' }}</td>
+
+                            @if ($tarjeta->vehiculo_id === 1)
+                                <td class="text-info">{{ $tarjeta->vehiculo->nombre }}</td>
+                            @elseif($tarjeta->vehiculo_id === 2)
+                                <td class="text-primary">{{ $tarjeta->vehiculo->nombre }}</td>
+                            @else
+                                <td class="text-secondary">{{ $tarjeta->vehiculo->nombre }}</td>
+                            @endif
+
+                           @if ($tarjeta->status == 1)
                                 <td><span class="badge badge-info text-white">Generado</span></td>
                             @else
                                 <td></td>

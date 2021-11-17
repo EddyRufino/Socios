@@ -7,7 +7,6 @@
     <h2 id="dds"></h2>
     <div class="d-flex justify-content-center">
         <div id="search" class="mb-4" style="display: none;">
-            {{-- {{ route('search.fotocheck') }} --}}
             <form action="{{ route('search.fotocheck') }}" class="form-inline">
                 @csrf
                 <div class="input-group input-group-md">
@@ -86,11 +85,10 @@
                                         <span id="tooltipw" class="tooltiptext">Ver QR</span>
                                         @include('icons.qr')
                                     </a></h6>
-                                    {{-- {{ route('fotocheck.anverso', $fotocheck->id) }} --}}
-                                    <h6><a href=""
+                                    <h6><a href="{{ route('fotocheck.anverso', $fotocheck->id)}}"
                                         class="ml-3 text-decoration-none tooltipw"
                                     >
-                                        <span id="tooltipw" class="tooltiptext">Descargar Carnet</span>
+                                        <span id="tooltipw" class="tooltiptext">Descargar Fotocheck</span>
                                         @include('icons.download')
                                     </a></h6>
 

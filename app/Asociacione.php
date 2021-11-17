@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Asociacione extends Model
 {
-    protected $guarded = [];
+    protected $fillable = ['nombre'];
 
     protected $with = ['tarjetas', 'fotochecks'];
 

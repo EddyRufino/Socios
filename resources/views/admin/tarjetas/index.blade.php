@@ -60,6 +60,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Nombre Socio</th>
+                        <th scope="col">Propietario</th>
                         <th scope="col">DNI Socio</th>
                         <th scope="col">N. Placa</th>
                         <th scope="col">Asociación</th>
@@ -71,6 +72,11 @@
                     @forelse ($tarjetas as $tarjeta)
                         <tr>
                             <td>{{ $tarjeta->nombre_socio }}</td>
+                            @if ($tarjeta->nombre_propietario)
+                                <td>{{ $tarjeta->nombre_propietario }}</td>
+                            @else
+                                <td>El Mismo Socio</td>
+                            @endif
                             <td>{{ $tarjeta->dni_socio }}</td>
                             <td>{{ $tarjeta->num_placa }}</td>
                             <td>{{ optional($tarjeta->asociacione)->nombre ? optional($tarjeta->asociacione)->nombre : 'Persona Natural' }}</td>

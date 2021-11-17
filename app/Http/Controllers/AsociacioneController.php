@@ -7,77 +7,36 @@ use Illuminate\Http\Request;
 
 class AsociacioneController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $asociaciones = Asociacione::latest()->paginate();
+        return view('admin.asociaciones.index', compact('asociaciones'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin.asociaciones.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $data = Asociacione::create($request->all());
+
+        return redirect()->route('asociaciones.index')->with('status', $data->nombre . ' fue registrado!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Asociacione  $asociacione
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Asociacione $asociacione)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Asociacione  $asociacione
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Asociacione $asociacione)
     {
-        //
+        return view('admin.asociaciones.edit', compact('asociacione'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Asociacione  $asociacione
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Asociacione $asociacione)
     {
-        //
+        $asociacione->update($request->all());
+
+        return redirect()->route('asociaciones.index')->with('status', $asociacione->nombre . ' fue modificado!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Asociacione  $asociacione
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Asociacione $asociacione)
     {
         //
