@@ -62,6 +62,9 @@ Route::middleware('can:admin')->group( function () {
     Route::put('/asociaciones/{asociacione}', 'AsociacioneController@update')->name('asociaciones.update');
     //Route::delete('/asociaciones/{socio}', 'AsociacioneController@destroy')->name('asociaciones.destroy');
     Route::get('/asociaciones/{asociacione}/edit', 'AsociacioneController@edit')->name('asociaciones.edit');
+
+    // Número Correlativo
+    Route::resource('correlativos', 'CorrelativoController')->except(['show', 'destroy']);
 });
 
 Route::get('/socios-fotochecks/{fotocheck}', 'FotocheckController@show')->name('fotochecks.show');

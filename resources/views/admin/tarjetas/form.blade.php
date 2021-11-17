@@ -238,6 +238,37 @@
         </div>
 
         <div class="col-md-6">
+            <fieldset class="boder-1">
+                <legend class="text-legend-transportador legend p-2">
+                    N. Correlativo
+                </legend>
+
+                <div class="form-group pl-2 pr-2">
+                    <label for="inputEmail3">N. Correlativo</label>
+                    <input type="text"
+                        name="num_correlativo"
+                        class="form-control @error('num_correlativo') is-invalid  @enderror"
+                        value="{{ old('num_correlativo', $num_correlativo + 1) }}"
+                        id="inputEmail1"
+                        placeholder="Ejm: 5816-4P"
+                    >
+
+                    @error('num_correlativo')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
+
+            </fieldset>
+
+            <div class="custom-control custom-checkbox mt-3">
+                <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
+                <label class="custom-control-label" for="myCheck">Persona Natural</label>
+            </div>
+        </div>
+
+        <div class="col-md-6">
             <fieldset class="boder-1" id="natural" style="display:none">
                 <legend class="text-legend-transportador legend p-2">
                     Persona Natural
@@ -279,10 +310,10 @@
 
             </fieldset>
 
-            <div class="custom-control custom-checkbox mt-3">
+{{--             <div class="custom-control custom-checkbox mt-3">
                 <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
                 <label class="custom-control-label" for="myCheck">Persona Natural</label>
-            </div>
+            </div> --}}
         </div>
     @endif
 
@@ -389,6 +420,35 @@
                 </div>
 
             </fieldset>
+
+            <fieldset class="boder-1">
+                <legend class="text-legend-transportador legend p-2">
+                    N. Correlativo
+                </legend>
+
+                <div class="form-group pl-2 pr-2">
+                    <label for="inputEmail3">N. Correlativo</label>
+                    <input type="text"
+                        name="num_correlativo"
+                        class="form-control @error('num_correlativo') is-invalid  @enderror"
+                        value="{{ old('num_correlativo', $tarjeta->num_correlativo) }}"
+                        id="inputEmail1"
+                        placeholder="Ejm: 5816-4P"
+                    >
+                    <i class="text-secondary">Manten ese formato año-N. Correlativo</i>
+
+                    @error('num_correlativo')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
+
+            </fieldset>
+        </div>
+
+        <div class="col-md-6">
+
         </div>
     @endif
 

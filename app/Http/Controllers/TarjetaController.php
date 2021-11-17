@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Asociacione;
+use App\Correlativo;
 use App\Http\Requests\TarjetaRequest;
 use App\Tarjeta;
 use App\Vehiculo;
@@ -21,13 +22,23 @@ class TarjetaController extends Controller
     {
         $vehiculos = Vehiculo::all();
         $asociaciones = Asociacione::all();
+        $inicio = Correlativo::select('num_correlativo')->where('tipo', 1)->get();
+        $num_correlativo = $inicio[0]->num_correlativo;
 
-        return view('admin.tarjetas.create', compact('vehiculos', 'asociaciones'));
+        return view('admin.tarjetas.create', compact('vehiculos', 'asociaciones', 'num_correlativo'));
     }
 
     public function store(TarjetaRequest $request)
     {
-        $socio = Tarjeta::create($request->validated());
+        $socio = Tarjeta::create(array_merge(
+            $request->validated(), [
+                'num_correlativo' => now()->format('Y') .'-'. $request->num_correlativo
+            ])
+        );
+
+        Correlativo::where('tipo', 1)->update([
+            'num_correlativo' => $request->num_correlativo
+        ]);
 
         return redirect()->route('tarjetas.index')->with('status', $socio->nombre_socio . ' fue registrado!');
     }
@@ -41,13 +52,20 @@ class TarjetaController extends Controller
     {
         $vehiculos = Vehiculo::all();
         $asociaciones = Asociacione::all();
+        $inicio = Correlativo::select('num_correlativo')->where('tipo', 1)->get();
+        $num_correlativo = $inicio[0]->num_correlativo;
 
-        return view('admin.tarjetas.edit', compact('tarjeta', 'vehiculos', 'asociaciones'));
+        return view('admin.tarjetas.edit', compact('tarjeta', 'vehiculos', 'asociaciones', 'num_correlativo'));
     }
 
     public function update(TarjetaRequest $request, Tarjeta $tarjeta)
     {
+        $url = $tarjeta->url; // OJO que si cambias el nombre también cambia la url y cuando generes el QR no saldran los datos
+
         $socio = $tarjeta->fill($request->validated());
+
+        $tarjeta->url = $url;
+
         $socio->save();
 
         return redirect()->route('tarjetas.index')->with('status', $socio->nombre_socio . ' fue modificado!');

@@ -88,13 +88,6 @@
                 <li class="list-group-item ">
                     <strong>D.N.I:</strong> {{ $socio->dni_socio }}
                 </li>
-
-
-
-
-
-
-
             </ul>
 
 
@@ -149,6 +142,11 @@
                 </ul>
             @endif
         </div>
+
+        <span class="d-flex justify-content-center mt-1 font-weight-light">N. {{ $socio->num_correlativo }}</span>
+
+    </div>
+    <div>
     </div>
     <footer class="bg-primary pt-4 pb-2 text-white">
         <div class="text-center">

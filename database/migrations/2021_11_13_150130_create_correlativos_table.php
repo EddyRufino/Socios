@@ -15,7 +15,9 @@ class CreateCorrelativosTable extends Migration
     {
         Schema::create('correlativos', function (Blueprint $table) {
             $table->id();
-            $table->integer('num_correlativo');
+            $table->integer('num_inicio')->default(0);
+            $table->integer('tipo'); // Carnet - Fotocheck
+            $table->integer('num_correlativo')->nullable()->default(0);
         });
     }
 

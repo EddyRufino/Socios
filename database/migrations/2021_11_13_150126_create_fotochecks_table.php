@@ -23,7 +23,7 @@ class CreateFotochecksTable extends Migration
             $table->string('image')->nullable();
             $table->integer('status')->nullable()->default(0);
             $table->foreignId('vehiculo_id')->constrained('vehiculos')->nullable();
-            $table->foreignId('asociacione_id')->constrained('asociaciones')->nullable();
+            $table->foreignId('asociacione_id')->constrained('asociaciones')->nullable(); // Modifica en la DB que es NULL - no lo agarra
             $table->timestamps();
         });
     }
