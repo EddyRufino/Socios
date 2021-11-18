@@ -17,6 +17,7 @@ class CreateAsociacionesTable extends Migration
             $table->id();
             $table->string('nombre', 90);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +28,6 @@ class CreateAsociacionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asociaciones');
+        Schema::dropSoftDeletes('asociaciones');
     }
 }

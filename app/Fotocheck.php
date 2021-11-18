@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Fotocheck extends Model
 {
+    use SoftDeletes;
+
     protected $guarded = [];
 
     public function getRouteKeyName()

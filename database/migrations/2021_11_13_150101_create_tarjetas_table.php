@@ -30,8 +30,9 @@ class CreateTarjetasTable extends Migration
             $table->integer('status')->nullable()->default(0);
             $table->string('num_correlativo')->unique();
             $table->foreignId('vehiculo_id')->constrained('vehiculos');
-            $table->foreignId('asociacione_id')->constrained('asociaciones')->nullable(); // Modifica en la DB que es NULL - no lo agarra
+            $table->foreignId('asociacione_id')->nullable()->constrained('asociaciones'); // Modifica en la DB que es NULL - no lo agarra
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -42,6 +43,6 @@ class CreateTarjetasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tarjetas');
+        Schema::dropSoftDeletes('tarjetas');
     }
 }

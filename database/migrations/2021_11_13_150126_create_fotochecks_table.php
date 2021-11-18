@@ -22,9 +22,10 @@ class CreateFotochecksTable extends Migration
             $table->date('revalidacion');
             $table->string('image')->nullable();
             $table->integer('status')->nullable()->default(0);
-            $table->foreignId('vehiculo_id')->constrained('vehiculos')->nullable();
-            $table->foreignId('asociacione_id')->constrained('asociaciones')->nullable(); // Modifica en la DB que es NULL - no lo agarra
+            $table->foreignId('vehiculo_id')->constrained('vehiculos');
+            $table->foreignId('asociacione_id')->nullable()->constrained('asociaciones'); // Modifica en la DB que es NULL - no lo agarra
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -35,6 +36,6 @@ class CreateFotochecksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fotochecks');
+        Schema::dropSoftDeletes('fotochecks');
     }
 }

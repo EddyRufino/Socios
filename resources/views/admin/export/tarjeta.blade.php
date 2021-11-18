@@ -16,6 +16,12 @@
     display: inline-block;
     /*margin-top: 3rem;*/
 }
+
+.anverso {
+    position: relative;
+    display: block;
+}
+
 .foto-encima{
     position: absolute;
     top: 212px;
@@ -24,78 +30,122 @@
 
 .texto-encima-nombre {
     position: absolute;
-    top: 80%;
-    left: 50%;
-    height: 30%;
-    width: 95%;
-    margin: -17% 0 0 -48%;
-    font-size: 2.4rem;
+    top: 44%;
+    left: 6.5%;
+    font-size: 1.8rem;
     font-weight: 900;
     text-transform: uppercase;
-    text-align: center;
     line-height: 30px;
     font-family: sans-serif;
 }
+
+.texto-encima-nombre-socio {
+    position: absolute;
+    top: 34%;
+    left: 6.5%;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 30px;
+    font-family: sans-serif;
+}
+
 .texto-encima-dni {
     position: absolute;
-    top: 90.58%;
-    left: 50%;
-    height: 30%;
-    width: 95%;
-    margin: -17% 0 0 -36%;
-    font-size: 3rem;
+    top: 54%;
+    left: 15%;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.texto-encima-placa {
+    position: absolute;
+    top: 61%;
+    left: 31.54%;
+    font-size: 1.2rem;
     font-weight: 900;
     text-transform: uppercase;
-    text-align: center;
-    line-height: 26px;
 }
+
 .texto-encima-asociacion {
     position: absolute;
-    top: 107%;
-    left: 50%;
-    height: 30%;
-    width: 95%;
-    margin: -17% 0 0 -48%;
-    font-size: 2.4rem;
+    top: 73%;
+    left: 6.5%;
+    font-size: 1.6rem;
     font-weight: 900;
     text-transform: uppercase;
-    text-align: center;
-    line-height: 30px;
-    font-family: sans-serif;
 }
-.texto-encima-expedicion {
+
+.texto-encima-asociacion-name {
     position: absolute;
-    top: 78%;
-    left: 50%;
+    top: 68%;
+    left: 6.5%;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.texto-encima-expedicion-anverso {
+    position: absolute;
+    top: 81%;
+    left: 33%;
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.texto-encima-revalidacion-anverso {
+    position: absolute;
+    top: 88%;
+    left: 37%;
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.texto-encima-correlativo {
+    position: absolute;
+    top: 92%;
+    left: 77%;
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: tomato;
+}
+
+.texto-encima-expedicion-reverso {
+    position: absolute;
+    top: 60.54%;
+    left: 36%;
     height: 30%;
     width: 95%;
     margin: -17% 0 0 -25%;
-    font-size: 2.5rem;
+    font-size: 1.2rem;
     font-weight: 900;
     text-transform: uppercase;
     text-align: center;
     line-height: 30px;
 }
 
-.texto-encima-revalidacion {
+.texto-encima-revalidacion-reverso {
     position: absolute;
-    top: 84%;
-    left: 50%;
+    top: 69%;
+    left: 46%;
     height: 30%;
     width: 95%;
     margin: -17% 0 0 -25%;
-    font-size: 2.5rem;
+    font-size: 1.2rem;
     font-weight: 900;
     text-transform: uppercase;
     text-align: center;
-    line-height: 30px;
+    /*line-height: 30px;*/
     font-family: monospace !important;
 }
 
 .qr-encima {
     position: absolute;
-    top: 230px;
-    left: 170px;
+    top: 10px;
+    left: 81%;
 }
 /*.centrado{
     position: absolute;
@@ -122,32 +172,62 @@ body{
 </style>
 
 <body>
-    <div class="contenedor">
-        {{-- <img src="{{ asset('img/anverso.jpg') }}"
-            style="display: block; width: 100%; height: 793px;"
-        > --}}
+    <div class="anverso">
+        <img src="{{ asset('img/anverso2.jpg') }}"
+            style="display: block; width: 100%; height: 426px;"
+        >
 
+        @if ($tarjeta[0]->nombre_propietario)
+            <span class="texto-encima-nombre-socio">APELLIDOS Y NOMBRES DEL SOCIO</span>
+        @else
+            <span class="texto-encima-nombre-socio">APELLIDOS Y NOMBRES DEL SOCIO - PROPIETARIO</span>
+        @endif
 
-        {{-- <div class="foto-encima">
-            <img src="{{ asset($tarjeta[0]->image) }}" style="width: 220px; height: 274.58px;">
-        </div> --}}
-        <span id="ter" class="texto-encima-nombre">{{ $tarjeta[0]->nombre_socio }}</span>
+        <span class="texto-encima-nombre">{{ $tarjeta[0]->nombre_socio }}</span>
         <span class="texto-encima-dni">{{ $tarjeta[0]->dni_socio }}</span>
-        <span class="texto-encima-asociacion">"{{ $tarjeta[0]->nombre_asociacion }}"</span>
+        <span class="texto-encima-placa">{{ $tarjeta[0]->num_placa }}</span>
 
+        @if ($tarjeta[0]->asociacione_id)
+            <span class="texto-encima-asociacion-name">NOMBRE DEL TRANSPORTADOR AUTORIZADO</span>
+            <span class="texto-encima-asociacion"> {{ optional($tarjeta[0]->asociacione)->nombre }}</span>
+            <span class="texto-encima-asociacion"> {{ optional($tarjeta[0]->asociacione)->nombre }}</span>
+        @else
+            <span class="texto-encima-asociacion-name">SIN TRANSPORTADOR AUTORIZADO</span>
+            <span class="texto-encima-asociacion"> ES PERSONA NATURAL</span>
+            <span class="texto-encima-asociacion"> ES PERSONA NATURAL</span>
+        @endif
 
+        <span class="texto-encima-expedicion-anverso">{{ $tarjeta[0]->expedicion }}</span>
+        <span class="texto-encima-expedicion-anverso">{{ $tarjeta[0]->expedicion }}</span>
 
-        {{-- <img src="{{ asset('img/reverso.jpg') }}"
-            style="display: block; width: 100%; height: 793px;"
-        > --}}
-        {{-- {{dd($tarjeta[0]->url)}} --}}
+        <span class="texto-encima-revalidacion-anverso">{{ $tarjeta[0]->revalidacion }}</span>
+        <span class="texto-encima-revalidacion-anverso">{{ $tarjeta[0]->revalidacion }}</span>
+
+        <span class="texto-encima-correlativo">N° {{ $tarjeta[0]->num_correlativo }}</span>
+        <span class="texto-encima-correlativo">N° {{ $tarjeta[0]->num_correlativo }}</span>
+{{--         <span class="texto-encima-correlativo">{{ $tarjeta[0]->num_correlativo }}</span>
+        <span class="texto-encima-correlativo">{{ $tarjeta[0]->num_correlativo }}</span> --}}
+        {{-- {{dd()}} --}}
+        {{-- <span class="texto-encima-correlativo">{{ $tarjeta[0]->num_correlativom }}</span> --}}
+    </div>
+
+    <div class="contenedor">
+        <img src="{{ asset('img/reverso2.jpg') }}"
+            style="display: block; width: 100%; height: 426px;"
+        >
+
         <img src="{{ asset('tarjetasQR/' . $tarjeta[0]->url . '.svg') }}"
-            width="180"
+            width="125"
             class="qr-encima"
         >
 
-        <p class="texto-encima-expedicion">{{ date('Y/m/d', strtotime($tarjeta[0]->expedicion)) }}</p>
-        <p class="texto-encima-revalidacion">{{ date('Y/m/d', strtotime($tarjeta[0]->revalidacion)) }}</p>
+        @if ($tarjeta[0]->asociacione_id)
+            <p class="texto-encima-expedicion-reverso">{{ $tarjeta[0]->num_operacion }}</p>
+            <p class="texto-encima-revalidacion-reverso">{{ $tarjeta[0]->vigencia_operacion }}</p>
+        @else
+            <p class="texto-encima-expedicion-reverso">{{ $tarjeta[0]->num_autorizacion }}</p>
+            <p class="texto-encima-revalidacion-reverso">{{ $tarjeta[0]->vigencia_autorizacion }}</p>
+        @endif
     </div>
 </body>
 </html>
