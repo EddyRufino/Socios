@@ -99,19 +99,17 @@
                                         @include('icons.edit')
                                     </a></h6>
 
-                                    {{-- <form id="myform" method="POST" action="{{ route('fotochecks.destroy', $fotocheck) }}" style="display: inline">
-                                        @csrf
-                                        @method('DELETE')
+                                    @superAdmin
+                                        <h6 class="tooltipw mb-2">
+                                            <form action="{{ route('fotochecks.destroy', $fotocheck) }}" method="POST" style="display: inline-block;">
+                                                @csrf
+                                                @method('DELETE')
 
-                                        <button class="btn btn-xs btn-transparent "
-                                            onclick="return confirm('¿Seguro de querer eliminar este socio?')"
-                                            data-toggle="tooltip"
-                                            data-placement="top"
-                                            title="Eliminar Socio"
-                                        >
-                                            @include('icons.delete')
-                                        </button>
-                                    </form> --}}
+                                                <span id="tooltipw" class="tooltiptext">Eliminar</span>
+                                                <button class="p-0 ml-2 btn btn-transparent ">@include('icons.delete')</button>
+                                            </form>
+                                        </h6>
+                                    @endsuperAdmin
                                 </div>
                             </td>
                         </tr>

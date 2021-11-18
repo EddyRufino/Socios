@@ -110,6 +110,18 @@
                                         <span id="tooltipw" class="tooltiptext">Editar</span>
                                         @include('icons.edit')
                                     </a></h6>
+
+                                    @superAdmin
+                                        <h6 class="tooltipw mb-2">
+                                            <form action="{{ route('tarjetas.destroy', $tarjeta) }}" method="POST" style="display: inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <span id="tooltipw" class="tooltiptext">Eliminar</span>
+                                                <button class="p-0 ml-2 btn btn-transparent ">@include('icons.delete')</button>
+                                            </form>
+                                        </h6>
+                                    @endsuperAdmin
                                 </div>
                             </td>
                         </tr>
