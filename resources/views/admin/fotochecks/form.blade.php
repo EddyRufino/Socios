@@ -169,10 +169,11 @@
             </div>
         </fieldset>
     </div>
-</div>
-
-<div class="row">
-    <button class="btn btn-info text-white form-group mt-3 ml-4 btn-lg" type="submit">{{ $btn }}</button>
+    <button class="btn float-right text-white form-group mt-3" type="submit"
+        style="background-color: rgba(42,67,101,1) !important"
+    >
+        {{ $btn }}
+    </button>
 </div>
 
 @push('scripts')

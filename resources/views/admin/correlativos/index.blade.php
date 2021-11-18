@@ -24,8 +24,8 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Número Correlativo</th>
-                        <th scope="col">Actividad</th>
+                        <th scope="col" class="bg-primary text-white">Número Correlativo</th>
+                        <th scope="col" class="bg-primary text-white">Actividad</th>
                     </tr>
                 </thead>
                 <tbody>

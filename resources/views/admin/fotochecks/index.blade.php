@@ -55,11 +55,11 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Nombre Socio</th>
-                        <th scope="col">DNI Socio</th>
-                        <th scope="col">Asociación</th>
-                        <th scope="col">Vehículo</th>
-                        <th scope="col">Actividad</th>
+                        <th scope="col" class="bg-primary text-white">Nombre Socio</th>
+                        <th scope="col" class="bg-primary text-white">DNI Socio</th>
+                        <th scope="col" class="bg-primary text-white">Asociación</th>
+                        <th scope="col" class="bg-primary text-white">Vehículo</th>
+                        <th scope="col" class="bg-primary text-white">Actividad</th>
                     </tr>
                 </thead>
                 <tbody>

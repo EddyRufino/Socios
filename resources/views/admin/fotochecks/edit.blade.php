@@ -12,7 +12,7 @@
             <h2 id="dds"></h2>
 
             <div class="card mt-4">
-                <div class="card-header bg-secondary text-white">
+                <div class="card-header bg-primary text-white">
                     <h6 class="font-weight-bold">Modificar Fotocheck</h6>
                 </div>
                 <div class="card-body">
