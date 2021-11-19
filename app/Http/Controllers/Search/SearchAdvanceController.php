@@ -18,14 +18,15 @@ class SearchAdvanceController extends Controller
 
         $tipo = request()->tipo;
         $vehiculo = request()->vehiculo_id;
-        $asociacion = request()->asociacione_id;
+        $asociacion = request()->tre;
 
         if ($tipo == 1) {
             $tarjetas = Tarjeta::where('tipo', $tipo)
                 ->where('vehiculo_id', $vehiculo)
                 ->where('asociacione_id', $asociacion)
-                ->paginate(1);
+                ->paginate();
 
+            //dd($tarjetas);
             $tarjetas->appends(['tipo' => $tipo]);
             $tarjetas->appends(['vehiculo_id' => $vehiculo]);
             $tarjetas->appends(['asociacione_id' => $asociacion]);
@@ -36,7 +37,7 @@ class SearchAdvanceController extends Controller
             $fotochecks = Fotocheck::where('tipo', $tipo)
                 ->where('vehiculo_id', $vehiculo)
                 ->where('asociacione_id', $asociacion)
-                ->paginate(1);
+                ->paginate();
 
             $fotochecks->appends(['tipo' => $tipo]);
             $fotochecks->appends(['vehiculo_id' => $vehiculo]);
@@ -44,5 +45,37 @@ class SearchAdvanceController extends Controller
 
             return view('admin.search.advancedFotochecks', compact('vehiculos', 'asociaciones', 'fotochecks'));
         }
+    }
+
+    public function advancedTwo()
+    {
+        $vehiculos = Vehiculo::all();
+        $asociaciones = Asociacione::all();
+
+        $asociacion = request()->asociacione_id_two;
+
+        $attributes = Asociacione::where('id', $asociacion)->get();
+
+        $countTarjetas = $attributes[0]->tarjetas->count();
+        $countFotochecks = $attributes[0]->fotochecks->count();
+
+        $countMoto = $attributes[0]->tarjetas[0]->vehiculo_id;
+//        dd($countMoto);
+
+        return view('admin.search.advancedTwo', compact('vehiculos', 'asociaciones', 'attributes'));
+    }
+
+    public function advancedTree()
+    {
+        $vehiculos = Vehiculo::all();
+        $asociaciones = Asociacione::all();
+
+        $asociacion = request()->asociacione_id_tree;
+
+        $attributes = Asociacione::where('id', $asociacion)->get();
+
+        //dd($attributes);
+
+        return view('admin.search.advancedTree', compact('vehiculos', 'asociaciones', 'attributes'));
     }
 }

@@ -68,6 +68,8 @@ Route::middleware('can:admin')->group( function () {
 
     // Search Advanced
     Route::get('/buscar-advanced', 'Search\SearchAdvanceController@advanced')->name('search.advanced');
+    Route::get('/buscar-advanced-tree', 'Search\SearchAdvanceController@advancedTree')->name('search.advanced.tree');
+    Route::get('/buscar-advanced-two', 'Search\SearchAdvanceController@advancedTwo')->name('search.advanced.two');
 });
 
 Route::get('/socios-fotochecks/{fotocheck}', 'FotocheckController@show')->name('fotochecks.show');

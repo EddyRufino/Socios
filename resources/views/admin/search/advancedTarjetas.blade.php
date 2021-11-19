@@ -2,9 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('tarjetas.index') }}" class="text-dark item">Socios - Tarjetas Circulación</a></h4>
+    <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('tarjetas.index') }}" class="text-dark item text-decoration-none">Socios - Tarjetas Circulación</a></h4>
 
-    {{-- <h2 id="dds"></h2> --}}
     {{-- Search Advanced --}}
     <div id="searchAdvanced" class="d-flex justify-content-center" style="display: none !important;">
         @include('admin.search.advanced')
