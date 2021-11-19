@@ -7,9 +7,7 @@
 
             <h5 class="pl-2">@include('icons.back')<a href="{{ route('tarjetas.index') }}" class="text-dark font-weight-bold">Volver</a></h5>
 
-            <h4 class="text-dark font-weight-bold mt-3 pl-2">Socios - Nueva Tarjeta Circulación</h4>
-
-            <h2 id="dds"></h2>
+            <h4 class="font-weight-bold mt-3 pl-2 mb-4 pb-1"><a href="{{ route('tarjetas.index') }}" class="text-dark item text-decoration-none">Socios - Nueva Tarjeta Circulación</a></h4>
 
             <div class="card mt-4">
                 <div class="card-header bg-primary text-white">

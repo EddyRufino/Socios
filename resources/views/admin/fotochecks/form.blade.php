@@ -72,10 +72,15 @@
                     </div>
                 @endif
             </div>
+
         </fieldset>
+            <div class="custom-control custom-checkbox mt-3">
+                <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
+                <label class="custom-control-label" for="myCheck">Persona Natural</label>
+            </div>
     </div>
     <div class="col-md-6">
-        <fieldset class="boder-1 p-2">
+        <fieldset class="boder-1 p-2" >
             <legend class="legend">
                 Autorización
             </legend>
@@ -116,38 +121,7 @@
                     @enderror
                 </div>
         </fieldset>
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-md-6">
-        <fieldset class="boder-1">
-            <legend class="text-legend-transportador legend p-2">
-                Transportador Autorizado
-            </legend>
-
-            <div class="form-group pl-2 pr-2">
-                <label for="inputEmail2">Asociación</label>
-                <select data-size="7" class="form-control selectpicker @error('asociacione_id') is-invalid  @enderror" name="asociacione_id" data-live-search="true">
-                    <option value="">Selecciona una asociación</option>
-                    @foreach ($asociaciones as $asociacione)
-                      <option value="{{ $asociacione->id }}"
-                              {{ old('asociacione_id', $fotocheck->asociacione_id) == $asociacione->id ? 'selected' : '' }}>
-                        {{ $asociacione->nombre }}</option>
-                    @endforeach
-                </select>
-
-                @error('asociacione_id')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                @enderror
-            </div>
-
-        </fieldset>
-    </div>
-
-    <div class="col-md-6">
         <fieldset class="boder-1 ">
             <legend class="legend p-2">
                 Vehículo
@@ -176,7 +150,46 @@
             </div>
         </fieldset>
     </div>
-    <button class="btn float-right text-white form-group mt-3" type="submit"
+</div>
+
+<div class="row col">
+    <div class="col-md-6">
+        <fieldset class="boder-1 " id="natural">
+            <legend class="text-legend-transportador legend p-2">
+                Transportador Autorizado
+            </legend>
+
+            <div class="form-group pl-2 pr-2">
+                <label for="inputEmail2">Asociación</label>
+                <select data-size="7" class="form-control selectpicker @error('asociacione_id') is-invalid  @enderror" name="asociacione_id" data-live-search="true">
+                    <option value="">Selecciona una asociación</option>
+                    @foreach ($asociaciones as $asociacione)
+
+                        @if ($loop->first) @continue @endif
+
+                        <option value="{{ $asociacione->id }}"
+                              {{ old('asociacione_id', $fotocheck->asociacione_id) == $asociacione->id ? 'selected' : '' }}
+                        >
+                            {{ $asociacione->nombre }}
+                        </option>
+                    @endforeach
+                </select>
+
+                @error('asociacione_id')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                @enderror
+            </div>
+
+        </fieldset>
+    </div>
+
+</div>
+
+<div>
+
+    <button class="btn float-right text-white form-group mt-3 mr-3" type="submit"
         style="background-color: rgba(42,67,101,1) !important"
     >
         {{ $btn }}
@@ -184,6 +197,18 @@
 </div>
 
 @push('scripts')
+    <script>
+        function myFunction() {
+            let checkBox = document.getElementById("myCheck");
+            let natural = document.getElementById("natural");
+
+            if (checkBox.checked == true){
+                natural.style.display = "none";
+            } else {
+                natural.style.display = "block";
+            }
+        }
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://www.jqueryscript.net/demo/Bootstrap-4-Dropdown-Select-Plugin-jQuery/dist/js/bootstrap-select.js"></script>
 @endpush

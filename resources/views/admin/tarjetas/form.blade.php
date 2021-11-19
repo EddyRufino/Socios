@@ -194,9 +194,14 @@
                     <select data-size="7" class="form-control selectpicker @error('asociacione_id') is-invalid  @enderror" name="asociacione_id" data-live-search="true">
                         <option value="">Selecciona una asociación</option>
                         @foreach ($asociaciones as $asociacione)
-                          <option value="{{ $asociacione->id }}"
-                                  {{ old('asociacione_id', $tarjeta->asociacione_id) == $asociacione->id ? 'selected' : '' }}>
-                            {{ $asociacione->nombre }}</option>
+
+                            @if ($loop->first) @continue @endif
+
+                            <option value="{{ $asociacione->id }}"
+                                  {{ old('asociacione_id', $tarjeta->asociacione_id) == $asociacione->id ? 'selected' : '' }}
+                            >
+                                {{ $asociacione->nombre }}
+                            </option>
                         @endforeach
                     </select>
 
@@ -336,9 +341,14 @@
                     <select data-size="7" class="form-control selectpicker @error('asociacione_id') is-invalid  @enderror" data-live-search="true" name="asociacione_id">
                         <option value="">Selecciona una asociación</option>
                         @foreach ($asociaciones as $asociacione)
-                          <option value="{{ $asociacione->id }}"
-                                  {{ old('asociacione_id', $tarjeta->asociacione_id) == $asociacione->id ? 'selected' : '' }}>
-                            {{ $asociacione->nombre }}</option>
+
+                            @if ($loop->first) @continue @endif
+
+                            <option value="{{ $asociacione->id }}"
+                                  {{ old('asociacione_id', $tarjeta->asociacione_id) == $asociacione->id ? 'selected' : '' }}
+                            >
+                                {{ $asociacione->nombre }}
+                            </option>
                         @endforeach
                     </select>
 

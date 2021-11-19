@@ -2,9 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h4 class="text-dark font-weight-bold">Número Correlativo</h4>
 
-    <h2 id="dds"></h2>
+    <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('correlativos.index') }}" class="text-dark item text-decoration-none">Número Correlativo</a></h4>
 
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex justify-content-between align-items-center">

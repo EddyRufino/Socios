@@ -2,16 +2,16 @@
 
 @section('content')
 <div class="container">
-    <h4 class="text-dark font-weight-bold">Socios - Tarjetas Circulación</h4>
+    <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('tarjetas.index') }}" class="text-dark item text-decoration-none">Socios - Tarjetas Circulación</a></h4>
 
-    <h2 id="dds"></h2>
+    {{-- <h2 id="dds"></h2> --}}
     {{-- Search Advanced --}}
     <div id="searchAdvanced" class="d-flex justify-content-center" style="display: none !important;">
         @include('admin.search.advanced')
     </div>
 
     {{-- Search Basico --}}
-    @include('partials.searchBasico')
+    @include('partials.searchBasico', ['link' => 'search.tarjeta'])
 
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex justify-content-between align-items-center">
