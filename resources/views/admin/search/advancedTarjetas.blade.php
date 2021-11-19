@@ -2,8 +2,7 @@
 
 @section('content')
 <div class="container">
-
-    <h4> <a href="{{ route('tarjetas.index') }}" class="text-dark font-weight-bold">Socios - Tarjetas Circulación</a></h4>
+    <h4 class="text-dark font-weight-bold"><a href="{{ route('tarjetas.index') }}" class="text-dark">Socios - Tarjetas Circulación</a></h4>
 
     <h2 id="dds"></h2>
     {{-- Search Advanced --}}
@@ -16,10 +15,6 @@
 
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex justify-content-between align-items-center">
-            <h6><a href="{{ route('tarjetas.index') }}" class="text-dark ml-3 tooltipw">
-                <span id="tooltipw" class="tooltiptext">Listar Tarjetas</span>
-                @include('icons.tarjeta')
-            </a></h6>
             <h6><a href="{{ route('fotochecks.index') }}" class="text-dark ml-3 tooltipw">
                 <span id="tooltipw" class="tooltiptext">Listar Fotochecks</span>
                 @include('icons.fotocheck')
@@ -49,7 +44,6 @@
                         <th scope="col" class="bg-primary text-white">N. Placa</th>
                         <th scope="col" class="bg-primary text-white">Asociación</th>
                         <th scope="col" class="bg-primary text-white">Vehículo</th>
-                        <th scope="col" class="bg-primary text-white">QR</th>
                         <th scope="col" class="bg-primary text-white">Actividad</th>
                     </tr>
                 </thead>
@@ -79,46 +73,40 @@
                                 <td class="text-secondary">{{ $tarjeta->vehiculo->nombre }}</td>
                             @endif
 
-                           @if ($tarjeta->status == 1)
-                                <td><span class="badge badge-info text-white">Generado</span></td>
-                            @else
-                                <td></td>
-                            @endif
                             <td>
-                                <a href="{{ route('tarjetas.show', $tarjeta->url) }}"
-                                    class="text-decoration-none tooltipw"
-                                >
-                                <span id="tooltipw" class="tooltiptext">Ver QR</span>
-                                    @include('icons.qr')
-                                </a>
-                                <a href="{{ route('tarjeta.anverso', $tarjeta->id) }}"
-                                    class="ml-3 text-decoration-none"
-                                    data-toggle="tooltip"
-                                    data-placement="top"
-                                    title="Descarga Carnet Circulación"
-                                >
-                                    @include('icons.download')
-                                </a>
-                                <a href="{{ route('tarjetas.edit', $tarjeta) }}"
-                                    class="ml-3 text-decoration-none"
-                                    data-toggle="tooltip"
-                                    data-placement="top"
-                                    title="Editar Socio"
-                                >
-                                    @include('icons.edit')
-                                </a>
+                                <div class="d-flex">
+                                    <h6><a href="{{ route('tarjetas.show', $tarjeta->url) }}"
+                                        class="text-decoration-none tooltipw"
+                                    >
+                                        <span id="tooltipw" class="tooltiptext">Ver QR</span>
+                                        @include('icons.qr')
+                                    </a></h6>
+                                    <h6><a href="{{ route('tarjeta.anverso', $tarjeta->id) }}"
+                                        class="ml-3 text-decoration-none tooltipw"
+                                    >
+                                        <span id="tooltipw" class="tooltiptext">Descargar Carnet</span>
+                                        @include('icons.download')
+                                    </a></h6>
 
-                                @superAdmin
-                                    <h6 class="tooltipw mb-2">
-                                        <form action="{{ route('tarjetas.destroy', $tarjeta) }}" method="POST" style="display: inline-block;">
-                                            @csrf
-                                            @method('DELETE')
+                                    <h6><a href="{{ route('tarjetas.edit', $tarjeta) }}"
+                                        class="ml-3 text-decoration-none tooltipw"
+                                    >
+                                        <span id="tooltipw" class="tooltiptext">Editar</span>
+                                        @include('icons.edit')
+                                    </a></h6>
 
-                                            <span id="tooltipw" class="tooltiptext">Eliminar</span>
-                                            <button class="p-0 ml-2 btn btn-transparent ">@include('icons.delete')</button>
-                                        </form>
-                                    </h6>
-                                @endsuperAdmin
+                                    @superAdmin
+                                        <h6 class="tooltipw mb-2">
+                                            <form action="{{ route('tarjetas.destroy', $tarjeta) }}" method="POST" style="display: inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <span id="tooltipw" class="tooltiptext">Eliminar</span>
+                                                <button class="p-0 ml-2 btn btn-transparent ">@include('icons.delete')</button>
+                                            </form>
+                                        </h6>
+                                    @endsuperAdmin
+                                </div>
                             </td>
                         </tr>
                     @empty

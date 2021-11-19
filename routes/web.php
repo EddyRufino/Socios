@@ -65,6 +65,9 @@ Route::middleware('can:admin')->group( function () {
 
     // Número Correlativo
     Route::resource('correlativos', 'CorrelativoController')->except(['show', 'destroy']);
+
+    // Search Advanced
+    Route::get('/buscar-advanced', 'Search\SearchAdvanceController@advanced')->name('search.advanced');
 });
 
 Route::get('/socios-fotochecks/{fotocheck}', 'FotocheckController@show')->name('fotochecks.show');

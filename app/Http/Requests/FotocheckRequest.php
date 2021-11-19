@@ -32,6 +32,7 @@ class FotocheckRequest extends FormRequest
             'revalidacion' => ['required'],
             'image' => $this->fotocheck ? ['image', 'mimes:jpg,jpeg,png', 'max:2048'] : ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
             'status' => ['nullable'],
+            'tipo' => ['nullable'],
             'vehiculo_id' => ['required'],
             'asociacione_id' => ['nullable'],
         ];

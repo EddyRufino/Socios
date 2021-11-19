@@ -13,8 +13,11 @@ class FotocheckController extends Controller
     public function index()
     {
        $fotochecks = Fotocheck::latest()->paginate();
+       // Para Search Advanced
+        $vehiculos = Vehiculo::all();
+        $asociaciones = Asociacione::all();
 
-        return view('admin.fotochecks.index', compact('fotochecks'));
+        return view('admin.fotochecks.index', compact('fotochecks', 'vehiculos', 'asociaciones'));
     }
 
     public function create()
@@ -28,7 +31,8 @@ class FotocheckController extends Controller
     public function store(FotocheckRequest $request)
     {
         $data = array_merge($request->validated(), [
-            'image' => '/storage/'.$request->file('image')->store('fotos')
+            'image' => '/storage/'.$request->file('image')->store('fotos'),
+            'asociacione_id' => $request->asociacione_id ? $request->asociacione_id : 1
         ]);
 
         $socio = Fotocheck::create($data);
@@ -68,6 +72,8 @@ class FotocheckController extends Controller
         }
 
         $fotocheck->url = $url;
+
+        $fotocheck->asociacione_id = $fotocheck->asociacione_id ? $fotocheck->asociacione_id : 1;
 
         $fotocheck->save();
 

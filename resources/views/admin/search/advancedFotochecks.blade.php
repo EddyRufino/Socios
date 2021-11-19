@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h4 class="text-dark font-weight-bold"><a href="{{ route('fotochecks.index') }}" class="text-dark font-weight-bold">Socios - Fotochecks</a></h4>
+    <h4 class="text-dark font-weight-bold"><a href="{{ route('fotochecks.index') }}" class="text-dark">Socios - Fotochecks</a></h4>
 
     <h2 id="dds"></h2>
     {{-- Search Advanced --}}
@@ -42,7 +42,6 @@
                         <th scope="col" class="bg-primary text-white">DNI Socio</th>
                         <th scope="col" class="bg-primary text-white">Asociación</th>
                         <th scope="col" class="bg-primary text-white">Vehículo</th>
-                        <th scope="col" class="bg-primary text-white">QR</th>
                         <th scope="col" class="bg-primary text-white">Actividad</th>
                     </tr>
                 </thead>
@@ -66,12 +65,6 @@
                                 <td class="text-secondary">{{ $fotocheck->vehiculo->nombre }}</td>
                             @endif
 
-                            @if ($fotocheck->status == 1)
-                                <td><span class="badge badge-info text-white">Generado</span></td>
-                            @else
-                                <td></td>
-                            @endif
-
                             <td>
                                 <div class="d-flex">
                                     <h6><a href="{{ route('fotochecks.show', $fotocheck->url) }}"
@@ -80,11 +73,10 @@
                                         <span id="tooltipw" class="tooltiptext">Ver QR</span>
                                         @include('icons.qr')
                                     </a></h6>
-                                    {{-- {{ route('fotocheck.anverso', $fotocheck->id) }} --}}
-                                    <h6><a href=""
+                                    <h6><a href="{{ route('fotocheck.anverso', $fotocheck->id)}}"
                                         class="ml-3 text-decoration-none tooltipw"
                                     >
-                                        <span id="tooltipw" class="tooltiptext">Descargar Carnet</span>
+                                        <span id="tooltipw" class="tooltiptext">Descargar Fotocheck</span>
                                         @include('icons.download')
                                     </a></h6>
 

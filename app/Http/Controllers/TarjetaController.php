@@ -14,8 +14,11 @@ class TarjetaController extends Controller
     public function index()
     {
        $tarjetas = Tarjeta::where('status', 0)->latest()->paginate();
+       // Para Search Advanced
+        $vehiculos = Vehiculo::all();
+        $asociaciones = Asociacione::all();
 
-        return view('admin.tarjetas.index', compact('tarjetas'));
+        return view('admin.tarjetas.index', compact('tarjetas', 'vehiculos', 'asociaciones'));
     }
 
     public function create()
@@ -32,7 +35,8 @@ class TarjetaController extends Controller
     {
         $socio = Tarjeta::create(array_merge(
             $request->validated(), [
-                'num_correlativo' => now()->format('Y') .'-'. $request->num_correlativo
+                'num_correlativo' => now()->format('Y') .'-'. $request->num_correlativo,
+                'asociacione_id' => $request->asociacione_id ? $request->asociacione_id : 1
             ])
         );
 
@@ -65,6 +69,8 @@ class TarjetaController extends Controller
         $socio = $tarjeta->fill($request->validated());
 
         $tarjeta->url = $url;
+
+        $tarjeta->asociacione_id = $socio->asociacione_id ? $socio->asociacione_id : 1;
 
         $socio->save();
 

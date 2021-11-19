@@ -1,3 +1,16 @@
+
+
+
+/** Search Advanced **/
+.bootstrap-select.form-control:not([class*="col-"]) {
+     width: 0% !important;
+}
+
+/*div#searchAdvanced {
+    display: none !important;
+}*/
+
+
 /** Tooltip **/
     .tooltipw {
       position: relative;
@@ -110,3 +123,10 @@ label {
     margin-top: 0.5rem;
   }
 }
+
+@media (max-width: 1023px) {
+    .span-buscador {
+        display: none;
+    }
+}
+

@@ -5,28 +5,13 @@
     <h4 class="text-dark font-weight-bold">Socios - Fotochecks</h4>
 
     <h2 id="dds"></h2>
-    <div class="d-flex justify-content-center">
-        <div id="search" class="mb-4" style="display: none;">
-            <form action="{{ route('search.fotocheck') }}" class="form-inline">
-                @csrf
-                <div class="input-group input-group-md">
-
-                    <input class="form-control form-control-navbar"
-                        name="search" type="search"
-                        placeholder="Socio - DNI"
-                        aria-label="Search"
-                        required
-                    >
-
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar bg-primary text-white" type="submit">
-                            @include('icons.icon-search')
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
+    {{-- Search Advanced --}}
+    <div id="searchAdvanced" class="d-flex justify-content-center" style="display: none !important;">
+        @include('admin.search.advanced')
     </div>
+
+    {{-- Search Basico --}}
+    @include('partials.searchBasico')
 
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex justify-content-between align-items-center">
@@ -43,11 +28,8 @@
                 @include('icons.new')
             </a></h6>
         </div>
-        <div class="custom-control custom-checkbox ">
-            <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
-            <label class="custom-control-label text-dark" for="myCheck">Mostrar Buscador</label>
-        </div>
 
+        @include('partials.checkbox')
     </div>
 
     <div class="row">
@@ -67,7 +49,12 @@
                         <tr>
                             <td>{{ $fotocheck->nombre_socio }}</td>
                             <td>{{ $fotocheck->dni_socio }}</td>
-                            <td>{{ optional($fotocheck->asociacione)->nombre ? optional($fotocheck->asociacione)->nombre : 'Persona Natural' }}</td>
+
+                            @if ($fotocheck->asociacione->id == 1)
+                                <td class="text-secondary">Es Persona Natural</td>
+                            @else
+                                <td>{{ optional($fotocheck->asociacione)->nombre }}</td>
+                            @endif
 
                             @if ($fotocheck->vehiculo_id === 1)
                                 <td class="text-info">{{ $fotocheck->vehiculo->nombre }}</td>
@@ -140,6 +127,17 @@
         } else {
             search.style.display = "none";
             // juridica.style.display = "block";
+        }
+    }
+
+    function mySearchAdvanced() {
+        let check = document.getElementById("myCheckAdvanced");
+        let search = document.getElementById("searchAdvanced");
+
+        if (check.checked == true){
+            search.style.display = "block";
+        } else {
+            search.style.setProperty('display', 'none', 'important');
         }
     }
 </script>

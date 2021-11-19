@@ -39,6 +39,7 @@ class TarjetaRequest extends FormRequest
             'vigencia_autorizacion' => ['nullable', 'max:120'],
             'num_correlativo' => ['nullable', Rule::unique('tarjetas')->ignore($this->tarjeta, 'num_correlativo')],
             'status' => ['nullable'],
+            'tipo' => ['nullable'],
             'vehiculo_id' => ['required'],
             'asociacione_id' => ['nullable'],
         ];

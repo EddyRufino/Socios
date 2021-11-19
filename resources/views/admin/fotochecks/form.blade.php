@@ -1,5 +1,12 @@
 @push('styles')
     <link rel="stylesheet" href="https://www.jqueryscript.net/demo/Bootstrap-4-Dropdown-Select-Plugin-jQuery/dist/css/bootstrap-select.css" />
+
+    <style type="text/css">
+        /** Search Advanced **/
+        .bootstrap-select.form-control:not([class*="col-"]) {
+             width: 100% !important;
+        }
+    </style>
 @endpush
 
 <div class="row">

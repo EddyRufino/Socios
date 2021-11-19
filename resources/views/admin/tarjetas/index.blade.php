@@ -5,35 +5,16 @@
     <h4 class="text-dark font-weight-bold">Socios - Tarjetas Circulación</h4>
 
     <h2 id="dds"></h2>
-    <div class="d-flex justify-content-center">
-        <div id="search" class="mb-4" style="display: none;">
-            <form action="{{ route('search.tarjeta') }}" class="form-inline">
-                @csrf
-                <div class="input-group input-group-md">
-
-                    <input class="form-control form-control-navbar"
-                        name="search" type="search"
-                        placeholder="Socio - DNI - Placa"
-                        aria-label="Search"
-                        required
-                    >
-
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar bg-primary text-white" type="submit">
-                            @include('icons.icon-search')
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
+    {{-- Search Advanced --}}
+    <div id="searchAdvanced" class="d-flex justify-content-center" style="display: none !important;">
+        @include('admin.search.advanced')
     </div>
+
+    {{-- Search Basico --}}
+    @include('partials.searchBasico')
 
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex justify-content-between align-items-center">
-{{--             <h6><a href="{{ route('tarjetas.index') }}" class="text-dark ml-3 tooltipw">
-                <span id="tooltipw" class="tooltiptext">Listar Tarjetas</span>
-                @include('icons.tarjeta')
-            </a></h6> --}}
             <h6><a href="{{ route('fotochecks.index') }}" class="text-dark ml-3 tooltipw">
                 <span id="tooltipw" class="tooltiptext">Listar Fotochecks</span>
                 @include('icons.fotocheck')
@@ -47,10 +28,8 @@
                 @include('icons.new')
             </a></h6>
         </div>
-        <div class="custom-control custom-checkbox ">
-            <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
-            <label class="custom-control-label text-dark" for="myCheck">Mostrar Buscador</label>
-        </div>
+
+        @include('partials.checkbox')
 
     </div>
 
@@ -75,11 +54,16 @@
                             @if ($tarjeta->nombre_propietario)
                                 <td>{{ $tarjeta->nombre_propietario }}</td>
                             @else
-                                <td>El Mismo Socio</td>
+                                <td class="text-secondary">El Mismo Socio</td>
                             @endif
                             <td>{{ $tarjeta->dni_socio }}</td>
                             <td>{{ $tarjeta->num_placa }}</td>
-                            <td>{{ optional($tarjeta->asociacione)->nombre ? optional($tarjeta->asociacione)->nombre : 'Persona Natural' }}</td>
+
+                            @if ($tarjeta->asociacione->id == 1)
+                                <td class="text-secondary">Es Persona Natural</td>
+                            @else
+                                <td>{{ optional($tarjeta->asociacione)->nombre }}</td>
+                            @endif
 
                             @if ($tarjeta->vehiculo_id === 1)
                                 <td class="text-info">{{ $tarjeta->vehiculo->nombre }}</td>
@@ -148,10 +132,19 @@
 
         if (check.checked == true){
             search.style.display = "block";
-            // juridica.style.display = "none";
         } else {
             search.style.display = "none";
-            // juridica.style.display = "block";
+        }
+    }
+
+    function mySearchAdvanced() {
+        let check = document.getElementById("myCheckAdvanced");
+        let search = document.getElementById("searchAdvanced");
+
+        if (check.checked == true){
+            search.style.display = "block";
+        } else {
+            search.style.setProperty('display', 'none', 'important');
         }
     }
 </script>

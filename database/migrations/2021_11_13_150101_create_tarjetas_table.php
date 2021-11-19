@@ -28,9 +28,10 @@ class CreateTarjetasTable extends Migration
             $table->string('num_autorizacion', 120)->nullable();
             $table->string('vigencia_autorizacion', 120)->nullable();
             $table->integer('status')->nullable()->default(0);
+            $table->integer('tipo')->nullable()->default(1);
             $table->string('num_correlativo')->unique();
             $table->foreignId('vehiculo_id')->constrained('vehiculos');
-            $table->foreignId('asociacione_id')->nullable()->constrained('asociaciones'); // Modifica en la DB que es NULL - no lo agarra
+            $table->foreignId('asociacione_id')->nullable()->constrained('asociaciones')->default(1); // Modifica en la DB que es NULL - no lo agarra ---- 0 es para persona natural
             $table->timestamps();
             $table->softDeletes();
         });
