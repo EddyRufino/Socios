@@ -20,15 +20,10 @@ class CreateSociosTable extends Migration
             $table->string('dni_socio')->nullable();
             $table->string('dni_propietario')->nullable();
             $table->string('url')->nullable();
-            $table->string('num_placa');
-            $table->string('nombre_asociacion');
-            $table->date('expedicion')->nullable();
-            $table->date('revalidacion')->nullable();
-            $table->string('num_operacion');
-            $table->string('vigencia_operacion');
-            $table->string('image')->nullable();
-            $table->integer('status')->nullable()->default(0);
+            $table->integer('status')->nullable()->default(0); // Puede Servir cuando es P.N
+            $table->foreignId('asociacione_id')->nullable()->constrained('asociaciones');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
