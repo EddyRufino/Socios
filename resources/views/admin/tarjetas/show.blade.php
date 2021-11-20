@@ -109,7 +109,7 @@
                 </li>
             </ul>
 
-            @if ($socio->asociacione_id)
+            @if ($socio->asociacione_id > 1)
                 <ul class='list-group col-md-3 mt-3'>
                     <li class="list-group-item color-box-header">
                         <strong class="font-weight-bold">TRANSPORTADOR AUTORIZADO</strong>
@@ -128,7 +128,7 @@
 
 
 
-            @if (!$socio->asociacione_id)
+            @if ($socio->asociacione_id == 1)
                 <ul class='list-group col-md-3 mt-3'>
                     <li class="list-group-item color-box-header">
                         <strong>PERSONA NATURAL</strong>
