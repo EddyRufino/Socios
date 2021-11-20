@@ -27,23 +27,21 @@
                 @include('icons.new')
             </a></h6>
             <h6>
-                @php
+               {{--  @php
                     $count = 0;
-                @endphp
-                @foreach ($attributes[0]->tarjetas as $element)
+                @endphp --}}
+                {{-- @foreach ($attributes[0]->tarjetas as $element) --}}
                     {{-- {{dd($element)}} --}}
-                        @php
-                            $count = $count + 1;
-                        @endphp
-                    @if ($element->vehiculo_id == 2)
+
+                    {{-- @if ($element->vehiculo_id == 2) --}}
                         {{-- <a href="#">{{ $element }}</a> --}}
                         {{-- @foreach($attributes[0]->tarjetas[0]->vehiculo_id == 2)
                             <a href="#">{{ $count + 1 }}</a>
                             {{dd($element)}}
                         @endforeach --}}
-                        {{dd($count)}}
-                    @endif
-                @endforeach
+                        {{-- {{dd($count)}} --}}
+                    {{-- @endif --}}
+                {{-- @endforeach --}}
                 {{-- {{dd($attributes[0]->tarjetas[0]->vehiculo_id)}} --}}
             </h6>
         </div>

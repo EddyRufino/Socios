@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Tarjeta;
 use App\Vehiculo;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
+use DB;
 
 class SearchAdvanceController extends Controller
 {
@@ -18,26 +20,45 @@ class SearchAdvanceController extends Controller
 
         $tipo = request()->tipo;
         $vehiculo = request()->vehiculo_id;
-        $asociacion = request()->tre;
+        $asociacion = request()->asociacione_id;
 
         if ($tipo == 1) {
-            $tarjetas = Tarjeta::where('tipo', $tipo)
-                ->where('vehiculo_id', $vehiculo)
-                ->where('asociacione_id', $asociacion)
-                ->paginate();
+            if($vehiculo > 0) {
+                $tarjetas = Tarjeta::where('tipo', $tipo)
+                    ->where('asociacione_id', $asociacion)
+                    ->where('vehiculo_id', $vehiculo)
+                    ->paginate();
+            }
+
+            if($vehiculo == 'Vehículo') {
+                $tarjetas = Tarjeta::where('tipo', $tipo)
+                    ->where('asociacione_id', $asociacion)
+                    ->paginate();
+            }
 
             //dd($tarjetas);
             $tarjetas->appends(['tipo' => $tipo]);
-            $tarjetas->appends(['vehiculo_id' => $vehiculo]);
             $tarjetas->appends(['asociacione_id' => $asociacion]);
+            $tarjetas->appends(['vehiculo_id' => $vehiculo]);
 
             return view('admin.search.advancedTarjetas', compact('vehiculos', 'asociaciones', 'tarjetas'));
         }
         else {
-            $fotochecks = Fotocheck::where('tipo', $tipo)
-                ->where('vehiculo_id', $vehiculo)
-                ->where('asociacione_id', $asociacion)
-                ->paginate();
+
+            if ($tipo == 2 ) {
+                if($vehiculo > 0) {
+                    $fotochecks = Fotocheck::where('tipo', $tipo)
+                        ->where('asociacione_id', $asociacion)
+                        ->where('vehiculo_id', $vehiculo)
+                        ->paginate();
+                }
+
+                if($vehiculo == 'Vehículo') {
+                    $fotochecks = Fotocheck::where('tipo', $tipo)
+                        ->where('asociacione_id', $asociacion)
+                        ->paginate();
+                }
+            }
 
             $fotochecks->appends(['tipo' => $tipo]);
             $fotochecks->appends(['vehiculo_id' => $vehiculo]);
@@ -56,11 +77,12 @@ class SearchAdvanceController extends Controller
 
         $attributes = Asociacione::where('id', $asociacion)->get();
 
-        $countTarjetas = $attributes[0]->tarjetas->count();
-        $countFotochecks = $attributes[0]->fotochecks->count();
+        //$countTarjetas = $attributes[0]->tarjetas->count();
+        //$countFotochecks = $attributes[0]->fotochecks->count();
 
-        $countMoto = $attributes[0]->tarjetas[0]->vehiculo_id;
-//        dd($countMoto);
+        //$countMoto = $attributes[0]->tarjetas[0]->vehiculo_id;
+        //$vh = Vehiculo::where('', )->get();
+        //dd($vh);
 
         return view('admin.search.advancedTwo', compact('vehiculos', 'asociaciones', 'attributes'));
     }
@@ -71,10 +93,33 @@ class SearchAdvanceController extends Controller
         $asociaciones = Asociacione::all();
 
         $asociacion = request()->asociacione_id_tree;
+        $vehiculo = request()->vehiculo_id_tree;
 
-        $attributes = Asociacione::where('id', $asociacion)->get();
+        $vehiculosTree = Vehiculo::with(['tarjetas', 'fotochecks'])->where('id', $vehiculo)->get();
 
-        //dd($attributes);
+        dd($vehiculosTree);
+
+        $attributes = Asociacione::where('id', $asociacion)
+                //->orWhereHas('tarjetas', function(Builder $query) use($vehiculo, $asociacion) {
+                    //$query->where('vehiculo_id', '=', $vehiculo)->where('asociacione_id', $asociacion);
+                //})
+                //->orWhere(function($subQuery) use($vehiculo) {
+                    //$subQuery->whereHas('fotochecks', function($query) use($vehiculo) {
+                        //$query->where('asociacione_id', $vehiculo);
+                    //});
+                //})
+                //->orWhereHas('fotochecks', function($query) use($vehiculo, $asociacion) {
+                    //$query->where('vehiculo_id', '=', $vehiculo)->where('asociacione_id', $asociacion);
+                //})
+                ->where(function($subQuery) use($vehiculo, $asociacion) {
+                    $subQuery->whereHas('fotochecks', function($query) use($vehiculo, $asociacion) {
+                        $query->where('vehiculo_id', $vehiculo);
+                    });
+                })
+                ->get();
+
+
+        dd($attributes);
 
         return view('admin.search.advancedTree', compact('vehiculos', 'asociaciones', 'attributes'));
     }
