@@ -133,7 +133,7 @@ body{
         </div>
         <span id="ter" class="texto-encima-nombre">{{ $fotocheck[0]->nombre_socio }}</span>
         <span class="texto-encima-dni">{{ $fotocheck[0]->dni_socio }}</span>
-        @if ($fotocheck[0]->asociacione_id)
+        @if ($fotocheck[0]->asociacione_id > 1)
             <span class="texto-encima-asociacion">"{{ optional($fotocheck[0]->asociacione)->nombre }}"</span>
         @else
             <span class="texto-encima-asociacion">"Persona Natural"</span>

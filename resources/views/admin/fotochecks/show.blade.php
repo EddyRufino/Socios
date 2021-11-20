@@ -100,7 +100,7 @@
                 </li>
 
                 <li class="list-group-item ">
-                    @if ($fotocheck->asociacione_id)
+                    @if ($fotocheck->asociacione_id > 1)
                         <strong>Asociación:</strong> {{ Illuminate\Support\Str::title($fotocheck->asociacione->nombre) }}
                     @else
                         <strong>Socio Es:</strong> Persona Natural

@@ -187,7 +187,7 @@ body{
         <span class="texto-encima-dni">{{ $tarjeta[0]->dni_socio }}</span>
         <span class="texto-encima-placa">{{ $tarjeta[0]->num_placa }}</span>
 
-        @if ($tarjeta[0]->asociacione_id)
+        @if ($tarjeta[0]->asociacione_id > 1)
             <span class="texto-encima-asociacion-name">NOMBRE DEL TRANSPORTADOR AUTORIZADO</span>
             <span class="texto-encima-asociacion"> {{ optional($tarjeta[0]->asociacione)->nombre }}</span>
             <span class="texto-encima-asociacion"> {{ optional($tarjeta[0]->asociacione)->nombre }}</span>
@@ -221,7 +221,7 @@ body{
             class="qr-encima"
         >
 
-        @if ($tarjeta[0]->asociacione_id)
+        @if ($tarjeta[0]->asociacione_id > 1)
             <p class="texto-encima-expedicion-reverso">{{ $tarjeta[0]->num_operacion }}</p>
             <p class="texto-encima-revalidacion-reverso">{{ $tarjeta[0]->vigencia_operacion }}</p>
         @else
