@@ -11,15 +11,15 @@ class Asociacione extends Model
 
     protected $fillable = ['nombre'];
 
-    protected $with = ['tarjetas', 'fotochecks'];
+    //protected $with = ['tarjetas', 'fotochecks'];
 
-    public function tarjetas()
+    public function socios()
     {
-        return $this->hasMany(Tarjeta::class);
+        return $this->hasMany(Socio::class);
     }
 
-    public function fotochecks()
-    {
-        return $this->hasMany(Fotocheck::class);
-    }
+    //public function fotochecks()
+    //{
+        //return $this->hasMany(Fotocheck::class);
+    //}
 }

@@ -21,7 +21,7 @@
                 <input type="text"
                     name="nombre_socio"
                     class="form-control @error('nombre_socio') is-invalid  @enderror"
-                    value="{{ old('nombre_socio', $tarjeta->nombre_socio) }}"
+                    value="{{ old('nombre_socio', optional($tarjeta->socio)->nombre_socio) }}"
                     id="inputEmail4"
                     placeholder="Ejm: ALBERCA TERESA"
                     required
@@ -39,7 +39,7 @@
                 <input type="text"
                     name="dni_socio"
                     class="form-control @error('dni_socio') is-invalid  @enderror"
-                    value="{{ old('dni_socio', $tarjeta->dni_socio) }}"
+                    value="{{ old('dni_socio', optional($tarjeta->socio)->dni_socio) }}"
                     id="inputEmail4"
                     placeholder="Ejm: 77577145"
                 >
@@ -63,7 +63,7 @@
                 <input type="text"
                     name="nombre_propietario"
                     class="form-control @error('nombre_propietario') is-invalid  @enderror"
-                    value="{{ old('nombre_propietario', $tarjeta->nombre_propietario) }}"
+                    value="{{ old('nombre_propietario', optional($tarjeta->socio)->nombre_propietario) }}"
                     id="inputEmail4"
                     placeholder="Ejm: ALBERCA YANAYACO"
                 >
@@ -80,7 +80,7 @@
                 <input type="text"
                     name="dni_propietario"
                     class="form-control @error('dni_propietario') is-invalid  @enderror"
-                    value="{{ old('dni_propietario', $tarjeta->dni_propietario) }}"
+                    value="{{ old('dni_propietario', optional($tarjeta->socio)->dni_propietario) }}"
                     id="inputEmail4"
                     placeholder="Ejm: 33655414"
                 >
@@ -194,8 +194,6 @@
                     <select data-size="7" class="form-control selectpicker @error('asociacione_id') is-invalid  @enderror" name="asociacione_id" data-live-search="true">
                         <option value="">Selecciona una asociación</option>
                         @foreach ($asociaciones as $asociacione)
-
-                            @if ($loop->first) @continue @endif
 
                             <option value="{{ $asociacione->id }}"
                                   {{ old('asociacione_id', $tarjeta->asociacione_id) == $asociacione->id ? 'selected' : '' }}
@@ -330,139 +328,154 @@
     @endif
 
     @if (request()->routeIs('tarjetas.edit') )
-        <div class="col-md-6" id="juridica">
-            <fieldset class="boder-1">
-                <legend class="text-legend-transportador legend p-2">
-                    Transportador Autorizado
-                </legend>
 
-                <div class="form-group pl-2 pr-2">
-                    <label for="inputEmail2">Asociación</label>
-                    <select data-size="7" class="form-control selectpicker @error('asociacione_id') is-invalid  @enderror" data-live-search="true" name="asociacione_id">
-                        <option value="">Selecciona una asociación</option>
-                        @foreach ($asociaciones as $asociacione)
+            <div class="col-md-6" id="juridica" style="{{ $tarjeta->socio->asociacione_id ? 'display: block' : 'display: none' }}">
+                <fieldset class="boder-1">
+                    <legend class="text-legend-transportador legend p-2">
+                        Transportador Autorizado
+                    </legend>
 
-                            @if ($loop->first) @continue @endif
+                    <div class="form-group pl-2 pr-2">
+                        <label for="inputEmail2">Asociación</label>
+                        <select id="asociacione_id" data-size="7" class="form-control selectpicker @error('asociacione_id') is-invalid  @enderror" data-live-search="true" name="asociacione_id">
+                            <option value="">Selecciona una asociación</option>
+                            @foreach ($asociaciones as $asociacione)
 
-                            <option value="{{ $asociacione->id }}"
-                                  {{ old('asociacione_id', $tarjeta->asociacione_id) == $asociacione->id ? 'selected' : '' }}
-                            >
-                                {{ $asociacione->nombre }}
-                            </option>
-                        @endforeach
-                    </select>
+                                <option value="{{ $asociacione->id }}"
+                                      {{ old('asociacione_id', optional($tarjeta->socio->asociacione)->id) == $asociacione->id ? 'selected' : '' }}
+                                >
+                                    {{ $asociacione->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
 
-                    @error('asociacione_id')
-                        <div class="invalid-feedback">
-                            {{$message}}
-                        </div>
-                    @enderror
+                        @error('asociacione_id')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group pl-2 pr-2">
+                        <label for="inputEmail1">N. Operación</label>
+                        <input type="text"
+                            name="num_operacion"
+                            class="form-control @error('num_operacion') is-invalid  @enderror"
+                            value="{{ old('num_operacion', $tarjeta->num_operacion) }}"
+                            id="num_operacion"
+                            placeholder="Ejm: 036-2019"
+                        >
+
+                        @error('num_operacion')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group pl-2 pr-2">
+                        <label for="inputEmail1">Vigencia Operación</label>
+                        <input type="text"
+                            name="vigencia_operacion"
+                            class="form-control @error('vigencia_operacion') is-invalid  @enderror"
+                            value="{{ old('vigencia_operacion', $tarjeta->vigencia_operacion) }}"
+                            id="vigencia_operacion"
+                            placeholder="Ejm: 19/09/2019 AL 19/09/2025"
+                        >
+
+                        @error('vigencia_operacion')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                        @enderror
+                    </div>
+
+                </fieldset>
+
+                <div class="custom-control custom-checkbox mt-3">
+                    <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
+                    <label class="custom-control-label" for="myCheck">Persona Natural</label>
                 </div>
+            </div>
 
-                <div class="form-group pl-2 pr-2">
-                    <label for="inputEmail1">N. Operación</label>
-                    <input type="text"
-                        name="num_operacion"
-                        class="form-control @error('num_operacion') is-invalid  @enderror"
-                        value="{{ old('num_operacion', $tarjeta->num_operacion) }}"
-                        id="inputEmail1"
-                        placeholder="Ejm: 036-2019"
-                    >
 
-                    @error('num_operacion')
-                        <div class="invalid-feedback">
-                            {{$message}}
-                        </div>
-                    @enderror
+            <div id="natural" class="col-md-6" style="{{ $tarjeta->socio->asociacione_id ? 'display: none' : 'display: block' }}">
+                <fieldset class="boder-1" id="natural">
+                    <legend class="text-legend-transportador legend p-2">
+                        Persona Natural
+                    </legend>
+
+                    <div class="form-group pl-2 pr-2">
+                        <label for="inputEmail3">N. Autorización</label>
+                        <input type="text"
+                            name="num_autorizacion"
+                            class="form-control @error('num_autorizacion') is-invalid  @enderror"
+                            value="{{ old('num_autorizacion', $tarjeta->num_autorizacion) }}"
+                            id="num_autorizacion"
+                            placeholder="Ejm: 5816-4P"
+                        >
+
+                        @error('num_autorizacion')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group pl-2 pr-2">
+                        <label for="inputEmail3">Vigencia Autorización</label>
+                        <input type="text"
+                            name="vigencia_autorizacion"
+                            class="form-control @error('vigencia_autorizacion') is-invalid  @enderror"
+                            value="{{ old('vigencia_autorizacion', $tarjeta->vigencia_autorizacion) }}"
+                            id="vigencia_autorizacion"
+                            placeholder="Ejm: 26/08 AL 26/09"
+                        >
+
+                        @error('vigencia_autorizacion')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                        @enderror
+                    </div>
+
+                </fieldset>
+
+
+
+                <div class="custom-control custom-checkbox mt-3">
+                    <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
+                    <label class="custom-control-label" for="myCheck">Tiene Asociación</label>
                 </div>
+            </div>
 
-                <div class="form-group pl-2 pr-2">
-                    <label for="inputEmail1">Vigencia Operación</label>
-                    <input type="text"
-                        name="vigencia_operacion"
-                        class="form-control @error('vigencia_operacion') is-invalid  @enderror"
-                        value="{{ old('vigencia_operacion', $tarjeta->vigencia_operacion) }}"
-                        id="inputEmail1"
-                        placeholder="Ejm: 19/09/2019 AL 19/09/2025"
-                    >
+            <div class="col-md-6">
+                <fieldset class="boder-1">
+                    <legend class="text-legend-transportador legend p-2">
+                        N. Correlativo
+                    </legend>
 
-                    @error('vigencia_operacion')
-                        <div class="invalid-feedback">
-                            {{$message}}
-                        </div>
-                    @enderror
-                </div>
+                    <div class="form-group pl-2 pr-2">
+                        <label for="inputEmail3">N. Correlativo</label>
+                        <input type="text"
+                            name="num_correlativo"
+                            class="form-control @error('num_correlativo') is-invalid  @enderror"
+                            value="{{ old('num_correlativo', $tarjeta->num_correlativo) }}"
+                            id="inputEmail1"
+                            placeholder="Ejm: 5816-4P"
+                        >
+                        <i class="text-secondary">Manten ese formato año-N. Correlativo</i>
 
-            </fieldset>
-        </div>
+                        @error('num_correlativo')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                        @enderror
+                    </div>
 
-        <div class="col-md-6">
-            <fieldset class="boder-1" id="natural">
-                <legend class="text-legend-transportador legend p-2">
-                    Persona Natural
-                </legend>
+                </fieldset>
+            </div>
 
-                <div class="form-group pl-2 pr-2">
-                    <label for="inputEmail3">N. Autorización</label>
-                    <input type="text"
-                        name="num_autorizacion"
-                        class="form-control @error('num_autorizacion') is-invalid  @enderror"
-                        value="{{ old('num_autorizacion', $tarjeta->num_autorizacion) }}"
-                        id="inputEmail1"
-                        placeholder="Ejm: 5816-4P"
-                    >
-
-                    @error('num_autorizacion')
-                        <div class="invalid-feedback">
-                            {{$message}}
-                        </div>
-                    @enderror
-                </div>
-
-                <div class="form-group pl-2 pr-2">
-                    <label for="inputEmail3">Vigencia Autorización</label>
-                    <input type="text"
-                        name="vigencia_autorizacion"
-                        class="form-control @error('vigencia_autorizacion') is-invalid  @enderror"
-                        value="{{ old('vigencia_autorizacion', $tarjeta->vigencia_autorizacion) }}"
-                        id="inputEmail1"
-                        placeholder="Ejm: 26/08 AL 26/09"
-                    >
-
-                    @error('vigencia_autorizacion')
-                        <div class="invalid-feedback">
-                            {{$message}}
-                        </div>
-                    @enderror
-                </div>
-
-            </fieldset>
-
-            <fieldset class="boder-1">
-                <legend class="text-legend-transportador legend p-2">
-                    N. Correlativo
-                </legend>
-
-                <div class="form-group pl-2 pr-2">
-                    <label for="inputEmail3">N. Correlativo</label>
-                    <input type="text"
-                        name="num_correlativo"
-                        class="form-control @error('num_correlativo') is-invalid  @enderror"
-                        value="{{ old('num_correlativo', $tarjeta->num_correlativo) }}"
-                        id="inputEmail1"
-                        placeholder="Ejm: 5816-4P"
-                    >
-                    <i class="text-secondary">Manten ese formato año-N. Correlativo</i>
-
-                    @error('num_correlativo')
-                        <div class="invalid-feedback">
-                            {{$message}}
-                        </div>
-                    @enderror
-                </div>
-
-            </fieldset>
-        </div>
 
         <div class="col-md-6">
 
@@ -484,12 +497,32 @@
         let natural = document.getElementById("natural");
         let juridica = document.getElementById("juridica");
 
+        let asociacione_id = document.getElementById("asociacione_id");
+        let num_operacion = document.getElementById("num_operacion");
+        let vigencia_operacion = document.getElementById("vigencia_operacion");
+        let num_autorizacion = document.getElementById("num_autorizacion");
+        let vigencia_autorizacion = document.getElementById("vigencia_autorizacion");
+
+            // Quitar el valor
+            asociacione_id.value = '';
+            num_operacion.value = '';
+            vigencia_operacion.value = '';
+            num_autorizacion.value = '';
+            vigencia_autorizacion.value = '';
+
         if (checkBox.checked == true){
+
             natural.style.display = "block";
             juridica.style.display = "none";
+
+
+
         } else {
             natural.style.display = "none";
             juridica.style.display = "block";
+
+            // Pon el valor
+
         }
     }
 </script>

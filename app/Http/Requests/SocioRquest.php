@@ -24,20 +24,11 @@ class SocioRquest extends FormRequest
     public function rules()
     {
         return [
-            'nombre_socio' => '',
-            'nombre_propietario' => 'nullable',
-            'dni_socio' => 'nullable',
-            'dni_propietario' => 'nullable',
-            'url' => 'nullable',
-            'num_placa' => '',
-            'nombre_asociacion' => '',
-            'expedicion' => 'nullable',
-            'revalidacion' => 'nullable',
-            'num_operacion' => '',
-            'vigencia_operacion' => '',
-            'image' => ['image', 'mimes:jpg,png', 'max:2048', 'nullable'],
-            'status' => 'nullable',
-            'admin_since' => 'nullable',
+            'nombre_socio' => ['required', 'max:120'],
+            'nombre_propietario' => ['nullable', 'max:120'],
+            'dni_socio' => ['required', 'min:8', 'max:8'],
+            'dni_propietario' => ['nullable', 'min:8', 'max:8'],
+            'url' => ['nullable'],
         ];
     }
 }

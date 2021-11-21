@@ -20,12 +20,12 @@ class SocioController extends Controller
         return view('socios.create');
     }
 
-    public function store(SocioRquest $request)
-    {
-        $socio = Socio::create( $request->all() );
+    //public function store(SocioRquest $request)
+    //{
+        //$socio = Socio::create( $request->validated() );
 
-        return redirect()->route('socios.index')->with('status', $socio->nombre_socio . ' fue registrado!');
-    }
+        //return redirect()->route('socios.index')->with('status', $socio->nombre_socio . ' fue registrado!');
+    //}
 
     public function show(Socio $socio)
     {

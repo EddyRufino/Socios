@@ -83,10 +83,10 @@
                     <strong class="font-weight-bold">SOCIO</strong>
                 </li>
                 <li class="list-group-item ">
-                    <strong>Nombre:</strong> {{ Illuminate\Support\Str::title($socio->nombre_socio) }}
+                    <strong>Nombre:</strong> {{ Illuminate\Support\Str::title($socio->socio->nombre_socio) }}
                 </li>
                 <li class="list-group-item ">
-                    <strong>D.N.I:</strong> {{ $socio->dni_socio }}
+                    <strong>D.N.I:</strong> {{ $socio->socio->dni_socio }}
                 </li>
             </ul>
 
@@ -109,13 +109,13 @@
                 </li>
             </ul>
 
-            @if ($socio->asociacione_id > 1)
+            @if (!empty($socio->socio->asociacione_id))
                 <ul class='list-group col-md-3 mt-3'>
                     <li class="list-group-item color-box-header">
                         <strong class="font-weight-bold">TRANSPORTADOR AUTORIZADO</strong>
                     </li>
                     <li class="list-group-item ">
-                        <strong>Asociación:</strong> {{ Illuminate\Support\Str::title($socio->asociacione->nombre) }}
+                        <strong>Asociación:</strong> {{ Illuminate\Support\Str::title(optional($socio->socio->asociacione)->nombre) }}
                     </li>
                     <li class="list-group-item ">
                         <strong>N. Operación:</strong> {{ Illuminate\Support\Str::title($socio->num_operacion) }}
@@ -128,7 +128,7 @@
 
 
 
-            @if ($socio->asociacione_id == 1)
+            @if (empty($socio->socio->asociacione_id))
                 <ul class='list-group col-md-3 mt-3'>
                     <li class="list-group-item color-box-header">
                         <strong>PERSONA NATURAL</strong>

@@ -21,7 +21,7 @@
                 <input type="text"
                     name="nombre_socio"
                     class="form-control @error('nombre_socio') is-invalid  @enderror"
-                    value="{{ old('nombre_socio', $fotocheck->nombre_socio) }}"
+                    value="{{ old('nombre_socio', optional($fotocheck->socio)->nombre_socio) }}"
                     id="inputEmail4"
                     placeholder="Ejm: ALBERCA TERESA"
                     required
@@ -39,7 +39,7 @@
                 <input type="text"
                     name="dni_socio"
                     class="form-control @error('dni_socio') is-invalid  @enderror"
-                    value="{{ old('dni_socio', $fotocheck->dni_socio) }}"
+                    value="{{ old('dni_socio', optional($fotocheck->socio)->dni_socio) }}"
                     id="inputEmail4"
                     placeholder="Ejm: 77577145"
                 >
@@ -122,38 +122,6 @@
                 </div>
         </fieldset>
 
-        <fieldset class="boder-1 ">
-            <legend class="legend p-2">
-                Vehículo
-            </legend>
-
-            <div class="row col">
-                <div class="form-group col-md-12">
-                    <label for="inputEmail2">Tipo Vehículo</label>
-                    <select class="form-control @error('vehiculo_id') is-invalid  @enderror" name="vehiculo_id">
-                        <option value="">Selecciona un vehículo</option>
-                        @foreach ($vehiculos as $vehiculo)
-                          <option value="{{ $vehiculo->id }}"
-                                  {{ old('vehiculo_id', $fotocheck->vehiculo_id) == $vehiculo->id ? 'selected' : '' }}>
-                            {{ $vehiculo->nombre }}</option>
-                        @endforeach
-                    </select>
-
-                    @error('vehiculo_id')
-                        <div class="invalid-feedback">
-                            {{$message}}
-                        </div>
-                    @enderror
-                </div>
-            </div>
-
-            </div>
-        </fieldset>
-    </div>
-</div>
-
-<div class="row col">
-    <div class="col-md-6">
         <fieldset class="boder-1 " id="natural">
             <legend class="text-legend-transportador legend p-2">
                 Transportador Autorizado
@@ -161,17 +129,16 @@
 
             <div class="form-group pl-2 pr-2">
                 <label for="inputEmail2">Asociación</label>
-                <select data-size="7" class="form-control selectpicker @error('asociacione_id') is-invalid  @enderror" name="asociacione_id" data-live-search="true">
+                <select id="asociacione_id" data-size="7" class="form-control selectpicker @error('asociacione_id') is-invalid  @enderror" name="asociacione_id" data-live-search="true">
                     <option value="">Selecciona una asociación</option>
                     @foreach ($asociaciones as $asociacione)
 
-                        @if ($loop->first) @continue @endif
-
                         <option value="{{ $asociacione->id }}"
-                              {{ old('asociacione_id', $fotocheck->asociacione_id) == $asociacione->id ? 'selected' : '' }}
+                              {{ old('asociacione_id', optional($fotocheck->socio)->asociacione_id) == $asociacione->id ? 'selected' : '' }}
                         >
                             {{ $asociacione->nombre }}
                         </option>
+
                     @endforeach
                 </select>
 
@@ -183,6 +150,12 @@
             </div>
 
         </fieldset>
+    </div>
+</div>
+
+<div class="row col">
+    <div class="col-md-6">
+
     </div>
 
 </div>
@@ -201,6 +174,9 @@
         function myFunction() {
             let checkBox = document.getElementById("myCheck");
             let natural = document.getElementById("natural");
+            let asociacione_id = document.getElementById("asociacione_id");
+
+            asociacione_id.value = '';
 
             if (checkBox.checked == true){
                 natural.style.display = "none";

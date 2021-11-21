@@ -131,10 +131,10 @@ body{
         <div class="foto-encima">
             <img src="{{ asset($fotocheck[0]->image) }}" style="width: 220px; height: 274.58px;">
         </div>
-        <span id="ter" class="texto-encima-nombre">{{ $fotocheck[0]->nombre_socio }}</span>
-        <span class="texto-encima-dni">{{ $fotocheck[0]->dni_socio }}</span>
-        @if ($fotocheck[0]->asociacione_id > 1)
-            <span class="texto-encima-asociacion">"{{ optional($fotocheck[0]->asociacione)->nombre }}"</span>
+        <span id="ter" class="texto-encima-nombre">{{ $fotocheck[0]->socio->nombre_socio }}</span>
+        <span class="texto-encima-dni">{{ $fotocheck[0]->socio->dni_socio }}</span>
+        @if (!empty($fotocheck[0]->socio->asociacione_id))
+            <span class="texto-encima-asociacion">"{{ optional($fotocheck[0]->socio->asociacione)->nombre }}"</span>
         @else
             <span class="texto-encima-asociacion">"Persona Natural"</span>
         @endif

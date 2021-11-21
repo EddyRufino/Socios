@@ -40,28 +40,19 @@
                         <th scope="col" class="bg-primary text-white">Nombre Socio</th>
                         <th scope="col" class="bg-primary text-white">DNI Socio</th>
                         <th scope="col" class="bg-primary text-white">Asociación</th>
-                        <th scope="col" class="bg-primary text-white">Vehículo</th>
                         <th scope="col" class="bg-primary text-white">Actividad</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($fotochecks as $fotocheck)
                         <tr>
-                            <td>{{ $fotocheck->nombre_socio }}</td>
-                            <td>{{ $fotocheck->dni_socio }}</td>
+                            <td>{{ $fotocheck->socio->nombre_socio }}</td>
+                            <td>{{ $fotocheck->socio->dni_socio }}</td>
 
-                            @if ($fotocheck->asociacione->id == 1)
+                            @if (empty($fotocheck->socio->asociacione_id))
                                 <td class="text-secondary">Es Persona Natural</td>
                             @else
-                                <td>{{ optional($fotocheck->asociacione)->nombre }}</td>
-                            @endif
-
-                            @if ($fotocheck->vehiculo_id === 1)
-                                <td class="text-info">{{ $fotocheck->vehiculo->nombre }}</td>
-                            @elseif($fotocheck->vehiculo_id === 2)
-                                <td class="text-primary">{{ $fotocheck->vehiculo->nombre }}</td>
-                            @else
-                                <td class="text-secondary">{{ $fotocheck->vehiculo->nombre }}</td>
+                                <td>{{ optional($fotocheck->socio->asociacione)->nombre }}</td>
                             @endif
 
                             <td>

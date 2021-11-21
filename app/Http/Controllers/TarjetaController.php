@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Asociacione;
 use App\Correlativo;
 use App\Http\Requests\TarjetaRequest;
+use App\Socio;
 use App\Tarjeta;
 use App\Vehiculo;
 use Illuminate\Http\Request;
@@ -33,10 +34,21 @@ class TarjetaController extends Controller
 
     public function store(TarjetaRequest $request)
     {
-        $socio = Tarjeta::create(array_merge(
+
+        $socio = Socio::updateOrCreate([
+            'nombre_socio' => $request->nombre_socio,
+            'dni_socio' => $request->dni_socio,
+            'nombre_propietario' => $request->nombre_propietario,
+            'dni_propietario' => $request->dni_propietario,
+            'asociacione_id' => $request->asociacione_id
+        ]);
+
+        Tarjeta::create(array_merge(
             $request->validated(), [
+                'socio_id' => $socio->id,
                 'num_correlativo' => now()->format('Y') .'-'. $request->num_correlativo,
-                'asociacione_id' => $request->asociacione_id ? $request->asociacione_id : 1
+                'url' => $socio->url,
+                'user_id' => auth()->user()->id
             ])
         );
 
@@ -66,15 +78,24 @@ class TarjetaController extends Controller
     {
         $url = $tarjeta->url; // OJO que si cambias el nombre también cambia la url y cuando generes el QR no saldran los datos
 
-        $socio = $tarjeta->fill($request->validated());
+        $socio = Socio::where('url', $url)->update([
+            'nombre_socio' => ucwords($request->nombre_socio),
+            'dni_socio' => $request->dni_socio,
+            'nombre_propietario' => ucwords($request->nombre_propietario),
+            'dni_propietario' => $request->dni_propietario,
+            'url' => $url,
+            'asociacione_id' => $request->asociacione_id
+        ]);
+
+        $tarjeta = $tarjeta->fill($request->validated());
 
         $tarjeta->url = $url;
 
-        $tarjeta->asociacione_id = $socio->asociacione_id ? $socio->asociacione_id : 1;
+        //$tarjeta->asociacione_id = $socio->asociacione_id ? $socio->asociacione_id : 1;
 
-        $socio->save();
+        $tarjeta->save();
 
-        return redirect()->route('tarjetas.index')->with('status', $socio->nombre_socio . ' fue modificado!');
+        return redirect()->route('tarjetas.index')->with('status', $request->nombre_socio . ' fue modificado!');
     }
 
     public function destroy(Tarjeta $tarjeta)

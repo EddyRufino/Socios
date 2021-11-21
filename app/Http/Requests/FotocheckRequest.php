@@ -25,16 +25,14 @@ class FotocheckRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre_socio' => ['required'],
-            'dni_socio' => ['required', 'min:8', 'max:8', Rule::unique('fotochecks')->ignore($this->fotocheck, 'dni_socio')],
             'url' => ['nullable'],
             'expedicion' => ['required'],
             'revalidacion' => ['required'],
             'image' => $this->fotocheck ? ['image', 'mimes:jpg,jpeg,png', 'max:2048'] : ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
             'status' => ['nullable'],
             'tipo' => ['nullable'],
-            'vehiculo_id' => ['required'],
-            'asociacione_id' => ['nullable'],
+            'socio_id' => ['nullable'],
+            'user_id' => ['nullable'],
         ];
     }
 }

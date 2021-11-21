@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Socio extends Model
@@ -13,26 +14,62 @@ class Socio extends Model
       return 'url';
     }
 
-    public static function create(array $attributes = []) {
+    public function setNombrePropietarioAttribute($value)
+    {
+        $this->attributes['nombre_propietario'] = ucwords($value);
+    }
 
-        $socio = static::query()->create($attributes);
+    public function setNombreSocioAttribute($nombre_socio) {
 
-        $url = \Str::slug($attributes['nombre_socio']);
+        $this->attributes['nombre_socio'] = ucwords($nombre_socio);
+
+        $url = Str::of($nombre_socio)->slug('-');
 
         if (static::whereUrl($url)->exists()) {
 
-            $socio->url = \Str::slug($attributes['nombre_socio']) . "-{$socio->id}";
+            $this->attributes['url'] = Str::of($nombre_socio .'-'. now()->format('d'))->slug('-');
+
         } else {
 
-            $socio->url = \Str::slug($attributes['nombre_socio']);
+            $this->attributes['url'] = Str::of($nombre_socio)->slug('-');
         }
+    }
 
-        if (!empty($attributes['image'])) {
-            $socio->image = '/storage/'.request()->file('image')->store('fotos', 'public');
-        }
+    //public static function create(array $attributes = []) {
 
-        $socio->save();
+        //$socio = static::query()->create($attributes);
 
-        return $socio;
+        //$url = \Str::slug($attributes['nombre_socio']);
+
+        //if (static::whereUrl($url)->exists()) {
+
+            //$socio->url = \Str::slug($attributes['nombre_socio']) . "-{$socio->id}";
+        //} else {
+
+            //$socio->url = \Str::slug($attributes['nombre_socio']);
+        //}
+
+        //if (!empty($attributes['image'])) {
+            //$socio->image = '/storage/'.request()->file('image')->store('fotos', 'public');
+        //}
+
+        //$socio->save();
+
+        //return $socio;
+    //}
+
+    public function asociacione()
+    {
+        return $this->belongsTo(Asociacione::class);
+    }
+
+    public function tarjetas()
+    {
+        return $this->hasMany(Tarjeta::class);
+    }
+
+    public function fotochecks()
+    {
+        return $this->hasMany(Fotocheck::class);
     }
 }

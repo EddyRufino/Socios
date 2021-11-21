@@ -15,19 +15,13 @@ class CreateSociosTable extends Migration
     {
         Schema::create('socios', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_socio');
-            $table->string('nombre_propietario')->nullable();
-            $table->string('dni_socio')->nullable();
-            $table->string('dni_propietario')->nullable();
+            $table->string('nombre_socio', 120);
+            $table->string('nombre_propietario', 120)->nullable();
+            $table->string('dni_socio', 8)->nullable();
+            $table->string('dni_propietario', 8)->nullable();
             $table->string('url')->nullable();
-            $table->string('num_placa');
-            $table->string('nombre_asociacion');
-            $table->date('expedicion')->nullable();
-            $table->date('revalidacion')->nullable();
-            $table->string('num_operacion');
-            $table->string('vigencia_operacion');
-            $table->string('image')->nullable();
             $table->integer('status')->nullable()->default(0);
+            $table->foreignId('asociacione_id')->nullable()->constrained('asociaciones');
             $table->timestamps();
         });
     }

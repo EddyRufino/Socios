@@ -19,7 +19,7 @@ class Fotocheck extends Model
 
     public function setNombreSocioAttribute($nombre_socio) {
 
-        $this->attributes['nombre_socio'] = $nombre_socio;
+        $this->attributes['nombre_socio'] = ucwords($nombre_socio);
 
         $url = Str::of($nombre_socio)->slug('-');
 
@@ -33,13 +33,8 @@ class Fotocheck extends Model
         }
     }
 
-    public function vehiculo()
+    public function socio()
     {
-        return $this->belongsTo(Vehiculo::class);
-    }
-
-    public function asociacione()
-    {
-        return $this->belongsTo(Asociacione::class);
+        return $this->belongsTo(Socio::class);
     }
 }

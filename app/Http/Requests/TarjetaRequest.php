@@ -25,10 +25,6 @@ class TarjetaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre_socio' => ['required', 'max:120'],
-            'nombre_propietario' => ['nullable', 'max:120'],
-            'dni_socio' => ['required', 'min:8', 'max:8'],
-            'dni_propietario' => ['nullable', 'min:8', 'max:8'],
             'url' => ['nullable'],
             'num_placa' => ['required', 'max:30', Rule::unique('tarjetas')->ignore($this->tarjeta, 'num_placa')],
             'expedicion' => ['required', 'date'],
@@ -40,8 +36,9 @@ class TarjetaRequest extends FormRequest
             'num_correlativo' => ['nullable', Rule::unique('tarjetas')->ignore($this->tarjeta, 'num_correlativo')],
             'status' => ['nullable'],
             'tipo' => ['nullable'],
+            'socio_id' => ['nullable'],
             'vehiculo_id' => ['required'],
-            'asociacione_id' => ['nullable'],
+            'user_id' => ['nullable'],
         ];
     }
 }

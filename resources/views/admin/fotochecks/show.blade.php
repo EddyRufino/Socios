@@ -58,7 +58,7 @@
 
             <img
                 src="{{ asset($fotocheck->image) }}"
-                alt="{{ $fotocheck->nombre_socio }}"
+                alt="{{ $fotocheck->socio->nombre_socio }}"
                 class='img-thumbnail mb-4' style="width: 180px; height: 200px;"
             >
         </div>
@@ -90,18 +90,16 @@
                     <strong class="font-weight-bold">MIEMBRO DE LA ASOCIACIÓN</strong>
                 </li>
                 <li class="list-group-item ">
-                    <strong>Nombre:</strong> {{ Illuminate\Support\Str::title($fotocheck->nombre_socio) }}
+                    <strong>Nombre:</strong> {{ Illuminate\Support\Str::title($fotocheck->socio->nombre_socio) }}
                 </li>
                 <li class="list-group-item ">
-                    <strong>D.N.I:</strong> {{ $fotocheck->dni_socio }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Vehículo:</strong> {{ Illuminate\Support\Str::title($fotocheck->vehiculo->nombre) }}
+                    <strong>D.N.I:</strong> {{ $fotocheck->socio->dni_socio }}
                 </li>
 
+
                 <li class="list-group-item ">
-                    @if ($fotocheck->asociacione_id > 1)
-                        <strong>Asociación:</strong> {{ Illuminate\Support\Str::title($fotocheck->asociacione->nombre) }}
+                    @if (!empty($fotocheck->socio->asociacione_id))
+                        <strong>Asociación:</strong> {{ Illuminate\Support\Str::title(optional($fotocheck->socio->asociacione)->nombre) }}
                     @else
                         <strong>Socio Es:</strong> Persona Natural
                     @endif

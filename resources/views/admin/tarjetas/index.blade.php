@@ -50,22 +50,22 @@
                 <tbody>
                     @forelse ($tarjetas as $tarjeta)
                         <tr>
-                            <td>{{ $tarjeta->nombre_socio }}</td>
-                            @if ($tarjeta->nombre_propietario)
-                                <td>{{ $tarjeta->nombre_propietario }}</td>
+                            <td>{{ $tarjeta->socio->nombre_socio }}</td>
+                            @if ($tarjeta->socio->nombre_propietario)
+                                <td>{{ $tarjeta->socio->nombre_propietario }}</td>
                             @else
                                 <td class="text-secondary">El Mismo Socio</td>
                             @endif
-                            <td>{{ $tarjeta->dni_socio }}</td>
+                            <td>{{ $tarjeta->socio->dni_socio }}</td>
                             <td>{{ $tarjeta->num_placa }}</td>
 
-                            @if ($tarjeta->asociacione->id == 1)
+                            @if (empty($tarjeta->socio->asociacione_id))
                                 <td class="text-secondary">Es Persona Natural</td>
                             @else
-                                <td>{{ optional($tarjeta->asociacione)->nombre }}</td>
+                                <td>{{ optional($tarjeta->socio->asociacione)->nombre }}</td>
                             @endif
 
-                            @if ($tarjeta->vehiculo_id === 1)
+                            @if ($tarjeta->vehiculo_id == 1)
                                 <td class="text-info">{{ $tarjeta->vehiculo->nombre }}</td>
                             @elseif($tarjeta->vehiculo_id === 2)
                                 <td class="text-primary">{{ $tarjeta->vehiculo->nombre }}</td>
