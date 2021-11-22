@@ -393,7 +393,7 @@
                 </fieldset>
 
                 <div class="custom-control custom-checkbox mt-3">
-                    <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
+                    <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunctionEdit()">
                     <label class="custom-control-label" for="myCheck">Persona Natural</label>
                 </div>
             </div>
@@ -444,7 +444,7 @@
 
 
                 <div class="custom-control custom-checkbox mt-3">
-                    <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
+                    <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunctionEdit()">
                     <label class="custom-control-label" for="myCheck">Tiene Asociación</label>
                 </div>
             </div>
@@ -493,6 +493,29 @@
 @push('scripts')
 <script>
     function myFunction() {
+        let checkBox = document.getElementById("myCheck");
+        let natural = document.getElementById("natural");
+        let juridica = document.getElementById("juridica");
+
+        if (checkBox.checked == true){
+
+            natural.style.display = "block";
+            juridica.style.display = "none";
+
+
+
+        } else {
+            natural.style.display = "none";
+            juridica.style.display = "block";
+
+            // Pon el valor
+
+        }
+    }
+</script>
+
+<script>
+    function myFunctionEdit() {
         let checkBox = document.getElementById("myCheck");
         let natural = document.getElementById("natural");
         let juridica = document.getElementById("juridica");

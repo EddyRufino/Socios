@@ -65,24 +65,24 @@
                             <td>{{ $tarjeta->dni_socio }}</td>
                             <td>{{ $tarjeta->num_placa }}</td>
 
-                            @if ($tarjeta->asociacione->id == 1)
+                            @if (is_null($tarjeta->asociacione_id))
                                 <td class="text-secondary">Es Persona Natural</td>
                             @else
                                 <td>{{ optional($tarjeta->asociacione)->nombre }}</td>
                             @endif
-
-                            @if ($tarjeta->vehiculo_id === 1)
-                                <td class="text-info">{{ $tarjeta->vehiculo->nombre }}</td>
-                            @elseif($tarjeta->vehiculo_id === 2)
-                                <td class="text-primary">{{ $tarjeta->vehiculo->nombre }}</td>
+                            {{-- {{dd($tarjeta->tarjetas[0]->vehiculo_id)}} --}}
+                            @if ($tarjeta->tarjetas[0]->vehiculo_id === 1)
+                                <td class="text-info">{{ $tarjeta->tarjetas[0]->vehiculo->nombre }}</td>
+                            @elseif($tarjeta->tarjetas[0]->vehiculo_id === 2)
+                                <td class="text-primary">{{ $tarjeta->tarjetas[0]->vehiculo->nombre }}</td>
                             @else
-                                <td class="text-secondary">{{ $tarjeta->vehiculo->nombre }}</td>
+                                <td class="text-secondary">{{ $tarjeta->tarjetas[0]->vehiculo->nombre }}</td>
                             @endif
 
                            @if ($tarjeta->status == 1)
                                 <td><span class="badge badge-info text-white">Generado</span></td>
                             @else
-                                <td></td>
+                                <td><td><span class="badge badge-info text-white">No Generado</span></td></td>
                             @endif
                             <td>
                                 <a href="{{ route('tarjetas.show', $tarjeta->url) }}"

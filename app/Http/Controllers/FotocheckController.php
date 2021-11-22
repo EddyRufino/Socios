@@ -13,7 +13,7 @@ class FotocheckController extends Controller
 {
     public function index()
     {
-       $fotochecks = Fotocheck::latest()->paginate();
+       $fotochecks = Fotocheck::where('status', 0)->latest()->paginate();
        // Para Search Advanced
         $vehiculos = Vehiculo::all();
         $asociaciones = Asociacione::all();

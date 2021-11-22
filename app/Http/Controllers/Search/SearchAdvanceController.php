@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Search;
 use App\Asociacione;
 use App\Fotocheck;
 use App\Http\Controllers\Controller;
+use App\Socio;
 use App\Tarjeta;
 use App\Vehiculo;
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
 use DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 class SearchAdvanceController extends Controller
 {
@@ -75,16 +76,24 @@ class SearchAdvanceController extends Controller
 
         $asociacion = request()->asociacione_id_two;
 
-        $attributes = Asociacione::where('id', $asociacion)->get();
+        if ($asociacion == 'natural') {
+            $attributes = Socio::where('asociacione_id')->paginate();
 
-        //$countTarjetas = $attributes[0]->tarjetas->count();
-        //$countFotochecks = $attributes[0]->fotochecks->count();
+        } else {
 
-        //$countMoto = $attributes[0]->tarjetas[0]->vehiculo_id;
-        //$vh = Vehiculo::where('', )->get();
-        //dd($vh);
+            $attributes = Socio::where('asociacione_id', $asociacion)->paginate();
+        }
 
-        return view('admin.search.advancedTwo', compact('vehiculos', 'asociaciones', 'attributes'));
+        //$tr = Socio::where('asociacione_id', $asociacion)->get();
+
+        $tarjetasCount = Socio::whereHas('tarjetas')->where('asociacione_id', $asociacion)->count();
+        $fotochecksCount = Socio::whereHas('fotochecks')->where('asociacione_id', $asociacion)->count();
+
+        $tarjetasCountNatural = Socio::whereHas('tarjetas')->whereNull('asociacione_id')->count();
+        $fotochecksCountNatural = Socio::whereHas('fotochecks')->whereNull('asociacione_id')->count();
+        //dd($attributes[0]->fotochecks->count());
+
+    return view('admin.search.advancedTwo', compact('vehiculos', 'asociaciones', 'attributes', 'tarjetasCount', 'fotochecksCount', 'tarjetasCountNatural', 'fotochecksCountNatural'));
     }
 
     public function advancedTree()

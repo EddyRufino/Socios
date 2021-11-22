@@ -12,6 +12,8 @@ class Tarjeta extends Model
 
     protected $guarded = [];
 
+    public $with = ['vehiculo'];
+
     public function getRouteKeyName()
     {
       return 'url';

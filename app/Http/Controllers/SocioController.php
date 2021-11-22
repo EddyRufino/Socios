@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Socio;
-use Illuminate\Http\Request;
+use App\Asociacione;
 use App\Http\Requests\SocioRquest;
+use App\Socio;
+use App\Vehiculo;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class SocioController extends Controller
@@ -12,7 +14,13 @@ class SocioController extends Controller
     public function index()
     {
         $socios = Socio::where('status', 0)->latest()->paginate();
-        return view('socios.index', compact('socios'));
+
+        //dd($socios);
+
+        $vehiculos = Vehiculo::all();
+        $asociaciones = Asociacione::all();
+
+        return view('socios.index', compact('socios', 'vehiculos', 'asociaciones'));
     }
 
     public function create()

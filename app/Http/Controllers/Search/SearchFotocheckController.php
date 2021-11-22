@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Search;
 use App\Asociacione;
 use App\Fotocheck;
 use App\Http\Controllers\Controller;
+use App\Socio;
 use App\Vehiculo;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,9 @@ class SearchFotocheckController extends Controller
         $vehiculos = Vehiculo::all();
         $asociaciones = Asociacione::all();
 
-        $fotochecks = Fotocheck::where('nombre_socio', 'like', '%'. $request->search .'%')
+        $fotochecks = Socio::where('nombre_socio', 'like', '%'. $request->search .'%')
             ->orWhere('dni_socio', 'like', '%'. $request->search .'%')
+            ->orWhere('num_placa', 'like', '%'. $request->search .'%')
             ->latest()
             ->paginate();
 

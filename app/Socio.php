@@ -9,6 +9,8 @@ class Socio extends Model
 {
     protected $guarded = [];
 
+    public $with = ['tarjetas', 'fotochecks'];
+
     public function getRouteKeyName()
     {
       return 'url';
@@ -17,6 +19,11 @@ class Socio extends Model
     public function setNombrePropietarioAttribute($value)
     {
         $this->attributes['nombre_propietario'] = ucwords($value);
+    }
+
+    public function setNumPlacaAttribute($value)
+    {
+        $this->attributes['num_placa'] = strtoupper($value);
     }
 
     public function setNombreSocioAttribute($nombre_socio) {

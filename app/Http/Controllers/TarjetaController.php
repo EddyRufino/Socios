@@ -40,6 +40,7 @@ class TarjetaController extends Controller
             'dni_socio' => $request->dni_socio,
             'nombre_propietario' => $request->nombre_propietario,
             'dni_propietario' => $request->dni_propietario,
+            'num_placa' => $request->num_placa,
             'asociacione_id' => $request->asociacione_id
         ]);
 
@@ -84,6 +85,7 @@ class TarjetaController extends Controller
             'nombre_propietario' => ucwords($request->nombre_propietario),
             'dni_propietario' => $request->dni_propietario,
             'url' => $url,
+            'num_placa' => strtoupper($request->num_placa),
             'asociacione_id' => $request->asociacione_id
         ]);
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Search;
 
 use App\Asociacione;
 use App\Http\Controllers\Controller;
-use App\Tarjeta;
+use App\Socio;
 use App\Vehiculo;
 use Illuminate\Http\Request;
 
@@ -16,7 +16,7 @@ class SearchTarjetaController extends Controller
         $vehiculos = Vehiculo::all();
         $asociaciones = Asociacione::all();
 
-        $tarjetas = Tarjeta::where('nombre_socio', 'like', '%'. $request->search .'%')
+        $tarjetas = Socio::where('nombre_socio', 'like', '%'. $request->search .'%')
             ->orWhere('dni_socio', 'like', '%'. $request->search .'%')
             ->orWhere('num_placa', 'like', '%'. $request->search .'%')
             ->latest()

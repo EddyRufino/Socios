@@ -2,110 +2,125 @@
 
 @section('content')
 <div class="container">
-    <div class="d-flex align-items-center justify-content-between mb-3">
-        <h3><a href="{{ route('socios.index') }}" class="text-dark">Socios</a></h3>
-        {{-- <a href="{{ route('socios.create') }}" class="btn btn-primary">Nuevo</a> --}}
-        <div>
-            <a href="{{ route('socios.create') }}" class="btn btn-primary">Nueva Tarjeta</a>
-            <a href="{{ route('socios.create') }}" class="btn btn-primary">Nuevo Fotocheck</a>
+    <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('tarjetas.index') }}" class="text-dark item text-decoration-none">Socios</a></h4>
+
+    {{-- Search Advanced --}}
+    <div id="searchAdvanced" class="d-flex justify-content-center" style="display: none !important;">
+        @include('admin.search.advanced')
+    </div>
+
+    {{-- Search Basico --}}
+    @include('partials.searchBasico', ['link' => 'search.socio'])
+
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center">
+            <h6><a href="{{ route('tarjetas.index') }}" class="text-dark ml-3 tooltipw">
+                <span id="tooltipw" class="tooltiptext">Listar Tarjetas</span>
+                @include('icons.tarjeta')
+            </a></h6>
+            <h6><a href="{{ route('fotochecks.index') }}" class="text-dark ml-3 tooltipw">
+                <span id="tooltipw" class="tooltiptext">Listar Fotochecks</span>
+                @include('icons.fotocheck')
+            </a></h6>
+        </div>
+
+        @include('partials.checkbox')
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col" class="bg-primary text-white">Socio</th>
+                        <th scope="col" class="bg-primary text-white">DNI Socio</th>
+                        <th scope="col" class="bg-primary text-white">Placa</th>
+                        <th scope="col" class="bg-primary text-white">Asociación</th>
+                        <th scope="col" class="bg-primary text-white">Actividad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($socios as $socio)
+                        <tr>
+                            <td>{{ $socio->nombre_socio }}</td>
+                            <td>{{ $socio->dni_socio }}</td>
+                            <td>{{ $socio->num_placa }}</td>
+
+                            @if (is_null($socio->asociacione_id))
+                                <td class="text-secondary">Es Persona Natural</td>
+                            @else
+                                <td>{{ optional($socio->asociacione)->nombre }}</td>
+                            @endif
+
+                            <td>
+                                <div class="d-flex">
+
+                                    @if ($socio->tarjetas()->exists())
+                                        <h6><a href="{{ route('tarjeta.anverso', $socio->tarjetas[0]->id) }}"
+                                            class="ml-3 text-decoration-none tooltipw"
+                                        >
+                                            <span id="tooltipw" class="tooltiptext">Descargar Tarjeta Circulación</span>
+                                            @include('icons.tarjeta')
+                                        </a></h6>
+                                    @endif
+
+                                    @if ($socio->fotochecks()->exists())
+                                        <h6><a href="{{ route('fotocheck.anverso', $socio->fotochecks[0]->id) }}"
+                                            class="ml-3 text-decoration-none tooltipw"
+                                        >
+                                            <span id="tooltipw" class="tooltiptext">Descargar Fotocheck</span>
+                                            @include('icons.fotocheck')
+                                        </a></h6>
+                                    @endif
+                                </div>
+{{--                                 <a href="{{ route('socios.show', $socio->url) }}"
+                                    class="text-decoration-none"
+                                    data-toggle="tooltip"
+                                    data-placement="top"
+                                    title="Ver Socio"
+                                >
+                                    @include('icons.tarjeta')
+                                </a>
+                                <a href="{{ route('carnet.anverso', $socio->id) }}"
+                                    class="ml-3 text-decoration-none"
+                                    data-toggle="tooltip"
+                                    data-placement="top"
+                                    title="Descarga Carnet"
+                                >
+                                    @include('icons.fotocheck')
+                                </a>
+                                <a href="{{ route('socios.edit', $socio) }}"
+                                    class="ml-3 text-decoration-none"
+                                    data-toggle="tooltip"
+                                    data-placement="top"
+                                    title="Editar Socio"
+                                >
+                                    @include('icons.edit')
+                                </a>
+                                <form id="myform" method="POST" action="{{ route('socios.destroy', $socio) }}" style="display: inline">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button class="btn btn-xs btn-transparent "
+                                        onclick="return confirm('¿Seguro de querer eliminar este socio?')"
+                                        data-toggle="tooltip"
+                                        data-placement="top"
+                                        title="Eliminar Socio"
+                                    >
+                                        @include('icons.delete')
+                                    </button>
+                                </form> --}}
+                            </td>
+                        </tr>
+                    @empty
+                        <li class="list-group-item border-0 mb-3 shadow-sm">No hay nada para mostrar</li>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <div class="d-flex justify-content-center">
-        <div class="mb-4">
-            <form action="{{ route('search.socio') }}" class="form-inline">
-                @csrf
-                <div class="input-group input-group-md">
-
-                    <input class="form-control form-control-navbar"
-                        name="search" type="search"
-                        placeholder="Nombre Socio"
-                        aria-label="Search"
-                        required
-                    >
-
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar bg-primary text-white" type="submit">
-                            @include('icons.icon-search')
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Nombre Socio</th>
-                <th scope="col">DNI Socio</th>
-                <th scope="col">Nombre Propietario</th>
-                <th scope="col">N. Placa</th>
-                <th scope="col">Asociación</th>
-                <!--<th scope="col">Expedición</th>-->
-                <!--<th scope="col">Revalicación</th>-->
-                <th scope="col">N. Operación</th>
-                {{-- <th scope="col">Vigencia Operación</th> --}}
-                <th scope="col">Actividad</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($tarejtas as $socio)
-                <tr>
-                    <td>{{ $socio->nombre_socio }}</td>
-                    <td>{{ $socio->dni_socio }}</td>
-                    <td>{{ $socio->nombre_propietario }}</td>
-                    <td>{{ $socio->num_placa }}</td>
-                    <td>{{ $socio->nombre_asociacion }}</td>
-                    {{-- <td>{{ $socio->expedicion }}</td> --}}
-                    {{-- <td>{{ $socio->revalidacion }}</td> --}}
-                    <td>{{ $socio->num_operacion }}</td>
-                    {{-- <td>{{ $socio->vigencia_operacion }}</td> --}}
-                    <td>
-                        <a href="{{ route('socios.show', $socio->url) }}"
-                            class="text-decoration-none"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Ver Socio"
-                        >
-                            @include('icons.qr')
-                        </a>
-                        <a href="{{ route('carnet.anverso', $socio->id) }}"
-                            class="ml-3 text-decoration-none"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Descarga Carnet"
-                        >
-                            @include('icons.download')
-                        </a>
-                        <a href="{{ route('socios.edit', $socio) }}"
-                            class="ml-3 text-decoration-none"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Editar Socio"
-                        >
-                            @include('icons.edit')
-                        </a>
-                        <form id="myform" method="POST" action="{{ route('socios.destroy', $socio) }}" style="display: inline">
-                            @csrf
-                            @method('DELETE')
-
-                            <button class="btn btn-xs btn-transparent "
-                                onclick="return confirm('¿Seguro de querer eliminar este socio?')"
-                                data-toggle="tooltip"
-                                data-placement="top"
-                                title="Eliminar Socio"
-                            >
-                                @include('icons.delete')
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            @empty
-                <li class="list-group-item border-0 mb-3 shadow-sm">No hay nada para mostrar</li>
-            @endforelse
-        </tbody>
-    </table>
 
     <div class="overflow-auto mt-2">
         {{ $socios->links() }}
@@ -114,23 +129,27 @@
 @endsection
 
 @push('scripts')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function myFunction() {
+        let check = document.getElementById("myCheck");
+        let search = document.getElementById("search");
 
-<script type="text/javascript">
-    function mostrar() {
-        event.preventDefault();
-        Swal.fire({
-          title: "Estás segur@?",
-          text: "Recuerda estar completamente segur@!",
-          showDenyButton: true,  showCancelButton: false,
-          confirmButtonText: `Sí`,
-          denyButtonText: `Salir`,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById("myform").submit();
-            }
-        });
+        if (check.checked == true){
+            search.style.display = "block";
+        } else {
+            search.style.display = "none";
+        }
+    }
 
+    function mySearchAdvanced() {
+        let check = document.getElementById("myCheckAdvanced");
+        let search = document.getElementById("searchAdvanced");
+
+        if (check.checked == true){
+            search.style.display = "block";
+        } else {
+            search.style.setProperty('display', 'none', 'important');
+        }
     }
 </script>
 @endpush

@@ -51,11 +51,13 @@
                     @forelse ($tarjetas as $tarjeta)
                         <tr>
                             <td>{{ $tarjeta->socio->nombre_socio }}</td>
+
                             @if ($tarjeta->socio->nombre_propietario)
                                 <td>{{ $tarjeta->socio->nombre_propietario }}</td>
                             @else
                                 <td class="text-secondary">El Mismo Socio</td>
                             @endif
+
                             <td>{{ $tarjeta->socio->dni_socio }}</td>
                             <td>{{ $tarjeta->num_placa }}</td>
 
@@ -64,7 +66,7 @@
                             @else
                                 <td>{{ optional($tarjeta->socio->asociacione)->nombre }}</td>
                             @endif
-
+                            {{-- {{dd($tarjeta)}} --}}
                             @if ($tarjeta->vehiculo_id == 1)
                                 <td class="text-info">{{ $tarjeta->vehiculo->nombre }}</td>
                             @elseif($tarjeta->vehiculo_id === 2)
