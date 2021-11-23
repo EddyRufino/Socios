@@ -64,6 +64,7 @@
                                         <span id="tooltipw" class="tooltiptext">Ver QR</span>
                                         @include('icons.qr')
                                     </a></h6>
+                                    {{dd($fotocheck->fotochecks[0]->id)}}
                                     <h6><a href="{{ route('fotocheck.anverso', $fotocheck->id)}}"
                                         class="ml-3 text-decoration-none tooltipw"
                                         target="_blank"

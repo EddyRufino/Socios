@@ -92,11 +92,13 @@
                                 <span id="tooltipw" class="tooltiptext">Ver QR</span>
                                     @include('icons.qr')
                                 </a>
-                                <a href="{{ route('tarjeta.anverso', $tarjeta->id) }}"
+
+                                <a href="{{ route('tarjeta.anverso', $tarjeta->tarjetas[0]->id) }}"
                                     class="ml-3 text-decoration-none"
                                     data-toggle="tooltip"
                                     data-placement="top"
-                                    title="Descarga Carnet Circulación"
+                                    title="Descarga Tarjeta Circulación"
+                                    target="_blank"
                                 >
                                     @include('icons.download')
                                 </a>
