@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SocioRquest extends FormRequest
@@ -28,7 +29,7 @@ class SocioRquest extends FormRequest
             'nombre_propietario' => ['nullable', 'max:120'],
             'dni_socio' => ['required', 'min:8', 'max:8'],
             'dni_propietario' => ['nullable', 'min:8', 'max:8'],
-            'num_placa' => ['required', 'max:30', Rule::unique('socios')->ignore($this->socio, 'num_placa')],
+            'num_placa' => ['nullable', 'max:30', Rule::unique('socios')->ignore($this->socio, 'num_placa')],
             'url' => ['nullable'],
         ];
     }

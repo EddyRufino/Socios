@@ -47,20 +47,12 @@ class SocioController extends Controller
 
     public function update(SocioRquest $request, Socio $socio)
     {
-        $path = $socio->image;
+        //dd($socio);
+        $url = $socio->url;
 
-        $socio->fill( $request->validated() );
+        $socio->fill($request->validated());
 
-        if ($request->hasFile('image')) {
-            if ($socio->image != null) {
-                unlink(public_path($path));
-            }
-
-            $socio->update([
-                'image' => '/storage/'.$request->file('image')->store('fotos')
-            ]);
-
-        }
+        $socio->url = $url;
 
         $socio->save();
 

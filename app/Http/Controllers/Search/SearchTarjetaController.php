@@ -17,12 +17,17 @@ class SearchTarjetaController extends Controller
         $asociaciones = Asociacione::all();
 
         $tarjetas = Socio::where('nombre_socio', 'like', '%'. $request->search .'%')
+            ->whereHas('tarjetas', function($query) {
+                $query->where('tipo', 1);
+            })
             ->orWhere('dni_socio', 'like', '%'. $request->search .'%')
             ->orWhere('num_placa', 'like', '%'. $request->search .'%')
             ->latest()
             ->paginate();
 
         $tarjetas->appends(['search' => $request->search]);
+
+        //dd($tarjetas);
 
         return view('admin.tarjetas.search', compact('tarjetas', 'vehiculos', 'asociaciones'));
     }

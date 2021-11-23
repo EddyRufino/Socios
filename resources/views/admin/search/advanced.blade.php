@@ -1,5 +1,5 @@
     <div class="mb-4 d-flex flex-column justify-content-center align-items-center">
-        <form action="{{ route('search.advanced') }}" >
+{{--         <form action="{{ route('search.advanced') }}" >
             @csrf
             <span class="text-dark font-weight-bold">Encuentra socios por identificación - vehículo - asociación</span>
             <div class="input-group input-group-md">
@@ -30,7 +30,7 @@
                     </button>
                 </div>
             </div>
-        </form>
+        </form> --}}
 
 {{--         <form action="{{ route('search.advanced.tree') }}" class="mt-4">
             @csrf
@@ -59,7 +59,7 @@
             </div>
         </form> --}}
 
-        <form action="{{ route('search.advanced.two') }}" class="mt-4">
+        <form action="{{ route('search.advanced.two') }}" class="">
             @csrf
 
             <span class="text-dark font-weight-bold">Encuentra socios por asociación</span>

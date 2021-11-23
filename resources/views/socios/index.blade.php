@@ -2,15 +2,16 @@
 
 @section('content')
 <div class="container">
-    <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('tarjetas.index') }}" class="text-dark item text-decoration-none">Socios</a></h4>
+    <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('tarjetas.index') }}" class="text-dark item text-decoration-none">Socios Oficiales</a></h4>
+
+
+    {{-- Search Basico --}}
+    @include('partials.searchBasico', ['link' => 'search.socio'])
 
     {{-- Search Advanced --}}
     <div id="searchAdvanced" class="d-flex justify-content-center" style="display: none !important;">
         @include('admin.search.advanced')
     </div>
-
-    {{-- Search Basico --}}
-    @include('partials.searchBasico', ['link' => 'search.socio'])
 
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex justify-content-between align-items-center">
@@ -58,7 +59,8 @@
 
                                     @if ($socio->tarjetas()->exists())
                                         <h6><a href="{{ route('tarjeta.anverso', $socio->tarjetas[0]->id) }}"
-                                            class="ml-3 text-decoration-none tooltipw"
+                                            class="ml-3 text-decoration-none text-dark tooltipw"
+                                            target="_blank"
                                         >
                                             <span id="tooltipw" class="tooltiptext">Descargar Tarjeta Circulación</span>
                                             @include('icons.tarjeta')
@@ -67,50 +69,35 @@
 
                                     @if ($socio->fotochecks()->exists())
                                         <h6><a href="{{ route('fotocheck.anverso', $socio->fotochecks[0]->id) }}"
-                                            class="ml-3 text-decoration-none tooltipw"
+                                            class="ml-3 text-decoration-none text-info tooltipw"
+                                            target="_blank"
                                         >
                                             <span id="tooltipw" class="tooltiptext">Descargar Fotocheck</span>
                                             @include('icons.fotocheck')
                                         </a></h6>
                                     @endif
-                                </div>
-{{--                                 <a href="{{ route('socios.show', $socio->url) }}"
-                                    class="text-decoration-none"
-                                    data-toggle="tooltip"
-                                    data-placement="top"
-                                    title="Ver Socio"
-                                >
-                                    @include('icons.tarjeta')
-                                </a>
-                                <a href="{{ route('carnet.anverso', $socio->id) }}"
-                                    class="ml-3 text-decoration-none"
-                                    data-toggle="tooltip"
-                                    data-placement="top"
-                                    title="Descarga Carnet"
-                                >
-                                    @include('icons.fotocheck')
-                                </a>
-                                <a href="{{ route('socios.edit', $socio) }}"
-                                    class="ml-3 text-decoration-none"
-                                    data-toggle="tooltip"
-                                    data-placement="top"
-                                    title="Editar Socio"
-                                >
-                                    @include('icons.edit')
-                                </a>
-                                <form id="myform" method="POST" action="{{ route('socios.destroy', $socio) }}" style="display: inline">
-                                    @csrf
-                                    @method('DELETE')
 
-                                    <button class="btn btn-xs btn-transparent "
-                                        onclick="return confirm('¿Seguro de querer eliminar este socio?')"
-                                        data-toggle="tooltip"
-                                        data-placement="top"
-                                        title="Eliminar Socio"
+                                    <h6><a href="{{ route('socios.edit', $socio) }}"
+                                        class="ml-3 text-decoration-none text-primary tooltipw"
                                     >
-                                        @include('icons.delete')
-                                    </button>
-                                </form> --}}
+                                        <span id="tooltipw" class="tooltiptext">Editar Socio</span>
+                                        @include('icons.edit')
+                                    </a></h6>
+
+
+{{--                                     @superAdmin
+                                        <h6 class="tooltipw mb-2">
+                                            <form action="{{ route('socios.destroy', $socio) }}" method="POST" style="display: inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <span id="tooltipw" class="tooltiptext">Eliminar</span>
+                                                <button class="p-0 ml-2 btn btn-transparent">@include('icons.delete')</button>
+                                            </form>
+                                        </h6>
+                                    @endsuperAdmin --}}
+
+                                </div>
                             </td>
                         </tr>
                     @empty

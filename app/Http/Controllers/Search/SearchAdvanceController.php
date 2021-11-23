@@ -77,21 +77,25 @@ class SearchAdvanceController extends Controller
         $asociacion = request()->asociacione_id_two;
 
         if ($asociacion == 'natural') {
-            $attributes = Socio::where('asociacione_id')->paginate();
+            $attributes = Socio::where('asociacione_id')->whereHas('tarjetas')->orWhereHas('fotochecks')->paginate();
 
         } else {
 
-            $attributes = Socio::where('asociacione_id', $asociacion)->paginate();
+            $attributes = Socio::where('asociacione_id', $asociacion)->whereHas('tarjetas')->orWhereHas('fotochecks')->paginate();
         }
 
+        //dd($attributes);
         //$tr = Socio::where('asociacione_id', $asociacion)->get();
 
         $tarjetasCount = Socio::whereHas('tarjetas')->where('asociacione_id', $asociacion)->count();
         $fotochecksCount = Socio::whereHas('fotochecks')->where('asociacione_id', $asociacion)->count();
 
+        //dd($fotochecksCount);
+
         $tarjetasCountNatural = Socio::whereHas('tarjetas')->whereNull('asociacione_id')->count();
         $fotochecksCountNatural = Socio::whereHas('fotochecks')->whereNull('asociacione_id')->count();
         //dd($attributes[0]->fotochecks->count());
+        //dd($fotochecksCountNatural);
 
     return view('admin.search.advancedTwo', compact('vehiculos', 'asociaciones', 'attributes', 'tarjetasCount', 'fotochecksCount', 'tarjetasCountNatural', 'fotochecksCountNatural'));
     }

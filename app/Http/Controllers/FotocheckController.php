@@ -98,6 +98,9 @@ class FotocheckController extends Controller
 
     public function destroy(Fotocheck $fotocheck)
     {
-        //
+        unlink(public_path($fotocheck->image)); // Elimina la imagen
+        $fotocheck->delete();
+
+        return redirect()->route('fotochecks.index')->with('status', ' Fue eliminado!');
     }
 }

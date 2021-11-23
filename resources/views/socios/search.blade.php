@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('tarjetas.index') }}" class="text-dark item text-decoration-none">Socios</a></h4>
+    <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('socios.index') }}" class="text-dark item text-decoration-none">Socios</a></h4>
 
     {{-- Search Advanced --}}
     <div id="searchAdvanced" class="d-flex justify-content-center" style="display: none !important;">

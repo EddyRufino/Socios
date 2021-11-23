@@ -102,7 +102,8 @@ class TarjetaController extends Controller
 
     public function destroy(Tarjeta $tarjeta)
     {
-        //$tarjeta = Tarjeta::find($tarjeta->id);
-        dd($tarjeta);
+        $tarjeta = $tarjeta->delete();
+
+        return redirect()->route('tarjetas.index')->with('status', 'Fue eliminado!');
     }
 }

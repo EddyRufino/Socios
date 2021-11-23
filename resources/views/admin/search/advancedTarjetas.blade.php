@@ -76,14 +76,16 @@
                                 <div class="d-flex">
                                     <h6><a href="{{ route('tarjetas.show', $tarjeta->url) }}"
                                         class="text-decoration-none tooltipw"
+                                        target="_blank"
                                     >
                                         <span id="tooltipw" class="tooltiptext">Ver QR</span>
                                         @include('icons.qr')
                                     </a></h6>
                                     <h6><a href="{{ route('tarjeta.anverso', $tarjeta->id) }}"
                                         class="ml-3 text-decoration-none tooltipw"
+                                        target="_blank"
                                     >
-                                        <span id="tooltipw" class="tooltiptext">Descargar Carnet</span>
+                                        <span id="tooltipw" class="tooltiptext">Descargar Tarjeta Circulación</span>
                                         @include('icons.download')
                                     </a></h6>
 

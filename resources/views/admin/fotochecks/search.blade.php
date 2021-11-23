@@ -4,13 +4,13 @@
 <div class="container">
     <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('fotochecks.index') }}" class="text-dark item text-decoration-none">Socios - Fotochecks</a></h4>
 
+    {{-- Search Basico --}}
+    @include('partials.searchBasico', ['link' => 'search.fotocheck'])
+
     {{-- Search Advanced --}}
     <div id="searchAdvanced" class="d-flex justify-content-center" style="display: none !important;">
         @include('admin.search.advanced')
     </div>
-
-    {{-- Search Basico --}}
-    @include('partials.searchBasico', ['link' => 'search.fotocheck'])
 
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex justify-content-between align-items-center">
@@ -55,8 +55,8 @@
                             @else
                                 <td>{{ optional($fotocheck->asociacione)->nombre }}</td>
                             @endif
-
-                            @if ($fotocheck->status == 1)
+                            {{-- {{dd($fotocheck)}} --}}
+                            @if ($fotocheck->fotochecks[0]->status == 1)
                                 <td><span class="badge badge-info text-white">Generado</span></td>
                             @else
                                 <td><span class="badge badge-info text-white">No Generado</span></td>
@@ -66,13 +66,15 @@
                                 <div class="d-flex">
                                     <h6><a href="{{ route('fotochecks.show', $fotocheck->url) }}"
                                         class="text-decoration-none tooltipw"
+                                        target="_blank"
                                     >
                                         <span id="tooltipw" class="tooltiptext">Ver QR</span>
                                         @include('icons.qr')
                                     </a></h6>
                                     {{-- {{ route('fotocheck.anverso', $fotocheck->id) }} --}}
-                                    <h6><a href=""
+                                    <h6><a href="{{ route('fotocheck.anverso', $fotocheck->id)}}"
                                         class="ml-3 text-decoration-none tooltipw"
+                                        target="_blank"
                                     >
                                         <span id="tooltipw" class="tooltiptext">Descargar Carnet</span>
                                         @include('icons.download')
@@ -87,7 +89,10 @@
 
                                     @superAdmin
                                         <h6 class="tooltipw mb-2">
-                                            <form action="{{ route('fotochecks.destroy', $fotocheck) }}" method="POST" style="display: inline-block;">
+                                            <form action="{{ route('fotochecks.destroy', $fotocheck) }}" method="POST"
+                                                style="display: inline-block;"
+                                                onclick="return confirm('¿Segur@ de querer eliminar?')"
+                                            >
                                                 @csrf
                                                 @method('DELETE')
 

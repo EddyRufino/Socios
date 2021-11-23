@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('tarjetas.index') }}" class="text-dark item text-decoration-none">Socios - "{{ $attributes[0] ? optional($attributes[0]->asociacione)->nombre : 'Sin Socios' }}"</a></h4>
+    <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('socios.index') }}" class="text-dark item text-decoration-none">Socios - "{{ $attributes[0] ? optional($attributes[0]->asociacione)->nombre : 'Sin Socios' }}"</a></h4>
 
     {{-- Search Advanced --}}
     <div id="searchAdvanced" class="d-flex justify-content-center" style="display: none !important;">
@@ -19,16 +19,24 @@
                 <h6 class="text-dark ml-3 tooltipw">Fotochecks <strong>{{ $fotochecksCount }}</strong></h6>
                 <h6 class="text-dark ml-3 tooltipw">Tarjetas <strong>{{ $tarjetasCount }}</strong></h6>
             @endif --}}
-            {{-- {{dd($attributes->count() > 0)}} --}}
+            {{-- {{dd($attributes[0]->tarjetas())}} --}}
             @if ($attributes->count() > 0)
-                @if (optional($attributes[0]->tarjetas())->exists())
-                    <h6 class="text-dark ml-3 tooltipw">Tarjetas <strong>{{ $tarjetasCount ? $tarjetasCount : $tarjetasCountNatural }}</strong></h6>
-                @endif
+                {{-- @if (optional($attributes[0]->tarjetas())->exists()) --}}
+                    <h6 class="text-dark ml-3 tooltipw d-flex">
+                        <span class="countTarjeta">Tarjetas</span>
+                        <span id="iconFotocheck">@include('icons.tarjeta')</span>
+                        <strong class="pl-1">{{ $tarjetasCount ? $tarjetasCount : $tarjetasCountNatural }}</strong>
+                    </h6>
+                {{-- @endif --}}
 
                 {{-- {{dd($attributes[0]->fotochecks())}} --}}
-                @if (optional($attributes[0]->fotochecks())->exists())
-                    <h6 class="text-dark ml-3 tooltipw">Fotochecks <strong>{{  $fotochecksCount ? $fotochecksCount : $fotochecksCountNatural}}</strong></h6>
-                @endif
+                {{-- @if (optional($attributes[0]->fotochecks())->exists()) --}}
+                    <h6 class="text-dark ml-3 tooltipw">
+                        <span class="countFotocheck">Fotochecks</span>
+                        <span id="iconTarjeta">@include('icons.fotocheck')</span>
+                        <strong>{{  $fotochecksCount ? $fotochecksCount : $fotochecksCountNatural}}</strong>
+                    </h6>
+                {{-- @endif --}}
             @endif
 
 {{--             @if ($attributes && !request()->asociacione_id_two == "natural") optional($attributes[0]->fotochecks())->count()
@@ -49,22 +57,6 @@
                 @include('icons.new')
             </a></h6>
             <h6> --}}
-               {{--  @php
-                    $count = 0;
-                @endphp --}}
-                {{-- @foreach ($attributes[0]->tarjetas as $element) --}}
-                    {{-- {{dd($element)}} --}}
-
-                    {{-- @if ($element->vehiculo_id == 2) --}}
-                        {{-- <a href="#">{{ $element }}</a> --}}
-                        {{-- @foreach($attributes[0]->tarjetas[0]->vehiculo_id == 2)
-                            <a href="#">{{ $count + 1 }}</a>
-                            {{dd($element)}}
-                        @endforeach --}}
-                        {{-- {{dd($count)}} --}}
-                    {{-- @endif --}}
-                {{-- @endforeach --}}
-                {{-- {{dd($attributes[0]->tarjetas[0]->vehiculo_id)}} --}}
             </h6>
         </div>
 
@@ -90,9 +82,15 @@
                     @forelse ($attributes as $socio)
                         <tr>
                             <td>{{ $socio->nombre_socio }}</td>
-                            <td>{{ $socio->nombre_propietario }}</td>
+
+                            @if ($socio->nombre_propietario)
+                                <td>{{ $socio->nombre_propietario }}</td>
+                            @else
+                                <td class="text-secondary">El mismo socio</td>
+                            @endif
+
                             <td>{{ $socio->dni_socio }}</td>
-                            <td>{{ $socio->num_placa }}</td>
+                            <td>{{ $socio->num_placa ? $socio->num_placa : '-' }}</td>
 
                             {{-- {{dd(optional($socio->tarjetas[0])->vehiculo_id)}} --}}
                             @if (isset($socio->tarjetas[0]->vehiculo_id))
@@ -120,7 +118,7 @@
 
                                     @if ($socio->tarjetas()->exists())
                                         <h6><a href="{{ route('tarjeta.anverso', $socio->tarjetas[0]->id) }}"
-                                            class="ml-3 text-decoration-none tooltipw"
+                                            class="ml-3 text-decoration-none tooltipw text-dark"
                                         >
                                             <span id="tooltipw" class="tooltiptext">Descargar Tarjeta Circulación</span>
                                             @include('icons.tarjeta')
@@ -129,50 +127,13 @@
 
                                     @if ($socio->fotochecks()->exists())
                                         <h6><a href="{{ route('fotocheck.anverso', $socio->fotochecks[0]->id) }}"
-                                            class="ml-3 text-decoration-none tooltipw"
+                                            class="ml-3 text-decoration-none tooltipw text-info"
                                         >
                                             <span id="tooltipw" class="tooltiptext">Descargar Fotocheck</span>
                                             @include('icons.fotocheck')
                                         </a></h6>
                                     @endif
                                 </div>
-                            {{-- <a href="{{ route('socios.show', $socio->url) }}"
-                                    class="text-decoration-none"
-                                    data-toggle="tooltip"
-                                    data-placement="top"
-                                    title="Ver Socio"
-                                >
-                                    @include('icons.tarjeta')
-                                </a>
-                                <a href="{{ route('carnet.anverso', $socio->id) }}"
-                                    class="ml-3 text-decoration-none"
-                                    data-toggle="tooltip"
-                                    data-placement="top"
-                                    title="Descarga Carnet"
-                                >
-                                    @include('icons.fotocheck')
-                                </a>
-                                <a href="{{ route('socios.edit', $socio) }}"
-                                    class="ml-3 text-decoration-none"
-                                    data-toggle="tooltip"
-                                    data-placement="top"
-                                    title="Editar Socio"
-                                >
-                                    @include('icons.edit')
-                                </a>
-                                <form id="myform" method="POST" action="{{ route('socios.destroy', $socio) }}" style="display: inline">
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button class="btn btn-xs btn-transparent "
-                                        onclick="return confirm('¿Seguro de querer eliminar este socio?')"
-                                        data-toggle="tooltip"
-                                        data-placement="top"
-                                        title="Eliminar Socio"
-                                    >
-                                        @include('icons.delete')
-                                    </button>
-                                </form> --}}
                             </td>
                         </tr>
                     @empty

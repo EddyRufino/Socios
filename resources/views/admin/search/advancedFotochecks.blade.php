@@ -68,12 +68,14 @@
                                 <div class="d-flex">
                                     <h6><a href="{{ route('fotochecks.show', $fotocheck->url) }}"
                                         class="text-decoration-none tooltipw"
+                                        target="_blank"
                                     >
                                         <span id="tooltipw" class="tooltiptext">Ver QR</span>
                                         @include('icons.qr')
                                     </a></h6>
                                     <h6><a href="{{ route('fotocheck.anverso', $fotocheck->id)}}"
                                         class="ml-3 text-decoration-none tooltipw"
+                                        target="_blank"
                                     >
                                         <span id="tooltipw" class="tooltiptext">Descargar Fotocheck</span>
                                         @include('icons.download')

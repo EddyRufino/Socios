@@ -139,11 +139,15 @@ label {
     border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-@media (max-width: 768px) {
-  .mobil {
-    margin-left: 0px !important;
-    margin-top: 0.5rem;
-  }
+@media (max-width: 767px) {
+    .mobil {
+        margin-left: 0px !important;
+        margin-top: 0.5rem;
+    }
+
+    span.countTarjeta, span.countFotocheck {
+        display: none;
+    }
 }
 
 @media (max-width: 1023px) {
@@ -152,3 +156,9 @@ label {
     }
 }
 
+
+@media (min-width: 768px) {
+    span#iconTarjeta, span#iconFotocheck {
+        display: none;
+    }
+}

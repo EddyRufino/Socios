@@ -22,8 +22,9 @@ class CreateSociosTable extends Migration
             $table->string('num_placa', 30)->nullable();
             $table->string('url')->nullable();
             $table->integer('status')->nullable()->default(0);
-            $table->foreignId('asociacione_id')->nullable()->constrained('asociaciones');
+            $table->foreignId('asociacione_id')->nullable()->constrained('asociaciones')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

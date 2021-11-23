@@ -18,6 +18,9 @@ class SearchFotocheckController extends Controller
         $asociaciones = Asociacione::all();
 
         $fotochecks = Socio::where('nombre_socio', 'like', '%'. $request->search .'%')
+            ->whereHas('fotochecks', function($query) {
+                $query->where('tipo', 2);
+            })
             ->orWhere('dni_socio', 'like', '%'. $request->search .'%')
             ->orWhere('num_placa', 'like', '%'. $request->search .'%')
             ->latest()

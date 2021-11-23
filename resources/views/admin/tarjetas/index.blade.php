@@ -4,14 +4,14 @@
 <div class="container">
     <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('tarjetas.index') }}" class="text-dark item text-decoration-none">Socios - Tarjetas Circulación</a></h4>
 
-    {{-- <h2 id="dds"></h2> --}}
+
+    {{-- Search Basico --}}
+    @include('partials.searchBasico', ['link' => 'search.tarjeta'])
+
     {{-- Search Advanced --}}
     <div id="searchAdvanced" class="d-flex justify-content-center" style="display: none !important;">
         @include('admin.search.advanced')
     </div>
-
-    {{-- Search Basico --}}
-    @include('partials.searchBasico', ['link' => 'search.tarjeta'])
 
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex justify-content-between align-items-center">
@@ -79,12 +79,14 @@
                                 <div class="d-flex">
                                     <h6><a href="{{ route('tarjetas.show', $tarjeta->url) }}"
                                         class="text-decoration-none tooltipw"
+                                        target="_blank"
                                     >
                                         <span id="tooltipw" class="tooltiptext">Ver QR</span>
                                         @include('icons.qr')
                                     </a></h6>
                                     <h6><a href="{{ route('tarjeta.anverso', $tarjeta->id) }}"
                                         class="ml-3 text-decoration-none tooltipw"
+                                        target="_blank"
                                     >
                                         <span id="tooltipw" class="tooltiptext">Descargar Carnet</span>
                                         @include('icons.download')
@@ -99,7 +101,10 @@
 
                                     @superAdmin
                                         <h6 class="tooltipw mb-2">
-                                            <form action="{{ route('tarjetas.destroy', $tarjeta) }}" method="POST" style="display: inline-block;">
+                                            <form action="{{ route('tarjetas.destroy', $tarjeta) }}" method="POST"
+                                                style="display: inline-block;"
+                                                onclick="return confirm('¿Segur@ de querer eliminar?')"
+                                            >
                                                 @csrf
                                                 @method('DELETE')
 

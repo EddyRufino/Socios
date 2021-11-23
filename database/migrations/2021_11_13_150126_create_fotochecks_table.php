@@ -21,7 +21,7 @@ class CreateFotochecksTable extends Migration
             $table->string('image')->nullable();
             $table->integer('status')->nullable()->default(0);
             $table->integer('tipo')->nullable()->default(2);
-            $table->foreignId('socio_id')->constrained('socios');
+            $table->foreignId('socio_id')->constrained('socios')->onDelete('cascade');
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->timestamps();
             $table->softDeletes();
