@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('socios.index') }}" class="text-dark item text-decoration-none">Socios</a></h4>
+    <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('socios.index') }}" class="text-dark item text-decoration-none">Socios Oficiales</a></h4>
 
     {{-- Search Advanced --}}
     <div id="searchAdvanced" class="d-flex justify-content-center" style="display: none !important;">
@@ -82,6 +82,21 @@
                                             @include('icons.fotocheck')
                                         </a></h6>
                                     @endif
+
+                                    @superAdmin
+                                        <h6 class="tooltipw mb-2">
+                                            <form action="{{ route('socios.destroy', $socio) }}" method="POST"
+                                                style="display: inline-block;"
+                                                onclick="return confirm('¿Segur@ de querer eliminar?')"
+                                            >
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <span id="tooltipw" class="tooltiptext">Eliminar</span>
+                                                <button class="p-0 ml-2 btn btn-transparent">@include('icons.delete')</button>
+                                            </form>
+                                        </h6>
+                                    @endsuperAdmin
                                 </div>
                             </td>
                         </tr>

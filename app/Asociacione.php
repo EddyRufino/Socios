@@ -11,7 +11,10 @@ class Asociacione extends Model
 
     protected $fillable = ['nombre'];
 
-    //protected $with = ['tarjetas', 'fotochecks'];
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['nombre'] = ucwords($value);
+    }
 
     public function socios()
     {

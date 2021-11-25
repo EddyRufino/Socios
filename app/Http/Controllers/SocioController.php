@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Asociacione;
+use App\Fotocheck;
 use App\Http\Requests\SocioRquest;
 use App\Socio;
+use App\Tarjeta;
 use App\Vehiculo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -61,9 +63,13 @@ class SocioController extends Controller
 
     public function destroy(Socio $socio)
     {
-        unlink(public_path($socio->image)); // Elimina la imagen
+        //dd($socio->url);
+
+        //unlink(public_path($socio->image)); // Elimina la imagen
+        $socio->tarjetas()->delete();
+        $socio->fotochecks()->delete();
         $socio->delete();
 
-        return redirect()->route('socios.index')->with('status', $socio->nombre_socio . ' fue eliminado!');
+        return redirect()->route('socios.index')->with('status', 'Fue eliminado!');
     }
 }

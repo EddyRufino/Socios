@@ -17,7 +17,7 @@
             </legend>
 
             <div class="form-group">
-                <label for="inputEmail4 font-weight-bold">Nombres y Apellidos</label>
+                <label for="inputEmail4 font-weight-bold">Nombres y Apellidos *</label>
                 <input type="text"
                     name="nombre_socio"
                     class="form-control @error('nombre_socio') is-invalid  @enderror"
@@ -35,7 +35,7 @@
             </div>
 
             <div class="form-group">
-                <label for="inputEmail4 font-weight-bold">D.N.I</label>
+                <label for="inputEmail4 font-weight-bold">D.N.I *</label>
                 <input type="text"
                     name="dni_socio"
                     class="form-control @error('dni_socio') is-invalid  @enderror"
@@ -104,7 +104,7 @@
 
             <div class="row col">
                 <div class="form-group col-md-6">
-                    <label for="inputEmail1">N. Placa</label>
+                    <label for="inputEmail1">N. Placa *</label>
                     <input type="text"
                         name="num_placa"
                         class="form-control @error('num_placa') is-invalid  @enderror"
@@ -122,7 +122,7 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="inputEmail2">Tipo Vehículo</label>
+                    <label for="inputEmail2">Tipo Vehículo *</label>
                     <select class="form-control @error('vehiculo_id') is-invalid  @enderror" name="vehiculo_id">
                         <option value="">Selecciona un vehículo</option>
                         @foreach ($vehiculos as $vehiculo)
@@ -142,7 +142,7 @@
 
             <div class="row col">
                 <div class="form-group col-md-6">
-                    <label for="inputEmail1">Expedición</label>
+                    <label for="inputEmail1">Expedición *</label>
                     <input type="date"
                         name="expedicion"
                         min="2015-01-01" max="2030-12-31" required
@@ -160,7 +160,7 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="inputEmail1">Revalidación</label>
+                    <label for="inputEmail1">Revalidación *</label>
                     <input type="date"
                         name="revalidacion"
                         min="2015-01-01" max="2030-12-31" required
@@ -190,7 +190,7 @@
                 </legend>
 
                 <div class="form-group pl-2 pr-2">
-                    <label for="inputEmail2">Asociación</label>
+                    <label for="inputEmail2">Asociación *</label>
                     <select data-size="7" class="form-control selectpicker @error('asociacione_id') is-invalid  @enderror" name="asociacione_id" data-live-search="true">
                         <option value="">Selecciona una asociación</option>
                         @foreach ($asociaciones as $asociacione)
@@ -211,7 +211,7 @@
                 </div>
 
                 <div class="form-group pl-2 pr-2">
-                    <label for="inputEmail1">N. Operación</label>
+                    <label for="inputEmail1">N. Operación *</label>
                     <input type="text"
                         name="num_operacion"
                         class="form-control @error('num_operacion') is-invalid  @enderror"
@@ -228,7 +228,7 @@
                 </div>
 
                 <div class="form-group pl-2 pr-2">
-                    <label for="inputEmail1">Vigencia Operación</label>
+                    <label for="inputEmail1">Vigencia Operación *</label>
                     <input type="text"
                         name="vigencia_operacion"
                         class="form-control @error('vigencia_operacion') is-invalid  @enderror"
@@ -285,7 +285,7 @@
                 </legend>
 
                 <div class="form-group pl-2 pr-2">
-                    <label for="inputEmail3">N. Autorización</label>
+                    <label for="inputEmail3">N. Autorización *</label>
                     <input type="text"
                         name="num_autorizacion"
                         class="form-control @error('num_autorizacion') is-invalid  @enderror"
@@ -302,7 +302,7 @@
                 </div>
 
                 <div class="form-group pl-2 pr-2">
-                    <label for="inputEmail3">Vigencia Autorización</label>
+                    <label for="inputEmail3">Vigencia Autorización *</label>
                     <input type="text"
                         name="vigencia_autorizacion"
                         class="form-control @error('vigencia_autorizacion') is-invalid  @enderror"

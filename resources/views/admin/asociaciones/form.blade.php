@@ -6,7 +6,7 @@
             </legend>
 
             <div class="form-group">
-                <label for="inputEmail4 font-weight-bold">Nombre</label>
+                <label for="inputEmail4 font-weight-bold">Nombre *</label>
                 <input type="text"
                     name="nombre"
                     class="form-control @error('nombre') is-invalid  @enderror"

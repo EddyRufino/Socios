@@ -94,9 +94,12 @@
                                     </a></h6>
 
 
-{{--                                     @superAdmin
+                                    @superAdmin
                                         <h6 class="tooltipw mb-2">
-                                            <form action="{{ route('socios.destroy', $socio) }}" method="POST" style="display: inline-block;">
+                                            <form action="{{ route('socios.destroy', $socio) }}" method="POST"
+                                                style="display: inline-block;"
+                                                onclick="return confirm('¿Segur@ de querer eliminar?')"
+                                            >
                                                 @csrf
                                                 @method('DELETE')
 
@@ -104,7 +107,7 @@
                                                 <button class="p-0 ml-2 btn btn-transparent">@include('icons.delete')</button>
                                             </form>
                                         </h6>
-                                    @endsuperAdmin --}}
+                                    @endsuperAdmin
 
                                 </div>
                             </td>

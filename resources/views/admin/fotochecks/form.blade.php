@@ -13,11 +13,11 @@
     <div class="col-md-6">
         <fieldset class="boder-1 p-2">
             <legend class="legend">
-                Socio
+                Conductor
             </legend>
 
             <div class="form-group">
-                <label for="inputEmail4 font-weight-bold">Nombres y Apellidos</label>
+                <label for="inputEmail4 font-weight-bold">Nombres y Apellidos *</label>
                 <input type="text"
                     name="nombre_socio"
                     class="form-control @error('nombre_socio') is-invalid  @enderror"
@@ -35,7 +35,7 @@
             </div>
 
             <div class="form-group">
-                <label for="inputEmail4 font-weight-bold">D.N.I</label>
+                <label for="inputEmail4 font-weight-bold">D.N.I *</label>
                 <input type="text"
                     name="dni_socio"
                     class="form-control @error('dni_socio') is-invalid  @enderror"
@@ -52,7 +52,7 @@
             </div>
 
             <div class="form-">
-                <label for="exampleFormControlFile1">Foto</label>
+                <label for="exampleFormControlFile1">Foto *</label>
                 <input type="file" name="image" class="form-control-file @error('image') is-invalid  @enderror" id="exampleFormControlFile1">
 
                 @error('image')
@@ -86,7 +86,7 @@
             </legend>
 
                 <div class="form-group">
-                    <label for="inputEmail1">Expedición</label>
+                    <label for="inputEmail1">Expedición *</label>
                     <input type="date"
                         name="expedicion"
                         min="2015-01-01" max="2030-12-31" required
@@ -104,7 +104,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputEmail1">Revalidación</label>
+                    <label for="inputEmail1">Revalidación *</label>
                     <input type="date"
                         name="revalidacion"
                         min="2015-01-01" max="2030-12-31" required
@@ -157,7 +157,7 @@
             </legend>
 
             <div class="form-group pl-2 pr-2">
-                <label for="inputEmail2">Tipo Vehículo</label>
+                <label for="inputEmail2">Tipo Vehículo *</label>
                 <select class="form-control @error('vehiculo_id') is-invalid  @enderror" name="vehiculo_id">
                     <option value="">Selecciona un vehículo</option>
                     @foreach ($vehiculos as $vehiculo)
@@ -182,7 +182,6 @@
                     value="{{ old('num_placa', $fotocheck->num_placa) }}"
                     id="inputEmail1"
                     placeholder="Ejm: 5816-4P"
-                    required
                 >
 
                 @error('num_placa')
