@@ -35,6 +35,7 @@ class FotocheckController extends Controller
         $socio = Socio::updateOrCreate([
             'nombre_socio' => $request->nombre_socio,
             'dni_socio' => $request->dni_socio,
+            'num_placa' => strtoupper($request->num_placa),
             'asociacione_id' => $request->asociacione_id,
             'vehiculo_id' => $request->vehiculo_id
         ]);
@@ -73,6 +74,7 @@ class FotocheckController extends Controller
         $socio = Socio::where('url', $url)->update([
             'nombre_socio' => ucwords($request->nombre_socio),
             'dni_socio' => $request->dni_socio,
+            'num_placa' => strtoupper($request->num_placa),
             'url' => $url,
             'asociacione_id' => $request->asociacione_id,
             'vehiculo_id' => $request->vehiculo_id

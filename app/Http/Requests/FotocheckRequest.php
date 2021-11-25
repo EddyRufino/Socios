@@ -31,6 +31,7 @@ class FotocheckRequest extends FormRequest
             'image' => $this->fotocheck ? ['image', 'mimes:jpg,jpeg,png', 'max:2048'] : ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
             'status' => ['nullable'],
             'tipo' => ['nullable'],
+            'num_placa' => ['nullable', 'max:30', Rule::unique('fotochecks')->ignore($this->fotocheck, 'num_placa')],
             'socio_id' => ['nullable'],
             'vehiculo_id' => ['required'],
             'user_id' => ['nullable'],
