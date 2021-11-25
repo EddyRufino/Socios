@@ -40,6 +40,7 @@
                         <th scope="col" class="bg-primary text-white">Nombre Socio</th>
                         <th scope="col" class="bg-primary text-white">DNI Socio</th>
                         <th scope="col" class="bg-primary text-white">Asociación</th>
+                        <th scope="col" class="bg-primary text-white">Vehículo</th>
                         <th scope="col" class="bg-primary text-white">QR</th>
                         <th scope="col" class="bg-primary text-white">Actividad</th>
                     </tr>
@@ -55,6 +56,15 @@
                             @else
                                 <td>{{ optional($fotocheck->asociacione)->nombre }}</td>
                             @endif
+
+                            @if ($fotocheck->vehiculo_id == 1)
+                                <td class="text-info">{{ $fotocheck->vehiculo->nombre }}</td>
+                            @elseif($fotocheck->vehiculo_id === 2)
+                                <td class="text-primary">{{ $fotocheck->vehiculo->nombre }}</td>
+                            @else
+                                <td class="text-secondary">{{ $fotocheck->vehiculo->nombre }}</td>
+                            @endif
+
                             {{-- {{dd($fotocheck)}} --}}
                             @if ($fotocheck->fotochecks[0]->status == 1)
                                 <td><span class="badge badge-info text-white">Generado</span></td>

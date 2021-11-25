@@ -35,7 +35,8 @@ class FotocheckController extends Controller
         $socio = Socio::updateOrCreate([
             'nombre_socio' => $request->nombre_socio,
             'dni_socio' => $request->dni_socio,
-            'asociacione_id' => $request->asociacione_id
+            'asociacione_id' => $request->asociacione_id,
+            'vehiculo_id' => $request->vehiculo_id
         ]);
 
         $data = array_merge($request->validated(), [
@@ -73,7 +74,8 @@ class FotocheckController extends Controller
             'nombre_socio' => ucwords($request->nombre_socio),
             'dni_socio' => $request->dni_socio,
             'url' => $url,
-            'asociacione_id' => $request->asociacione_id
+            'asociacione_id' => $request->asociacione_id,
+            'vehiculo_id' => $request->vehiculo_id
         ]);
 
         $fotocheck->fill( $request->validated() );

@@ -150,6 +150,30 @@
             </div>
 
         </fieldset>
+
+        <fieldset class="boder-1">
+            <legend class="text-legend-transportador legend p-2">
+                Vehículo
+            </legend>
+
+            <div class="form-group pl-2 pr-2">
+                <label for="inputEmail2">Tipo Vehículo</label>
+                <select class="form-control @error('vehiculo_id') is-invalid  @enderror" name="vehiculo_id">
+                    <option value="">Selecciona un vehículo</option>
+                    @foreach ($vehiculos as $vehiculo)
+                      <option value="{{ $vehiculo->id }}"
+                              {{ old('vehiculo_id', $fotocheck->vehiculo_id) == $vehiculo->id ? 'selected' : '' }}>
+                        {{ $vehiculo->nombre }}</option>
+                    @endforeach
+                </select>
+
+                @error('vehiculo_id')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                @enderror
+            </div>
+        </fieldset>
     </div>
 </div>
 

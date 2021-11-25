@@ -41,7 +41,8 @@ class TarjetaController extends Controller
             'nombre_propietario' => $request->nombre_propietario,
             'dni_propietario' => $request->dni_propietario,
             'num_placa' => $request->num_placa,
-            'asociacione_id' => $request->asociacione_id
+            'asociacione_id' => $request->asociacione_id,
+            'vehiculo_id' => $request->vehiculo_id
         ]);
 
         Tarjeta::create(array_merge(
@@ -86,7 +87,8 @@ class TarjetaController extends Controller
             'dni_propietario' => $request->dni_propietario,
             'url' => $url,
             'num_placa' => strtoupper($request->num_placa),
-            'asociacione_id' => $request->asociacione_id
+            'asociacione_id' => $request->asociacione_id,
+            'vehiculo_id' => $request->vehiculo_id
         ]);
 
         $tarjeta = $tarjeta->fill($request->validated());

@@ -23,6 +23,7 @@ class CreateSociosTable extends Migration
             $table->string('url')->nullable();
             $table->integer('status')->nullable()->default(0);
             $table->foreignId('asociacione_id')->nullable()->constrained('asociaciones')->onDelete('cascade');
+            $table->foreignId('vehiculo_id')->nullable()->constrained('vehiculos')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

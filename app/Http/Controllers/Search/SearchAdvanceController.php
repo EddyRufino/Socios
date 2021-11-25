@@ -77,23 +77,93 @@ class SearchAdvanceController extends Controller
         $asociacion = request()->asociacione_id_two;
 
         if ($asociacion == 'natural') {
-            $attributes = Socio::where('asociacione_id')->whereHas('tarjetas')->orWhereHas('fotochecks')->paginate();
+
+            $attributes = Socio::whereNull('asociacione_id')
+                ->whereNull('deleted_at')
+                ->paginate();
 
         } else {
 
-            $attributes = Socio::where('asociacione_id', $asociacion)->whereHas('tarjetas')->orWhereHas('fotochecks')->paginate();
+            $attributes = Socio::where('asociacione_id', $asociacion)
+                ->whereNull('deleted_at')
+                ->paginate();
         }
 
-        //dd($attributes);
-        //$tr = Socio::where('asociacione_id', $asociacion)->get();
+        // Con Asociación
+        $tarjetasCount = Socio::whereHas('tarjetas', function($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->where('asociacione_id', $asociacion)
+            ->whereNull('deleted_at')
+            ->get();
+        //$tarjetasCount = DB::table('socios')
+                    //->whereExists(function ($query) use($asociacion){
+                        //$query->select(DB::raw(1))
+                            //->from('tarjetas')
+                            //->where('asociacione_id', $asociacion)
+                            //->whereNull('deleted_at')
+                            //->whereRaw('tarjetas.socio_id = socios.id');
+                   //})
+                   //->get();
 
-        $tarjetasCount = Socio::whereHas('tarjetas')->where('asociacione_id', $asociacion)->count();
-        $fotochecksCount = Socio::whereHas('fotochecks')->where('asociacione_id', $asociacion)->count();
 
-        //dd($fotochecksCount);
+        $fotochecksCount = Socio::whereHas('fotochecks', function($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->where('asociacione_id', $asociacion)
+            ->whereNull('deleted_at')
+            ->get();
+        //$fotochecksCount = DB::table('socios')
+                    //->whereExists(function ($query) use($asociacion){
+                        //$query->select(DB::raw(1))
+                            //->from('fotochecks')
+                            //->where('asociacione_id', $asociacion)
+                            //->whereNull('deleted_at')
+                            //->whereRaw('fotochecks.socio_id = socios.id');
+                   //})
+                   //->get();
 
-        $tarjetasCountNatural = Socio::whereHas('tarjetas')->whereNull('asociacione_id')->count();
-        $fotochecksCountNatural = Socio::whereHas('fotochecks')->whereNull('asociacione_id')->count();
+
+
+        // Sin Asociación
+        $tarjetasCountNatural = Socio::whereHas('tarjetas', function($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->whereNull('asociacione_id')
+            ->whereNull('deleted_at')
+            ->get();
+
+        //$tarjetasCountNatural = DB::table('socios')
+                    //->whereExists(function ($query) use($asociacion){
+                        //$query->select(DB::raw(1))
+                            //->from('tarjetas')
+                            //->whereNull('asociacione_id')
+                            //->whereNull('deleted_at')
+                            //->whereRaw('tarjetas.socio_id = socios.id');
+                   //})
+                   //->get();
+
+        //dd($tarjetasCountNatural);
+
+        $fotochecksCountNatural = Socio::whereHas('fotochecks', function($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->whereNull('asociacione_id')
+            ->whereNull('deleted_at')
+            ->get();
+        //$fotochecksCountNatural = DB::table('socios')
+                    //->whereExists(function ($query) use($asociacion){
+                        //$query->select(DB::raw(1))
+                            //->from('fotochecks')
+                            //->whereNull('asociacione_id')
+                            //->whereNull('deleted_at')
+                            //->whereRaw('fotochecks.socio_id = socios.id');
+                   //})
+                   //->get();
+
+
+
+        //dd($fotochecksCountNatural);
         //dd($attributes[0]->fotochecks->count());
         //dd($fotochecksCountNatural);
 

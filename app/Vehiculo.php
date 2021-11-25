@@ -19,4 +19,9 @@ class Vehiculo extends Model
     {
         return $this->hasMany(Fotocheck::class);
     }
+
+    public function socios()
+    {
+        return $this->hasMany(Socio::class);
+    }
 }

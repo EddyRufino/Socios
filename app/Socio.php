@@ -82,4 +82,9 @@ class Socio extends Model
     {
         return $this->hasMany(Fotocheck::class);
     }
+
+    public function vehiculo()
+    {
+        return $this->belongsTo(Vehiculo::class);
+    }
 }

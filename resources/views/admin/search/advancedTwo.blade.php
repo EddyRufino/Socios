@@ -14,49 +14,40 @@
 
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex justify-content-between align-items-center">
-            {{-- {{dd(!request()->asociacione_id_two == "natural")}} --}}
-{{--             @if ($attributes)
-                <h6 class="text-dark ml-3 tooltipw">Fotochecks <strong>{{ $fotochecksCount }}</strong></h6>
-                <h6 class="text-dark ml-3 tooltipw">Tarjetas <strong>{{ $tarjetasCount }}</strong></h6>
-            @endif --}}
-            {{-- {{dd($attributes[0]->tarjetas())}} --}}
             @if ($attributes->count() > 0)
-                {{-- @if (optional($attributes[0]->tarjetas())->exists()) --}}
-                    <h6 class="text-dark ml-3 tooltipw d-flex">
-                        <span class="countTarjeta">Tarjetas</span>
+
+                @if (is_numeric(request()->asociacione_id_two))
+
+                    <h6 class="text-dark ml-2 tooltipw d-flex">
+                        <span class="countTarjeta mr-1">Tarjetas</span>
                         <span id="iconFotocheck">@include('icons.tarjeta')</span>
-                        <strong class="pl-1">{{ $tarjetasCount ? $tarjetasCount : $tarjetasCountNatural }}</strong>
-                    </h6>
-                {{-- @endif --}}
+                        <strong class="mr-3">{{$tarjetasCount->count()}}</strong>
 
-                {{-- {{dd($attributes[0]->fotochecks())}} --}}
-                {{-- @if (optional($attributes[0]->fotochecks())->exists()) --}}
-                    <h6 class="text-dark ml-3 tooltipw">
-                        <span class="countFotocheck">Fotochecks</span>
-                        <span id="iconTarjeta">@include('icons.fotocheck')</span>
-                        <strong>{{  $fotochecksCount ? $fotochecksCount : $fotochecksCountNatural}}</strong>
+                        <span class="countTarjeta">Fotochecks</span>
+                        <span id="iconFotocheck">@include('icons.fotocheck')</span>
+                        <strong class="ml-1">{{$fotochecksCount->count()}}</strong>
+                        {{-- <strong class="pl-1">{{ $tarjetasCount->count() ? $tarjetasCount->count().'con' : $tarjetasCountNatural->count().'sin' }}</strong> --}}
                     </h6>
-                {{-- @endif --}}
+
+                @endif
+
+                @if (request()->asociacione_id_two == 'natural')
+
+                    <h6 class="text-dark ml-2 tooltipw">
+                    <span class="countTarjeta mr-1">Tarjetas</span>
+                    <span id="iconFotocheck">@include('icons.tarjeta')</span>
+                    <strong class="mr-3">{{$tarjetasCountNatural->count()}}</strong>
+
+                    <span class="countTarjeta">Fotochecks</span>
+                    <span id="iconFotocheck">@include('icons.fotocheck')</span>
+                    <strong class="ml-1">{{$fotochecksCountNatural->count()}}</strong>
+                        {{-- <strong>{{  $tarjetasCount->count() ? $fotochecksCount->count().'con' : $fotochecksCountNatural->count().'sin' }}</strong> --}}
+                    </h6>
+
+                @endif
+
             @endif
 
-{{--             @if ($attributes && !request()->asociacione_id_two == "natural") optional($attributes[0]->fotochecks())->count()
-                <h6 class="text-dark ml-3 tooltipw">Fotochecks <strong>{{ $fotochecksCount }}</strong></h6>
-                <h6 class="text-dark ml-3 tooltipw">Tarjetas <strong>{{ $tarjetasCount }}</strong></h6>
-            @endif
-
-            @if($attributes || (request()->asociacione_id_two === 'natural' && $attributes))
-                <h6 class="text-dark ml-3 tooltipw">Fotochecks <strong>{{ $fotochecksCountNatural }}</strong></h6>
-                <h6 class="text-dark ml-3 tooltipw">Tarjetas <strong>{{ $tarjetasCountNatural }}</strong></h6>
-            @endif --}}
-{{--             <h6><a href="{{ route('tarjetas.create') }}" class="text-dark ml-3 tooltipw">
-                <span id="tooltipw" class="tooltiptext">Nueva Tarjeta Circulación</span>
-                @include('icons.add')
-            </a></h6>
-            <h6><a href="{{ route('fotochecks.create') }}" class="text-dark ml-3 tooltipw">
-                <span id="tooltipw" class="tooltiptext">Nuevo Fotocheck</span>
-                @include('icons.new')
-            </a></h6>
-            <h6> --}}
             </h6>
         </div>
 
@@ -93,10 +84,12 @@
                             <td>{{ $socio->num_placa ? $socio->num_placa : '-' }}</td>
 
                             {{-- {{dd(optional($socio->tarjetas[0])->vehiculo_id)}} --}}
-                            @if (isset($socio->tarjetas[0]->vehiculo_id))
-                                <td>{{ optional($socio->tarjetas[0]->vehiculo)->nombre }}
+                            @if ($socio->vehiculo_id == 1)
+                                <td class="text-info">{{ $socio->vehiculo->nombre }}</td>
+                            @elseif($socio->vehiculo_id === 2)
+                                <td class="text-primary">{{ $socio->vehiculo->nombre }}</td>
                             @else
-                                <td>-</td>
+                                <td class="text-secondary">{{ $socio->vehiculo->nombre }}</td>
                             @endif
                             {{-- {{dd($socio->tarjetas[0]->vehiculo_id)}} --}}
                             {{-- @if (optional($socio->tarjetas[0])->vehiculo_id == 1) --}}

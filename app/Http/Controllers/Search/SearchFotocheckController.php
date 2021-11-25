@@ -28,7 +28,7 @@ class SearchFotocheckController extends Controller
 
         $fotochecks->appends(['search' => $request->search]);
 
-        dd($fotochecks[0]->fotochecks[0]->id);
+        //dd($fotochecks[0]->fotochecks[0]->id);
 
         return view('admin.fotochecks.search', compact('fotochecks', 'vehiculos', 'asociaciones'));
     }

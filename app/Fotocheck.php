@@ -33,6 +33,11 @@ class Fotocheck extends Model
         }
     }
 
+    public function vehiculo()
+    {
+        return $this->belongsTo(Vehiculo::class);
+    }
+
     public function socio()
     {
         return $this->belongsTo(Socio::class);

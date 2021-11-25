@@ -32,6 +32,7 @@ class FotocheckRequest extends FormRequest
             'status' => ['nullable'],
             'tipo' => ['nullable'],
             'socio_id' => ['nullable'],
+            'vehiculo_id' => ['required'],
             'user_id' => ['nullable'],
         ];
     }

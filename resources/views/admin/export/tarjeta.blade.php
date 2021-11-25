@@ -178,9 +178,9 @@ body{
         >
 
         @if ($tarjeta[0]->socio->nombre_propietario)
-            <span class="texto-encima-nombre-socio">APELLIDOS Y NOMBRES DEL SOCIO - PROPIETARIO</span>
-        @else
             <span class="texto-encima-nombre-socio">APELLIDOS Y NOMBRES DEL SOCIO</span>
+        @else
+            <span class="texto-encima-nombre-socio">APELLIDOS Y NOMBRES DEL SOCIO - PROPIETARIO</span>
         @endif
 
         <span class="texto-encima-nombre">{{ $tarjeta[0]->socio->nombre_socio }}</span>

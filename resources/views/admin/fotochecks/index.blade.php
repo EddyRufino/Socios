@@ -40,6 +40,7 @@
                         <th scope="col" class="bg-primary text-white">Nombre Socio</th>
                         <th scope="col" class="bg-primary text-white">DNI Socio</th>
                         <th scope="col" class="bg-primary text-white">Asociación</th>
+                        <th scope="col" class="bg-primary text-white">Vehículo</th>
                         <th scope="col" class="bg-primary text-white">Actividad</th>
                     </tr>
                 </thead>
@@ -49,10 +50,18 @@
                             <td>{{ $fotocheck->socio->nombre_socio }}</td>
                             <td>{{ $fotocheck->socio->dni_socio }}</td>
 
-                            @if (empty($fotocheck->socio->asociacione_id))
+                           @if (empty($fotocheck->socio->asociacione_id))
                                 <td class="text-secondary">Es Persona Natural</td>
                             @else
                                 <td>{{ optional($fotocheck->socio->asociacione)->nombre }}</td>
+                            @endif
+
+                            @if ($fotocheck->vehiculo_id == 1)
+                                <td class="text-info">{{ $fotocheck->vehiculo->nombre }}</td>
+                            @elseif($fotocheck->vehiculo_id === 2)
+                                <td class="text-primary">{{ $fotocheck->vehiculo->nombre }}</td>
+                            @else
+                                <td class="text-secondary">{{ $fotocheck->vehiculo->nombre }}</td>
                             @endif
 
                             <td>
@@ -64,7 +73,7 @@
                                         <span id="tooltipw" class="tooltiptext">Ver QR</span>
                                         @include('icons.qr')
                                     </a></h6>
-                                    {{dd($fotocheck->fotochecks[0]->id)}}
+                                    {{-- {{dd($fotocheck->fotochecks[0]->id)}} --}}
                                     <h6><a href="{{ route('fotocheck.anverso', $fotocheck->id)}}"
                                         class="ml-3 text-decoration-none tooltipw"
                                         target="_blank"

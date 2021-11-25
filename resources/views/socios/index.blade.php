@@ -38,6 +38,7 @@
                         <th scope="col" class="bg-primary text-white">DNI Socio</th>
                         <th scope="col" class="bg-primary text-white">Placa</th>
                         <th scope="col" class="bg-primary text-white">Asociación</th>
+                        <th scope="col" class="bg-primary text-white">Vehículo</th>
                         <th scope="col" class="bg-primary text-white">Actividad</th>
                     </tr>
                 </thead>
@@ -52,6 +53,14 @@
                                 <td class="text-secondary">Es Persona Natural</td>
                             @else
                                 <td>{{ optional($socio->asociacione)->nombre }}</td>
+                            @endif
+
+                            @if ($socio->vehiculo_id == 1)
+                                <td class="text-info">{{ $socio->vehiculo->nombre }}</td>
+                            @elseif($socio->vehiculo_id === 2)
+                                <td class="text-primary">{{ $socio->vehiculo->nombre }}</td>
+                            @else
+                                <td class="text-secondary">{{ $socio->vehiculo->nombre }}</td>
                             @endif
 
                             <td>
