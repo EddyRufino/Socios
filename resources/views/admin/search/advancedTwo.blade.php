@@ -141,7 +141,7 @@
     </div>
 
     <div class="overflow-auto mt-2">
-        {{-- {{ $attributes->links() }} --}}
+        {{ $attributes->links() }}
     </div>
 </div>
 @endsection

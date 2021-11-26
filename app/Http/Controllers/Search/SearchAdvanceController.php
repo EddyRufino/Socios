@@ -89,6 +89,8 @@ class SearchAdvanceController extends Controller
                 ->paginate();
         }
 
+        $attributes->appends(['asociacione_id_two' => $asociacion]);
+
         // Con Asociación
         $tarjetasCount = Socio::whereHas('tarjetas', function($query) {
                 $query->whereNull('deleted_at');

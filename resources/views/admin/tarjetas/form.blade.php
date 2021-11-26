@@ -36,7 +36,7 @@
 
             <div class="form-group">
                 <label for="inputEmail4 font-weight-bold">D.N.I *</label>
-                <input type="text"
+                <input type="number"
                     name="dni_socio"
                     class="form-control @error('dni_socio') is-invalid  @enderror"
                     value="{{ old('dni_socio', optional($tarjeta->socio)->dni_socio) }}"
@@ -77,7 +77,7 @@
 
             <div class="form-group">
                 <label for="inputEmail4 font-weight-bold">D.N.I</label>
-                <input type="text"
+                <input type="number"
                     name="dni_propietario"
                     class="form-control @error('dni_propietario') is-invalid  @enderror"
                     value="{{ old('dni_propietario', optional($tarjeta->socio)->dni_propietario) }}"

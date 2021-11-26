@@ -36,7 +36,7 @@
 
             <div class="form-group">
                 <label for="inputEmail4 font-weight-bold">D.N.I *</label>
-                <input type="text"
+                <input type="number"
                     name="dni_socio"
                     class="form-control @error('dni_socio') is-invalid  @enderror"
                     value="{{ old('dni_socio', optional($fotocheck->socio)->dni_socio) }}"
