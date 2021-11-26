@@ -7,6 +7,7 @@ use App\Correlativo;
 use App\Http\Requests\TarjetaRequest;
 use App\Socio;
 use App\Tarjeta;
+use App\TipoDocumento;
 use App\Vehiculo;
 use Illuminate\Http\Request;
 
@@ -26,10 +27,11 @@ class TarjetaController extends Controller
     {
         $vehiculos = Vehiculo::all();
         $asociaciones = Asociacione::all();
+        $documentos = TipoDocumento::all();
         $inicio = Correlativo::select('num_correlativo')->where('tipo', 1)->get();
         $num_correlativo = $inicio[0]->num_correlativo;
 
-        return view('admin.tarjetas.create', compact('vehiculos', 'asociaciones', 'num_correlativo'));
+        return view('admin.tarjetas.create', compact('vehiculos', 'asociaciones', 'num_correlativo', 'documentos'));
     }
 
     public function store(TarjetaRequest $request)
@@ -42,7 +44,8 @@ class TarjetaController extends Controller
             'dni_propietario' => $request->dni_propietario,
             'num_placa' => $request->num_placa,
             'asociacione_id' => $request->asociacione_id,
-            'vehiculo_id' => $request->vehiculo_id
+            'vehiculo_id' => $request->vehiculo_id,
+            'tipo_documento_id' => $request->tipo_documento_id
         ]);
 
         Tarjeta::create(array_merge(
@@ -70,10 +73,11 @@ class TarjetaController extends Controller
     {
         $vehiculos = Vehiculo::all();
         $asociaciones = Asociacione::all();
+        $documentos = TipoDocumento::all();
         $inicio = Correlativo::select('num_correlativo')->where('tipo', 1)->get();
         $num_correlativo = $inicio[0]->num_correlativo;
 
-        return view('admin.tarjetas.edit', compact('tarjeta', 'vehiculos', 'asociaciones', 'num_correlativo'));
+        return view('admin.tarjetas.edit', compact('tarjeta', 'vehiculos', 'asociaciones', 'num_correlativo', 'documentos'));
     }
 
     public function update(TarjetaRequest $request, Tarjeta $tarjeta)
@@ -88,7 +92,8 @@ class TarjetaController extends Controller
             'url' => $url,
             'num_placa' => strtoupper($request->num_placa),
             'asociacione_id' => $request->asociacione_id,
-            'vehiculo_id' => $request->vehiculo_id
+            'vehiculo_id' => $request->vehiculo_id,
+            'tipo_documento_id' => $request->tipo_documento_id
         ]);
 
         $tarjeta = $tarjeta->fill($request->validated());

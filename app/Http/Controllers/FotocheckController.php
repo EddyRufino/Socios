@@ -6,6 +6,7 @@ use App\Asociacione;
 use App\Fotocheck;
 use App\Http\Requests\FotocheckRequest;
 use App\Socio;
+use App\TipoDocumento;
 use App\Vehiculo;
 use Illuminate\Http\Request;
 
@@ -25,8 +26,9 @@ class FotocheckController extends Controller
     {
         $vehiculos = Vehiculo::all();
         $asociaciones = Asociacione::all();
+        $documentos = TipoDocumento::all();
 
-        return view('admin.fotochecks.create', compact('vehiculos', 'asociaciones'));
+        return view('admin.fotochecks.create', compact('vehiculos', 'asociaciones', 'documentos'));
     }
 
     public function store(FotocheckRequest $request)
@@ -37,7 +39,8 @@ class FotocheckController extends Controller
             'dni_socio' => $request->dni_socio,
             'num_placa' => strtoupper($request->num_placa),
             'asociacione_id' => $request->asociacione_id,
-            'vehiculo_id' => $request->vehiculo_id
+            'vehiculo_id' => $request->vehiculo_id,
+            'tipo_documento_id' => $request->tipo_documento_id
         ]);
 
         $data = array_merge($request->validated(), [
@@ -61,8 +64,9 @@ class FotocheckController extends Controller
     {
         $vehiculos = Vehiculo::all();
         $asociaciones = Asociacione::all();
+        $documentos = TipoDocumento::all();
 
-        return view('admin.fotochecks.edit', compact('fotocheck', 'vehiculos', 'asociaciones'));
+        return view('admin.fotochecks.edit', compact('fotocheck', 'vehiculos', 'asociaciones', 'documentos'));
     }
 
     public function update(FotocheckRequest $request, Fotocheck $fotocheck)
@@ -77,7 +81,8 @@ class FotocheckController extends Controller
             'num_placa' => strtoupper($request->num_placa),
             'url' => $url,
             'asociacione_id' => $request->asociacione_id,
-            'vehiculo_id' => $request->vehiculo_id
+            'vehiculo_id' => $request->vehiculo_id,
+            'tipo_documento_id' => $request->tipo_documento_id
         ]);
 
         $fotocheck->fill( $request->validated() );

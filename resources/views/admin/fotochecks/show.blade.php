@@ -93,7 +93,7 @@
                     <strong>Nombre:</strong> {{ Illuminate\Support\Str::title($fotocheck->socio->nombre_socio) }}
                 </li>
                 <li class="list-group-item ">
-                    <strong>D.N.I:</strong> {{ $fotocheck->socio->dni_socio }}
+                    <strong>{{ $fotocheck->socio->documento->nombre }}:</strong> {{ $fotocheck->socio->dni_socio }}
                 </li>
 
 

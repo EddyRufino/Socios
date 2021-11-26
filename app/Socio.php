@@ -87,4 +87,9 @@ class Socio extends Model
     {
         return $this->belongsTo(Vehiculo::class);
     }
+
+    public function documento()
+    {
+        return $this->belongsTo(TipoDocumento::class, 'tipo_documento_id');
+    }
 }

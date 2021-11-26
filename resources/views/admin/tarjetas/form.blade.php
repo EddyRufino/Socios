@@ -35,7 +35,24 @@
             </div>
 
             <div class="form-group">
-                <label for="inputEmail4 font-weight-bold">D.N.I *</label>
+                <label for="inputEmail2">Tipo Documento *</label>
+                <select class="form-control @error('tipo_documento_id') is-invalid  @enderror" name="tipo_documento_id">
+                    @foreach ($documentos as $documento)
+                      <option value="{{ $documento->id }}"
+                              {{ old('tipo_documento_id', optional($tarjeta->socio)->tipo_documento_id) == $documento->id ? 'selected' : '' }}>
+                        {{ $documento->nombre }}</option>
+                    @endforeach
+                </select>
+
+                @error('tipo_documento_id')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                {{-- <label for="inputEmail4 font-weight-bold">D.N.I *</label> --}}
                 <input type="number"
                     name="dni_socio"
                     class="form-control @error('dni_socio') is-invalid  @enderror"
@@ -75,7 +92,7 @@
                 @enderror
             </div>
 
-            <div class="form-group">
+{{--             <div class="form-group">
                 <label for="inputEmail4 font-weight-bold">D.N.I</label>
                 <input type="number"
                     name="dni_propietario"
@@ -90,7 +107,7 @@
                         {{$message}}
                     </div>
                 @enderror
-            </div>
+            </div> --}}
         </fieldset>
     </div>
 </div>

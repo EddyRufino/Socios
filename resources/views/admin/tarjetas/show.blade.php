@@ -86,7 +86,7 @@
                     <strong>Nombre:</strong> {{ Illuminate\Support\Str::title($socio->socio->nombre_socio) }}
                 </li>
                 <li class="list-group-item ">
-                    <strong>D.N.I:</strong> {{ $socio->socio->dni_socio }}
+                    <strong>{{ $socio->socio->documento->nombre }}:</strong> {{ $socio->socio->dni_socio }}
                 </li>
             </ul>
 
