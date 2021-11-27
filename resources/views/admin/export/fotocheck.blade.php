@@ -29,7 +29,21 @@
     height: 30%;
     width: 95%;
     margin: -17% 0 0 -48%;
-    font-size: 2.4rem;
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 30px;
+    font-family: sans-serif;
+}
+.texto-encima-dni-tipo {
+    position: absolute;
+    top: 89%;
+    left: 50%;
+    height: 30%;
+    width: 95%;
+    margin: -17% 0 0 -48%;
+    font-size: 1.5rem;
     font-weight: 900;
     text-transform: uppercase;
     text-align: center;
@@ -38,25 +52,41 @@
 }
 .texto-encima-dni {
     position: absolute;
-    top: 90.58%;
-    left: 50%;
-    height: 30%;
-    width: 95%;
-    margin: -17% 0 0 -36%;
-    font-size: 3rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 26px;
-}
-.texto-encima-asociacion {
-    position: absolute;
-    top: 107%;
+    top: 93%;
     left: 50%;
     height: 30%;
     width: 95%;
     margin: -17% 0 0 -48%;
-    font-size: 2.4rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 30px;
+    font-family: sans-serif;
+}
+.texto-encima-asociacion-text {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    height: 30%;
+    width: 95%;
+    margin: -17% 0 0 -48%;
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 30px;
+    font-family: sans-serif;
+}
+
+.texto-encima-asociacion {
+    position: absolute;
+    top: 105%;
+    left: 50%;
+    height: 30%;
+    width: 95%;
+    margin: -17% 0 0 -48%;
+    font-size: 2rem;
     font-weight: 900;
     text-transform: uppercase;
     text-align: center;
@@ -132,11 +162,14 @@ body{
             <img src="{{ asset($fotocheck[0]->image) }}" style="width: 220px; height: 274.58px;">
         </div>
         <span id="ter" class="texto-encima-nombre">{{ $fotocheck[0]->socio->nombre_socio }}</span>
+        <span class="texto-encima-dni-tipo">{{ $fotocheck[0]->socio->documento->nombre }}</span>
         <span class="texto-encima-dni">{{ $fotocheck[0]->socio->dni_socio }}</span>
         @if (!empty($fotocheck[0]->socio->asociacione_id))
+            <span class="texto-encima-asociacion-text">TRANSPORTADOR</span>
             <span class="texto-encima-asociacion">"{{ optional($fotocheck[0]->socio->asociacione)->nombre }}"</span>
         @else
-            <span class="texto-encima-asociacion">"Persona Natural"</span>
+            <span class="texto-encima-asociacion-text">SIN TRANSPORTADOR</span>
+            <span class="texto-encima-asociacion">"Es Persona Natural"</span>
         @endif
 
 
