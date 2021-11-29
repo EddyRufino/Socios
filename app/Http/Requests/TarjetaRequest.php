@@ -27,8 +27,8 @@ class TarjetaRequest extends FormRequest
         return [
             'url' => ['nullable'],
             'num_placa' => ['required', 'max:30', Rule::unique('tarjetas')->ignore($this->tarjeta, 'num_placa')],
-            'expedicion' => ['required', 'date'],
-            'revalidacion' => ['required', 'date'],
+            'expedicion' => ['nullable', 'date'],
+            'revalidacion' => ['nullable', 'date'],
             'num_operacion' => ['nullable', 'max:120'],
             'vigencia_operacion' => ['nullable', 'max:120'],
             'num_autorizacion' => ['nullable', 'max:120'],
@@ -39,6 +39,7 @@ class TarjetaRequest extends FormRequest
             'socio_id' => ['nullable'],
             'vehiculo_id' => ['required'],
             'user_id' => ['nullable'],
+            'descripcion' => ['nullable']
         ];
     }
 }

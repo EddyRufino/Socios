@@ -68,6 +68,7 @@
                                     @if ($socio->tarjetas()->exists())
                                         <h6><a href="{{ route('tarjeta.anverso', $socio->tarjetas[0]->id) }}"
                                             class="ml-3 text-decoration-none tooltipw"
+                                            target="_blank"
                                         >
                                             <span id="tooltipw" class="tooltiptext">Descargar Tarjeta Circulación</span>
                                             @include('icons.tarjeta')
@@ -77,6 +78,7 @@
                                     @if ($socio->fotochecks()->exists())
                                         <h6><a href="{{ route('fotocheck.anverso', $socio->fotochecks[0]->id) }}"
                                             class="ml-3 text-decoration-none tooltipw"
+                                            target="_blank"
                                         >
                                             <span id="tooltipw" class="tooltiptext">Descargar Fotocheck</span>
                                             @include('icons.fotocheck')

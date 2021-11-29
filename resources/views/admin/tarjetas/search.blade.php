@@ -102,16 +102,28 @@
                                 >
                                     @include('icons.download')
                                 </a>
-                                <a href="{{ route('tarjetas.edit', $tarjeta) }}"
-                                    class="ml-3 text-decoration-none"
-                                    data-toggle="tooltip"
-                                    data-placement="top"
-                                    title="Editar Socio"
-                                >
-                                    @include('icons.edit')
-                                </a>
+
+                                @if ($tarjeta->tarjetas[0]->status == 0)
+                                    <a href="{{ route('tarjetas.edit', $tarjeta) }}"
+                                        class="ml-3 text-decoration-none"
+                                        data-toggle="tooltip"
+                                        data-placement="top"
+                                        title="Editar Socio"
+                                    >
+                                        @include('icons.edit')
+                                    </a>
+                                @endif
 
                                 @superAdmin
+                                    <a href="{{ route('tarjetas.edit', $tarjeta) }}"
+                                        class="ml-3 text-decoration-none"
+                                        data-toggle="tooltip"
+                                        data-placement="top"
+                                        title="Editar Socio"
+                                    >
+                                        @include('icons.edit')
+                                    </a>
+
                                     <h6 class="tooltipw ">
                                         <form action="{{ route('tarjetas.destroy', $tarjeta) }}" method="POST"
                                             style="display: inline-block;"

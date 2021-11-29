@@ -14,6 +14,7 @@ class SearchSocioController extends Controller
     {
         $socios = Socio::where('nombre_socio', 'like', '%'. $request->search .'%')
             ->orWhere('dni_socio', 'like', '%'. $request->search .'%')
+            ->orWhere('num_placa', 'like', '%'. $request->search .'%')
             ->latest()
             ->paginate();
 

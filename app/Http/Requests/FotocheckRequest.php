@@ -26,8 +26,8 @@ class FotocheckRequest extends FormRequest
     {
         return [
             'url' => ['nullable'],
-            'expedicion' => ['required'],
-            'revalidacion' => ['required'],
+            'expedicion' => ['nullable'],
+            'revalidacion' => ['nullable'],
             'image' => $this->fotocheck ? ['image', 'mimes:jpg,jpeg,png', 'max:2048'] : ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
             'status' => ['nullable'],
             'tipo' => ['nullable'],
@@ -35,6 +35,7 @@ class FotocheckRequest extends FormRequest
             'socio_id' => ['nullable'],
             'vehiculo_id' => ['required'],
             'user_id' => ['nullable'],
+            'descripcion' => ['nullable']
         ];
     }
 }

@@ -8,7 +8,7 @@
 
                     <input class="form-control form-control-navbar"
                         name="search" type="search"
-                        placeholder="Socio - DNI"
+                        placeholder="Socio - DNI - Placa"
                         aria-label="Search"
                         value="{{ request()->search }}"
                         required

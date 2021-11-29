@@ -17,8 +17,8 @@ class CreateTarjetasTable extends Migration
             $table->id();
             $table->string('url')->nullable();
             $table->string('num_placa', 30)->nullable()->unique();
-            $table->date('expedicion');
-            $table->date('revalidacion');
+            $table->date('expedicion')->nullable();
+            $table->date('revalidacion')->nullable();
             $table->string('num_operacion', 120)->nullable();
             $table->string('vigencia_operacion', 120)->nullable();
             $table->string('num_autorizacion', 120)->nullable();

@@ -16,8 +16,8 @@ class CreateFotochecksTable extends Migration
         Schema::create('fotochecks', function (Blueprint $table) {
             $table->id();
             $table->string('url')->nullable();
-            $table->date('expedicion');
-            $table->date('revalidacion');
+            $table->date('expedicion')->nullable();
+            $table->date('revalidacion')->nullable();
             $table->string('image')->nullable();
             $table->integer('status')->nullable()->default(0);
             $table->string('num_placa', 30)->nullable()->unique();

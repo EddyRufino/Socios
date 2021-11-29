@@ -144,8 +144,8 @@
 
 .qr-encima {
     position: absolute;
-    top: 30px;
-    left: 72%;
+    top: 35px;
+    left: 76%;
 }
 /*.centrado{
     position: absolute;
@@ -173,7 +173,7 @@ body{
 
 <body>
     <div class="anverso">
-        <img src="{{ asset('img/anverso2.png') }}"
+        <img src="{{ asset('img/anverso2.jpg') }}"
             style="display: block; width: 100%; height: 426px;"
         >
 
@@ -197,11 +197,11 @@ body{
             <span class="texto-encima-asociacion"> {{ optional($tarjeta[0]->socio->asociacione)->nombre }}</span>
         @endif
 
-        <span class="texto-encima-expedicion-anverso">EXPEDICIÓN DE LA TCV: {{ $tarjeta[0]->expedicion }}</span>
-        <span class="texto-encima-expedicion-anverso">EXPEDICIÓN DE LA TCV: {{ $tarjeta[0]->expedicion }}</span>
+        <span class="texto-encima-expedicion-anverso">EXPEDICIÓN DE LA TCV: {{ now()->format('d-m-Y') }}</span>
+        <span class="texto-encima-expedicion-anverso">EXPEDICIÓN DE LA TCV: {{ now()->format('d-m-Y') }}</span>
 
-        <span class="texto-encima-revalidacion-anverso">REVALIDACIÓN DE LA TCV: {{ $tarjeta[0]->revalidacion }}</span>
-        <span class="texto-encima-revalidacion-anverso">REVALIDACIÓN DE LA TCV: {{ $tarjeta[0]->revalidacion }}</span>
+        <span class="texto-encima-revalidacion-anverso">REVALIDACIÓN DE LA TCV: {{ date('d-m-Y', strtotime("+1 years")) }}</span>
+        <span class="texto-encima-revalidacion-anverso">REVALIDACIÓN DE LA TCV: {{ date('d-m-Y', strtotime("+1 years")) }}</span>
 
         <span class="texto-encima-correlativo">N° {{ $tarjeta[0]->num_correlativo }}</span>
         <span class="texto-encima-correlativo">N° {{ $tarjeta[0]->num_correlativo }}</span>
@@ -212,12 +212,12 @@ body{
     </div>
 
     <div class="contenedor">
-        <img src="{{ asset('img/reverso2.png') }}"
+        <img src="{{ asset('img/reverso2.jpg') }}"
             style="display: block; width: 100%; height: 426px;"
         >
 
         <img src="{{ asset('tarjetasQR/' . $tarjeta[0]->url . '.svg') }}"
-            width="125"
+            width="130"
             class="qr-encima"
         >
 

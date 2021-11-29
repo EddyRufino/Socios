@@ -92,22 +92,29 @@
                 @enderror
             </div>
 
-{{--             <div class="form-group">
-                <label for="inputEmail4 font-weight-bold">D.N.I</label>
-                <input type="number"
-                    name="dni_propietario"
-                    class="form-control @error('dni_propietario') is-invalid  @enderror"
-                    value="{{ old('dni_propietario', optional($tarjeta->socio)->dni_propietario) }}"
-                    id="inputEmail4"
-                    placeholder="Ejm: 33655414"
-                >
+        </fieldset>
 
-                @error('dni_propietario')
+        <fieldset class="boder-1 p-2">
+            <legend class="legend">
+                Observación
+            </legend>
+
+            <div class="form-group">
+                <textarea
+                    name="descripcion"
+                    class="form-control @error('descripcion') is-invalid  @enderror"
+                    rows="2"
+                >
+                    {{ old('descripcion', $tarjeta->descripcion) }}
+                </textarea>
+
+                @error('descripcion')
                     <div class="invalid-feedback">
                         {{$message}}
                     </div>
                 @enderror
-            </div> --}}
+            </div>
+
         </fieldset>
     </div>
 </div>
@@ -159,14 +166,13 @@
 
             <div class="row col">
                 <div class="form-group col-md-6">
-                    <label for="inputEmail1">Expedición *</label>
+                    <label for="inputEmail1">Expedición</label>
                     <input type="date"
                         name="expedicion"
                         min="2015-01-01" max="2030-12-31" required
                         class="form-control @error('expedicion') is-invalid  @enderror"
                         value="{{ request()->routeIs('tarjetas.edit') ? $tarjeta->expedicion : date("Y-m-d") }}"
                         id="inputCity"
-                        required
                     >
 
                     @error('expedicion')
@@ -177,14 +183,13 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="inputEmail1">Revalidación *</label>
+                    <label for="inputEmail1">Revalidación</label>
                     <input type="date"
                         name="revalidacion"
                         min="2015-01-01" max="2030-12-31" required
                         class="form-control @error('revalidacion') is-invalid  @enderror"
                         value="{{ request()->routeIs('tarjetas.edit') ? $tarjeta->revalidacion : date("Y-m-d") }}"
                         id="inputCity"
-                        required
                     >
 
                     @error('revalidacion')

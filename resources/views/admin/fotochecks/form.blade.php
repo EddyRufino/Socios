@@ -91,6 +91,29 @@
             </div>
 
         </fieldset>
+
+        <fieldset class="boder-1 p-2">
+            <legend class="legend">
+                Observación
+            </legend>
+
+            <div class="form-group">
+                <textarea
+                    name="descripcion"
+                    class="form-control @error('descripcion') is-invalid  @enderror"
+                    rows="2"
+                >
+                    {{ old('descripcion', $fotocheck->descripcion) }}
+                </textarea>
+
+                @error('descripcion')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                @enderror
+            </div>
+
+        </fieldset>
             <div class="custom-control custom-checkbox mt-3">
                 <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
                 <label class="custom-control-label" for="myCheck">Persona Natural</label>
@@ -103,14 +126,13 @@
             </legend>
 
                 <div class="form-group">
-                    <label for="inputEmail1">Expedición *</label>
+                    <label for="inputEmail1">Expedición</label>
                     <input type="date"
                         name="expedicion"
                         min="2015-01-01" max="2030-12-31" required
                         class="form-control @error('expedicion') is-invalid  @enderror"
                         value="{{ request()->routeIs('fotochecks.edit') ? $fotocheck->expedicion : date("Y-m-d") }}"
                         id="inputCity"
-                        required
                     >
 
                     @error('expedicion')
@@ -121,14 +143,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputEmail1">Revalidación *</label>
+                    <label for="inputEmail1">Revalidación</label>
                     <input type="date"
                         name="revalidacion"
                         min="2015-01-01" max="2030-12-31" required
                         class="form-control @error('revalidacion') is-invalid  @enderror"
                         value="{{ request()->routeIs('fotochecks.edit') ? $fotocheck->revalidacion : date("Y-m-d") }}"
                         id="inputCity"
-                        required
                     >
 
                     @error('revalidacion')

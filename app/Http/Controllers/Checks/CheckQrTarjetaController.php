@@ -10,7 +10,10 @@ class CheckQrTarjetaController extends Controller
 {
     public function __invoke(Tarjeta $tarjeta)
     {
+        //dd($tarjeta);
         $tarjeta->status = 1;
+        $tarjeta->expedicion = now()->format('Y-m-d');
+        $tarjeta->revalidacion = date('Y-m-d', strtotime("+1 years"));
         $tarjeta->save();
         return back();
     }

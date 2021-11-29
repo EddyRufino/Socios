@@ -19,7 +19,7 @@
 .foto-encima{
     position: absolute;
     top: 212px;
-    left: 142px;
+    left: 143px;
 }
 
 .texto-encima-nombre {
@@ -182,8 +182,8 @@ body{
             class="qr-encima"
         >
 
-        <p class="texto-encima-expedicion">{{ date('Y/m/d', strtotime($fotocheck[0]->expedicion)) }}</p>
-        <p class="texto-encima-revalidacion">{{ date('Y/m/d', strtotime($fotocheck[0]->revalidacion)) }}</p>
+        <p class="texto-encima-expedicion">{{ now()->format('d/m/Y') }}</p>
+        <p class="texto-encima-revalidacion">{{ date('d/m/Y', strtotime("+1 years")) }}</p>
     </div>
 </body>
 </html>

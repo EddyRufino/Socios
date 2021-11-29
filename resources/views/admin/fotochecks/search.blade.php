@@ -90,14 +90,23 @@
                                         @include('icons.download')
                                     </a></h6>
 
-                                    <h6><a href="{{ route('fotochecks.edit', $fotocheck) }}"
-                                        class="ml-3 text-decoration-none tooltipw"
-                                    >
-                                        <span id="tooltipw" class="tooltiptext">Editar</span>
-                                        @include('icons.edit')
-                                    </a></h6>
+                                    @if ($fotocheck->fotochecks[0]->status == 0)
+                                        <h6><a href="{{ route('fotochecks.edit', $fotocheck) }}"
+                                            class="ml-3 text-decoration-none tooltipw"
+                                        >
+                                            <span id="tooltipw" class="tooltiptext">Editar</span>
+                                            @include('icons.edit')
+                                        </a></h6>
+                                    @endif
 
                                     @superAdmin
+                                        <h6><a href="{{ route('fotochecks.edit', $fotocheck) }}"
+                                            class="ml-3 text-decoration-none tooltipw"
+                                        >
+                                            <span id="tooltipw" class="tooltiptext">Editar</span>
+                                            @include('icons.edit')
+                                        </a></h6>
+
                                         <h6 class="tooltipw mb-2">
                                             <form action="{{ route('fotochecks.destroy', $fotocheck) }}" method="POST"
                                                 style="display: inline-block;"
