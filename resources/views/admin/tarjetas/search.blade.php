@@ -55,32 +55,39 @@
                 <tbody>
                     @forelse ($tarjetas as $tarjeta)
                         <tr>
-                            <td>{{ $tarjeta->nombre_socio }}</td>
-                            @if ($tarjeta->nombre_propietario)
-                                <td>{{ $tarjeta->nombre_propietario }}</td>
+                            <td>{{ $tarjeta->socio->nombre_socio }}</td>
+                            @if ($tarjeta->socio->nombre_propietario)
+                                <td>{{ $tarjeta->socio->nombre_propietario }}</td>
                             @else
                                 <td class="text-secondary">El Mismo Socio</td>
                             @endif
-                            <td>{{ $tarjeta->dni_socio }}</td>
+                            <td>{{ $tarjeta->socio->dni_socio }}</td>
                             <td>{{ $tarjeta->num_placa }}</td>
 
-                            @if (is_null($tarjeta->asociacione_id))
+                            @if (is_null($tarjeta->socio->asociacione_id))
                                 <td class="text-secondary">Es Persona Natural</td>
                             @else
-                                <td>{{ optional($tarjeta->asociacione)->nombre }}</td>
+                                <td>{{ optional($tarjeta->socio->asociacione)->nombre }}</td>
                             @endif
                             {{-- {{dd($tarjeta->tarjetas()->exists())}} --}}
                             {{-- @if ($tarjeta->tarjetas()->exists()) --}}
-                                @if ($tarjeta->tarjetas[0]->vehiculo_id === 1)
-                                    <td class="text-info">{{ $tarjeta->tarjetas[0]->vehiculo->nombre }}</td>
-                                @elseif($tarjeta->tarjetas[0]->vehiculo_id === 2)
+              {{--                   @if ($tarjeta->socio->vehiculo_id === 1)
+                                    <td class="text-info">{{ $tarjeta->vehiculo->nombre }}</td>
+                                @elseif($tarjeta->socio->vehiculo_id === 2)
                                     <td class="text-primary">{{ $tarjeta->tarjetas[0]->vehiculo->nombre }}</td>
                                 @else
                                     <td class="text-secondary">{{ $tarjeta->tarjetas[0]->vehiculo->nombre }}</td>
-                                @endif
+                                @endif --}}
                             {{-- @endif --}}
+                            @if ($tarjeta->socio->vehiculo_id == 1)
+                                <td class="text-info">{{ $tarjeta->vehiculo->nombre }}</td>
+                            @elseif($tarjeta->socio->vehiculo_id === 2)
+                                <td class="text-primary">{{ $tarjeta->vehiculo->nombre }}</td>
+                            @else
+                                <td class="text-secondary">{{ $tarjeta->vehiculo->nombre }}</td>
+                            @endif
 
-                           @if ($tarjeta->tarjetas[0]->status == 1)
+                           @if ($tarjeta->status == 1)
                                 <td><span class="badge badge-info text-white">Generado</span></td>
                             @else
                                 <td><span class="badge badge-info text-white">No Generado</span></td>
@@ -88,12 +95,13 @@
                             <td class="d-flex">
                                 <a href="{{ route('tarjetas.show', $tarjeta->url) }}"
                                     class="text-decoration-none tooltipw"
+                                    target="_blank"
                                 >
                                 <span id="tooltipw" class="tooltiptext">Ver QR</span>
                                     @include('icons.qr')
                                 </a>
 
-                                <a href="{{ route('tarjeta.anverso', $tarjeta->tarjetas[0]->id) }}"
+                                <a href="{{ route('tarjeta.anverso', $tarjeta->id) }}"
                                     class="ml-3 text-decoration-none"
                                     data-toggle="tooltip"
                                     data-placement="top"
@@ -103,7 +111,7 @@
                                     @include('icons.download')
                                 </a>
 
-                                @if ($tarjeta->tarjetas[0]->status == 0)
+                                @if ($tarjeta->status == 0)
                                     <a href="{{ route('tarjetas.edit', $tarjeta) }}"
                                         class="ml-3 text-decoration-none"
                                         data-toggle="tooltip"

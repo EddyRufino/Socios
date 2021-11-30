@@ -17,14 +17,22 @@ class SearchFotocheckController extends Controller
         $vehiculos = Vehiculo::all();
         $asociaciones = Asociacione::all();
 
-        $fotochecks = Socio::where('nombre_socio', 'like', '%'. $request->search .'%')
-            ->whereHas('fotochecks', function($query) {
-                $query->where('tipo', 2);
-            })
-            ->orWhere('dni_socio', 'like', '%'. $request->search .'%')
-            ->orWhere('num_placa', 'like', '%'. $request->search .'%')
-            ->latest()
-            ->paginate();
+        //$fotochecks = Socio::whereHas('fotochecks', function($query) {
+                //$query->where('tipo', 2)
+                    //->where('num_placa', 'like', '%'. request()->search .'%')
+                    //->orWhere('url', 'like', '%'. request()->search .'%');
+            //})
+            //->latest()
+            //->paginate();
+        $fotochecks = Fotocheck::whereHas('socio', function($query) {
+            $query->where('nombre_socio', 'like', '%'. request()->search .'%')
+                ->orWhere('num_placa', 'like', '%'. request()->search .'%')
+                ->orWhere('dni_socio', 'like', '%'. request()->search .'%');
+        })
+        ->latest()
+        ->paginate();
+
+        //dd($fotochecks);
 
         $fotochecks->appends(['search' => $request->search]);
 

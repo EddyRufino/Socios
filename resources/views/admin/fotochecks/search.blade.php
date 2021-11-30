@@ -48,29 +48,31 @@
                 <tbody>
                     @forelse ($fotochecks as $fotocheck)
                         <tr>
-                            <td>{{ $fotocheck->nombre_socio }}</td>
-                            <td>{{ $fotocheck->dni_socio }}</td>
+                            <td>{{ $fotocheck->socio->nombre_socio }}</td>
+                            <td>{{ $fotocheck->socio->dni_socio }}</td>
 
-                            @if (is_null($fotocheck->asociacione_id))
+                            @if (is_null($fotocheck->socio->asociacione_id))
                                 <td class="text-secondary">Es Persona Natural</td>
                             @else
-                                <td>{{ optional($fotocheck->asociacione)->nombre }}</td>
+                                <td>{{ optional($fotocheck->socio->asociacione)->nombre }}</td>
                             @endif
 
-                            @if ($fotocheck->vehiculo_id == 1)
+                            @if ($fotocheck->socio->vehiculo_id == 1)
                                 <td class="text-info">{{ $fotocheck->vehiculo->nombre }}</td>
-                            @elseif($fotocheck->vehiculo_id === 2)
+                            @elseif($fotocheck->socio->vehiculo_id === 2)
                                 <td class="text-primary">{{ $fotocheck->vehiculo->nombre }}</td>
                             @else
                                 <td class="text-secondary">{{ $fotocheck->vehiculo->nombre }}</td>
                             @endif
 
-                            {{-- {{dd($fotocheck)}} --}}
-                            @if ($fotocheck->fotochecks[0]->status == 1)
-                                <td><span class="badge badge-info text-white">Generado</span></td>
-                            @else
-                                <td><span class="badge badge-info text-white">No Generado</span></td>
-                            @endif
+
+                            {{-- @if (empty($fotocheck->fotochecks)) --}}
+                                @if ($fotocheck->status == 1)
+                                    <td><span class="badge badge-info text-white">Generado</span></td>
+                                @else
+                                    <td><span class="badge badge-info text-white">No Generado</span></td>
+                                @endif
+                            {{-- @endif --}}
 
                             <td>
                                 <div class="d-flex">
@@ -81,7 +83,7 @@
                                         <span id="tooltipw" class="tooltiptext">Ver QR</span>
                                         @include('icons.qr')
                                     </a></h6>
-                                    {{-- {{ route('fotocheck.anverso', $fotocheck->id) }} --}}
+
                                     <h6><a href="{{ route('fotocheck.anverso', $fotocheck->id)}}"
                                         class="ml-3 text-decoration-none tooltipw"
                                         target="_blank"
@@ -90,14 +92,14 @@
                                         @include('icons.download')
                                     </a></h6>
 
-                                    @if ($fotocheck->fotochecks[0]->status == 0)
-                                        <h6><a href="{{ route('fotochecks.edit', $fotocheck) }}"
-                                            class="ml-3 text-decoration-none tooltipw"
-                                        >
-                                            <span id="tooltipw" class="tooltiptext">Editar</span>
-                                            @include('icons.edit')
-                                        </a></h6>
-                                    @endif
+                                        @if ($fotocheck->status == 0)
+                                            <h6><a href="{{ route('fotochecks.edit', $fotocheck) }}"
+                                                class="ml-3 text-decoration-none tooltipw"
+                                            >
+                                                <span id="tooltipw" class="tooltiptext">Editar</span>
+                                                @include('icons.edit')
+                                            </a></h6>
+                                        @endif
 
                                     @superAdmin
                                         <h6><a href="{{ route('fotochecks.edit', $fotocheck) }}"
