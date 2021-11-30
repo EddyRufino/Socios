@@ -2,8 +2,41 @@
 
 @section('content')
 <div class="container">
-    <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('socios.index') }}" class="text-dark item text-decoration-none">Socios - "{{ $attributes[0] ? optional($attributes[0]->asociacione)->nombre : 'Sin Socios' }}"</a></h4>
+    <div class="d-flex align-items-center justify-content-between">
+        <h4 class="text-dark font-weight-bold mb-4">
+            <a href="{{ route('socios.index') }}"
+                class="text-dark item text-decoration-none"
+            >
+                Socios - "{{ $attributes[0] ? optional($attributes[0]->asociacione)->nombre : 'Sin Socios' }}"
+            </a>
+        </h4>
 
+        <div>
+            <span class="flex-1">Exportar:</span>
+            <span id="contenido">
+                <a href="{{ route('socio.pdf', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-danger text-decoration-none tooltipw" target="_blank">
+                    <span id="tooltipw" class="tooltiptext">Descarga Socios</span>
+                    @include('icons.pdf')
+                </a>
+                <a href="{{ route('socio.excel', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-success text-decoration-none tooltipw">
+                    <span id="tooltipw" class="tooltiptext">Descarga Socios</span>
+                    @include('icons.excel')
+                </a>
+            </span>
+            <span class="ml-1 text-dark tooltipw" style='cursor: pointer;' onClick="muestra_oculta('contenido')">
+                <span id="tooltipw" class="tooltiptext">Ver más</span>
+                @include('icons.users')
+            </span>
+            <a href="#" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+                <span id="tooltipw" class="tooltiptext">Descarga Tarjetas Circulación</span>
+                @include('icons.tarjeta')
+            </a>
+            <a href="#" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+                <span id="tooltipw" class="tooltiptext">Descarga Fotochecks</span>
+                @include('icons.fotocheck')
+            </a>
+        </div>
+    </div>
     {{-- Search Advanced --}}
     <div id="searchAdvanced" class="d-flex justify-content-center" style="display: none !important;">
         @include('admin.search.advanced')
@@ -168,6 +201,16 @@
         } else {
             search.style.setProperty('display', 'none', 'important');
         }
+    }
+
+    function muestra_oculta(id) {
+        if (document.getElementById) {
+            let el = document.getElementById(id);
+            el.style.display = (el.style.display == 'none') ? 'inline-block' : 'none';
+        }
+    }
+    window.onload = function() {
+        muestra_oculta('contenido');
     }
 </script>
 @endpush

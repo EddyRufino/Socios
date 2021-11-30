@@ -70,6 +70,12 @@ Route::middleware('can:admin')->group( function () {
     Route::get('/buscar-advanced', 'Search\SearchAdvanceController@advanced')->name('search.advanced');
     Route::get('/buscar-advanced-tree', 'Search\SearchAdvanceController@advancedTree')->name('search.advanced.tree');
     Route::get('/buscar-advanced-two', 'Search\SearchAdvanceController@advancedTwo')->name('search.advanced.two');
+
+    // Export Socios PDF
+    Route::get('socios-pdf/{id}', 'Export\ExportSocioController')->name('socio.pdf');
+
+    // Export Socios EXCEL
+    Route::get('socios-excel/{id}', 'Export\ExportSocioExcelController')->name('socio.excel');
 });
 
 Route::get('/socios-fotochecks/{fotocheck}', 'FotocheckController@show')->name('fotochecks.show');
