@@ -2,9 +2,35 @@
 
 @section('content')
 <div class="container">
-    <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('tarjetas.index') }}" class="text-dark item text-decoration-none">Socios Oficiales</a></h4>
+{{--     <h4 class="text-dark font-weight-bold mb-4"><a href="{{ route('tarjetas.index') }}" class="text-dark item text-decoration-none">Socios Oficiales</a></h4> --}}
 
+    <div class="d-flex align-items-center justify-content-between">
+        <h4 class="text-dark font-weight-bold mb-4">
+            <a href="{{ route('tarjetas.index') }}"
+                class="text-dark item text-decoration-none"
+            >
+                Socios Oficiales
+            </a>
+        </h4>
 
+        <div>
+            <span class="flex-1">Exportar:</span>
+
+            <a href="{{ route('todo.socio.excel') }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+                <span id="tooltipw" class="tooltiptext">Descarga Socios</span>
+                @include('icons.users')
+            </a>
+            <a href="{{ route('todo.tarjeta.excel') }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+                <span id="tooltipw" class="tooltiptext">Descarga Tarjetas Circulación</span>
+                @include('icons.tarjeta')
+            </a>
+            <a href="{{ route('todo.fotocheck.excel') }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+                <span id="tooltipw" class="tooltiptext">Descarga Fotochecks</span>
+                @include('icons.fotocheck')
+            </a>
+        </div>
+
+    </div>
     {{-- Search Basico --}}
     @include('partials.searchBasico', ['link' => 'search.socio'])
 

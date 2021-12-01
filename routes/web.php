@@ -81,6 +81,11 @@ Route::middleware('can:admin')->group( function () {
     //Route::get('tarjetas-pdf/{id}', 'Export\ExportTarjetasController')->name('tarjeta.pdf');
     Route::get('tarjetas-excel/{id}', 'Export\ExportTarjetasExcelController')->name('tarjeta.excel');
     Route::get('fotochecks-excel/{id}', 'Export\ExportFotochecksExcelController')->name('fotocheck.excel');
+
+    // Export Socios Oficiales EXCEL
+    Route::get('/socios-todo-excel', 'Export\ExportTodosSociosExcelController')->name('todo.socio.excel');
+    Route::get('/tarjetas-todo-excel', 'Export\ExportTodosTarjetasExcelController')->name('todo.tarjeta.excel');
+    Route::get('/fotochecks-todo-excel', 'Export\ExportTodosFotochecksExcelController')->name('todo.fotocheck.excel');
 });
 
 Route::get('/socios-fotochecks/{fotocheck}', 'FotocheckController@show')->name('fotochecks.show');
