@@ -91,7 +91,7 @@
                                         <span id="tooltipw" class="tooltiptext">Descargar Fotocheck</span>
                                         @include('icons.download')
                                     </a></h6>
-
+{{-- {{dd($fotocheck->status == 0 && auth()->user()->name == 'Admin')}} --}}
                                         @if ($fotocheck->status == 0)
                                             <h6><a href="{{ route('fotochecks.edit', $fotocheck) }}"
                                                 class="ml-3 text-decoration-none tooltipw"
@@ -99,6 +99,7 @@
                                                 <span id="tooltipw" class="tooltiptext">Editar</span>
                                                 @include('icons.edit')
                                             </a></h6>
+
                                         @endif
 
                                     @superAdmin

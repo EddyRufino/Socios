@@ -14,6 +14,13 @@ Route::middleware('can:admin')->group( function () {
     Route::put('/socios/{socio}', 'SocioController@update')->name('socios.update');
     Route::delete('/socios/{socio}', 'SocioController@destroy')->name('socios.destroy');
     Route::get('/socios/{socio}/edit', 'SocioController@edit')->name('socios.edit');
+
+    // Usuario
+    Route::get('profile', 'ProfileController@edit')
+                ->name('profile.edit');
+
+    Route::put('profile', 'ProfileController@update')
+            ->name('profile.update');
 });
 
 // Generate Carnet PDF
