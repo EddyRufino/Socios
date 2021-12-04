@@ -37,8 +37,8 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col" class="bg-primary text-white">Nombre Socio</th>
-                        <th scope="col" class="bg-primary text-white">DNI Socio</th>
+                        <th scope="col" class="bg-primary text-white">Nombres y Apellidos</th>
+                        <th scope="col" class="bg-primary text-white">dni, ruc, carnet</th>
                         <th scope="col" class="bg-primary text-white">Asociación</th>
                         <th scope="col" class="bg-primary text-white">Vehículo</th>
                         <th scope="col" class="bg-primary text-white">Actividad</th>
@@ -50,8 +50,10 @@
                             <td>{{ $fotocheck->socio->nombre_socio }}</td>
                             <td>{{ $fotocheck->socio->dni_socio }}</td>
 
-                           @if (empty($fotocheck->socio->asociacione_id))
-                                <td class="text-secondary">Es Persona Natural</td>
+                            @if (empty($fotocheck->socio->asociacione_id)  && $fotocheck->socio->tipo_documento_id == 3)
+                                <td class="text-secondary">Entidad Privada</td>
+                            @elseif (empty($fotocheck->socio->asociacione_id))
+                                <td class="text-secondary">Persona Natural</td>
                             @else
                                 <td>{{ optional($fotocheck->socio->asociacione)->nombre }}</td>
                             @endif

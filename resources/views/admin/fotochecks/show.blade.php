@@ -104,7 +104,15 @@
         <div class="d-flex justify-content-center flex-column align-items-center">
             <ul class="list-group col-md-3">
                 <li class="list-group-item color-box-header">
-                    <strong class="font-weight-bold">MIEMBRO DE LA ASOCIACIÓN</strong>
+
+                    @if (empty($fotocheck->socio->asociacione_id)  && $fotocheck->socio->tipo_documento_id == 3)
+                        <strong class="font-weight-bold">ENTIDAD PRIVADA</strong>
+                    @elseif (empty($fotocheck->socio->asociacione_id))
+                        <strong class="font-weight-bold">PERSONA NATURAL</strong>
+                    @else
+                        <strong class="font-weight-bold">MIEMBRO DE LA ASOCIACIÓN</strong>
+                    @endif
+
                 </li>
                 <li class="list-group-item ">
                     <strong>Nombre:</strong> {{ Illuminate\Support\Str::title($fotocheck->socio->nombre_socio) }}
@@ -114,13 +122,20 @@
                 </li>
 
 
-                <li class="list-group-item ">
-                    @if (!empty($fotocheck->socio->asociacione_id))
+                @if (!empty($fotocheck->socio->asociacione_id))
+                    <li class="list-group-item ">
                         <strong>Asociación:</strong> {{ Illuminate\Support\Str::title(optional($fotocheck->socio->asociacione)->nombre) }}
-                    @else
+
+                    </li>
+                @endif
+{{--                     @if (empty($fotocheck->socio->asociacione_id)  && $fotocheck->socio->tipo_documento_id == 3)
+                        <strong>Socio Es:</strong> Entidad Privada
+                    @elseif (empty($fotocheck->socio->asociacione_id))
                         <strong>Socio Es:</strong> Persona Natural
-                    @endif
-                </li>
+                    @else
+                        <strong>Asociación:</strong> {{ Illuminate\Support\Str::title(optional($fotocheck->socio->asociacione)->nombre) }}
+                    @endif --}}
+
 
             </ul>
 
