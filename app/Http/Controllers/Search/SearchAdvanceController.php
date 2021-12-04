@@ -79,6 +79,14 @@ class SearchAdvanceController extends Controller
         if ($asociacion == 'natural') {
 
             $attributes = Socio::whereNull('asociacione_id')
+                ->where('tipo_documento_id', '!=', 3)
+                ->whereNull('deleted_at')
+                ->paginate();
+
+        } elseif ($asociacion == 'juridica') {
+
+            $attributes = Socio::whereNull('asociacione_id')
+                ->where('tipo_documento_id', 3)
                 ->whereNull('deleted_at')
                 ->paginate();
 

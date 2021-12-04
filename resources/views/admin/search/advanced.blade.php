@@ -66,8 +66,9 @@
             <div class="input-group input-group-md ">
                 <select name="asociacione_id_two" id="" class="form-control selectpicker" data-size="7" data-live-search="true" required>
                     <option value="">Filtra Asociaciones</option>
-                    <optgroup label="Persona Natural">
+                    <optgroup label="Natural / Jurídica">
                         <option value="natural">Persona Natural</option>
+                        <option value="juridica">Entidad Privada</option>
                     </optgroup>
                     <optgroup label="Asociaciones">
                         @foreach ($asociaciones as $asociacione)
