@@ -176,12 +176,29 @@ body{
         <img src="{{ asset('img/anverso2.jpg') }}"
             style="display: block; width: 100%; height: 426px;"
         >
-
-        @if ($tarjeta[0]->socio->nombre_propietario)
+{{-- {{dd(empty($tarjeta[0]->socio->nombre_propietario))}} --}}
+        @if ($tarjeta[0]->socio->nombre_propietario && $tarjeta[0]->socio->asociacione_id)
             <span class="texto-encima-nombre-socio">APELLIDOS Y NOMBRES DEL SOCIO</span>
-        @else
+        @elseif(empty($tarjeta[0]->socio->nombre_propietario) && $tarjeta[0]->socio->asociacione_id)
             <span class="texto-encima-nombre-socio">APELLIDOS Y NOMBRES DEL SOCIO - PROPIETARIO</span>
+
+        @elseif($tarjeta[0]->socio->nombre_propietario && is_null($tarjeta[0]->socio->asociacione_id) && $tarjeta[0]->socio->tipo_documento_id == 3)
+            <span class="texto-encima-nombre-socio">APELLIDOS Y NOMBRES DE LA PERSONA JURíDICA</span>
+        @elseif(empty($tarjeta[0]->socio->nombre_propietario) && is_null($tarjeta[0]->socio->asociacione_id) && $tarjeta[0]->socio->tipo_documento_id == 3)
+            <span class="texto-encima-nombre-socio">APELLIDOS Y NOMBRES DEL PROPIETARIO</span>
+
+        @elseif($tarjeta[0]->socio->nombre_propietario && is_null($tarjeta[0]->socio->asociacione_id))
+            <span class="texto-encima-nombre-socio">APELLIDOS Y NOMBRES DE LA PERSONA NATURAL</span>
+        @elseif(empty($tarjeta[0]->socio->nombre_propietario) && is_null($tarjeta[0]->socio->asociacione_id))
+            <span class="texto-encima-nombre-socio">APELLIDOS Y NOMBRES DEL PROPIETARIO</span>
+
         @endif
+
+       {{--  @if ($tarjeta[0]->socio->nombre_propietario && is_null($tarjeta[0]->socio->asociacione_id))
+            <span class="texto-encima-nombre-socio">APELLIDOS Y NOMBRES DEL PROPIETARIO</span>
+        @else
+            <span class="texto-encima-nombre-socio">APELLIDOS Y NOMBRES DE LA PERSONA NATURAL</span>
+        @endif --}}
 
         <span class="texto-encima-nombre">{{ $tarjeta[0]->socio->nombre_socio }}</span>
         <span class="texto-encima-dni">{{ strtoupper($tarjeta[0]->socio->documento->nombre) }}: {{ $tarjeta[0]->socio->dni_socio }}</span>

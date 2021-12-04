@@ -37,7 +37,7 @@ class Socio extends Model
 
         if (static::whereUrl($url)->exists()) {
 
-            $this->attributes['url'] = Str::of($nombre_socio .'-'. now()->format('d'))->slug('-');
+            $this->attributes['url'] = Str::of($nombre_socio .'-'. now()->format('H:i:s'))->slug('-');
 
         } else {
 

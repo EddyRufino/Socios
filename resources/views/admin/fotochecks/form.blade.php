@@ -9,6 +9,11 @@
     </style>
 @endpush
 
+<div class="custom-control custom-checkbox mb-3">
+    <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
+    <label class="custom-control-label" for="myCheck">Persona Natural / Jurídica</label>
+</div>
+
 <div class="row">
     <div class="col-md-6">
         <fieldset class="boder-1 p-2">
@@ -24,7 +29,6 @@
                     value="{{ old('nombre_socio', optional($fotocheck->socio)->nombre_socio) }}"
                     id="inputEmail4"
                     placeholder="Ejm: ALBERCA TERESA"
-                    required
                 >
 
                 @error('nombre_socio')
@@ -114,10 +118,35 @@
             </div>
 
         </fieldset>
-            <div class="custom-control custom-checkbox mt-3">
-                <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
-                <label class="custom-control-label" for="myCheck">Persona Natural</label>
+
+{{--         <fieldset class="boder-1 p-2">
+            <legend class="legend">
+                Propietario
+            </legend>
+
+            <div class="form-group pl-2 pr-2">
+                <label for="inputEmail1">Nombres</label>
+                <input type="text"
+                    name="nombre_propietario"
+                    class="form-control @error('nombre_propietario') is-invalid  @enderror"
+                    value="{{ old('nombre_propietario', optional($fotocheck->socio)->nombre_propietario) }}"
+                    id="inputEmail1"
+                    placeholder="Ejm: JUAN Y SANDRA"
+                >
+
+                @error('nombre_propietario')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                @enderror
             </div>
+
+        </fieldset> --}}
+
+{{--             <div class="custom-control custom-checkbox mt-3">
+                <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
+                <label class="custom-control-label" for="myCheck">Persona Natural / Jurídica</label>
+            </div> --}}
     </div>
     <div class="col-md-6">
         <fieldset class="boder-1 p-2" >
@@ -143,13 +172,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputEmail1">Revalidación</label>
+                    <label for="inputEmail1">Revalidación *</label>
                     <input type="date"
                         name="revalidacion"
                         min="2015-01-01" max="2030-12-31" required
                         class="form-control @error('revalidacion') is-invalid  @enderror"
                         value="{{ request()->routeIs('fotochecks.edit') ? $fotocheck->revalidacion : date("Y-m-d") }}"
                         id="inputCity"
+                        required
                     >
 
                     @error('revalidacion')
@@ -213,6 +243,23 @@
             </div>
 
             <div class="form-group pl-2 pr-2">
+                <label for="inputEmail1">N° Autorización</label>
+                <input type="text"
+                    name="num_autorizacion"
+                    class="form-control @error('num_autorizacion') is-invalid  @enderror"
+                    value="{{ old('num_autorizacion', $fotocheck->num_autorizacion) }}"
+                    id="inputEmail1"
+                    placeholder="Ejm: 5816-4P"
+                >
+
+                @error('num_autorizacion')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                @enderror
+            </div>
+
+{{--             <div class="form-group pl-2 pr-2">
                 <label for="inputEmail1">N. Placa</label>
                 <input type="text"
                     name="num_placa"
@@ -227,7 +274,7 @@
                         {{$message}}
                     </div>
                 @enderror
-            </div>
+            </div> --}}
         </fieldset>
     </div>
 </div>

@@ -14,7 +14,7 @@
                 <th scope="col" class="bg-primary text-white">NOMBRE PROPIETARIO</th>
                 <th scope="col" class="bg-primary text-white">TIPO DOCUMENTO</th>
                 <th scope="col" class="bg-primary text-white">N° DOCUMENTO SOCIO</th>
-                <th scope="col" class="bg-primary text-white">PLACA</th>
+                <th scope="col" class="bg-primary text-white">N° AUTORIZACIÓN</th>
                 <th scope="col" class="bg-primary text-white">VEHIVULO</th>
                 <th scope="col" class="bg-primary text-white">TRANSPORTADOR</th>
                 <th scope="col" class="bg-primary text-white">EXPEDICION</th>
@@ -30,7 +30,7 @@
                     <td>{{ $fotocheck->socio->documento->nombre }}</td>
 
                     <td>{{ $fotocheck->socio->dni_socio }}</td>
-                    <td>{{ $fotocheck->num_placa ? $fotocheck->num_placa : '-' }}</td>
+                    <td>{{ $fotocheck->num_autorizacion  }}</td>
 
                     @if ($fotocheck->vehiculo_id == 1)
                         <td class="text-info">{{ $fotocheck->vehiculo->nombre }}</td>

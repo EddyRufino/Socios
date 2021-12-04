@@ -26,7 +26,7 @@ class TarjetaRequest extends FormRequest
     {
         return [
             'url' => ['nullable'],
-            'num_placa' => ['required', 'max:30', Rule::unique('tarjetas')->ignore($this->tarjeta, 'num_placa')],
+            'num_placa' => ['required', 'max:30'], //, Rule::unique('tarjetas')->ignore($this->tarjeta, 'num_placa')
             'expedicion' => ['nullable', 'date'],
             'revalidacion' => ['nullable', 'date'],
             'num_operacion' => ['nullable', 'max:120'],

@@ -70,7 +70,24 @@
                                 onchange="this.form.submit()"
                             >
                             <label class="form-check-label" for="defaultCheck1">
-                                Código QR Generado
+                                Ya Está Impreso
+                            </label>
+                    </form>
+                </div>
+
+                <div class="form-check ml-2">
+                    <form  method="POST" action="{{ route('renovar.tarjeta', $socio) }}">
+                        @csrf
+                            <input class="form-check-input"
+                                name="status"
+                                type="checkbox"
+                                value="1"
+                                {{ old('status', $socio->status) == 0 ? 'checked' : '' }}
+                                id="defaultCheck1"
+                                onchange="this.form.submit()"
+                            >
+                            <label class="form-check-label" for="defaultCheck1">
+                                Renovar Tarjeta
                             </label>
                     </form>
                 </div>

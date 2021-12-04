@@ -36,6 +36,8 @@ Route::middleware('can:admin')->group( function () {
 
     Route::get('/buscar-tarjeta-circulacion', 'Search\SearchTarjetaController')->name('search.tarjeta');
     Route::post('/check-qr-tarjeta/{tarjeta}', 'Checks\CheckQrTarjetaController')->name('check.tarjeta');
+    Route::post('/check-renovar-tarjeta/{tarjeta}', 'Checks\CheckRenovarTarjetaController')->name('renovar.tarjeta');
+
     // Socios
     Route::get('/socios-tarjetas', 'TarjetaController@index')->name('tarjetas.index');
     Route::post('/socios-tarjetas', 'TarjetaController@store')->name('tarjetas.store');
@@ -54,6 +56,8 @@ Route::middleware('can:admin')->group( function () {
 
     Route::get('/buscar-fotocheck', 'Search\SearchFotocheckController')->name('search.fotocheck');
     Route::post('/check-qr-fotocheck/{fotocheck}', 'Checks\CheckQrFotocheckController')->name('check.fotocheck');
+    Route::post('/check-renovar-fotocheck/{fotocheck}', 'Checks\CheckRenovarFotocheckController')->name('renovar.fotocheck');
+
     // Socios
     Route::get('/socios-fotochecks', 'FotocheckController@index')->name('fotochecks.index');
     Route::post('/socios-fotochecks', 'FotocheckController@store')->name('fotochecks.store');

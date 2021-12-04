@@ -6,12 +6,19 @@ use App\Fotocheck;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CheckQrFotocheckController extends Controller
+class CheckRenovarFotocheckController extends Controller
 {
+    /**
+     * Handle the incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function __invoke(Fotocheck $fotocheck)
     {
-        $fotocheck->status = 1;
-        $fotocheck->expedicion = now()->format('Y-m-d');
+        //dd($fotocheck);
+        $fotocheck->status = 0;
+        $fotocheck->expedicion = NULL;
         //$fotocheck->revalidacion = date('Y-m-d', strtotime("+1 years"));
         $fotocheck->save();
         return back();

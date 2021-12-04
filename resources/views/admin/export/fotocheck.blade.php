@@ -96,11 +96,11 @@
 .texto-encima-expedicion {
     position: absolute;
     top: 78%;
-    left: 50%;
+    left: 28%;
     height: 30%;
     width: 95%;
     margin: -17% 0 0 -25%;
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 900;
     text-transform: uppercase;
     text-align: center;
@@ -110,11 +110,11 @@
 .texto-encima-revalidacion {
     position: absolute;
     top: 84%;
-    left: 50%;
+    left: 28%;
     height: 30%;
     width: 95%;
     margin: -17% 0 0 -25%;
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 900;
     text-transform: uppercase;
     text-align: center;
@@ -124,8 +124,8 @@
 
 .qr-encima {
     position: absolute;
-    top: 230px;
-    left: 170px;
+    top: 210px;
+    left: 165px;
 }
 /*.centrado{
     position: absolute;
@@ -164,12 +164,13 @@ body{
         <span id="ter" class="texto-encima-nombre">{{ $fotocheck[0]->socio->nombre_socio }}</span>
         <span class="texto-encima-dni-tipo">{{ $fotocheck[0]->socio->documento->nombre }}</span>
         <span class="texto-encima-dni">{{ $fotocheck[0]->socio->dni_socio }}</span>
+
         @if (!empty($fotocheck[0]->socio->asociacione_id))
             <span class="texto-encima-asociacion-text">TRANSPORTADOR</span>
             <span class="texto-encima-asociacion">"{{ optional($fotocheck[0]->socio->asociacione)->nombre }}"</span>
         @else
-            <span class="texto-encima-asociacion-text">SIN TRANSPORTADOR</span>
-            <span class="texto-encima-asociacion">"Es Persona Natural"</span>
+            <span class="texto-encima-asociacion-text">N° AUTORIZACIÓN</span>
+            <span class="texto-encima-asociacion">{{ $fotocheck[0]->num_autorizacion }}</span>
         @endif
 
 
@@ -182,8 +183,9 @@ body{
             class="qr-encima"
         >
 
-        <p class="texto-encima-expedicion">{{ now()->format('d/m/Y') }}</p>
-        <p class="texto-encima-revalidacion">{{ date('d/m/Y', strtotime("+1 years")) }}</p>
+        <p class="texto-encima-expedicion">F.EXPEDICIÓN: {{ now()->format('d/m/Y') }}</p>
+        {{-- date('d/m/Y', strtotime("+1 years")) --}}
+        <p class="texto-encima-revalidacion">F.REVALIDACIÓN: {{ date('d/m/Y', strtotime($fotocheck[0]->revalidacion)) }}</p>
     </div>
 </body>
 </html>

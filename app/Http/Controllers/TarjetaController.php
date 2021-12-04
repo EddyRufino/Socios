@@ -10,6 +10,7 @@ use App\Tarjeta;
 use App\TipoDocumento;
 use App\Vehiculo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TarjetaController extends Controller
 {
@@ -36,23 +37,45 @@ class TarjetaController extends Controller
 
     public function store(TarjetaRequest $request)
     {
+        $socioGet = Socio::where('url', 'LIKE', '%'. Str::slug($request->nombre_socio) .'%')
+            ->doesnthave('tarjetas')
+            ->first();
+        //dd($socioGet);
 
-        $socio = Socio::updateOrCreate([
-            'nombre_socio' => $request->nombre_socio,
-            'dni_socio' => $request->dni_socio,
-            'nombre_propietario' => $request->nombre_propietario,
-            'dni_propietario' => $request->dni_propietario,
-            'num_placa' => $request->num_placa,
-            'asociacione_id' => $request->asociacione_id,
-            'vehiculo_id' => $request->vehiculo_id,
-            'tipo_documento_id' => $request->tipo_documento_id
-        ]);
+        if (is_null($socioGet)) {
+            //dd('nulo');
+            $socio = Socio::updateOrCreate([
+                'nombre_socio' => $request->nombre_socio,
+                'dni_socio' => $request->dni_socio,
+                'nombre_propietario' => $request->nombre_propietario,
+                'dni_propietario' => $request->dni_propietario,
+                'num_placa' => $request->num_placa,
+                'asociacione_id' => $request->asociacione_id,
+                'vehiculo_id' => $request->vehiculo_id,
+                'tipo_documento_id' => $request->tipo_documento_id
+            ]);
+
+        } else {
+            //dd('no nulo');
+            $socio = Socio::where('url', $socioGet->url)->update([
+                'nombre_socio' => ucwords($socioGet->nombre_socio),
+                'dni_socio' => $socioGet->dni_socio,
+                'nombre_propietario' => ucwords($socioGet->nombre_propietario),
+                'dni_propietario' => $socioGet->dni_propietario,
+                'url' => $socioGet->url,
+                'num_placa' => strtoupper($request->num_placa),
+                'asociacione_id' => $socioGet->asociacione_id,
+                'vehiculo_id' => $socioGet->vehiculo_id,
+                'tipo_documento_id' => $socioGet->tipo_documento_id
+            ]);
+
+        }
 
         Tarjeta::create(array_merge(
             $request->validated(), [
-                'socio_id' => $socio->id,
+                'socio_id' => is_null($socioGet) ? $socio->id : $socioGet->id,
                 'num_correlativo' => now()->format('Y') .'-'. $request->num_correlativo,
-                'url' => $socio->url,
+                'url' => is_null($socioGet) ? $socio->url : $socioGet->url,
                 'user_id' => auth()->user()->id
             ])
         );
@@ -61,7 +84,7 @@ class TarjetaController extends Controller
             'num_correlativo' => $request->num_correlativo
         ]);
 
-        return redirect()->route('tarjetas.index')->with('status', $socio->nombre_socio . ' fue registrado!');
+        return redirect()->route('tarjetas.index')->with('status', $request->nombre_socio . ' fue registrado!');
     }
 
     public function show(Tarjeta $socio)

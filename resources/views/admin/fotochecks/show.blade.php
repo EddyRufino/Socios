@@ -77,7 +77,24 @@
                                 onchange="this.form.submit()"
                             >
                             <label class="form-check-label" for="defaultCheck1">
-                                Código QR Generado
+                                Ya Está Impreso
+                            </label>
+                    </form>
+                </div>
+
+                <div class="form-check ml-2">
+                    <form  method="POST" action="{{ route('renovar.fotocheck', $fotocheck) }}">
+                        @csrf
+                            <input class="form-check-input"
+                                name="status"
+                                type="checkbox"
+                                value="1"
+                                {{ old('status', $fotocheck->status) == 0 ? 'checked' : '' }}
+                                id="defaultCheck1"
+                                onchange="this.form.submit()"
+                            >
+                            <label class="form-check-label" for="defaultCheck1">
+                                Renovar Fotocheck
                             </label>
                     </form>
                 </div>
@@ -106,6 +123,19 @@
                 </li>
 
             </ul>
+
+            <ul class='list-group col-md-3 mt-3'>
+                <li class="list-group-item color-box-header">
+                    <strong>VEHÍCULO</strong>
+                </li>
+                <li class="list-group-item ">
+                    <strong>Tipo:</strong> {{ $fotocheck->vehiculo->nombre }}
+                </li>
+                <li class="list-group-item ">
+                    <strong>N° Autorización:</strong> {{ $fotocheck->num_autorizacion }}
+                </li>
+            </ul>
+
             <ul class='list-group col-md-3 mt-3'>
                 <li class="list-group-item color-box-header">
                     <strong>PERSONAL E INTRANSFERIBLE</strong>
@@ -116,6 +146,7 @@
                 <li class="list-group-item ">
                     <strong>Revalidación:</strong> {{ $fotocheck->revalidacion }}
                 </li>
+
             </ul>
         </div>
     </div>

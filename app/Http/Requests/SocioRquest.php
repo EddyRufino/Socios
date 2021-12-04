@@ -29,7 +29,7 @@ class SocioRquest extends FormRequest
             'nombre_propietario' => ['nullable', 'max:120'],
             'dni_socio' => ['required', 'min:8', 'max:30'],
             'dni_propietario' => ['nullable', 'min:8', 'max:30'],
-            'num_placa' => ['nullable', 'max:30', Rule::unique('socios')->ignore($this->socio, 'num_placa')],
+            'num_placa' => ['nullable', 'max:30'], //, Rule::unique('socios')->ignore($this->socio, 'num_placa')
             'url' => ['nullable'],
             //'vehiculo_id' => ['nullable'],
             //'tipo_documento_id' => ['nullable'],

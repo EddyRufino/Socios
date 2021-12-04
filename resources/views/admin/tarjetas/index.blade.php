@@ -38,7 +38,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col" class="bg-primary text-white">Nombre Socio</th>
+                        <th scope="col" class="bg-primary text-white">Nombres y Apellidos</th>
                         <th scope="col" class="bg-primary text-white">Propietario</th>
                         <th scope="col" class="bg-primary text-white">DNI Socio</th>
                         <th scope="col" class="bg-primary text-white">N. Placa</th>
@@ -61,8 +61,10 @@
                             <td>{{ $tarjeta->socio->dni_socio }}</td>
                             <td>{{ $tarjeta->num_placa }}</td>
 
-                            @if (empty($tarjeta->socio->asociacione_id))
-                                <td class="text-secondary">Es Persona Natural</td>
+                            @if (empty($tarjeta->socio->asociacione_id)  && $tarjeta->socio->tipo_documento_id == 3)
+                                <td class="text-secondary">Entidad Privada</td>
+                            @elseif (empty($tarjeta->socio->asociacione_id))
+                                <td class="text-secondary">Persona Natural</td>
                             @else
                                 <td>{{ optional($tarjeta->socio->asociacione)->nombre }}</td>
                             @endif

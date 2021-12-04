@@ -9,11 +9,22 @@
     </style>
 @endpush
 
+@if (request()->routeIs('tarjetas.create'))
+    <div class="custom-control custom-checkbox mb-3">
+        <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
+        <label class="custom-control-label" for="myCheck">Persona Natural / Jurídica</label>
+    </div>
+@endif
+
 <div class="row">
     <div class="col-md-6">
         <fieldset class="boder-1 p-2">
-            <legend class="legend">
+            <legend id="legend-socio" class="text-legend-transportador legend">
                 Socio
+            </legend>
+
+            <legend id="legend-persona" style="display: none" class="text-legend-transportador legend">
+                Natural / Jurídica
             </legend>
 
             <div class="form-group">
@@ -294,16 +305,16 @@
 
             </fieldset>
 
-            <div class="custom-control custom-checkbox mt-3">
+{{--             <div class="custom-control custom-checkbox mt-3">
                 <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
-                <label class="custom-control-label" for="myCheck">Persona Natural</label>
-            </div>
+                <label class="custom-control-label" for="myCheck">Persona Natural / Jurídica</label>
+            </div> --}}
         </div>
 
         <div class="col-md-6">
             <fieldset class="boder-1" id="natural" style="display:none">
                 <legend class="text-legend-transportador legend p-2">
-                    Persona Natural
+                    Persona Natural / Jurídica
                 </legend>
 
                 <div class="form-group pl-2 pr-2">
@@ -342,10 +353,6 @@
 
             </fieldset>
 
-{{--             <div class="custom-control custom-checkbox mt-3">
-                <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
-                <label class="custom-control-label" for="myCheck">Persona Natural</label>
-            </div> --}}
         </div>
     @endif
 
@@ -416,7 +423,7 @@
 
                 <div class="custom-control custom-checkbox mt-3">
                     <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunctionEdit()">
-                    <label class="custom-control-label" for="myCheck">Persona Natural</label>
+                    <label class="custom-control-label" for="myCheck">Persona Natural / Jurídica</label>
                 </div>
             </div>
 
@@ -424,7 +431,7 @@
             <div id="natural" class="col-md-6" style="{{ $tarjeta->socio->asociacione_id ? 'display: none' : 'display: block' }}">
                 <fieldset class="boder-1" id="natural">
                     <legend class="text-legend-transportador legend p-2">
-                        Persona Natural
+                        Persona Natural / Jurídica
                     </legend>
 
                     <div class="form-group pl-2 pr-2">
@@ -513,22 +520,31 @@
 </button>
 
 @push('scripts')
+
 <script>
     function myFunction() {
         let checkBox = document.getElementById("myCheck");
         let natural = document.getElementById("natural");
         let juridica = document.getElementById("juridica");
+        let persona = document.getElementById("legend-persona");
+        let socio = document.getElementById("legend-socio");
 
         if (checkBox.checked == true){
 
             natural.style.display = "block";
             juridica.style.display = "none";
 
+            persona.style.display = "block";
+            socio.style.display = "none";
+
 
 
         } else {
             natural.style.display = "none";
             juridica.style.display = "block";
+
+            persona.style.display = "none";
+            socio.style.display = "block";
 
             // Pon el valor
 
