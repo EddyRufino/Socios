@@ -10,10 +10,10 @@
     <table class="table">
         <thead>
             <tr bgcolor="#5D6D7E" class="font-color-white">
-                    <th scope="col" class="bg-primary text-white">NOMBRE SOCIO</th>
+                    <th scope="col" class="bg-primary text-white">NOMBRE Y APELLIDO</th>
                     <th scope="col" class="bg-primary text-white">NOMBRE PROPIETARIO</th>
                     <th scope="col" class="bg-primary text-white">TIPO DOCUMENTO</th>
-                    <th scope="col" class="bg-primary text-white">N° DOCUMENTO SOCIO</th>
+                    <th scope="col" class="bg-primary text-white">N° DOCUMENTO</th>
                     <th scope="col" class="bg-primary text-white">PLACA</th>
                     <th scope="col" class="bg-primary text-white">VEHIVULO</th>
                     <th scope="col" class="bg-primary text-white">TRANSPORTADOR</th>
@@ -45,7 +45,13 @@
                         <td class="text-secondary">{{ $tarjeta->vehiculo->nombre }}</td>
                     @endif
 
-                    <td>{{ optional($tarjeta->socio->asociacione)->nombre }}</td>
+                    @if (empty($tarjeta->socio->asociacione_id)  && $tarjeta->socio->tipo_documento_id == 3)
+                        <td class="text-secondary">Entidad Privada</td>
+                    @elseif (empty($tarjeta->socio->asociacione_id))
+                        <td class="text-secondary">Persona Natural</td>
+                    @else
+                        <td>{{ optional($tarjeta->socio->asociacione)->nombre }}</td>
+                    @endif
 
                     <td>{{ $tarjeta->expedicion }}</td>
                     <td>{{ $tarjeta->revalidacion }}</td>

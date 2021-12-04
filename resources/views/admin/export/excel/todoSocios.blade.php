@@ -35,7 +35,13 @@
                         <td>{{ $socio->vehiculo->nombre }}</td>
                     @endif
 
-                    <td>{{ optional($socio->asociacione)->nombre }}</td>
+                    @if (empty($socio->asociacione_id)  && $socio->tipo_documento_id == 3)
+                        <td class="text-secondary">Entidad Privada</td>
+                    @elseif (empty($socio->asociacione_id))
+                        <td class="text-secondary">Persona Natural</td>
+                    @else
+                        <td>{{ optional($socio->asociacione)->nombre }}</td>
+                    @endif
 
                 </tr>
 

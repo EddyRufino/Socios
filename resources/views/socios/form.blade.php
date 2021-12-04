@@ -18,7 +18,7 @@
     </div>
 
     <div class="form-group col-md-6">
-        <label for="inputEmail4 font-weight-bold">DNI Socio</label>
+        <label for="inputEmail4 font-weight-bold">N. ruc - dni - carnet</label>
         <input type="text"
             name="dni_socio"
             class="form-control @error('dni_socio') is-invalid  @enderror"

@@ -10,10 +10,10 @@
     <table class="table">
         <thead>
             <tr bgcolor="#5D6D7E" class="font-color-white">
-                <th scope="col" class="bg-primary text-white">NOMBRE SOCIO</th>
+                <th scope="col" class="bg-primary text-white">NOMBRE Y APELLIDO</th>
                 <th scope="col" class="bg-primary text-white">NOMBRE PROPIETARIO</th>
                 <th scope="col" class="bg-primary text-white">TIPO DOCUMENTO</th>
-                <th scope="col" class="bg-primary text-white">N° DOCUMENTO SOCIO</th>
+                <th scope="col" class="bg-primary text-white">N° DOCUMENTO</th>
                 <th scope="col" class="bg-primary text-white">N° AUTORIZACIÓN</th>
                 <th scope="col" class="bg-primary text-white">VEHIVULO</th>
                 <th scope="col" class="bg-primary text-white">TRANSPORTADOR</th>
@@ -40,7 +40,13 @@
                         <td class="text-secondary">{{ $fotocheck->vehiculo->nombre }}</td>
                     @endif
 
-                    <td>{{ optional($fotocheck->socio->asociacione)->nombre }}</td>
+                    @if (empty($fotocheck->socio->asociacione_id)  && $fotocheck->socio->tipo_documento_id == 3)
+                        <td>Entidad Privada</td>
+                    @elseif (empty($fotocheck->socio->asociacione_id))
+                        <td>Persona Natural</td>
+                    @else
+                        <td>{{ optional($fotocheck->socio->asociacione)->nombre }}</td>
+                    @endif
 
                     <td>{{ $fotocheck->expedicion }}</td>
                     <td>{{ $fotocheck->revalidacion }}</td>
