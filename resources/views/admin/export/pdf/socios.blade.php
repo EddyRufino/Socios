@@ -57,12 +57,16 @@
             </span>
         </div>
 
-        @if ($nameAsociacion->asociacione_id > 0)
+        @if ($nameAsociacion == 'juridica')
+            <h4 class="center font-color">LISTA DE ENTIDADES PRIVADAS</h4>
+
+        @elseif ($nameAsociacion == 'natural')
+            <h4 class="center font-color">LISTA DE PERSONAS NATURALES</h4>
+
+        @else
             <h4 class="center font-color">LISTA DE SOCIOS DE
                 "{{ $nameAsociacion->asociacione->nombre }}"
             </h4>
-        @else
-            <h4 class="center font-color">LISTA DE SOCIOS QUE SON "PERSONA NATURAL"</h4>
         @endif
 
         <table class="table">
@@ -124,6 +128,18 @@
 
                                 <span class="countTarjeta">Fotochecks</span>
                                 <strong class="ml-1">{{$fotochecksCountNatural->count()}}</strong>
+                                </th>
+
+                            @endif
+
+                            @if (request()->id == 'juridica')
+
+                                <th>
+                                <span class="countTarjeta mr-1">Tarjetas</span>
+                                <strong class="mr-3">{{$tarjetasCountJuridica->count()}}</strong>
+
+                                <span class="countTarjeta">Fotochecks</span>
+                                <strong class="ml-1">{{$fotochecksCountJuridica->count()}}</strong>
                                 </th>
 
                             @endif

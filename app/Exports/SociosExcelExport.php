@@ -28,7 +28,20 @@ class SociosExcelExport implements FromView
         //dd($this->id);
         if ($this->id == 'natural') {
 
+            //$attributes = Socio::whereNull('asociacione_id')
+                //->whereNull('deleted_at')
+                //->get();
+
+        //} else {
             $attributes = Socio::whereNull('asociacione_id')
+                ->where('tipo_documento_id', '!=', 3)
+                ->whereNull('deleted_at')
+                ->get();
+
+        } elseif ($this->id == 'juridica') {
+
+            $attributes = Socio::whereNull('asociacione_id')
+                ->where('tipo_documento_id', 3)
                 ->whereNull('deleted_at')
                 ->get();
 
@@ -55,21 +68,36 @@ class SociosExcelExport implements FromView
             ->whereNull('deleted_at')
             ->get();
 
-        // Sin Asociación
-        $tarjetasCountNatural = Socio::whereHas('tarjetas', function($query) {
+        // Sin Asociación - Persona Natural
+        $tarjetasCountNatural = Socio::where('tipo_documento_id', '!=', 3)->whereHas('tarjetas', function($query) {
                 $query->whereNull('deleted_at');
             })
             ->whereNull('asociacione_id')
             ->whereNull('deleted_at')
             ->get();
 
-        $fotochecksCountNatural = Socio::whereHas('fotochecks', function($query) {
+        $fotochecksCountNatural = Socio::where('tipo_documento_id', '!=', 3)->whereHas('fotochecks', function($query) {
                 $query->whereNull('deleted_at');
             })
             ->whereNull('asociacione_id')
             ->whereNull('deleted_at')
             ->get();
 
-        return view('admin.export.excel.socios', compact('attributes', 'tarjetasCount', 'fotochecksCount', 'tarjetasCountNatural', 'fotochecksCountNatural'));
+        // Sin Asociación - Persona Jurídica
+        $tarjetasCountJuridica = Socio::where('tipo_documento_id', 3)->whereHas('tarjetas', function($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->whereNull('asociacione_id')
+            ->whereNull('deleted_at')
+            ->get();
+
+        $fotochecksCountJuridica = Socio::where('tipo_documento_id', 3)->whereHas('fotochecks', function($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->whereNull('asociacione_id')
+            ->whereNull('deleted_at')
+            ->get();
+
+        return view('admin.export.excel.socios', compact('attributes', 'tarjetasCount', 'fotochecksCount', 'tarjetasCountNatural', 'fotochecksCountNatural', 'tarjetasCountJuridica', 'fotochecksCountJuridica'));
     }
 }

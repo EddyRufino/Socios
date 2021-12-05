@@ -18,15 +18,25 @@ class ExportSocioController extends Controller
     public function __invoke(Request $request, $id)
     {
         //$id = request()->asociacione_id_two;
-        //dd($id);
+
         if ($id == 'natural') {
 
             $attributes = Socio::whereNull('asociacione_id')
+                ->where('tipo_documento_id', '!=', 3)
                 ->whereNull('deleted_at')
                 ->paginate();
 
-            $nameAsociacion = Socio::whereNull('asociacione_id')->first();
+            $nameAsociacion = 'natural';
+        }
 
+        elseif ($id == 'juridica') {
+
+            $attributes = Socio::whereNull('asociacione_id')
+                ->where('tipo_documento_id', 3)
+                ->whereNull('deleted_at')
+                ->paginate();
+
+            $nameAsociacion = 'juridica';
         } else {
 
             $attributes = Socio::where('asociacione_id', $id)
@@ -35,7 +45,6 @@ class ExportSocioController extends Controller
 
             $nameAsociacion = Socio::where('asociacione_id', $id)->first();
         }
-        //dd($nameAsociacion->asociacione->nombre);
 
         // Con Asociación
         $tarjetasCount = Socio::whereHas('tarjetas', function($query) {
@@ -52,22 +61,37 @@ class ExportSocioController extends Controller
             ->whereNull('deleted_at')
             ->get();
 
-        // Sin Asociación
-        $tarjetasCountNatural = Socio::whereHas('tarjetas', function($query) {
+        // Sin Asociación - Persona Natural
+        $tarjetasCountNatural = Socio::where('tipo_documento_id', '!=', 3)->whereHas('tarjetas', function($query) {
                 $query->whereNull('deleted_at');
             })
             ->whereNull('asociacione_id')
             ->whereNull('deleted_at')
             ->get();
 
-        $fotochecksCountNatural = Socio::whereHas('fotochecks', function($query) {
+        $fotochecksCountNatural = Socio::where('tipo_documento_id', '!=', 3)->whereHas('fotochecks', function($query) {
                 $query->whereNull('deleted_at');
             })
             ->whereNull('asociacione_id')
             ->whereNull('deleted_at')
             ->get();
 
-        $pdf = PDF::loadView('admin.export.pdf.socios', compact('attributes', 'tarjetasCount', 'fotochecksCount', 'tarjetasCountNatural', 'fotochecksCountNatural', 'nameAsociacion'));
+        // Sin Asociación - Persona Jurídica
+        $tarjetasCountJuridica = Socio::where('tipo_documento_id', 3)->whereHas('tarjetas', function($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->whereNull('asociacione_id')
+            ->whereNull('deleted_at')
+            ->get();
+
+        $fotochecksCountJuridica = Socio::where('tipo_documento_id', 3)->whereHas('fotochecks', function($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->whereNull('asociacione_id')
+            ->whereNull('deleted_at')
+            ->get();
+
+        $pdf = PDF::loadView('admin.export.pdf.socios', compact('attributes', 'tarjetasCount', 'fotochecksCount', 'tarjetasCountNatural', 'fotochecksCountNatural', 'nameAsociacion', 'tarjetasCountJuridica', 'fotochecksCountJuridica'));
 
         return $pdf->stream();
     }

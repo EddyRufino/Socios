@@ -135,8 +135,8 @@ class SearchAdvanceController extends Controller
 
 
 
-        // Sin Asociación
-        $tarjetasCountNatural = Socio::whereHas('tarjetas', function($query) {
+        // Sin Asociación - Persona Natural
+        $tarjetasCountNatural = Socio::where('tipo_documento_id', '!=', 3)->whereHas('tarjetas', function($query) {
                 $query->whereNull('deleted_at');
             })
             ->whereNull('asociacione_id')
@@ -155,7 +155,7 @@ class SearchAdvanceController extends Controller
 
         //dd($tarjetasCountNatural);
 
-        $fotochecksCountNatural = Socio::whereHas('fotochecks', function($query) {
+        $fotochecksCountNatural = Socio::where('tipo_documento_id', '!=', 3)->whereHas('fotochecks', function($query) {
                 $query->whereNull('deleted_at');
             })
             ->whereNull('asociacione_id')
@@ -171,13 +171,26 @@ class SearchAdvanceController extends Controller
                    //})
                    //->get();
 
+        // Sin Asociacion - Entidad Privada
+        $tarjetasCountJuridica = Socio::where('tipo_documento_id', 3)->whereHas('tarjetas', function($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->whereNull('asociacione_id')
+            ->whereNull('deleted_at')
+            ->get();
 
+        $fotochecksCountJuridica = Socio::where('tipo_documento_id', 3)->whereHas('fotochecks', function($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->whereNull('asociacione_id')
+            ->whereNull('deleted_at')
+            ->get();
 
         //dd($fotochecksCountNatural);
         //dd($attributes[0]->fotochecks->count());
         //dd($fotochecksCountNatural);
 
-    return view('admin.search.advancedTwo', compact('vehiculos', 'asociaciones', 'attributes', 'tarjetasCount', 'fotochecksCount', 'tarjetasCountNatural', 'fotochecksCountNatural'));
+    return view('admin.search.advancedTwo', compact('vehiculos', 'asociaciones', 'attributes', 'tarjetasCount', 'fotochecksCount', 'tarjetasCountNatural', 'fotochecksCountNatural', 'tarjetasCountJuridica', 'fotochecksCountJuridica'));
     }
 
     public function advancedTree()

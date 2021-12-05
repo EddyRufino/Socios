@@ -79,6 +79,21 @@
 
                 @endif
 
+
+                @if (request()->asociacione_id_two == 'juridica')
+
+                    <h6 class="text-dark ml-2 tooltipw">
+                    <span class="countTarjeta mr-1">Tarjetas</span>
+                    <span id="iconFotocheck">@include('icons.tarjeta')</span>
+                    <strong class="mr-3">{{$tarjetasCountJuridica->count()}}</strong>
+
+                    <span class="countTarjeta">Fotochecks</span>
+                    <span id="iconFotocheck">@include('icons.fotocheck')</span>
+                    <strong class="ml-1">{{$fotochecksCountJuridica->count()}}</strong>
+                    </h6>
+
+                @endif
+
             @endif
 
             </h6>
@@ -110,7 +125,7 @@
                             @if ($socio->nombre_propietario)
                                 <td>{{ $socio->nombre_propietario }}</td>
                             @else
-                                <td class="text-secondary">El mismo socio</td>
+                                <td class="text-secondary">NO TIENE</td>
                             @endif
 
                             <td>{{ $socio->dni_socio }}</td>

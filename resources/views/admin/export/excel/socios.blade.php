@@ -122,6 +122,18 @@
 
                             @endif
 
+                            @if (request()->id == 'juridica')
+
+                                <th>
+                                <span class="countTarjeta mr-1">Tarjetas</span>
+                                <strong class="mr-3">{{$tarjetasCountJuridica->count()}}</strong>
+
+                                <span class="countTarjeta">Fotochecks</span>
+                                <strong class="ml-1">{{$fotochecksCountJuridica->count()}}</strong>
+                                </th>
+
+                            @endif
+
                         @endif
                     </tr>
             </tbody>
