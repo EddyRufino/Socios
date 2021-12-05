@@ -30,9 +30,9 @@
 
 .texto-encima-nombre {
     position: absolute;
-    top: 40%;
+    top: 36%;
     left: 6.5%;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-weight: 900;
     text-transform: uppercase;
     line-height: 30px;
@@ -41,9 +41,9 @@
 
 .texto-encima-nombre-socio {
     position: absolute;
-    top: 31%;
+    top: 30%;
     left: 6.5%;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 900;
     text-transform: uppercase;
     line-height: 30px;
@@ -52,53 +52,93 @@
 
 .texto-encima-dni {
     position: absolute;
-    top: 50%;
+    top: 44%;
     left: 6.5%;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 900;
 }
 
 .texto-encima-placa {
     position: absolute;
-    top: 57%;
-    left: 6.5%;
-    font-size: 1.1rem;
-    font-weight: 900;
-    text-transform: uppercase;
-}
-
-.texto-encima-asociacion {
-    position: absolute;
-    top: 70%;
-    left: 6.5%;
-    font-size: 1.6rem;
-    font-weight: 900;
-    text-transform: uppercase;
-}
-
-.texto-encima-asociacion-name {
-    position: absolute;
-    top: 64%;
+    top: 61%;
     left: 6.5%;
     font-size: 1rem;
     font-weight: 900;
     text-transform: uppercase;
 }
 
+.texto-encima-asociacion {
+    position: absolute;
+    top: 72%;
+    left: 6.5%;
+    font-size: 1.4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.texto-encima-asociacion-name {
+    position: absolute;
+    top: 67%;
+    left: 6.5%;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.texto-encima-propietario-name {
+    position: absolute;
+    top: 48%;
+    left: 6.5%;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 30px;
+    font-family: sans-serif;
+}
+
+.texto-encima-propietario {
+    position: absolute;
+    top: 53%;
+    left: 6.5%;
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 30px;
+    font-family: sans-serif;
+}
+
 .texto-encima-expedicion-anverso {
     position: absolute;
-    top: 81%;
+    top: 80%;
     left: 6.5%;
-    font-size: 1.005rem;
+    font-size: 1rem;
     font-weight: 900;
     text-transform: uppercase;
 }
 
 .texto-encima-revalidacion-anverso {
     position: absolute;
-    top: 88%;
+    top: 86%;
     left: 6.5%;
-    font-size: 1.005rem;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.expedicion-tiene-propietario {
+    position: absolute;
+    top: 67%;
+    left: 6.5%;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.revalidacion-tiene-propietario {
+    position: absolute;
+    top: 73%;
+    left: 6.5%;
+    font-size: 1rem;
     font-weight: 900;
     text-transform: uppercase;
 }
@@ -201,15 +241,26 @@ body{
         @endif --}}
 
         <span class="texto-encima-nombre">{{ $tarjeta[0]->socio->nombre_socio }}</span>
-        <span class="texto-encima-dni">{{ strtoupper($tarjeta[0]->socio->documento->nombre) }}: {{ $tarjeta[0]->socio->dni_socio }}</span>
+        <span class="texto-encima-dni">
+            {{ strtoupper($tarjeta[0]->socio->documento->nombre) }}: {{ $tarjeta[0]->socio->dni_socio }}
+        </span>
+
+        @if ($tarjeta[0]->socio->nombre_propietario)
+            <span class="texto-encima-propietario-name">PROPIETARIO</span>
+            <span class="texto-encima-propietario"> {{ $tarjeta[0]->socio->nombre_propietario }}</span>
+        @else
+            <span class="texto-encima-propietario-name">PROPIETARIO</span>
+            <span class="texto-encima-propietario"> -</span>
+        @endif
+
         <span class="texto-encima-placa">N° Placa: {{ $tarjeta[0]->num_placa }}</span>
 
         @if (empty($tarjeta[0]->socio->asociacione_id))
-            <span class="texto-encima-asociacion-name">SIN TRANSPORTADOR AUTORIZADO</span>
-            <span class="texto-encima-asociacion"> ES PERSONA NATURAL</span>
-            <span class="texto-encima-asociacion"> ES PERSONA NATURAL</span>
+            <span class="texto-encima-asociacion-name">NOMBRE DEL TRANSPORTADOR</span>
+            <span class="texto-encima-asociacion"> -</span>
+            <span class="texto-encima-asociacion"> -</span>
         @else
-            <span class="texto-encima-asociacion-name">NOMBRE DEL TRANSPORTADOR AUTORIZADO</span>
+            <span class="texto-encima-asociacion-name">NOMBRE DEL TRANSPORTADOR</span>
             <span class="texto-encima-asociacion"> {{ optional($tarjeta[0]->socio->asociacione)->nombre }}</span>
             <span class="texto-encima-asociacion"> {{ optional($tarjeta[0]->socio->asociacione)->nombre }}</span>
         @endif
@@ -219,6 +270,43 @@ body{
 
         <span class="texto-encima-revalidacion-anverso">REVALIDACIÓN DE LA TCV: {{ date('d-m-Y', strtotime("+1 years")) }}</span>
         <span class="texto-encima-revalidacion-anverso">REVALIDACIÓN DE LA TCV: {{ date('d-m-Y', strtotime("+1 years")) }}</span>
+
+{{--         @if ($tarjeta[0]->socio->asociacione_id)
+            <span class="texto-encima-asociacion-name">NOMBRE DEL TRANSPORTADOR AUTORIZADO</span>
+            <span class="texto-encima-asociacion"> {{ optional($tarjeta[0]->socio->asociacione)->nombre }}</span>
+            <span class="texto-encima-asociacion"> {{ optional($tarjeta[0]->socio->asociacione)->nombre }}</span>
+
+            @php
+                $hasAsociacion = true;
+            @endphp
+        @endif --}}
+
+        {{-- TIENEN SOLO PROPIETARIO --}}
+{{--         @if (empty($tarjeta[0]->socio->nombre_propietario) && is_null($tarjeta[0]->socio->asociacione_id))
+            <span class="expedicion-tiene-propietario">EXPEDICIÓN DE LA TCV: {{ now()->format('d-m-Y') }}</span>
+            <span class="expedicion-tiene-propietario">EXPEDICIÓN DE LA TCV: {{ now()->format('d-m-Y') }}</span>
+
+            <span class="revalidacion-tiene-propietario">REVALIDACIÓN DE LA TCV: {{ date('d-m-Y', strtotime("+1 years")) }}</span>
+            <span class="revalidacion-tiene-propietario">REVALIDACIÓN DE LA TCV: {{ date('d-m-Y', strtotime("+1 years")) }}</span>
+        @endif
+
+        @if (!empty($tarjeta[0]->socio->nombre_propietario) && is_null($tarjeta[0]->socio->asociacione_id))
+            <span class="expedicion-tiene-propietario">EXPEDICIÓN DE LA TCV: {{ now()->format('d-m-Y') }}</span>
+            <span class="expedicion-tiene-propietario">EXPEDICIÓN DE LA TCV: {{ now()->format('d-m-Y') }}</span>
+
+            <span class="revalidacion-tiene-propietario">REVALIDACIÓN DE LA TCV: {{ date('d-m-Y', strtotime("+1 years")) }}</span>
+            <span class="revalidacion-tiene-propietario">REVALIDACIÓN DE LA TCV: {{ date('d-m-Y', strtotime("+1 years")) }}</span>
+        @endif
+
+        @if (!empty($tarjeta[0]->socio->nombre_propietario) && $tarjeta[0]->socio->asociacione_id)
+            <span class="texto-encima-expedicion-anverso">EXPEDICIÓN DE LA TCV: {{ now()->format('d-m-Y') }}</span>
+            <span class="texto-encima-expedicion-anverso">EXPEDICIÓN DE LA TCV: {{ now()->format('d-m-Y') }}</span>
+
+            <span class="texto-encima-revalidacion-anverso">REVALIDACIÓN DE LA TCV: {{ date('d-m-Y', strtotime("+1 years")) }}</span>
+            <span class="texto-encima-revalidacion-anverso">REVALIDACIÓN DE LA TCV: {{ date('d-m-Y', strtotime("+1 years")) }}</span>
+        @endif
+ --}}
+        {{-- NO TIENEN PROPIETARIO NI ASOCIACION --}}
 
         <span class="texto-encima-correlativo">N° {{ $tarjeta[0]->num_correlativo }}</span>
         <span class="texto-encima-correlativo">N° {{ $tarjeta[0]->num_correlativo }}</span>

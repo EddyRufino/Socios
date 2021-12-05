@@ -97,7 +97,14 @@
         <div class="d-flex justify-content-center flex-column align-items-center">
             <ul class="list-group col-md-3">
                 <li class="list-group-item color-box-header">
-                    <strong class="font-weight-bold">SOCIO</strong>
+                    @if (empty($socio->socio->asociacione_id)  && $socio->socio->tipo_documento_id == 3)
+                        <strong class="font-weight-bold">ENTIDAD PRIVADA</strong>
+                    @elseif (empty($socio->socio->asociacione_id))
+                        <strong class="font-weight-bold">PERSONA NATURAL</strong>
+                    @else
+                        <strong class="font-weight-bold">SOCIO</strong>
+                    @endif
+
                 </li>
                 <li class="list-group-item ">
                     <strong>Nombre:</strong> {{ Illuminate\Support\Str::title($socio->socio->nombre_socio) }}

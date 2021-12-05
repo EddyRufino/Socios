@@ -40,7 +40,7 @@
                     <tr>
                         <th scope="col" class="bg-primary text-white">Nombres y Apellidos</th>
                         <th scope="col" class="bg-primary text-white">Propietario</th>
-                        <th scope="col" class="bg-primary text-white">DNI Socio</th>
+                        <th scope="col" class="bg-primary text-white">dni, ruc, carnet</th>
                         <th scope="col" class="bg-primary text-white">N. Placa</th>
                         <th scope="col" class="bg-primary text-white">Asociación</th>
                         <th scope="col" class="bg-primary text-white">Vehículo</th>
@@ -55,7 +55,7 @@
                             @if ($tarjeta->socio->nombre_propietario)
                                 <td>{{ $tarjeta->socio->nombre_propietario }}</td>
                             @else
-                                <td class="text-secondary">El Mismo Socio</td>
+                                <td class="text-secondary">NO TIENE</td>
                             @endif
 
                             <td>{{ $tarjeta->socio->dni_socio }}</td>
