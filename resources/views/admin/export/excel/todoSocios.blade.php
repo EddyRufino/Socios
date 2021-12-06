@@ -10,9 +10,9 @@
     <table class="table">
         <thead>
             <tr bgcolor="#5D6D7E" class="font-color-white">
-                    <th scope="col" class="bg-primary text-white">NOMBRE SOCIO</th>
+                    <th scope="col" class="bg-primary text-white">NOMBRES Y APELLIDOS</th>
                     <th scope="col" class="bg-primary text-white">TIPO DOCUMENTO</th>
-                    <th scope="col" class="bg-primary text-white">N° DOCUMENTO SOCIO</th>
+                    <th scope="col" class="bg-primary text-white">N° DOCUMENTO</th>
                     <th scope="col" class="bg-primary text-white">PLACA</th>
                     <th scope="col" class="bg-primary text-white">VEHIVULO</th>
                     <th scope="col" class="bg-primary text-white">TRANSPORTADOR</th>

@@ -24,7 +24,7 @@ class ExportSocioController extends Controller
             $attributes = Socio::whereNull('asociacione_id')
                 ->where('tipo_documento_id', '!=', 3)
                 ->whereNull('deleted_at')
-                ->paginate();
+                ->get();
 
             $nameAsociacion = 'natural';
         }
@@ -34,14 +34,14 @@ class ExportSocioController extends Controller
             $attributes = Socio::whereNull('asociacione_id')
                 ->where('tipo_documento_id', 3)
                 ->whereNull('deleted_at')
-                ->paginate();
+                ->get();
 
             $nameAsociacion = 'juridica';
         } else {
 
             $attributes = Socio::where('asociacione_id', $id)
                 ->whereNull('deleted_at')
-                ->paginate();
+                ->get();
 
             $nameAsociacion = Socio::where('asociacione_id', $id)->first();
         }

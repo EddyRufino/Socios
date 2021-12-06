@@ -20,10 +20,12 @@ class ExportFotochecksExcelController extends Controller
     {
         $asociacion = Asociacione::where('id', $id)->get();
 
-        if ($asociacion->count() > 0) {
-            $name = $asociacion[0]->nombre;
-        }else {
+        if ($id == 'juridica') {
+            $name = 'ENTIDAD PRIVADA';
+        } elseif ($id == 'natural') {
             $name = 'PERSONA NATURAL';
+        } else {
+            $name = $asociacion[0]->nombre;
         }
 
         //dd(is_null($asociacion));

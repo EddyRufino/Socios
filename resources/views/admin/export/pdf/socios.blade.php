@@ -72,8 +72,8 @@
         <table class="table">
             <thead>
                 <tr bgcolor="#5D6D7E" class="font-color-white">
-                        <th scope="col" class="bg-primary text-white">NOMBRE SOCIO</th>
-                        <th scope="col" class="bg-primary text-white">DNI SOCIO</th>
+                        <th scope="col" class="bg-primary text-white">NOMBRES Y APELLIDOS</th>
+                        <th scope="col" class="bg-primary text-white">DNI, RUC, CARNET</th>
                         <th scope="col" class="bg-primary text-white">PLACA</th>
                         <th scope="col" class="bg-primary text-white">VEHIVULO</th>
                         <th scope="col" class="bg-primary text-white"></th>

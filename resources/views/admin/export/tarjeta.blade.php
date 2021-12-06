@@ -100,7 +100,7 @@
     position: absolute;
     top: 53%;
     left: 6.5%;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 900;
     text-transform: uppercase;
     line-height: 30px;
@@ -156,7 +156,7 @@
 .texto-encima-expedicion-reverso {
     position: absolute;
     top: 60.54%;
-    left: 3%;
+    left: 4%;
     height: 30%;
     width: 95%;
     margin: -17% 0 0 -25%;

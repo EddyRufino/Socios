@@ -108,9 +108,9 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col" class="bg-primary text-white">Socio</th>
+                        <th scope="col" class="bg-primary text-white">Nombres y Apellidos</th>
                         <th scope="col" class="bg-primary text-white">Propietario</th>
-                        <th scope="col" class="bg-primary text-white">DNI Socio</th>
+                        <th scope="col" class="bg-primary text-white">ruc, dni, carnet</th>
                         <th scope="col" class="bg-primary text-white">Placa</th>
                         <th scope="col" class="bg-primary text-white">Vehículo</th>
                         <th scope="col" class="bg-primary text-white">Asociación</th>

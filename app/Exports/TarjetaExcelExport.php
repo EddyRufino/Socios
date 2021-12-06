@@ -28,7 +28,16 @@ class TarjetaExcelExport implements FromView
 
             $attributes = Tarjeta::where('tipo', 1)
                 ->whereHas('socio', function($query) {
-                    $query->whereNull('asociacione_id');
+                    $query->whereNull('asociacione_id')->where('tipo_documento_id', '!=', 3);
+                })
+                ->whereNull('deleted_at')
+                ->get();
+
+        } elseif ($this->id == 'juridica') {
+
+            $attributes = Tarjeta::where('tipo', 1)
+                ->whereHas('socio', function($query) {
+                    $query->whereNull('asociacione_id')->where('tipo_documento_id', 3);
                 })
                 ->whereNull('deleted_at')
                 ->get();

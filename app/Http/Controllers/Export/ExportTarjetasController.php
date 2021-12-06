@@ -15,7 +15,16 @@ class ExportTarjetasController extends Controller
 
             $attributes = Tarjeta::where('tipo', 1)
                 ->whereHas('socio', function($query) {
-                    $query->whereNull('asociacione_id');
+                    $query->whereNull('asociacione_id')->where('tipo_documento_id', '!=', 3);
+                })
+                ->whereNull('deleted_at')
+                ->get();
+
+        } elseif ($id == 'juridica') {
+
+            $attributes = Tarjeta::where('tipo', 1)
+                ->whereHas('socio', function($query) {
+                    $query->whereNull('asociacione_id')->where('tipo_documento_id', 3);
                 })
                 ->whereNull('deleted_at')
                 ->get();
