@@ -155,7 +155,7 @@
             @if (empty($socio->socio->asociacione_id))
                 <ul class='list-group col-md-3 mt-3'>
                     <li class="list-group-item color-box-header">
-                        <strong>PERSONA NATURAL</strong>
+                        <strong>PERSONAL E INTRANSFERIBLE</strong>
                     </li>
                     <li class="list-group-item ">
                         <strong>N. Autorización:</strong> {{ Illuminate\Support\Str::title($socio->num_autorizacion) }}

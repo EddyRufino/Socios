@@ -19,7 +19,7 @@ class CarnetTarjetaController extends Controller
         $pdf = PDF::loadView('admin.export.tarjeta', compact('tarjeta'));
 
         // https://www.srcodigofuente.es/aprender-php/guia-dompdf-completa
-        $pdf->setPaper(array(0, 0, 320, 550), 'landscape');
+        $pdf->setPaper(array(0,0,354.33,550.90), 'landscape');
 
         return $pdf->stream();
         // return $pdf->download('carnet-anverso.pdf');
