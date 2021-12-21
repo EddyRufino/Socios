@@ -62,7 +62,15 @@
     position: absolute;
     top: 43%;
     left: 6.5%;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    font-weight: 900;
+}
+
+.texto-encima-dni-natural {
+    position: absolute;
+    top: 43%;
+    left: 6.5%;
+    font-size: 1.2rem;
     font-weight: 900;
 }
 
@@ -70,7 +78,7 @@
     position: absolute;
     top: 48%;
     left: 6.5%;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 900;
 }
 
@@ -78,7 +86,16 @@
     position: absolute;
     top: 48%;
     left: 6.5%;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.texto-encima-placa-natural {
+    position: absolute;
+    top: 48%;
+    left: 6.5%;
+    font-size: 1.2rem;
     font-weight: 900;
     text-transform: uppercase;
 }
@@ -87,7 +104,7 @@
     position: absolute;
     top: 53%;
     left: 6.5%;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 900;
     text-transform: uppercase;
 }
@@ -193,7 +210,7 @@
     position: absolute;
     top: 64%;
     left: 6.5%;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 900;
     text-transform: uppercase;
 }
@@ -220,7 +237,7 @@
     position: absolute;
     top: 53%;
     left: 6.5%;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 900;
     text-transform: uppercase;
 }
@@ -245,9 +262,9 @@
 
 .texto-encima-revalidacion-anverso-natural-propietario {
     position: absolute;
-    top: 68%;
+    top: 69%;
     left: 6.5%;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 900;
     text-transform: uppercase;
 }
@@ -274,7 +291,7 @@
     position: absolute;
     top: 58%;
     left: 6.5%;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 900;
     text-transform: uppercase;
 }
@@ -335,7 +352,7 @@
 .qr-encima {
     position: absolute;
     top: 23px;
-    left: 75%;
+    left: 74%;
 }
 /*.centrado{
     position: absolute;
@@ -455,11 +472,11 @@ html {
 
             <span class="texto-encima-nombre">{{ $tarjeta[0]->socio->nombre_socio }}</span>
 
-            <span class="texto-encima-dni">
+            <span class="texto-encima-dni-natural">
                 {{ strtoupper($tarjeta[0]->socio->documento->nombre) }}: {{ $tarjeta[0]->socio->dni_socio }}
             </span>
 
-            <span class="texto-encima-placa">N° PLACA: {{ $tarjeta[0]->num_placa }}</span>
+            <span class="texto-encima-placa-natural">N° PLACA: {{ $tarjeta[0]->num_placa }}</span>
 
             <span class="texto-encima-propietario-name">PROPIETARIO</span>
             <span class="texto-encima-propietario"> {{ $tarjeta[0]->socio->nombre_propietario }}</span>
@@ -478,11 +495,11 @@ html {
 
             <span class="texto-encima-nombre">{{ $tarjeta[0]->socio->nombre_socio }}</span>
 
-            <span class="texto-encima-dni">
+            <span class="texto-encima-dni-natural">
                 {{ strtoupper($tarjeta[0]->socio->documento->nombre) }}: {{ $tarjeta[0]->socio->dni_socio }}
             </span>
 
-            <span class="texto-encima-placa">N° PLACA: {{ $tarjeta[0]->num_placa }}</span>
+            <span class="texto-encima-placa-natural">N° PLACA: {{ $tarjeta[0]->num_placa }}</span>
 
             <span class="texto-encima-expedicion-anverso-juridica">
                 EXPEDICIÓN DE LA TCV: {{ now()->format('d-m-Y') }}
