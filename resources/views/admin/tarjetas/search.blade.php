@@ -113,7 +113,7 @@
                                     @include('icons.download')
                                 </a>
 
-                                @if ($tarjeta->status == 0)
+                                @if (auth()->user()->name != 'Admin')
                                     <a href="{{ route('tarjetas.edit', $tarjeta) }}"
                                         class="ml-3 text-decoration-none"
                                         data-toggle="tooltip"
