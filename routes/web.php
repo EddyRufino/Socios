@@ -101,6 +101,11 @@ Route::middleware('can:admin')->group( function () {
 
 Route::get('/socios-fotochecks/{fotocheck}', 'FotocheckController@show')->name('fotochecks.show');
 
+
+// Template
+Route::view('/admin', 'admin.layout')->name('admin.template');
+
+
 Auth::routes(["register" => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
