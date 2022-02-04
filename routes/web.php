@@ -105,6 +105,7 @@ Route::get('/socios-fotochecks/{fotocheck}', 'FotocheckController@show')->name('
 // Template
 Route::view('/admin', 'admin.layout')->name('admin.template');
 
+Route::resource('admin/users', 'UserController');
 
 Auth::routes(["register" => false]);
 

@@ -1,0 +1,179 @@
+.itemd {
+    text-decoration: none;
+    color: #121314;
+    position: relative;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+.itemd::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 60%;
+    left: -0.1em;
+    right: -0.1em;
+    bottom: 0;
+    width: 100%;
+    transition: top 200ms cubic-bezier(0, .8, .13, 1);
+    background-color: #34D399 !important;
+}
+.itemd::hover::after {
+    top: 0%;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/** titulo formulario template **/
+left.pt-3.pb-1.font-weight-bold {
+    margin-left: 3.7rem !important;
+}
+
+/** Search Advanced **/
+.bootstrap-select.form-control:not([class*="col-"]) {
+width: 0% !important;
+}
+
+/*div#searchAdvanced {
+display: none !important;
+}*/
+
+
+/** Tooltip **/
+.tooltipw {
+position: relative;
+display: inline-block;
+}
+.tooltipw .tooltiptext {
+visibility: hidden;
+width: 120px;
+background-color: #555;
+color: #fff;
+text-align: center;
+border-radius: 6px;
+padding: 5px 0;
+position: absolute;
+z-index: 1;
+bottom: 125%;
+left: 50%;
+margin-left: -60px;
+opacity: 0;
+transition: opacity 0.3s;
+}
+.tooltipw .tooltiptext::after {
+content: "";
+position: absolute;
+top: 100%;
+left: 50%;
+margin-left: -5px;
+border-width: 5px;
+border-style: solid;
+border-color: #555 transparent transparent transparent;
+}
+.tooltipw:hover .tooltiptext {
+visibility: visible;
+opacity: 1;
+}
+
+
+/** selectpicker **/
+.bootstrap-select > .dropdown-toggle.bs-placeholder, .bootstrap-select > .dropdown-toggle.bs-placeholder:hover, .bootstrap-select > .dropdown-toggle.bs-placeholder:focus, .bootstrap-select > .dropdown-toggle.bs-placeholder:active {
+color: #495057 !important;
+}
+
+.btn-light {
+color: #495057;
+background-color: #fff;
+border: 1px solid #ced4da;
+}
+
+
+.col-md-10 {
+padding-left: 0px !important;
+}
+
+.card-body {
+flex: 1 1 auto;
+min-height: 1px;
+padding: 1rem 1.25rem 0rem 0.5rem;
+}
+
+.card {
+border-top: 0px solid!important;
+}
+
+h2#dds:before {
+content: " ";
+display: block;
+width: 100%;
+margin-bottom: 2rem;
+height: 12px;
+background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='20px' height='12px' viewBox='0 0 20 12' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cg id='Artboard' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' stroke-linecap='square'%3e%3cpath d='M25,1 C20,1 20,11 15,11 C10,11 10,1 5,1 C0,1 0,11 -5,11 C-10,11 -10,1 -15,1' id='Line' stroke='%23CBD5DF' stroke-width='2'%3e%3c/path%3e%3c/g%3e%3c/svg%3e");
+}
+
+.text-dark {
+color: rgba(42,67,101,1) !important;
+/*line-height: 1.25;*/
+/* font-family: Nunito,sans-serif; */
+}
+
+label {
+display: inline-block;
+margin-bottom: 0.5rem;
+color: #6c757d;
+}
+
+.legend {
+width: 120px !important;
+font-size: 0.9rem !important;
+color: rgba(107, 114, 128, 1);
+font-weight: bolder;
+}
+
+.text-legend-transportador {
+width: 255px !important;
+font-size: 0.9rem !important;
+color: rgba(107, 114, 128, 1);
+font-weight: bolder;
+}
+
+.text-legend {
+color: #495057;
+}
+
+.boder-1 {
+border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+@media (max-width: 767px) {
+.mobil {
+margin-left: 0px !important;
+margin-top: 0.5rem;
+}
+
+span.countTarjeta, span.countFotocheck {
+display: none;
+}
+}
+
+@media (max-width: 1023px) {
+.span-buscador {
+display: none;
+}
+}
+
+
+@media (min-width: 768px) {
+span#iconTarjeta, span#iconFotocheck {
+display: none;
+}
+}
+
+
+
+
+thead {
+    background-color: #059669;
+    color: white;
+}

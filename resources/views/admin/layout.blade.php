@@ -11,9 +11,11 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Theme style -->
+  <link rel="stylesheet" href="{{ asset('css/style-template.css') }}">
   <link rel="stylesheet" href="{{ asset('adminlte/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="{{ asset('css/mio.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('css/mio.css') }}"> --}}
+  
 
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/select2/css/select2.min.css') }}">
 
@@ -25,7 +27,7 @@
   {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
   @stack('styles')
 
-
+  
       <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
@@ -42,9 +44,9 @@
               <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
             </li>
         {{-- @if (auth()->user()->hasRoles(['admin', 'cobrador', 'secretaria'])) --}}
-            <li class="nav-item d-none d-sm-inline-block">
+            {{-- <li class="nav-item d-none d-sm-inline-block">
               <a href="{{ route('home') }}" class="nav-link">Buscar Conductor</a>
-            </li>
+            </li> --}}
         {{-- @endif --}}
           </ul>
 

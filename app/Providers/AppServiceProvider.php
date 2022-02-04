@@ -41,5 +41,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('superAdmin', function () {
             return optional(auth()->user())->can('superAdmin');
         });
+
+        Blade::if('adminTemplate', function() {
+            return request()->user()->hasRoles(['admin']);
+        });
     }
 }

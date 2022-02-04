@@ -41,4 +41,21 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($password);
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'assigned_roles');
+    }
+
+    public function hasRoles(array $roles)
+    {
+        return $this->roles->pluck('name')->intersect($roles)->count();
+
+        return false;
+    }
+
+    public function isAdmin()
+    {
+        return $this->hasRoles(['admin']);
+    }
 }
