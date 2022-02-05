@@ -36,17 +36,6 @@
                     </li>
                 {{-- @endif --}}
 
-               {{-- @if (auth()->user()->hasRoles(['comerciante'])) --}}
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-credit-card"></i>
-                            <p>
-                                Mis Deudas
-                            </p>
-                        </a>
-                    </li>
-               {{-- @endif --}}
-
                 {{-- @if (auth()->user()->hasRoles(['admin', 'cobrador', 'secretaria'])) --}}
                 <li class="nav-item has-treeview ">
                     <a href="#" class="nav-link ">
@@ -65,28 +54,6 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
-                                <p>
-                                    Panel Sisa
-                                </p>
-                            </a>
-                        </li>
-                        {{-- @if (auth()->user()->hasRoles(['admin', 'cobrador', 'secretaria'])) --}}
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Panel Baño</p>
-                            </a>
-                        </li>
-                        {{-- @endif --}}
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Panel Promoción</p>
-                            </a>
-                        </li>
                     </ul>
                 </li>
                 {{-- @endif --}}
@@ -96,22 +63,22 @@
                         <a href="#" class="nav-link ">
                             <i class="nav-icon fa fa-users"></i>
                             <p>
-                                Conductores
+                                Diseños
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('disenios.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Listar Conductores</p>
+                                <p>Listar Diseños</p>
                             </a>
                         </li>
                         {{-- @if (auth()->user()->hasRoles(['admin', 'secretaria'])) --}}
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('disenios.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Crear Conductor</p>
+                                <p>Subir Diseño</p>
                             </a>
                         </li>
                         {{-- @endif --}}

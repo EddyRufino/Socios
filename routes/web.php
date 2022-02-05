@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'auth.login');
@@ -106,6 +107,8 @@ Route::get('/socios-fotochecks/{fotocheck}', 'FotocheckController@show')->name('
 Route::view('/admin', 'admin.layout')->name('admin.template');
 
 Route::resource('admin/users', 'UserController');
+
+Route::resource('admin/disenios', 'DisenioController');
 
 Auth::routes(["register" => false]);
 

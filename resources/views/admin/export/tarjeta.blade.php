@@ -349,6 +349,20 @@
     font-family: monospace !important;
 }
 
+.nombre-jefe-footer-reverso {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    height: 30%;
+    width: 45%;
+    margin: -17% 0 0 -25%;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: monospace !important;
+}
+
 .qr-encima {
     position: absolute;
     top: 23px;
@@ -368,9 +382,16 @@ html {
 
 <body>
     <div class="anverso">
-        <img src="{{ asset('img/anverso2.jpg') }}"
-            style="display: block; width: 100%; height: 472px;"
-        >
+
+        @if (isset($tarjeta[0]->disenio->anverso))
+            <img src="{{ asset('disenios/' . $tarjeta[0]->disenio->anverso) }}"
+                style="display: block; width: 100%; height: 472px;"
+            >
+        @else
+            <img src="{{ asset('img/anverso2.jpg') }}"
+                style="display: block; width: 100%; height: 472px;"
+            >
+        @endif
 
         {{-- SOCIOS CON PROPIETARIOS --}}
         @if ($tarjeta[0]->socio->nombre_propietario && $tarjeta[0]->socio->asociacione_id)
@@ -515,9 +536,16 @@ html {
     </div>
 
     <div class="contenedor">
-        <img src="{{ asset('img/reverso2.jpg') }}"
-            style="display: block; width: 100%; height: 472px;"
-        >
+
+        @if (isset($tarjeta[0]->disenio->reverso))
+            <img src="{{ asset('disenios/' . $tarjeta[0]->disenio->reverso) }}"
+                style="display: block; width: 100%; height: 472px;"
+            >
+        @else
+            <img src="{{ asset('img/reverso2.jpg') }}"
+                style="display: block; width: 100%; height: 472px;"
+            >
+        @endif
 
         <img src="{{ asset('tarjetasQR/' . $tarjeta[0]->url . '.svg') }}"
             width="160"
@@ -535,6 +563,8 @@ html {
         <p class="texto-encima-footer-reverso">
             EL TRANSPORTADOR DEBE DE PORTAR ESTE DOCUMENTO AL MOMENTO DE SER SOLICITADO POR LA AUTORIDAD COMPETENTE
         </p>
+
+        <p class="nombre-jefe-footer-reverso">{{ $tarjeta[0]->disenio->nombre_jefe }}</p>
     </div>
 </body>
 </html>

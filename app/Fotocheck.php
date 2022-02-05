@@ -42,4 +42,9 @@ class Fotocheck extends Model
     {
         return $this->belongsTo(Socio::class);
     }
+    
+    public function disenio()
+    {
+        return $this->belongsTo(Disenio::class);
+    }    
 }

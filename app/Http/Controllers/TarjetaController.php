@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Socio;
+use App\Disenio;
+use App\Tarjeta;
+use App\Vehiculo;
 use App\Asociacione;
 use App\Correlativo;
-use App\Http\Requests\TarjetaRequest;
-use App\Socio;
-use App\Tarjeta;
 use App\TipoDocumento;
-use App\Vehiculo;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Requests\TarjetaRequest;
 
 class TarjetaController extends Controller
 {
@@ -41,6 +42,9 @@ class TarjetaController extends Controller
             ->doesnthave('tarjetas')
             ->first();
         //dd($socioGet);
+
+        $disenio = Disenio::select('id')->where('status', 1)->where('modelo', 1)->whereNull('deleted_at')->first();
+        // dd($disenio->id);
 
         if (is_null($socioGet)) {
             //dd('nulo');
@@ -76,7 +80,8 @@ class TarjetaController extends Controller
                 'socio_id' => is_null($socioGet) ? $socio->id : $socioGet->id,
                 'num_correlativo' => now()->format('Y') .'-'. $request->num_correlativo,
                 'url' => is_null($socioGet) ? $socio->url : $socioGet->url,
-                'user_id' => auth()->user()->id
+                'user_id' => auth()->user()->id,
+                'disenio_id' => $disenio->id
             ])
         );
 

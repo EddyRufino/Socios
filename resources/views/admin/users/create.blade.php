@@ -5,10 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
 
-                {{-- <h5 class="pl-2">@include('icons.back')<a href="{{ route('users.index') }}" class="text-dark font-weight-bold">Volver</a></h5> --}}
                 <h3 class="mt-4 pt-3 pb-1 font-weight-bold"><a href="{{ route('users.index') }}">Usuarios</a> @include('icons.arrow-right') Crear</h3>
-
-                {{-- <h4 class="font-weight-bold mt-3 pl-2 mb-4 pb-1"><a href="{{ route('users.index') }}" class="text-dark item text-decoration-none">Usuarios - Nuevo Usuario</a></h4> --}}
 
                 <div class="card mt-4">
                     
