@@ -352,21 +352,43 @@
 .nombre-jefe-footer-reverso {
     position: absolute;
     top: 100%;
-    left: 50%;
+    left: 81%;
     height: 30%;
     width: 45%;
     margin: -17% 0 0 -25%;
     font-size: 1rem;
     font-weight: 900;
-    text-transform: uppercase;
     text-align: center;
-    font-family: monospace !important;
+}
+
+.nombre-jefe-firma-footer-reverso {
+    position: absolute;
+    top: 80%;
+    left: 81%;
+    height: 30%;
+    width: 45%;
+    margin: -17% 0 0 -25%;
+    font-size: 1rem;
+    font-weight: 900;
+    text-align: center;
+}
+
+.nombre-area-footer-reverso {
+    position: absolute;
+    top: 103%;
+    left: 81%;
+    height: 30%;
+    width: 45%;
+    margin: -17% 0 0 -25%;
+    font-size: 1rem;
+    font-weight: 900;
+    text-align: center;
 }
 
 .qr-encima {
     position: absolute;
     top: 23px;
-    left: 74%;
+    left: 75%;
 }
 /*.centrado{
     position: absolute;
@@ -550,7 +572,8 @@ html {
         <img src="{{ asset('tarjetasQR/' . $tarjeta[0]->url . '.svg') }}"
             width="160"
             class="qr-encima"
-        >
+        > 
+        {{-- src="{{ asset('public/tarjetasQR/' . $tarjeta[0]->url . '.svg') }}" --}}
 
         @if (empty($tarjeta[0]->socio->asociacione_id))
             <p class="texto-encima-expedicion-reverso">N° AUTORIZACIÓN: {{ $tarjeta[0]->num_autorizacion }}</p>
@@ -564,7 +587,12 @@ html {
             EL TRANSPORTADOR DEBE DE PORTAR ESTE DOCUMENTO AL MOMENTO DE SER SOLICITADO POR LA AUTORIDAD COMPETENTE
         </p>
 
+        <p class="nombre-jefe-firma-footer-reverso">
+            <img src="{{ asset('disenios/' . $tarjeta[0]->disenio->firma) }}" alt="firma" style="width: 250px" height="150px">
+        </p>
+        <p class="nombre-jefe-footer-reverso" style="border-top: 1px solid black; width: 43%"></p>
         <p class="nombre-jefe-footer-reverso">{{ $tarjeta[0]->disenio->nombre_jefe }}</p>
+        <p class="nombre-area-footer-reverso">SUB GERENTE DE TRANSPORTE</p>
     </div>
 </body>
 </html>
