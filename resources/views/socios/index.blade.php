@@ -16,15 +16,15 @@
         <div>
             <span class="flex-1">Exportar:</span>
 
-            <a href="{{ route('todo.socio.excel') }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+            <a href="{{ route('todo.socio.pdf') }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
                 <span id="tooltipw" class="tooltiptext">Descarga Socios</span>
                 @include('icons.users')
             </a>
-            <a href="{{ route('todo.tarjeta.excel') }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+            <a href="{{ route('todo.tarjeta.pdf') }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
                 <span id="tooltipw" class="tooltiptext">Descarga Tarjetas Circulación</span>
                 @include('icons.tarjeta')
             </a>
-            <a href="{{ route('todo.fotocheck.excel') }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+            <a href="{{ route('todo.fotocheck.pdf') }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
                 <span id="tooltipw" class="tooltiptext">Descarga Fotochecks</span>
                 @include('icons.fotocheck')
             </a>

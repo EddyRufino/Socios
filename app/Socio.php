@@ -12,7 +12,7 @@ class Socio extends Model
 
     protected $guarded = [];
 
-    public $with = ['tarjetas', 'fotochecks'];
+    public $with = ['tarjetas', 'fotochecks', 'asociacione'];
 
     public function getRouteKeyName()
     {

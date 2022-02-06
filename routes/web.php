@@ -91,13 +91,22 @@ Route::middleware('can:admin')->group( function () {
 
     // Export Tarjetas que tiene cada asociación
     //Route::get('tarjetas-pdf/{id}', 'Export\ExportTarjetasController')->name('tarjeta.pdf');
+    // EXCEL
     Route::get('tarjetas-excel/{id}', 'Export\ExportTarjetasExcelController')->name('tarjeta.excel');
     Route::get('fotochecks-excel/{id}', 'Export\ExportFotochecksExcelController')->name('fotocheck.excel');
+    // PDF
+    Route::get('tarjetas-pdf/{id}', 'Export\Pdf\SociosPdfController@tarjetas')->name('tarjeta.pdf');
+    Route::get('fotochecks-pdf/{id}', 'Export\Pdf\SociosPdfController@fotochecks')->name('fotocheck.pdf');
 
     // Export Socios Oficiales EXCEL
     Route::get('/socios-todo-excel', 'Export\ExportTodosSociosExcelController')->name('todo.socio.excel');
     Route::get('/tarjetas-todo-excel', 'Export\ExportTodosTarjetasExcelController')->name('todo.tarjeta.excel');
     Route::get('/fotochecks-todo-excel', 'Export\ExportTodosFotochecksExcelController')->name('todo.fotocheck.excel');
+
+    // Export Socios Oficiales PDF
+    Route::get('/socios-todos-pdf', 'Export\Pdf\AllSociosPdfController@allSocios')->name('todo.socio.pdf');
+    Route::get('/tarjetas-todos-pdf', 'Export\Pdf\AllSociosPdfController@allTarjetas')->name('todo.tarjeta.pdf');
+    Route::get('/fotochecks-todos-pdf', 'Export\Pdf\AllSociosPdfController@allFotochecks')->name('todo.fotocheck.pdf');
 });
 
 Route::get('/socios-fotochecks/{fotocheck}', 'FotocheckController@show')->name('fotochecks.show');

@@ -18,20 +18,20 @@
                     <span id="tooltipw" class="tooltiptext">Descarga Socios</span>
                     @include('icons.pdf')
                 </a>
-                <a href="{{ route('socio.excel', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-success text-decoration-none tooltipw">
+                {{-- <a href="{{ route('socio.excel', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-success text-decoration-none tooltipw">
                     <span id="tooltipw" class="tooltiptext">Descarga Socios</span>
                     @include('icons.excel')
-                </a>
+                </a> --}}
             </span>
             <span class="ml-1 text-dark tooltipw" style='cursor: pointer;' onClick="muestra_oculta('contenido')">
                 <span id="tooltipw" class="tooltiptext">Ver más</span>
                 @include('icons.users')
             </span>
-            <a href="{{ route('tarjeta.excel', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+            <a href="{{ route('tarjeta.pdf', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
                 <span id="tooltipw" class="tooltiptext">Descarga Tarjetas Circulación</span>
                 @include('icons.tarjeta')
             </a>
-            <a href="{{ route('fotocheck.excel', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+            <a href="{{ route('fotocheck.pdf', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
                 <span id="tooltipw" class="tooltiptext">Descarga Fotochecks</span>
                 @include('icons.fotocheck')
             </a>
