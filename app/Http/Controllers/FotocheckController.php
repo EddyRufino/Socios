@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Asociacione;
-use App\Fotocheck;
-use App\Http\Requests\FotocheckRequest;
 use App\Socio;
-use App\TipoDocumento;
+use App\Disenio;
 use App\Vehiculo;
-use Illuminate\Http\Request;
+use App\Fotocheck;
+use App\Asociacione;
+use App\TipoDocumento;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Requests\FotocheckRequest;
+use Illuminate\Validation\ValidationException;
 
 class FotocheckController extends Controller
 {
@@ -37,6 +39,8 @@ class FotocheckController extends Controller
         $socioGet = Socio::where('url', 'LIKE', '%'. Str::slug($request->nombre_socio) .'%')
             ->doesnthave('fotochecks')
             ->first();
+
+        $disenio = Disenio::select('id')->where('status', 1)->where('modelo', 0)->whereNull('deleted_at')->first();
         //dd($socioGet);
         if (is_null($socioGet)) {
             //dd($socioGet);
@@ -51,12 +55,19 @@ class FotocheckController extends Controller
                 'tipo_documento_id' => $request->tipo_documento_id
             ]);
         }
+        
+        if (!isset($disenio->id)) {
+            throw ValidationException::withMessages([
+                'disenio' => "No hay diseño habilitado",
+            ]);
+        }
         //dd('paso');
         $data = array_merge($request->validated(), [
             'image' => '/storage/'.$request->file('image')->store('fotos'),
             'url' => is_null($socioGet) ? $socio->url : $socioGet->url,
             'socio_id' => is_null($socioGet) ? $socio->id : $socioGet->id,
-            'user_id' => auth()->user()->id
+            'user_id' => auth()->user()->id,
+            'disenio_id' => $disenio->id
         ]);
 
         $socio = Fotocheck::create($data);

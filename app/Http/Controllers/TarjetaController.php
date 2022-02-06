@@ -12,6 +12,7 @@ use App\TipoDocumento;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\TarjetaRequest;
+use Illuminate\Validation\ValidationException;
 
 class TarjetaController extends Controller
 {
@@ -73,6 +74,12 @@ class TarjetaController extends Controller
                 'tipo_documento_id' => $socioGet->tipo_documento_id
             ]);
 
+        }
+        
+        if (!isset($disenio->id)) {
+            throw ValidationException::withMessages([
+                'disenio' => "No hay diseño habilitado",
+            ]);
         }
 
         Tarjeta::create(array_merge(

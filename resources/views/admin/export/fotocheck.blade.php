@@ -119,7 +119,60 @@
     text-transform: uppercase;
     text-align: center;
     line-height: 30px;
-    font-family: monospace !important;
+}
+
+.nombre-jefe-revalidacion {
+    position: absolute;
+    top: 100%;
+    left: 28%;
+    height: 30%;
+    width: 95%;
+    margin: -17% 0 0 -25%;
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 30px;
+}
+
+.firma-jefe-revalidacion {
+    position: absolute;
+    top: 85%;
+    left: 28%;
+    height: 30%;
+    width: 95%;
+    margin: -17% 0 0 -25%;
+    text-align: center;
+    line-height: 30px;
+}
+
+.linea-firma-revalidacion {
+    position: absolute;
+    top: 100%;
+    left: 30%;
+    height: 30%;
+    width: 90%;
+    margin: -17% 0 0 -25%;
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 30px;
+    border-top: 2px solid black
+}
+
+.area-jefe-revalidacion {
+    position: absolute;
+    top: 102%;
+    left: 28%;
+    height: 30%;
+    width: 95%;
+    margin: -17% 0 0 -25%;
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 30px;
 }
 
 .qr-encima {
@@ -153,10 +206,19 @@ body{
 
 <body>
     <div class="contenedor">
-        <img src="{{ asset('img/anverso.jpg') }}"
+        {{-- <img src="{{ asset('img/anverso.jpg') }}"
             style="display: block; width: 100%; height: 793px;"
-        >
+        > --}}
 
+        @if (isset($fotocheck[0]->disenio->anverso))
+            <img src="{{ asset('disenios/' . $fotocheck[0]->disenio->anverso) }}"
+                style="display: block; width: 100%; height: 793px;"
+            >
+        @else
+            <img src="{{ asset('img/anverso.jpg') }}"
+                style="display: block; width: 100%; height: 793px;"
+            >
+        @endif
 
         <div class="foto-encima">
             <img src="{{ asset($fotocheck[0]->image) }}" style="width: 220px; height: 274.58px;">
@@ -175,17 +237,34 @@ body{
 
 
 
-        <img src="{{ asset('img/reverso.jpg') }}"
+        {{-- <img src="{{ asset('img/reverso.jpg') }}"
             style="display: block; width: 100%; height: 793px;"
-        >
+        > --}}
+        @if (isset($fotocheck[0]->disenio->reverso))
+            <img src="{{ asset('disenios/' . $fotocheck[0]->disenio->reverso) }}"
+                style="display: block; width: 100%; height: 793px;"
+            >
+        @else
+            <img src="{{ asset('img/reverso.jpg') }}"
+                style="display: block; width: 100%; height: 793px;"
+            >
+        @endif
         <img src="{{ asset('fotochecksQR/' . $fotocheck[0]->url . '.svg') }}"
             width="180"
             class="qr-encima"
         >
 
+
+
         <p class="texto-encima-expedicion">F.EXPEDICIÓN: {{ now()->format('d/m/Y') }}</p>
         {{-- date('d/m/Y', strtotime("+1 years")) --}}
         <p class="texto-encima-revalidacion">F.REVALIDACIÓN: {{ date('d/m/Y', strtotime($fotocheck[0]->revalidacion)) }}</p>
+        <p class="firma-jefe-revalidacion">
+            <img src="{{ asset('disenios/' . $fotocheck[0]->disenio->firma) }}" alt="firma" style="width: 300px" height="200px">
+        </p>
+        <p class="linea-firma-revalidacion"></p>
+        <p class="nombre-jefe-revalidacion">{{ $fotocheck[0]->disenio->nombre_jefe }}</p>
+        <p class="area-jefe-revalidacion">SUB GERENTE DE TRANSPORTE</p>
     </div>
 </body>
 </html>

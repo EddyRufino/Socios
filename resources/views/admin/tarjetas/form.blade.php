@@ -9,6 +9,15 @@
     </style>
 @endpush
 
+
+<div class="row">
+    <input type="hidden" name="disenio" class="@error('disenio') is-invalid @enderror">
+
+    @error('disenio')
+        <p style="color: red; display: block; margin-left: 20px; margin-bottom: 20px; background-color: navajowhite; padding: 5px; border-radius: 4px;">{{ $message }}</p>
+    @enderror
+</div>
+
 @if (request()->routeIs('tarjetas.create'))
     <div class="custom-control custom-checkbox mb-3">
         <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
