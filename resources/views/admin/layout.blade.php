@@ -43,11 +43,9 @@
             <li class="nav-item">
               <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
             </li>
-        {{-- @if (auth()->user()->hasRoles(['admin', 'cobrador', 'secretaria'])) --}}
-            {{-- <li class="nav-item d-none d-sm-inline-block">
-              <a href="{{ route('home') }}" class="nav-link">Buscar Conductor</a>
-            </li> --}}
-        {{-- @endif --}}
+            <li class="nav-item d-none d-sm-inline-block">
+              <a href="{{ route('socios.index') }}" class="nav-link">Municipalidad De Castilla</a>
+            </li>
           </ul>
 
         <!-- SEARCH FORM -->
@@ -66,25 +64,38 @@
         <ul class="navbar-nav ml-auto">
           <!-- Messages Dropdown Menu -->
           <li class="nav-item dropdown">
+            <li class="nav-item d-none d-sm-inline-block">
+              <a href="{{ route('socios.index') }}" class="nav-link">Hola, {{ auth()->user()->name }}</a>
+              
+            </li>
 
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <li class="nav-item d-none d-sm-inline-block">
+              <a class="nav-link" href="{{ route('logout') }}"
+              onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+               Cerrar Sesión
+              </a>
+            </li>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
 
 
+            {{-- <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    {{-- <img src="img/avatars/6.jpg" class="img-avatar"> --}}
-                    <span class="d-md-down-none">{{ auth()->user()->name }} </span>
+                    <img src="img/avatars/6.jpg" class="img-avatar">
+                    <span class="d-md-down-none">Hola, {{ auth()->user()->name }} </span>
                 </a>
+
                 <div class="dropdown-menu dropdown-menu-right">
-                    {{-- <div class="dropdown-header text-center">
+                    <div class="dropdown-header text-center">
                         <strong>{{ auth()->user()->roles->count() ?'  '.auth()->user()->roles->first()->display_name : '' }}</strong>
-                    </div> --}}
+                    </div>
                     <a class="dropdown-item" href="{{ route('profile.edit', auth()->user()->id) }}">
                       <i class="fa fa-user"></i> Perfil
                     </a>
-    {{--                 <a class="dropdown-item" href="{{ route('home') }}">
-                      <i class="fa fa-search"></i> Buscador
-                    </a> --}}
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
@@ -97,7 +108,7 @@
 
                 </div>
             </li>
-            </div>
+            </div> --}}
           </li>
         </ul>
       </nav>
@@ -133,9 +144,9 @@
       <!-- /.control-sidebar -->
 
       <!-- Main Footer -->
-      <footer class="main-footer">
+      {{-- <footer class="main-footer">
         <strong>Gerencia De Desarrollo Local <strong>-</strong> Administración Del Mercado</strong>
-      </footer>
+      </footer> --}}
     </div>
 <!-- ./wrapper -->
 </div>

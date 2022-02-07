@@ -77,7 +77,7 @@
                                         class="ml-3 text-decoration-none tooltipw"
                                         target="_blank"
                                     >
-                                        <span id="tooltipw" class="tooltiptext">Descargar Fotocheck</span>
+                                        <span id="tooltipw" class="tooltiptext">Imprimir Fotocheck</span>
                                         @include('icons.download')
                                     </a></h6>
 

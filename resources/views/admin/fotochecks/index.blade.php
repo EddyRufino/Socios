@@ -76,22 +76,27 @@
                                         @include('icons.qr')
                                     </a></h6>
                                     {{-- {{dd($fotocheck->fotochecks[0]->id)}} --}}
-                                    <h6><a href="{{ route('fotocheck.anverso', $fotocheck->id)}}"
-                                        class="ml-3 text-decoration-none tooltipw"
-                                        target="_blank"
-                                    >
-                                        <span id="tooltipw" class="tooltiptext">Descargar Fotocheck</span>
-                                        @include('icons.download')
-                                    </a></h6>
+                                    @canPrint
+                                        <h6><a href="{{ route('fotocheck.anverso', $fotocheck->id)}}"
+                                            class="ml-3 text-decoration-none tooltipw"
+                                            target="_blank"
+                                        >
+                                            <span id="tooltipw" class="tooltiptext">Imprimir Fotocheck</span>
+                                            @include('icons.download')
+                                        </a></h6>
+                                    @endcanPrint
 
-                                    <h6><a href="{{ route('fotochecks.edit', $fotocheck) }}"
-                                        class="ml-3 text-decoration-none tooltipw"
-                                    >
-                                        <span id="tooltipw" class="tooltiptext">Editar</span>
-                                        @include('icons.edit')
-                                    </a></h6>
+                                    @canUpdate
+                                        <h6><a href="{{ route('fotochecks.edit', $fotocheck) }}"
+                                            class="ml-3 text-decoration-none tooltipw"
+                                        >
+                                            <span id="tooltipw" class="tooltiptext">Editar</span>
+                                            @include('icons.edit')
+                                        </a></h6>
+                                    @endcanUpdate
 
-                                    @superAdmin
+                                    {{-- @superAdmin --}}
+                                    @canDelete
                                         <h6 class="tooltipw mb-2">
                                             <form action="{{ route('fotochecks.destroy', $fotocheck) }}" method="POST"
                                                 style="display: inline-block;"
@@ -104,7 +109,8 @@
                                                 <button class="p-0 ml-2 btn btn-transparent ">@include('icons.delete')</button>
                                             </form>
                                         </h6>
-                                    @endsuperAdmin
+                                    @endcanDelete
+                                    {{-- @endsuperAdmin --}}
                                 </div>
                             </td>
                         </tr>

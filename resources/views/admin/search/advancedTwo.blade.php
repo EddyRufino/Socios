@@ -12,29 +12,31 @@
         </h4>
 
         <div>
-            <span class="flex-1">Exportar:</span>
-            <span id="contenido">
-                <a href="{{ route('socio.pdf', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-danger text-decoration-none tooltipw" target="_blank">
-                    <span id="tooltipw" class="tooltiptext">Descarga Socios</span>
-                    @include('icons.pdf')
+            @canExport
+                <span class="flex-1">Exportar:</span>
+                <span id="contenido">
+                    <a href="{{ route('socio.pdf', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-danger text-decoration-none tooltipw" target="_blank">
+                        <span id="tooltipw" class="tooltiptext">Descarga Socios</span>
+                        @include('icons.pdf')
+                    </a>
+                    {{-- <a href="{{ route('socio.excel', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-success text-decoration-none tooltipw">
+                        <span id="tooltipw" class="tooltiptext">Descarga Socios</span>
+                        @include('icons.excel')
+                    </a> --}}
+                </span>
+                <span class="ml-1 text-dark tooltipw" style='cursor: pointer;' onClick="muestra_oculta('contenido')">
+                    <span id="tooltipw" class="tooltiptext">Ver más</span>
+                    @include('icons.users')
+                </span>
+                <a href="{{ route('tarjeta.pdf', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+                    <span id="tooltipw" class="tooltiptext">Descarga Tarjetas Circulación</span>
+                    @include('icons.tarjeta')
                 </a>
-                {{-- <a href="{{ route('socio.excel', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-success text-decoration-none tooltipw">
-                    <span id="tooltipw" class="tooltiptext">Descarga Socios</span>
-                    @include('icons.excel')
-                </a> --}}
-            </span>
-            <span class="ml-1 text-dark tooltipw" style='cursor: pointer;' onClick="muestra_oculta('contenido')">
-                <span id="tooltipw" class="tooltiptext">Ver más</span>
-                @include('icons.users')
-            </span>
-            <a href="{{ route('tarjeta.pdf', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
-                <span id="tooltipw" class="tooltiptext">Descarga Tarjetas Circulación</span>
-                @include('icons.tarjeta')
-            </a>
-            <a href="{{ route('fotocheck.pdf', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
-                <span id="tooltipw" class="tooltiptext">Descarga Fotochecks</span>
-                @include('icons.fotocheck')
-            </a>
+                <a href="{{ route('fotocheck.pdf', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+                    <span id="tooltipw" class="tooltiptext">Descarga Fotochecks</span>
+                    @include('icons.fotocheck')
+                </a>
+            @endcanExport
         </div>
     </div>
     {{-- Search Advanced --}}
@@ -110,7 +112,7 @@
                     <tr>
                         <th scope="col" class="bg-primary text-white">Nombres y Apellidos</th>
                         <th scope="col" class="bg-primary text-white">Propietario</th>
-                        <th scope="col" class="bg-primary text-white">ruc, dni, carnet</th>
+                        <th scope="col" class="bg-primary text-white">N. Doc</th>
                         <th scope="col" class="bg-primary text-white">Placa</th>
                         <th scope="col" class="bg-primary text-white">Vehículo</th>
                         <th scope="col" class="bg-primary text-white">Asociación</th>
@@ -159,25 +161,27 @@
                             <td>
                                 <div class="d-flex">
 
-                                    @if ($socio->tarjetas()->exists())
-                                        <h6><a href="{{ route('tarjeta.anverso', $socio->tarjetas[0]->id) }}"
-                                            class="ml-3 text-decoration-none tooltipw text-dark"
-                                            target="_blank"
-                                        >
-                                            <span id="tooltipw" class="tooltiptext">Descargar Tarjeta Circulación</span>
-                                            @include('icons.tarjeta')
-                                        </a></h6>
-                                    @endif
+                                    @canPrint
+                                        @if ($socio->tarjetas()->exists())
+                                            <h6><a href="{{ route('tarjeta.anverso', $socio->tarjetas[0]->id) }}"
+                                                class="ml-3 text-decoration-none tooltipw text-dark"
+                                                target="_blank"
+                                            >
+                                                <span id="tooltipw" class="tooltiptext">Imprimir Tarjeta Circulación</span>
+                                                @include('icons.tarjeta')
+                                            </a></h6>
+                                        @endif
 
-                                    @if ($socio->fotochecks()->exists())
-                                        <h6><a href="{{ route('fotocheck.anverso', $socio->fotochecks[0]->id) }}"
-                                            class="ml-3 text-decoration-none tooltipw text-info"
-                                            target="_blank"
-                                        >
-                                            <span id="tooltipw" class="tooltiptext">Descargar Fotocheck</span>
-                                            @include('icons.fotocheck')
-                                        </a></h6>
-                                    @endif
+                                        @if ($socio->fotochecks()->exists())
+                                            <h6><a href="{{ route('fotocheck.anverso', $socio->fotochecks[0]->id) }}"
+                                                class="ml-3 text-decoration-none tooltipw text-info"
+                                                target="_blank"
+                                            >
+                                                <span id="tooltipw" class="tooltiptext">Imprimir Fotocheck</span>
+                                                @include('icons.fotocheck')
+                                            </a></h6>
+                                        @endif
+                                    @endcanPrint
                                 </div>
                             </td>
                         </tr>

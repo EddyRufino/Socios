@@ -85,7 +85,7 @@
                                         class="ml-3 text-decoration-none tooltipw"
                                         target="_blank"
                                     >
-                                        <span id="tooltipw" class="tooltiptext">Descargar Tarjeta Circulación</span>
+                                        <span id="tooltipw" class="tooltiptext">Imprimir Tarjeta Circulación</span>
                                         @include('icons.download')
                                     </a></h6>
 

@@ -337,7 +337,7 @@
 
 .texto-encima-footer-reverso {
     position: absolute;
-    top: 100%;
+    top: 105%;
     left: 30%;
     height: 30%;
     width: 45%;

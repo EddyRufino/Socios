@@ -24,7 +24,7 @@
 
 .texto-encima-nombre {
     position: absolute;
-    top: 80%;
+    top: 74%;
     left: 50%;
     height: 30%;
     width: 95%;
@@ -38,7 +38,7 @@
 }
 .texto-encima-dni-tipo {
     position: absolute;
-    top: 89%;
+    top: 84%;
     left: 50%;
     height: 30%;
     width: 95%;
@@ -52,7 +52,7 @@
 }
 .texto-encima-dni {
     position: absolute;
-    top: 93%;
+    top: 88%;
     left: 50%;
     height: 30%;
     width: 95%;
@@ -66,7 +66,7 @@
 }
 .texto-encima-asociacion-text {
     position: absolute;
-    top: 100%;
+    top: 94%;
     left: 50%;
     height: 30%;
     width: 95%;
@@ -81,7 +81,7 @@
 
 .texto-encima-asociacion {
     position: absolute;
-    top: 105%;
+    top: 98%;
     left: 50%;
     height: 30%;
     width: 95%;
@@ -95,7 +95,7 @@
 }
 .texto-encima-expedicion {
     position: absolute;
-    top: 78%;
+    top: 72%;
     left: 28%;
     height: 30%;
     width: 95%;
@@ -109,7 +109,7 @@
 
 .texto-encima-revalidacion {
     position: absolute;
-    top: 84%;
+    top: 78%;
     left: 28%;
     height: 30%;
     width: 95%;

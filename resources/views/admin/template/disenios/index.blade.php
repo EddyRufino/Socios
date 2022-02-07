@@ -6,7 +6,7 @@
         <div class="col-md-10">
 
             <div class="d-flex mt-2 align-items-center justify-content-between">
-                <h2 class="mt-4 title-left pt-3 pb-3 font-weight-bold">Diseños</h2>
+                <h2 class="mt-4 title-left pt-3 pb-2 font-weight-bold">Diseños</h2>
             </div>
 
             <div class="d-flex justify-content-between align-items-center">

@@ -45,5 +45,21 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('adminTemplate', function() {
             return request()->user()->hasRoles(['admin']);
         });
+
+        Blade::if('canUpdate', function() {
+            return request()->user()->hasRoles(['admin', 'superadmin', 'editor']);
+        });
+
+        Blade::if('canDelete', function() {
+            return request()->user()->hasRoles(['superadmin']);
+        });
+
+        Blade::if('canPrint', function() {
+            return request()->user()->hasRoles(['admin', 'superadmin', 'imprimir']);
+        });
+
+        Blade::if('canExport', function() {
+            return request()->user()->hasRoles(['admin', 'superadmin', 'exportar']);
+        });
     }
 }

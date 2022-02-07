@@ -86,22 +86,27 @@
                                         <span id="tooltipw" class="tooltiptext">Ver QR</span>
                                         @include('icons.qr')
                                     </a></h6>
-                                    <h6><a href="{{ route('tarjeta.anverso', $tarjeta->id) }}"
-                                        class="ml-3 text-decoration-none tooltipw"
-                                        target="_blank"
-                                    >
-                                        <span id="tooltipw" class="tooltiptext">Descargar Carnet</span>
-                                        @include('icons.download')
-                                    </a></h6>
 
-                                    <h6><a href="{{ route('tarjetas.edit', $tarjeta) }}"
-                                        class="ml-3 text-decoration-none tooltipw"
-                                    >
-                                        <span id="tooltipw" class="tooltiptext">Editar</span>
-                                        @include('icons.edit')
-                                    </a></h6>
+                                    @canPrint
+                                        <h6><a href="{{ route('tarjeta.anverso', $tarjeta->id) }}"
+                                            class="ml-3 text-decoration-none tooltipw"
+                                            target="_blank"
+                                        >
+                                            <span id="tooltipw" class="tooltiptext">Imprimir Carnet</span>
+                                            @include('icons.download')
+                                        </a></h6>
+                                    @endcanPrint
 
-                                    @superAdmin
+                                    @canUpdate
+                                        <h6><a href="{{ route('tarjetas.edit', $tarjeta) }}"
+                                            class="ml-3 text-decoration-none tooltipw"
+                                        >
+                                            <span id="tooltipw" class="tooltiptext">Editar</span>
+                                            @include('icons.edit')
+                                        </a></h6>
+                                    @endcanUpdate
+
+                                    @canDelete
                                         <h6 class="tooltipw mb-2">
                                             <form action="{{ route('tarjetas.destroy', $tarjeta) }}" method="POST"
                                                 style="display: inline-block;"
@@ -114,7 +119,7 @@
                                                 <button class="p-0 ml-2 btn btn-transparent ">@include('icons.delete')</button>
                                             </form>
                                         </h6>
-                                    @endsuperAdmin
+                                    @endcanDelete
                                 </div>
                             </td>
                         </tr>

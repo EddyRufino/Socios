@@ -14,20 +14,22 @@
         </h4>
 
         <div>
-            <span class="flex-1">Exportar:</span>
+            @canExport
+                <span class="flex-1">Exportar:</span>
 
-            <a href="{{ route('todo.socio.pdf') }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
-                <span id="tooltipw" class="tooltiptext">Descarga Socios</span>
-                @include('icons.users')
-            </a>
-            <a href="{{ route('todo.tarjeta.pdf') }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
-                <span id="tooltipw" class="tooltiptext">Descarga Tarjetas Circulación</span>
-                @include('icons.tarjeta')
-            </a>
-            <a href="{{ route('todo.fotocheck.pdf') }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
-                <span id="tooltipw" class="tooltiptext">Descarga Fotochecks</span>
-                @include('icons.fotocheck')
-            </a>
+                <a href="{{ route('todo.socio.pdf') }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+                    <span id="tooltipw" class="tooltiptext">Descarga Socios</span>
+                    @include('icons.users')
+                </a>
+                <a href="{{ route('todo.tarjeta.pdf') }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+                    <span id="tooltipw" class="tooltiptext">Descarga Tarjetas Circulación</span>
+                    @include('icons.tarjeta')
+                </a>
+                <a href="{{ route('todo.fotocheck.pdf') }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+                    <span id="tooltipw" class="tooltiptext">Descarga Fotochecks</span>
+                    @include('icons.fotocheck')
+                </a>
+            @endcanExport
         </div>
 
     </div>
@@ -93,36 +95,37 @@
 
                             <td>
                                 <div class="d-flex">
+                                    @canPrint
+                                        @if ($socio->tarjetas()->exists())
+                                            <h6><a href="{{ route('tarjeta.anverso', $socio->tarjetas[0]->id) }}"
+                                                class="ml-3 text-decoration-none text-dark tooltipw"
+                                                target="_blank"
+                                            >
+                                                <span id="tooltipw" class="tooltiptext">Descargar Tarjeta Circulación</span>
+                                                @include('icons.tarjeta')
+                                            </a></h6>
+                                        @endif
 
-                                    @if ($socio->tarjetas()->exists())
-                                        <h6><a href="{{ route('tarjeta.anverso', $socio->tarjetas[0]->id) }}"
-                                            class="ml-3 text-decoration-none text-dark tooltipw"
-                                            target="_blank"
-                                        >
-                                            <span id="tooltipw" class="tooltiptext">Descargar Tarjeta Circulación</span>
-                                            @include('icons.tarjeta')
-                                        </a></h6>
-                                    @endif
+                                        @if ($socio->fotochecks()->exists())
+                                            <h6><a href="{{ route('fotocheck.anverso', $socio->fotochecks[0]->id) }}"
+                                                class="ml-3 text-decoration-none text-info tooltipw"
+                                                target="_blank"
+                                            >
+                                                <span id="tooltipw" class="tooltiptext">Descargar Fotocheck</span>
+                                                @include('icons.fotocheck')
+                                            </a></h6>
+                                        @endif
+                                    @endcanPrint
 
-                                    @if ($socio->fotochecks()->exists())
-                                        <h6><a href="{{ route('fotocheck.anverso', $socio->fotochecks[0]->id) }}"
-                                            class="ml-3 text-decoration-none text-info tooltipw"
-                                            target="_blank"
-                                        >
-                                            <span id="tooltipw" class="tooltiptext">Descargar Fotocheck</span>
-                                            @include('icons.fotocheck')
-                                        </a></h6>
-                                    @endif
-
-                                    <h6><a href="{{ route('socios.edit', $socio) }}"
+                                    {{-- <h6><a href="{{ route('socios.edit', $socio) }}"
                                         class="ml-3 text-decoration-none text-primary tooltipw"
                                     >
                                         <span id="tooltipw" class="tooltiptext">Editar Socio</span>
                                         @include('icons.edit')
-                                    </a></h6>
+                                    </a></h6> --}}
 
 
-                                    @superAdmin
+                                    @canDelete
                                         <h6 class="tooltipw mb-2">
                                             <form action="{{ route('socios.destroy', $socio) }}" method="POST"
                                                 style="display: inline-block;"
@@ -135,7 +138,7 @@
                                                 <button class="p-0 ml-2 btn btn-transparent">@include('icons.delete')</button>
                                             </form>
                                         </h6>
-                                    @endsuperAdmin
+                                    @endcanDelete
 
                                 </div>
                             </td>

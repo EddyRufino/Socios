@@ -66,28 +66,29 @@
 
                             <td>
                                 <div class="d-flex">
+                                    @canPrint
+                                        @if ($socio->tarjetas()->exists())
+                                            <h6><a href="{{ route('tarjeta.anverso', $socio->tarjetas[0]->id) }}"
+                                                class="ml-3 text-decoration-none tooltipw"
+                                                target="_blank"
+                                            >
+                                                <span id="tooltipw" class="tooltiptext">Descargar Tarjeta Circulación</span>
+                                                @include('icons.tarjeta')
+                                            </a></h6>
+                                        @endif
 
-                                    @if ($socio->tarjetas()->exists())
-                                        <h6><a href="{{ route('tarjeta.anverso', $socio->tarjetas[0]->id) }}"
-                                            class="ml-3 text-decoration-none tooltipw"
-                                            target="_blank"
-                                        >
-                                            <span id="tooltipw" class="tooltiptext">Descargar Tarjeta Circulación</span>
-                                            @include('icons.tarjeta')
-                                        </a></h6>
-                                    @endif
+                                        @if ($socio->fotochecks()->exists())
+                                            <h6><a href="{{ route('fotocheck.anverso', $socio->fotochecks[0]->id) }}"
+                                                class="ml-3 text-decoration-none tooltipw"
+                                                target="_blank"
+                                            >
+                                                <span id="tooltipw" class="tooltiptext">Descargar Fotocheck</span>
+                                                @include('icons.fotocheck')
+                                            </a></h6>
+                                        @endif
+                                    @endcanPrint
 
-                                    @if ($socio->fotochecks()->exists())
-                                        <h6><a href="{{ route('fotocheck.anverso', $socio->fotochecks[0]->id) }}"
-                                            class="ml-3 text-decoration-none tooltipw"
-                                            target="_blank"
-                                        >
-                                            <span id="tooltipw" class="tooltiptext">Descargar Fotocheck</span>
-                                            @include('icons.fotocheck')
-                                        </a></h6>
-                                    @endif
-
-                                    @superAdmin
+                                    @canDelete
                                         <h6 class="tooltipw mb-2">
                                             <form action="{{ route('socios.destroy', $socio) }}" method="POST"
                                                 style="display: inline-block;"
@@ -100,7 +101,7 @@
                                                 <button class="p-0 ml-2 btn btn-transparent">@include('icons.delete')</button>
                                             </form>
                                         </h6>
-                                    @endsuperAdmin
+                                    @endcanDelete
                                 </div>
                             </td>
                         </tr>
