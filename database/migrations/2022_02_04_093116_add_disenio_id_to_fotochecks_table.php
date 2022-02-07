@@ -14,7 +14,7 @@ class AddDisenioIdToFotochecksTable extends Migration
     public function up()
     {
         Schema::table('fotochecks', function (Blueprint $table) {
-            $table->foreignId('disenio_id')->constrained('disenios')->onDelete('cascade')->nullable();
+            // $table->foreignId('disenio_id')->constrained('disenios')->onDelete('cascade')->nullable();
         });
     }
 

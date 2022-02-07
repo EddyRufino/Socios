@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDiseniosTable extends Migration
+class CreateAreasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreateDiseniosTable extends Migration
      */
     public function up()
     {
-        Schema::create('disenios', function (Blueprint $table) {
+        Schema::create('areas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('anverso');
-            $table->string('reverso');
+            $table->string('nombre')->nullable();
+            $table->string('title')->nullable();
+            $table->string('sub_title')->nullable();
             $table->string('status')->nullable();
-            $table->string('modelo')->nullable();
-            $table->string('nombre_jefe')->nullable();
-            $table->string('firma')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -34,6 +30,6 @@ class CreateDiseniosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('disenios');
+        Schema::dropIfExists('areas');
     }
 }

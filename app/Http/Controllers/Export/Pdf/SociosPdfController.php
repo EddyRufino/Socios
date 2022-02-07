@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Export\Pdf;
 
+use App\Area;
 use App\Socio;
 use App\Tarjeta;
 use App\Fotocheck;
@@ -46,7 +47,9 @@ class SociosPdfController extends Controller
             $nameAsociacion = Socio::where('asociacione_id', $id)->first();
         }
 
-        $pdf = PDF::loadView('admin.export.pdf.tarjeta-circulacion', compact('attributes', 'nameAsociacion'));
+        $area = Area::first();
+
+        $pdf = PDF::loadView('admin.export.pdf.tarjeta-circulacion', compact('attributes', 'nameAsociacion', 'area'));
 
         $pdf->setPaper('a4', 'landscape');
 
@@ -89,7 +92,9 @@ class SociosPdfController extends Controller
             $nameAsociacion = Socio::where('asociacione_id', $id)->first();
         }
 
-        $pdf = PDF::loadView('admin.export.pdf.fotochecks', compact('attributes', 'nameAsociacion'));
+        $area = Area::first();
+
+        $pdf = PDF::loadView('admin.export.pdf.fotochecks', compact('attributes', 'nameAsociacion', 'area'));
 
         $pdf->setPaper('a4', 'landscape');
 

@@ -91,23 +91,23 @@
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-university"></i>
                         <p>
-                            Puestos
+                            Nombre Area
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('areas.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Listar Puestos</p>
+                                <p>Listar Area</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Crear Puesto</p>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                 {{-- @endif --}}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Export\Pdf;
 
+use App\Area;
 use App\Socio;
 use App\Tarjeta;
 use App\Fotocheck;
@@ -14,8 +15,10 @@ class AllSociosPdfController extends Controller
     public function allSocios()
     {
         $socios = Socio::whereNull('deleted_at')->get();
+
+        $area = Area::first();
         
-        $pdf = PDF::loadView('admin.export.pdf.allSocios', compact('socios'));
+        $pdf = PDF::loadView('admin.export.pdf.allSocios', compact('socios', 'area'));
 
         return $pdf->stream();
     }
@@ -24,7 +27,9 @@ class AllSociosPdfController extends Controller
     {
         $tarjetas = Tarjeta::whereNull('deleted_at')->get();
 
-        $pdf = PDF::loadView('admin.export.pdf.allTarjetas', compact('tarjetas'));
+        $area = Area::first();
+
+        $pdf = PDF::loadView('admin.export.pdf.allTarjetas', compact('tarjetas', 'area'));
 
         $pdf->setPaper('a4', 'landscape');
 
@@ -35,7 +40,9 @@ class AllSociosPdfController extends Controller
     {
         $fotochecks = Fotocheck::whereNull('deleted_at')->get();
 
-        $pdf = PDF::loadView('admin.export.pdf.allFotochecks', compact('fotochecks'));
+        $area = Area::first();
+
+        $pdf = PDF::loadView('admin.export.pdf.allFotochecks', compact('fotochecks', 'area'));
 
         $pdf->setPaper('a4', 'landscape');
 

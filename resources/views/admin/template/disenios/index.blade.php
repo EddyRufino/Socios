@@ -9,27 +9,16 @@
                 <h2 class="mt-4 title-left pt-3 pb-3 font-weight-bold">Diseños</h2>
             </div>
 
-            <div class="d-flex mt-2 align-items-center justify-content-between mb-4">
-                <div class="input-group input-group-md">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center">
 
-                    <input class="form-control col-md-4 form-control-navbar"
-                        name="search" type="search"
-                        placeholder="Socio - DNI - Placa"
-                        aria-label="Search"
-                        value="{{ request()->search }}"
-                        required
-                    >
+                    <h6><a href="{{ route('disenios.create') }}" class="text-dark ml-3 tooltipw">
+                        <span id="tooltipw" class="tooltiptext">Nuevo Diseño</span>
+                        @include('icons.add')
+                    </a></h6>
 
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar bg-primary text-white" type="submit">
-                            @include('icons.icon-search')
-                        </button>
-                    </div>
                 </div>
-
-                <div class="">
-                    <a class="btn btn-primary" href="{{ route('disenios.create') }}">Nuevo</a>
-                </div>
+        
             </div>
 
             @if (auth()->user()->hasRoles(['admin']))

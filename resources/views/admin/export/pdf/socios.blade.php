@@ -21,7 +21,7 @@
         .header-title {
             display: inline-block;
             margin-left: 7rem;
-            margin-top: -25;
+            margin-top: -20;
         }
         .font-color {
             color: #1F2937;
@@ -52,7 +52,9 @@
         <div class="header">
             <img src="{{ asset('img/logo.png') }}" alt="Minucipalidad De Castilla" class="circle">
             <span class="text-center header-title font-color">
-                <strong >MUNICIPALIDAD DISTRITAL DE CASTILLA <br> SUB GERENCIA DE TRANSPORTES
+                <strong >MUNICIPALIDAD DISTRITAL DE CASTILLA
+                    <br> {{ $area->title }}
+                    <br> {{ $area->sub_title }}
                 </strong>
             </span>
         </div>
