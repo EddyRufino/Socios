@@ -43,7 +43,7 @@ class AreaController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|min:6|max:26',
-            'sub_title' => 'required|min:6|max:26',
+            'sub_title' => 'max:26',
         ]);
 
         $area->update($request->all());

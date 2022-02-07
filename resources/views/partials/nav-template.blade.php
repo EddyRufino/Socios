@@ -112,58 +112,6 @@
                 </li>
                 {{-- @endif --}}
 
-                {{-- @if (auth()->user()->hasRoles(['admin', 'secretaria', 'banio'])) --}}
-                <li class="nav-item has-treeview ">
-                    <a href="#" class="nav-link ">
-                        <i class="nav-icon fas fa-restroom"></i>
-                        <p>
-                          Baños
-                          <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Nuevo Ticket</p>
-                              </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tickets Del Día</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                {{-- @endif --}}
-
-                {{-- @if (auth()->user()->hasRoles(['admin', 'secretaria'])) --}}
-                <li class="nav-item has-treeview ">
-                    <a href="#" class="nav-link ">
-                        <i class="nav-icon fas fa-gift"></i>
-                        <p>
-                            Promociones
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Lista Promociones</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Nueva Promoción</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                {{-- @endif --}}
-
                 {{-- @if (auth()->user()->hasRoles(['admin', 'secretaria'])) --}}
                 <li class="nav-item has-treeview ">
                     <a href="#" class="nav-link ">
@@ -207,21 +155,21 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('socios.delete') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Reporte Sisa</p>
+                                <p>Socios Eliminados</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('tarjetas.delete') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Reporte Baños</p>
+                                <p>Tarjetas Eliminadas</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('fotochecks.delete') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Reporte Promociones</p>
+                                <p>Fotochecks Eliminados</p>
                             </a>
                         </li>
                     </ul>

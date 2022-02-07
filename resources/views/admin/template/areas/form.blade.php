@@ -7,7 +7,7 @@
                 class="form-control @error('title') is-invalid  @enderror"
                 value="{{ old('title', $area->title) }}"
                 id="inputEmail4"
-                placeholder="Ejm: Diseño Uno"
+                placeholder="Ejm: SUB GERENCIA DE TRANSPORTE"
                 required
             >
 
@@ -21,14 +21,13 @@
 
     <div class="col-md-6">
         <div class="form-group">
-            <label for="nombre">Sub Título *</label>
+            <label for="nombre">Sub Título</label>
             <input type="text"
                 name="sub_title"
                 class="form-control @error('sub_title') is-invalid  @enderror"
                 value="{{ old('sub_title', $area->sub_title) }}"
                 id="inputEmail4"
-                placeholder="Ejm: Diseño Uno"
-                required
+                placeholder="Ejm: SOY UN SUB TITULO"
             >
 
             @error('sub_title')

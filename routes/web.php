@@ -121,6 +121,14 @@ Route::resource('admin/disenios', 'DisenioController');
 
 Route::resource('admin/areas', 'AreaController')->only(['index', 'edit', 'update']);
 
+Route::get('admin/socios-delete', 'Export\Pdf\SociosDeletePdfController@sociosIndex')->name('socios.delete');
+Route::get('admin/tarjetas-delete', 'Export\Pdf\SociosDeletePdfController@tarjetasIndex')->name('tarjetas.delete');
+Route::get('admin/fotochecks-delete', 'Export\Pdf\SociosDeletePdfController@fotochecksIndex')->name('fotochecks.delete');
+
+Route::get('admin/socios-delete-pdf', 'Export\Pdf\SociosDeletePdfController@socios')->name('socios.delete.pdf');
+Route::get('admin/tarjetas-delete-pdf', 'Export\Pdf\SociosDeletePdfController@tarjetas')->name('tarjetas.delete.pdf');
+Route::get('admin/fotochecks-delete-pdf', 'Export\Pdf\SociosDeletePdfController@fotochecks')->name('fotochecks.delete.pdf');
+
 Auth::routes(["register" => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
