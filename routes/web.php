@@ -113,7 +113,7 @@ Route::get('/socios-fotochecks/{fotocheck}', 'FotocheckController@show')->name('
 
 
 // Template
-Route::view('/admin', 'admin.layout')->name('admin.template');
+// Route::view('/admin', 'admin.dashboard')->name('admin.template');
 
 Route::resource('admin/users', 'UserController');
 
@@ -128,6 +128,9 @@ Route::get('admin/fotochecks-delete', 'Export\Pdf\SociosDeletePdfController@foto
 Route::get('admin/socios-delete-pdf', 'Export\Pdf\SociosDeletePdfController@socios')->name('socios.delete.pdf');
 Route::get('admin/tarjetas-delete-pdf', 'Export\Pdf\SociosDeletePdfController@tarjetas')->name('tarjetas.delete.pdf');
 Route::get('admin/fotochecks-delete-pdf', 'Export\Pdf\SociosDeletePdfController@fotochecks')->name('fotochecks.delete.pdf');
+
+// Charts
+Route::get('/admin', 'Dashboard\dashboardController@index')->name('admin.template');
 
 Auth::routes(["register" => false]);
 
