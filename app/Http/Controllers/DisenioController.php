@@ -29,6 +29,12 @@ class DisenioController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'anverso' => 'required|mimes:jpeg,jpg,png',
+            'reverso' => 'required|mimes:jpeg,jpg,png',
+            'firma' => 'required|mimes:jpeg,jpg,png',
+        ]);
+        
     	$anverso = $request->file('anverso');
         $reverso = $request->file('reverso');
         $firma = $request->file('firma');
@@ -69,6 +75,12 @@ class DisenioController extends Controller
 
     public function update(Request $request, Disenio $disenio)
     {
+        $this->validate($request, [
+            'anverso' => 'required|mimes:jpeg,jpg,png',
+            'reverso' => 'required|mimes:jpeg,jpg,png',
+            'firma' => 'required|mimes:jpeg,jpg,png',
+        ]);
+        
         $anverso = $request->file('anverso');
         $reverso = $request->file('reverso');
         $firma = $request->file('firma');
