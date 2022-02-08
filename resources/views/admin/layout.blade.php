@@ -32,6 +32,7 @@
 <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body class="hold-transition sidebar-mini">
+  @if (auth()->user()->hasRoles(['superadmin']))
   <div id="app">
 
     <div class="wrapper">
@@ -127,7 +128,11 @@
           @include('partials.session')
         </div>
 
-          @yield('content')
+        
+        @yield('content')
+            
+        
+
 
         <!-- /.content -->
       </div>
@@ -149,7 +154,8 @@
       </footer> --}}
     </div>
 <!-- ./wrapper -->
-</div>
+  </div>
+  @endif
 <!-- REQUIRED SCRIPTS -->
 @stack('scripts')
 <!-- jQuery -->

@@ -75,8 +75,9 @@
                                         <span id="tooltipw" class="tooltiptext">Ver QR</span>
                                         @include('icons.qr')
                                     </a></h6>
-                                    {{-- {{dd($fotocheck->fotochecks[0]->id)}} --}}
+                                    
                                     @canPrint
+                                        
                                         <h6><a href="{{ route('fotocheck.anverso', $fotocheck->id)}}"
                                             class="ml-3 text-decoration-none tooltipw"
                                             target="_blank"
@@ -84,6 +85,7 @@
                                             <span id="tooltipw" class="tooltiptext">Imprimir Fotocheck</span>
                                             @include('icons.download')
                                         </a></h6>
+                                        
                                     @endcanPrint
 
                                     @canUpdate

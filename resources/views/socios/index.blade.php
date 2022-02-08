@@ -95,8 +95,19 @@
 
                             <td>
                                 <div class="d-flex">
+
+                                    @if ($socio->tarjetas()->exists())
+                                        <h6><a href="{{ route('tarjetas.show', $socio->url) }}"
+                                            class="text-decoration-none tooltipw text-dark"
+                                            target="_blank"
+                                        >
+                                            <span id="tooltipw" class="tooltiptext">Ver QR Tarjeta</span>
+                                            @include('icons.qr-left')
+                                        </a></h6>
+                                    @endif
+
                                     @canPrint
-                                        @if ($socio->tarjetas()->exists())
+                                        @if ($socio->tarjetas()->exists() && optional($socio->tarjetas[0])->status == 0)
                                             <h6><a href="{{ route('tarjeta.anverso', $socio->tarjetas[0]->id) }}"
                                                 class="ml-3 text-decoration-none text-dark tooltipw"
                                                 target="_blank"
@@ -106,7 +117,7 @@
                                             </a></h6>
                                         @endif
 
-                                        @if ($socio->fotochecks()->exists())
+                                        @if ($socio->fotochecks()->exists() && $socio->fotochecks[0]->status == 0)
                                             <h6><a href="{{ route('fotocheck.anverso', $socio->fotochecks[0]->id) }}"
                                                 class="ml-3 text-decoration-none text-info tooltipw"
                                                 target="_blank"
@@ -116,6 +127,16 @@
                                             </a></h6>
                                         @endif
                                     @endcanPrint
+
+                                    @if ($socio->fotochecks()->exists())
+                                        <h6><a href="{{ route('fotochecks.show', $socio->url) }}"
+                                            class="ml-3 text-decoration-none tooltipw text-dark"
+                                            target="_blank"
+                                        >
+                                            <span id="tooltipw" class="tooltiptext">Ver QR Fotocheck</span>
+                                            @include('icons.qr-right')
+                                        </a></h6> 
+                                    @endif
 
                                     {{-- <h6><a href="{{ route('socios.edit', $socio) }}"
                                         class="ml-3 text-decoration-none text-primary tooltipw"

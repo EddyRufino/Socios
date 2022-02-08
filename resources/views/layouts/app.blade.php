@@ -65,9 +65,11 @@
                                     <a class="dropdown-item" href="{{ route('correlativos.index') }}">
                                         Correlativo
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('admin.template') }}">
-                                        Panel
-                                    </a>
+                                    @if (auth()->user()->name == 'Admin Informática')
+                                        <a class="dropdown-item" href="{{ route('admin.template') }}">
+                                            Panel
+                                        </a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('asociaciones.index') }}">
                                         Transportadores
                                     </a>

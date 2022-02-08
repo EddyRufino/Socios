@@ -103,15 +103,29 @@
                                     @include('icons.qr')
                                 </a>
 
-                                <a href="{{ route('tarjeta.anverso', $tarjeta->id) }}"
-                                    class="ml-3 text-decoration-none"
-                                    data-toggle="tooltip"
-                                    data-placement="top"
-                                    title="Descarga Tarjeta Circulación"
-                                    target="_blank"
-                                >
-                                    @include('icons.download')
-                                </a>
+                                @if ($tarjeta->status == 0)
+                                    <a href="{{ route('tarjeta.anverso', $tarjeta->id) }}"
+                                        class="ml-3 text-decoration-none"
+                                        data-toggle="tooltip"
+                                        data-placement="top"
+                                        title="Imprimir Tarjeta Circulación"
+                                        target="_blank"
+                                    >
+                                        @include('icons.download')
+                                    </a>
+                                @endif
+
+                                @if ($tarjeta->status == 1 && auth()->user()->name == 'Admin Informática')
+                                    <a href="{{ route('tarjeta.anverso', $tarjeta->id) }}"
+                                        class="ml-3 text-decoration-none"
+                                        data-toggle="tooltip"
+                                        data-placement="top"
+                                        title="Imprimir Tarjeta Circulación"
+                                        target="_blank"
+                                    >
+                                        @include('icons.download')
+                                    </a>
+                                @endif
 
                                 @if (auth()->user()->name != 'Admin')
                                     <a href="{{ route('tarjetas.edit', $tarjeta) }}"
