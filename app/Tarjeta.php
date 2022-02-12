@@ -12,7 +12,7 @@ class Tarjeta extends Model
 
     protected $guarded = [];
 
-    public $with = ['vehiculo'];
+    // public $with = ['vehiculo', 'socio'];
 
     public function getRouteKeyName()
     {
@@ -23,22 +23,6 @@ class Tarjeta extends Model
     {
         $this->attributes['num_placa'] = strtoupper($value);
     }
-
-    //public function setNombreSocioAttribute($nombre_socio) {
-
-        //$this->attributes['nombre_socio'] = $nombre_socio;
-
-        //$url = Str::of($nombre_socio)->slug('-');
-
-        //if (static::whereUrl($url)->exists()) {
-
-            //$this->attributes['url'] = Str::of($nombre_socio .'-'. now()->format('d'))->slug('-');
-
-        //} else {
-
-            //$this->attributes['url'] = Str::of($nombre_socio)->slug('-');
-        //}
-    //}
 
     public function vehiculo()
     {

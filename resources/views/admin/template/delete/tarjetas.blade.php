@@ -21,7 +21,7 @@
         
             </div>
 
-            @if (auth()->user()->hasRoles(['admin']))
+            @if (auth()->user()->hasRoles(['superadmin']))
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-12 table-responsive">
                         <table class="table table-striped">
@@ -41,25 +41,25 @@
                             <tbody>
                                 @foreach ($tarjetas as $tarjeta)
                                     <tr>
-                                        <td>{{ $tarjeta->socio->nombre_socio }}</td>
+                                        <td>{{ optional($tarjeta->socio)->nombre_socio }}</td>
                     
-                                        <td>{{ $tarjeta->socio->dni_socio }}</td>
+                                        <td>{{ optional($tarjeta->socio)->dni_socio }}</td>
                                         <td>{{ $tarjeta->num_placa ? $tarjeta->num_placa : '-' }}</td>
                     
                                         @if ($tarjeta->vehiculo_id == 1)
-                                            <td class="text-info">{{ $tarjeta->vehiculo->nombre }}</td>
+                                            <td class="text-info">{{ optional($tarjeta->vehiculo)->nombre }}</td>
                                         @elseif($tarjeta->vehiculo_id === 2)
-                                            <td class="text-primary">{{ $tarjeta->vehiculo->nombre }}</td>
+                                            <td class="text-primary">{{ optional($tarjeta->vehiculo)->nombre }}</td>
                                         @else
-                                            <td class="text-secondary">{{ $tarjeta->vehiculo->nombre }}</td>
+                                            <td class="text-secondary">{{ optional($tarjeta->vehiculo)->nombre }}</td>
                                         @endif
                     
-                                        @if (empty($tarjeta->socio->asociacione_id)  && $tarjeta->socio->tipo_documento_id == 3)
+                                        @if (empty(optional($tarjeta->socio)->asociacione_id)  && optional($tarjeta->socio)->tipo_documento_id == 3)
                                             <td class="text-secondary">Entidad Privada</td>
-                                        @elseif (empty($tarjeta->socio->asociacione_id))
+                                        @elseif (empty(optional($tarjeta->socio)->asociacione_id))
                                             <td class="text-secondary">Persona Natural</td>
                                         @else
-                                            <td>{{ optional($tarjeta->socio->asociacione)->nombre }}</td>
+                                            <td>{{ optional(optional($tarjeta->socio)->asociacione)->nombre }}</td>
                                         @endif
                     
                                         <td>{{ $tarjeta->num_operacion }}</td>

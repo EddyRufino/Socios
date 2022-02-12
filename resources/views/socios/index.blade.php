@@ -85,9 +85,10 @@
                                 <td>{{ optional($socio->asociacione)->nombre }}</td>
                             @endif
 
+                            {{-- {{ dd($socio->vehiculo) }} --}}
                             @if ($socio->vehiculo_id == 1)
                                 <td class="text-info">{{ $socio->vehiculo->nombre }}</td>
-                            @elseif($socio->vehiculo_id === 2)
+                            @elseif($socio->vehiculo_id == 2)
                                 <td class="text-primary">{{ $socio->vehiculo->nombre }}</td>
                             @else
                                 <td class="text-secondary">{{ $socio->vehiculo->nombre }}</td>
@@ -137,14 +138,6 @@
                                             @include('icons.qr-right')
                                         </a></h6> 
                                     @endif
-
-                                    {{-- <h6><a href="{{ route('socios.edit', $socio) }}"
-                                        class="ml-3 text-decoration-none text-primary tooltipw"
-                                    >
-                                        <span id="tooltipw" class="tooltiptext">Editar Socio</span>
-                                        @include('icons.edit')
-                                    </a></h6> --}}
-
 
                                     @canDelete
                                         <h6 class="tooltipw mb-2">

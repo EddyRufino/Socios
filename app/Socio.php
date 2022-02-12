@@ -12,7 +12,8 @@ class Socio extends Model
 
     protected $guarded = [];
 
-    public $with = ['tarjetas', 'fotochecks', 'asociacione'];
+    // public $with = ['tarjetas', 'fotochecks', 'asociacione'];
+    // public $with = [];
 
     public function getRouteKeyName()
     {
@@ -44,29 +45,6 @@ class Socio extends Model
             $this->attributes['url'] = Str::of($nombre_socio)->slug('-');
         }
     }
-
-    //public static function create(array $attributes = []) {
-
-        //$socio = static::query()->create($attributes);
-
-        //$url = \Str::slug($attributes['nombre_socio']);
-
-        //if (static::whereUrl($url)->exists()) {
-
-            //$socio->url = \Str::slug($attributes['nombre_socio']) . "-{$socio->id}";
-        //} else {
-
-            //$socio->url = \Str::slug($attributes['nombre_socio']);
-        //}
-
-        //if (!empty($attributes['image'])) {
-            //$socio->image = '/storage/'.request()->file('image')->store('fotos', 'public');
-        //}
-
-        //$socio->save();
-
-        //return $socio;
-    //}
 
     public function asociacione()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Search;
 
+use App\Area;
 use App\Asociacione;
 use App\Fotocheck;
 use App\Http\Controllers\Controller;
@@ -192,8 +193,9 @@ class SearchAdvanceController extends Controller
         //dd($fotochecksCountNatural);
         //dd($attributes[0]->fotochecks->count());
         //dd($fotochecksCountNatural);
+        $area = Area::first();
 
-    return view('admin.search.advancedTwo', compact('vehiculos', 'asociaciones', 'attributes', 'tarjetasCount', 'fotochecksCount', 'tarjetasCountNatural', 'fotochecksCountNatural', 'tarjetasCountJuridica', 'fotochecksCountJuridica'));
+    return view('admin.search.advancedTwo', compact('vehiculos', 'asociaciones', 'attributes', 'tarjetasCount', 'fotochecksCount', 'tarjetasCountNatural', 'fotochecksCountNatural', 'tarjetasCountJuridica', 'fotochecksCountJuridica', 'area'));
     }
 
     public function advancedTree()

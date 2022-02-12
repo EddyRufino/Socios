@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Export;
 
+use App\Area;
 use App\Socio;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -91,7 +92,9 @@ class ExportSocioController extends Controller
             ->whereNull('deleted_at')
             ->get();
 
-        $pdf = PDF::loadView('admin.export.pdf.socios', compact('attributes', 'tarjetasCount', 'fotochecksCount', 'tarjetasCountNatural', 'fotochecksCountNatural', 'nameAsociacion', 'tarjetasCountJuridica', 'fotochecksCountJuridica'));
+        $area = Area::first();
+
+        $pdf = PDF::loadView('admin.export.pdf.socios', compact('attributes', 'tarjetasCount', 'fotochecksCount', 'tarjetasCountNatural', 'fotochecksCountNatural', 'nameAsociacion', 'tarjetasCountJuridica', 'fotochecksCountJuridica', 'area'));
 
         return $pdf->stream();
     }

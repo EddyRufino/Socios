@@ -12,6 +12,8 @@ class Fotocheck extends Model
 
     protected $guarded = [];
 
+    public $with = ['vehiculo', 'socio'];
+
     public function getRouteKeyName()
     {
       return 'url';

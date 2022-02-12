@@ -56,7 +56,7 @@
             </li>
         </div>
 
-        @admin
+        @canPrint
             <div class="d-flex justify-content-center align-items-center mb-3">
                 <div class="form-check">
                     <form  method="POST" action="{{ route('check.tarjeta', $socio) }}">
@@ -92,7 +92,7 @@
                     </form>
                 </div>
             </div>
-        @endadmin
+        @endcanPrint
 
         <div class="d-flex justify-content-center flex-column align-items-center">
             <ul class="list-group col-md-3">

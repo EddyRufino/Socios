@@ -6,6 +6,7 @@ use App\Asociacione;
 use App\Fotocheck;
 use App\Http\Requests\SocioRquest;
 use App\Socio;
+use App\User;
 use App\Tarjeta;
 use App\Vehiculo;
 use Illuminate\Http\Request;
@@ -15,9 +16,27 @@ class SocioController extends Controller
 {
     public function index()
     {
-        $socios = Socio::where('status', 0)->latest()->paginate();
+        // $socios = Socio::where('status', 0)->first();
+        // $socioss = Socio::get('id');
+        $socios = Socio::where('status', 0)
+            ->with([
+                'tarjetas' => function($query) {
+                    $query->select('id', 'socio_id');
+                },
+                'fotochecks' => function($query) {
+                    $query->select('id', 'socio_id');
+                },
+                'asociacione' => function($query) {
+                    $query->select('id', 'nombre');
+                },
+                'vehiculo' => function($query) {
+                    $query->select('id', 'nombre');
+                },
+            ])
+            ->paginate(15, ['id', 'url', 'nombre_socio', 'dni_socio', 'num_placa', 'asociacione_id', 'tipo_documento_id', 'vehiculo_id']);
+            // ->first(['id', 'url', 'nombre_socio', 'dni_socio', 'num_placa', 'asociacione_id', 'tipo_documento_id', 'vehiculo_id']);
+        // dd($socios);
 
-        //dd($socios);
 
         $vehiculos = Vehiculo::all();
         $asociaciones = Asociacione::all();

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'auth.login');
 
-Route::middleware('can:admin')->group( function () {
+Route::middleware('auth')->group( function () {
     Route::get('/buscar-socio', 'Search\SearchSocioController')->name('search.socio');
     Route::post('/check-qr/{socio}', 'CheckQrSocioController')->name('check.socio');
     // Socios
@@ -31,7 +31,7 @@ Route::get('/socios/{socio}', 'SocioController@show')->name('socios.show');
 
 
 // Tarjetas
-Route::middleware('can:admin')->group( function () {
+Route::middleware('auth')->group( function () {
     // Generate Carnet Circulación PDF
     Route::get('tarjeta/{anverso}', 'Report\CarnetTarjetaController@anverso')->name('tarjeta.anverso');
 
@@ -51,7 +51,7 @@ Route::middleware('can:admin')->group( function () {
 Route::get('/tarjeta-circulacion/{socio}', 'TarjetaController@show')->name('tarjetas.show');
 
 // Fotochecks
-Route::middleware('can:admin')->group( function () {
+Route::middleware('auth')->group( function () {
     // Generate Fotocheck PDF
     Route::get('fotocheck/{anverso}', 'Report\CarnetFotocheckController@anverso')->name('fotocheck.anverso');
 

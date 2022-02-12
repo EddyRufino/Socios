@@ -21,7 +21,7 @@
         
             </div>
 
-            @if (auth()->user()->hasRoles(['admin']))
+            @if (auth()->user()->hasRoles(['superadmin']))
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-12 table-responsive">
                         <table class="table table-striped">
@@ -39,25 +39,25 @@
                             <tbody>
                                 @foreach ($fotochecks as $fotocheck)
                                     <tr>
-                                        <td>{{ $fotocheck->socio->nombre_socio }}</td>
+                                        <td>{{ optional($fotocheck->socio)->nombre_socio }}</td>
                     
-                                        <td>{{ $fotocheck->socio->dni_socio }}</td>
+                                        <td>{{ optional($fotocheck->socio)->dni_socio }}</td>
                                         <td>{{ $fotocheck->num_autorizacion }}</td>
                     
                                         @if ($fotocheck->vehiculo_id == 1)
-                                            <td class="text-info">{{ $fotocheck->vehiculo->nombre }}</td>
+                                            <td class="text-info">{{ optional($fotocheck->vehiculo)->nombre }}</td>
                                         @elseif($fotocheck->vehiculo_id === 2)
-                                            <td class="text-primary">{{ $fotocheck->vehiculo->nombre }}</td>
+                                            <td class="text-primary">{{ optional($fotocheck->vehiculo)->nombre }}</td>
                                         @else
-                                            <td class="text-secondary">{{ $fotocheck->vehiculo->nombre }}</td>
+                                            <td class="text-secondary">{{ optional($fotocheck->vehiculo)->nombre }}</td>
                                         @endif
                     
-                                        @if (empty($fotocheck->socio->asociacione_id)  && $fotocheck->socio->tipo_documento_id == 3)
+                                        @if (empty(optional($fotocheck->socio)->asociacione_id)  && optional($fotocheck->socio)->tipo_documento_id == 3)
                                             <td>Entidad Privada</td>
-                                        @elseif (empty($fotocheck->socio->asociacione_id))
+                                        @elseif (empty(optional($fotocheck->socio)->asociacione_id))
                                             <td>Persona Natural</td>
                                         @else
-                                            <td>{{ optional($fotocheck->socio->asociacione)->nombre }}</td>
+                                            <td>{{ optional(optional($fotocheck->socio)->asociacione)->nombre }}</td>
                                         @endif
 
                                         <td>{{ \Carbon\Carbon::parse($fotocheck->deleted_at)->format('Y-m-d') }}</td>
