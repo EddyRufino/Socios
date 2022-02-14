@@ -21,7 +21,7 @@
         
             </div>
 
-            @if (auth()->user()->hasRoles(['admin']))
+            @if (auth()->user()->hasRoles(['superadmin']))
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-12 table-responsive">
                         <table class="table table-striped">

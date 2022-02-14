@@ -27,7 +27,7 @@
                             'juridica' => request()->juridica,
                             'socio' => request()->socio,
                         ]) }}"
-                            class="text-dark ml-3 tooltipw"
+                            class="text-danger ml-3 tooltipw"
                             target="_blank"
                         >
                         <span id="tooltipw" class="tooltiptext">Descargar PDF</span>
@@ -67,7 +67,7 @@
                             'juridica' => request()->juridica,
                             'socio' => request()->socio,
                         ]) }}"
-                            class="text-dark ml-3 tooltipw"
+                            class="text-success ml-3 tooltipw"
                             target="_blank"
                         >
                         <span id="tooltipw" class="tooltiptext">Descargar EXCEL</span>

@@ -50,7 +50,7 @@
             <label class="font-weight-bold">Roles *</label>
             @auth
                 {{-- <div class=""> --}}
-                    @if (auth()->user()->hasRoles(['admin']))
+                    @if (auth()->user()->hasRoles(['superadmin']))
                         <div class="checkbox">
                             @foreach ($roles as $id => $name)
                                 <label class="font-weight-normal text-dark mr-1">

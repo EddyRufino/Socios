@@ -14,28 +14,52 @@
         <div>
             @canExport
                 <span class="flex-1">Exportar:</span>
-                <span id="contenido">
+
+                <span id="contenidoSocio" style="display: none">
                     <a href="{{ route('socio.pdf', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-danger text-decoration-none tooltipw" target="_blank">
                         <span id="tooltipw" class="tooltiptext">Descarga Socios</span>
                         @include('icons.pdf')
                     </a>
-                    {{-- <a href="{{ route('socio.excel', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-success text-decoration-none tooltipw">
+                    <a href="{{ route('socio.excel', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-success text-decoration-none tooltipw">
                         <span id="tooltipw" class="tooltiptext">Descarga Socios</span>
                         @include('icons.excel')
-                    </a> --}}
+                    </a>
                 </span>
-                <span class="ml-1 text-dark tooltipw" style='cursor: pointer;' onClick="muestra_oculta('contenido')">
+                <span class="ml-1 text-dark tooltipw" style='cursor: pointer;' onClick="showHidden_socio()">
                     <span id="tooltipw" class="tooltiptext">Ver más</span>
                     @include('icons.users')
                 </span>
-                <a href="{{ route('tarjeta.pdf', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
-                    <span id="tooltipw" class="tooltiptext">Descarga Tarjetas Circulación</span>
+
+
+                <span id="contenidoTarjeta" style="display: none">
+                    <a href="{{ route('tarjeta.pdf', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-danger text-decoration-none tooltipw" target="_blank">
+                        <span id="tooltipw" class="tooltiptext">Descarga Tarjetas Circulación</span>
+                        @include('icons.pdf')
+                    </a>
+                    <a href="{{ route('tarjeta.excel', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-success text-decoration-none tooltipw">
+                        <span id="tooltipw" class="tooltiptext">Descarga Tarjetas Circulación</span>
+                        @include('icons.excel')
+                    </a>
+                </span>
+                <span class="ml-1 text-dark text-decoration-none tooltipw" style='cursor: pointer;' onClick="showHidden_tarjeta()">
+                    <span id="tooltipw" class="tooltiptext">Ver más</span>
                     @include('icons.tarjeta')
-                </a>
-                <a href="{{ route('fotocheck.pdf', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-dark text-decoration-none tooltipw" target="_blank">
+                </span>
+
+                <span id="contenidoFotocheck" style="display: none">
+                    <a href="{{ route('fotocheck.pdf', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-danger text-decoration-none tooltipw" target="_blank">
+                        <span id="tooltipw" class="tooltiptext">Descarga Fotochecks</span>
+                        @include('icons.pdf')
+                    </a>
+                    <a href="{{ route('fotocheck.excel', ['id' => request()->asociacione_id_two]) }}" class="ml-1 text-success text-decoration-none tooltipw">
+                        <span id="tooltipw" class="tooltiptext">Descarga Fotochecks</span>
+                        @include('icons.excel')
+                    </a>
+                </span>
+                <span class="ml-1 text-dark text-decoration-none tooltipw" style='cursor: pointer;' onClick="showHidden_fotocheck()">
                     <span id="tooltipw" class="tooltiptext">Descarga Fotochecks</span>
                     @include('icons.fotocheck')
-                </a>
+                </span>
             @endcanExport
         </div>
     </div>
@@ -244,14 +268,41 @@
         }
     }
 
-    function muestra_oculta(id) {
-        if (document.getElementById) {
-            let el = document.getElementById(id);
-            el.style.display = (el.style.display == 'none') ? 'inline-block' : 'none';
+    // function muestra_oculta(id) {
+    //     if (document.getElementById) {
+    //         let el = document.getElementById(id);
+    //         el.style.display = (el.style.display == 'none') ? 'inline-block' : 'none';
+    //     }
+    // }
+    // window.onload = function() {
+    //     muestra_oculta('contenido');
+    // }
+
+    function showHidden_socio() {
+        var x = document.getElementById("contenidoSocio");
+        if (x.style.display === "none") {
+            x.style.display = "inline-block";
+        } else {
+            x.style.display = "none";
         }
     }
-    window.onload = function() {
-        muestra_oculta('contenido');
+
+    function showHidden_tarjeta() {
+        var x = document.getElementById("contenidoTarjeta");
+        if (x.style.display === "none") {
+            x.style.display = "inline-block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+    function showHidden_fotocheck() {
+        var x = document.getElementById("contenidoFotocheck");
+        if (x.style.display === "none") {
+            x.style.display = "inline-block";
+        } else {
+            x.style.display = "none";
+        }
     }
 </script>
 @endpush
