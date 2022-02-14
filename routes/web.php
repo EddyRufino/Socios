@@ -129,6 +129,12 @@ Route::get('admin/socios-delete-pdf', 'Export\Pdf\SociosDeletePdfController@soci
 Route::get('admin/tarjetas-delete-pdf', 'Export\Pdf\SociosDeletePdfController@tarjetas')->name('tarjetas.delete.pdf');
 Route::get('admin/fotochecks-delete-pdf', 'Export\Pdf\SociosDeletePdfController@fotochecks')->name('fotochecks.delete.pdf');
 
+Route::get('admin/filtros-socios', 'Export\Filtro\ViewFiltroController@createSocios')->name('filtro.socio.create');
+Route::get('admin/filtro', 'Export\Filtro\ViewFiltroController@storeSocios')->name('filtro.socio.store');
+Route::get('admin/filtro-pdf', 'Export\Filtro\Pdf\PdfFiltroController@pdfFiltroSocioInfo')->name('filtro.socio.pdf.info');
+// Route::get('admin/filtro-pdf-graficos', 'Export\Filtro\Pdf\PdfFiltroController@pdfFiltroSocioGrafico')->name('filtro.socio.pdf.grafi');
+Route::get('admin/filtro-excel', 'Export\Filtro\Pdf\PdfFiltroController@excelFiltroSocioInfo')->name('filtro.socio.excel.info');
+
 // Charts
 Route::get('/admin', 'Dashboard\dashboardController@index')->name('admin.template');
 

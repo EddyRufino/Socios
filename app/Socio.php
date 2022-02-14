@@ -12,6 +12,8 @@ class Socio extends Model
 
     protected $guarded = [];
 
+    // protected $table = 'socios';
+
     // public $with = ['tarjetas', 'fotochecks', 'asociacione'];
     // public $with = [];
 

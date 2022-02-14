@@ -75,7 +75,7 @@
             @else
                 <h2 class="text-secondary p-2">No Tienes permisos para ver esta vista</h2>
             @endif
-    </div>
+        </div>
     </div>
 </div>
 @endsection

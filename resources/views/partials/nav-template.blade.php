@@ -99,6 +99,12 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="{{ route('filtro.socio.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Filtros</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('socios.delete') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Socios Eliminados</p>
