@@ -47,15 +47,15 @@
                 <tbody>
                     @forelse ($fotochecks as $fotocheck)
                         <tr>
-                            <td>{{ $fotocheck->socio->nombre_socio }}</td>
-                            <td>{{ $fotocheck->socio->dni_socio }}</td>
+                            <td>{{ optional($fotocheck->socio)->nombre_socio }}</td>
+                            <td>{{ optional($fotocheck->socio)->dni_socio }}</td>
 
-                            @if (empty($fotocheck->socio->asociacione_id)  && $fotocheck->socio->tipo_documento_id == 3)
+                            @if (empty(optional($fotocheck->socio)->asociacione_id)  && optional($fotocheck->socio)->tipo_documento_id == 3)
                                 <td class="text-secondary">Entidad Privada</td>
-                            @elseif (empty($fotocheck->socio->asociacione_id))
+                            @elseif (empty(optional($fotocheck->socio)->asociacione_id))
                                 <td class="text-secondary">Persona Natural</td>
                             @else
-                                <td>{{ optional($fotocheck->socio->asociacione)->nombre }}</td>
+                                <td>{{ optional(optional($fotocheck->socio)->asociacione)->nombre }}</td>
                             @endif
 
                             @if ($fotocheck->vehiculo_id == 1)

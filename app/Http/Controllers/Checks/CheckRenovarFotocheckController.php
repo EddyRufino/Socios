@@ -16,9 +16,11 @@ class CheckRenovarFotocheckController extends Controller
      */
     public function __invoke(Fotocheck $fotocheck)
     {
-        //dd($fotocheck);
+        // dd($fotocheck);
         $fotocheck->status = 0;
         $fotocheck->expedicion = NULL;
+        $fotocheck->renovado = now();
+        $fotocheck->renovado_count = $fotocheck->renovado_count + 1;
         //$fotocheck->revalidacion = date('Y-m-d', strtotime("+1 years"));
         $fotocheck->save();
         return back();

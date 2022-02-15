@@ -26,6 +26,7 @@ class CreateSociosTable extends Migration
             $table->foreignId('vehiculo_id')->nullable()->constrained('vehiculos')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
+            $table->integer('tipo_persona')->nullable();
         });
     }
 

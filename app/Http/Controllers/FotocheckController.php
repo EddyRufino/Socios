@@ -52,7 +52,8 @@ class FotocheckController extends Controller
                 'num_placa' => $request->num_placa,
                 'asociacione_id' => $request->asociacione_id,
                 'vehiculo_id' => $request->vehiculo_id,
-                'tipo_documento_id' => $request->tipo_documento_id
+                'tipo_documento_id' => $request->tipo_documento_id,
+                'tipo_persona' => $request->tipo_persona
             ]);
         }
         
@@ -103,7 +104,8 @@ class FotocheckController extends Controller
             'url' => $url,
             'asociacione_id' => $request->asociacione_id,
             'vehiculo_id' => $request->vehiculo_id,
-            'tipo_documento_id' => $request->tipo_documento_id
+            'tipo_documento_id' => $request->tipo_documento_id,
+            'tipo_persona' => $request->tipo_persona
         ]);
 
         $fotocheck->fill( $request->validated() );

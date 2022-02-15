@@ -22,6 +22,8 @@ class CreateFotochecksTable extends Migration
             $table->integer('status')->nullable()->default(0);
             $table->string('num_placa', 30)->nullable()->unique();
             $table->integer('tipo')->nullable()->default(2);
+            $table->date('renovado')->nullable();
+            $table->integer('renovado_count')->defaul(0)->nullable();
             $table->foreignId('socio_id')->constrained('socios')->onDelete('cascade');
             $table->foreignId('vehiculo_id')->constrained('vehiculos');
             $table->foreignId('user_id')->nullable()->constrained('users');

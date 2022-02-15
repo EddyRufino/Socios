@@ -138,7 +138,12 @@ class ViewFiltroController extends Controller
                 $query->whereIn('vehiculo_id', $vehiculo_id)
                     ->whereIn('status', $print)
                     ->whereBetween('created_at', [$dateStart, $dateLast])
-                    ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia]);
+                    ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
+                    ->whereHas('socio', function ($query) {
+                        $query->whereIn('tipo_persona', [1, 3])
+                            ->orWhereNull('tipo_persona') // Quitale cuando hayan llenado todos el campo tipo_persona
+                            ->select(['id', 'tipo_persona']);
+                    });
             })
             ->when($naturalJuridica, function ($query) use ($vehiculo_id, $print, $dateStart, $dateLast, $dateStartVigencia, $dateLastVigencia)  {
                 $query->whereIn('vehiculo_id', $vehiculo_id)
@@ -160,17 +165,6 @@ class ViewFiltroController extends Controller
             return view('admin.template.filtros.socioSearch', compact('datas'));
 
         } elseif($request->tarjeta) {
-            
-            // $socio = false;
-            // $natural = false;
-            // $juridica = false;
-            // $socioNatural = false;
-            // $socioJuridica = false;
-            // $naturalJuridica = false;
-            // $todos = false;
-            // $vigenciaTarjeta = false;
-            // $vigenciaFotocheck = false;
-            // $vigenciaTodos = false;
     
             if ($request->tarjeta && $request->socio) {
                 $socio = true;
@@ -261,7 +255,12 @@ class ViewFiltroController extends Controller
                 $query->whereIn('vehiculo_id', $vehiculo_id)
                     ->whereIn('status', $print)
                     ->whereBetween('created_at', [$dateStart, $dateLast])
-                    ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia]);
+                    ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
+                    ->whereHas('socio', function ($query) {
+                        $query->whereIn('tipo_persona', [1, 3])
+                            ->orWhereNull('tipo_persona') // Quitale cuando hayan llenado todos el campo tipo_persona
+                            ->select(['id', 'tipo_persona']);
+                    });
             })
             ->when($naturalJuridica, function ($query) use ($vehiculo_id, $print, $dateStart, $dateLast, $dateStartVigencia, $dateLastVigencia)  {
                 $query->whereIn('vehiculo_id', $vehiculo_id)

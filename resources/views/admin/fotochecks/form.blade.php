@@ -17,10 +17,78 @@
     @enderror
 </div>
 
-<div class="custom-control custom-checkbox mb-3">
+{{-- <div class="custom-control custom-checkbox mb-3">
     <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
     <label class="custom-control-label" for="myCheck">Persona Natural / Jurídica</label>
-</div>
+</div> --}}
+@if (request()->routeIs('fotochecks.create'))
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo_persona" value="2" onchange="mostrar(this.value);">
+                <label class="form-check-label" for="myCheck">
+                    Persona Natural
+                </label>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo_persona" value="3" onchange="mostrar(this.value);">
+                <label class="form-check-label" for="myCheckJuridica">
+                    Persona Jurídica
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo_persona" value="1" onchange="mostrar(this.value);" checked>
+                <label class="form-check-label" for="myCheck">
+                    Socio
+                </label>
+            </div>
+        </div>
+    </div>
+@endif
+
+@if (request()->routeIs('fotochecks.edit'))
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo_persona"
+                    value="2" {{ $fotocheck->socio->tipo_persona == 2 ? 'checked' : '' }}
+                    onchange="mostrarEdit(this.value);"
+                >
+                <label class="form-check-label" for="myCheck">
+                    Persona Natural
+                </label>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo_persona"
+                    value="3" {{ $fotocheck->socio->tipo_persona == 3 ? 'checked' : '' }}
+                    onchange="mostrarEdit(this.value);"
+                >
+                <label class="form-check-label" for="myCheckJuridica">
+                    Persona Jurídica
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo_persona"
+                    value="1" {{ $fotocheck->socio->tipo_persona == 1 ? 'checked' : '' }}
+                    onchange="mostrarEdit(this.value);"
+                >
+                <label class="form-check-label" for="myCheck">
+                    Socio
+                </label>
+            </div>
+        </div>
+    </div>
+@endif
 
 <div class="row">
     <div class="col-md-6">
@@ -198,34 +266,68 @@
                 </div>
         </fieldset>
 
-        <fieldset class="boder-1 " id="natural">
-            <legend class="text-legend-transportador legend p-2">
-                Transportador Autorizado
-            </legend>
+        @if (request()->routeIs('fotochecks.create'))
+            <fieldset class="boder-1 " id="natural">
+                <legend class="text-legend-transportador legend p-2">
+                    Transportador Autorizado
+                </legend>
 
-            <div class="form-group pl-2 pr-2">
-                <label for="inputEmail2">Asociación</label>
-                <select id="asociacione_id" data-size="7" class="form-control selectpicker @error('asociacione_id') is-invalid  @enderror" name="asociacione_id" data-live-search="true">
-                    <option value="">Selecciona una asociación</option>
-                    @foreach ($asociaciones as $asociacione)
+                <div class="form-group pl-2 pr-2">
+                    <label for="inputEmail2">Asociación</label>
+                    <select id="asociacione_id" data-size="7" class="form-control selectpicker @error('asociacione_id') is-invalid  @enderror" name="asociacione_id" data-live-search="true">
+                        <option value="">Selecciona una asociación</option>
+                        @foreach ($asociaciones as $asociacione)
 
-                        <option value="{{ $asociacione->id }}"
-                              {{ old('asociacione_id', optional($fotocheck->socio)->asociacione_id) == $asociacione->id ? 'selected' : '' }}
-                        >
-                            {{ $asociacione->nombre }}
-                        </option>
+                            <option value="{{ $asociacione->id }}"
+                                {{ old('asociacione_id', optional($fotocheck->socio)->asociacione_id) == $asociacione->id ? 'selected' : '' }}
+                            >
+                                {{ $asociacione->nombre }}
+                            </option>
 
-                    @endforeach
-                </select>
+                        @endforeach
+                    </select>
 
-                @error('asociacione_id')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                @enderror
-            </div>
+                    @error('asociacione_id')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
 
-        </fieldset>
+            </fieldset>
+        @endif
+
+
+        @if (request()->routeIs('fotochecks.edit'))
+            <fieldset class="boder-1 " id="natural" style="{{ $fotocheck->socio->tipo_persona == 1 || !isset($fotocheck->socio->tipo_persona) ? 'display: block' : 'display: none' }}">
+                <legend class="text-legend-transportador legend p-2">
+                    Transportador Autorizado
+                </legend>
+
+                <div class="form-group pl-2 pr-2">
+                    <label for="inputEmail2">Asociación</label>
+                    <select id="asociacione_id" data-size="7" class="form-control selectpicker @error('asociacione_id') is-invalid  @enderror" name="asociacione_id" data-live-search="true">
+                        <option value="">Selecciona una asociación</option>
+                        @foreach ($asociaciones as $asociacione)
+
+                            <option value="{{ $asociacione->id }}"
+                                {{ old('asociacione_id', optional($fotocheck->socio)->asociacione_id) == $asociacione->id ? 'selected' : '' }}
+                            >
+                                {{ $asociacione->nombre }}
+                            </option>
+
+                        @endforeach
+                    </select>
+
+                    @error('asociacione_id')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
+
+            </fieldset>
+        @endif
 
         <fieldset class="boder-1">
             <legend class="text-legend-transportador legend p-2">
@@ -305,19 +407,55 @@
 
 @push('scripts')
     <script>
-        function myFunction() {
-            let checkBox = document.getElementById("myCheck");
-            let natural = document.getElementById("natural");
-            let asociacione_id = document.getElementById("asociacione_id");
-
-            asociacione_id.value = '';
-
-            if (checkBox.checked == true){
-                natural.style.display = "none";
-            } else {
-                natural.style.display = "block";
-            }
+    function mostrar(dato) {
+        if (dato == "1") {
+            document.getElementById("natural").style.display = "block";
+            document.getElementById("juridica").style.display = "none";            
         }
+        if (dato == "2") {
+            document.getElementById("natural").style.display = "none";
+            document.getElementById("juridica").style.display = "block";
+        }
+        if (dato == "3") {
+            document.getElementById("natural").style.display = "none";
+            document.getElementById("juridica").style.display = "block";
+        }
+    }
+
+    function mostrarEdit(dato) {
+
+        let asociacione_id = document.getElementById("asociacione_id");
+
+        // Quitar el valor
+        asociacione_id.value = '';
+
+        if (dato == "1") {
+            document.getElementById("natural").style.display = "block";
+            document.getElementById("juridica").style.display = "none";
+        }
+        if (dato == "2") {
+            document.getElementById("natural").style.display = "none";
+            document.getElementById("juridica").style.display = "block";
+
+        }
+        if (dato == "3") {
+            document.getElementById("natural").style.display = "none";
+            document.getElementById("juridica").style.display = "block";
+        }
+    }
+        // function myFunction() {
+        //     let checkBox = document.getElementById("myCheck");
+        //     let natural = document.getElementById("natural");
+        //     let asociacione_id = document.getElementById("asociacione_id");
+
+        //     asociacione_id.value = '';
+
+        //     if (checkBox.checked == true){
+        //         natural.style.display = "none";
+        //     } else {
+        //         natural.style.display = "block";
+        //     }
+        // }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://www.jqueryscript.net/demo/Bootstrap-4-Dropdown-Select-Plugin-jQuery/dist/js/bootstrap-select.js"></script>

@@ -96,24 +96,24 @@
                             @forelse ($datas as $data)
                                 {{-- <td>{{ dd($data->socio->nombre_socio) }}</td> --}}
                                 <tr>
-                                    <td>{{ $data->socio->nombre_socio }}</td>
-                                    <td>{{ $data->socio->dni_socio }}</td>
+                                    <td>{{ optional($data->socio)->nombre_socio }}</td>
+                                    <td>{{ optional($data->socio)->dni_socio }}</td>
                                     <td>{{ $data->num_placa }}</td>
 
-                                    @if (empty($data->socio->asociacione_id)  && $data->socio->tipo_documento_id == 3)
+                                    @if (empty(optional($data->socio)->asociacione_id)  && optional($data->socio)->tipo_documento_id == 3)
                                         <td class="text-secondary">Entidad Privada</td>
-                                    @elseif (empty($data->socio->asociacione_id))
+                                    @elseif (empty(optional($data->socio)->asociacione_id))
                                         <td class="text-secondary">Persona Natural</td>
                                     @else
-                                        <td>{{ optional($data->socio->asociacione)->nombre }}</td>
+                                        <td>{{ optional(optional($data->socio)->asociacione)->nombre }}</td>
                                     @endif
 
-                                    @if ($data->socio->vehiculo_id == 1)
-                                        <td class="text-info">{{ $data->socio->vehiculo->nombre }}</td>
-                                    @elseif($data->socio->vehiculo_id === 2)
-                                        <td class="text-primary">{{ $data->socio->vehiculo->nombre }}</td>
+                                    @if (optional($data->socio)->vehiculo_id == 1)
+                                        <td class="text-info">{{ optional(optional($data->socio)->vehiculo)->nombre }}</td>
+                                    @elseif(optional($data->socio)->vehiculo_id === 2)
+                                        <td class="text-primary">{{ optional(optional($data->socio)->vehiculo)->nombre }}</td>
                                     @else
-                                        <td class="text-secondary">{{ $data->socio->vehiculo->nombre }}</td>
+                                        <td class="text-secondary">{{ optional(optional($data->socio)->vehiculo)->nombre }}</td>
                                     @endif
 
                                     <td>

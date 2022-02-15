@@ -26,6 +26,8 @@ class CreateTarjetasTable extends Migration
             $table->integer('status')->nullable()->default(0);
             $table->integer('tipo')->nullable()->default(1); // Tarjeta o Fotocheck
             $table->string('num_correlativo')->unique();
+            $table->date('renovado')->nullable();
+            $table->integer('renovado_count')->defaul(0)->nullable();
             $table->foreignId('socio_id')->constrained('socios')->onDelete('cascade');
             $table->foreignId('vehiculo_id')->constrained('vehiculos');
             $table->foreignId('user_id')->nullable()->constrained('users');

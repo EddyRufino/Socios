@@ -57,7 +57,8 @@ class TarjetaController extends Controller
                 'num_placa' => $request->num_placa,
                 'asociacione_id' => $request->asociacione_id,
                 'vehiculo_id' => $request->vehiculo_id,
-                'tipo_documento_id' => $request->tipo_documento_id
+                'tipo_documento_id' => $request->tipo_documento_id,
+                'tipo_persona' => $request->tipo_persona
             ]);
 
         } else {
@@ -71,7 +72,8 @@ class TarjetaController extends Controller
                 'num_placa' => strtoupper($request->num_placa),
                 'asociacione_id' => $socioGet->asociacione_id,
                 'vehiculo_id' => $socioGet->vehiculo_id,
-                'tipo_documento_id' => $socioGet->tipo_documento_id
+                'tipo_documento_id' => $socioGet->tipo_documento_id,
+                'tipo_persona' => $request->tipo_persona
             ]);
 
         }
@@ -128,7 +130,8 @@ class TarjetaController extends Controller
             'num_placa' => strtoupper($request->num_placa),
             'asociacione_id' => $request->asociacione_id,
             'vehiculo_id' => $request->vehiculo_id,
-            'tipo_documento_id' => $request->tipo_documento_id
+            'tipo_documento_id' => $request->tipo_documento_id,
+            'tipo_persona' => $request->tipo_persona
         ]);
 
         $tarjeta = $tarjeta->fill($request->validated());

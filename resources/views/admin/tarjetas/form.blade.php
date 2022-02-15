@@ -19,10 +19,62 @@
 </div>
 
 @if (request()->routeIs('tarjetas.create'))
-    <div class="custom-control custom-checkbox mb-3">
-        <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
-        <label class="custom-control-label" for="myCheck">Persona Natural / Jurídica</label>
+    {{-- <div class="custom-control custom-checkbox mb-3">
+        <div class="row ml-1">
+            <div class="co-md-4">
+                <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
+                <label class="custom-control-label" for="myCheck">Persona Natural</label>
+            </div>
+            <div class="col-md-4 ml-3 pl-3">
+                <input type="checkbox" class="custom-control-input" id="myCheckJuridica" onclick="myFunctionJuridica()">
+                <label class="custom-control-label" for="myCheckJuridica">Persona Jurídica</label>
+            </div>
+        </div>
+    </div> --}}
+    {{-- <div class="form-check">
+        <div class="row ml-1">
+            <div class="co-md-4">
+                <input class="form-check-input" type="radio" name="natural" id="myCheck" onclick="myFunction()">
+                <label class="form-check-label" for="exampleRadios1">
+                    Persona Natural
+                </label>
+            </div>
+            <div class="col-md-4 ml-3 pl-3">
+                <input class="form-check-input" type="radio" name="juridica" id="myCheckJuridica" onclick="myFunctionJuridica()">
+                <label class="form-check-label" for="exampleRadios2">
+                    Persona Jurídica
+                </label>
+            </div>
+        </div>
+    </div> --}}
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo_persona" value="2" onchange="mostrar(this.value);">
+                <label class="form-check-label" for="myCheck">
+                    Persona Natural
+                </label>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo_persona" value="3" onchange="mostrar(this.value);">
+                <label class="form-check-label" for="myCheckJuridica">
+                    Persona Jurídica
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo_persona" value="1" onchange="mostrar(this.value);" checked>
+                <label class="form-check-label" for="myCheck">
+                    Socio
+                </label>
+            </div>
+        </div>
     </div>
+
 @endif
 
 <div class="row">
@@ -33,7 +85,11 @@
             </legend>
 
             <legend id="legend-persona" style="display: none" class="text-legend-transportador legend">
-                Natural / Jurídica
+                Natural
+            </legend>
+
+            <legend id="legend-persona-juridica" style="display: none" class="text-legend-transportador legend">
+                Jurídica
             </legend>
 
             <div class="form-group">
@@ -430,14 +486,42 @@
 
                 </fieldset>
 
-                <div class="custom-control custom-checkbox mt-3">
+                {{-- <div class="custom-control custom-checkbox mt-3">
                     <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunctionEdit()">
                     <label class="custom-control-label" for="myCheck">Persona Natural / Jurídica</label>
-                </div>
+                </div> --}}
+
+                {{-- <div class="row mb-3">
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" value="2" onchange="mostrarEdit(this.value);">
+                            <label class="form-check-label" for="myCheck">
+                                Persona Natural
+                            </label>
+                        </div>
+            
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" value="3" onchange="mostrarEdit(this.value);">
+                            <label class="form-check-label" for="myCheckJuridica">
+                                Persona Jurídica
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" value="1" onchange="mostrarEdit(this.value);" checked>
+                            <label class="form-check-label" for="myCheck">
+                                Socio
+                            </label>
+                        </div>
+                    </div>
+                </div> --}}
             </div>
 
 
-            <div id="natural" class="col-md-6" style="{{ $tarjeta->socio->asociacione_id ? 'display: none' : 'display: block' }}">
+            <div class="col-md-6" style="{{ $tarjeta->socio->asociacione_id ? 'display: none' : 'display: block' }}">
                 <fieldset class="boder-1" id="natural">
                     <legend class="text-legend-transportador legend p-2">
                         Persona Natural / Jurídica
@@ -481,11 +565,12 @@
 
 
 
-                <div class="custom-control custom-checkbox mt-3">
+                {{-- <div class="custom-control custom-checkbox mt-3">
                     <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunctionEdit()">
                     <label class="custom-control-label" for="myCheck">Tiene Asociación</label>
-                </div>
+                </div> --}}
             </div>
+
 
             <div class="col-md-6">
                 <fieldset class="boder-1">
@@ -512,6 +597,42 @@
                     </div>
 
                 </fieldset>
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipo_persona"
+                                value="2" {{ $tarjeta->socio->tipo_persona == 2 ? 'checked' : '' }}
+                                onchange="mostrarEdit(this.value);"
+                            >
+                            <label class="form-check-label" for="myCheck">
+                                Persona Natural
+                            </label>
+                        </div>
+            
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipo_persona"
+                                value="3" {{ $tarjeta->socio->tipo_persona == 3 ? 'checked' : '' }}
+                                onchange="mostrarEdit(this.value);"
+                            >
+                            <label class="form-check-label" for="myCheckJuridica">
+                                Persona Jurídica
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipo_persona"
+                                value="1" {{ $tarjeta->socio->tipo_persona == 1 ? 'checked' : '' }}
+                                onchange="mostrarEdit(this.value);"
+                            >
+                            <label class="form-check-label" for="myCheck">
+                                Socio
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
@@ -531,37 +652,102 @@
 @push('scripts')
 
 <script>
-    function myFunction() {
-        let checkBox = document.getElementById("myCheck");
-        let natural = document.getElementById("natural");
-        let juridica = document.getElementById("juridica");
-        let persona = document.getElementById("legend-persona");
-        let socio = document.getElementById("legend-socio");
-
-        if (checkBox.checked == true){
-
-            natural.style.display = "block";
-            juridica.style.display = "none";
-
-            persona.style.display = "block";
-            socio.style.display = "none";
-
-
-
-        } else {
-            natural.style.display = "none";
-            juridica.style.display = "block";
-
-            persona.style.display = "none";
-            socio.style.display = "block";
-
-            // Pon el valor
-
+    function mostrar(dato) {
+        if (dato == "1") {
+            document.getElementById("legend-socio").style.display = "block";
+            document.getElementById("legend-persona").style.display = "none";
+            document.getElementById("legend-persona-juridica").style.display = "none";
+            document.getElementById("natural").style.display = "none";
+            document.getElementById("juridica").style.display = "block";            
+        }
+        if (dato == "2") {
+            document.getElementById("legend-socio").style.display = "none";
+            document.getElementById("legend-persona").style.display = "block";
+            document.getElementById("legend-persona-juridica").style.display = "none";
+            document.getElementById("natural").style.display = "block";
+            document.getElementById("juridica").style.display = "none";
+        }
+        if (dato == "3") {
+            document.getElementById("legend-socio").style.display = "none";
+            document.getElementById("legend-persona").style.display = "none";
+            document.getElementById("legend-persona-juridica").style.display = "block";
+            document.getElementById("natural").style.display = "block";
+            document.getElementById("juridica").style.display = "none";
         }
     }
+
+    function mostrarEdit(dato) {
+
+        if (dato == "1") {
+            document.getElementById("legend-socio").style.display = "block";
+            document.getElementById("legend-persona").style.display = "none";
+            document.getElementById("legend-persona-juridica").style.display = "none";
+            document.getElementById("natural").style.display = "none";
+            document.getElementById("juridica").style.display = "block";
+            
+            let asociacione_id = document.getElementById("asociacione_id");
+            let num_operacion = document.getElementById("num_operacion");
+            let vigencia_operacion = document.getElementById("vigencia_operacion");
+            let num_autorizacion = document.getElementById("num_autorizacion");
+            let vigencia_autorizacion = document.getElementById("vigencia_autorizacion");
+            
+            // Quitar el valor
+            asociacione_id.value = '';
+            num_operacion.value = '';
+            vigencia_operacion.value = '';
+            num_autorizacion.value = '';
+            vigencia_autorizacion.value = '';
+        }
+        if (dato == "2") {
+            document.getElementById("legend-socio").style.display = "none";
+            document.getElementById("legend-persona").style.display = "block";
+            document.getElementById("legend-persona-juridica").style.display = "none";
+            document.getElementById("natural").style.display = "block";
+            document.getElementById("juridica").style.display = "none";
+
+        }
+        if (dato == "3") {
+            document.getElementById("legend-socio").style.display = "none";
+            document.getElementById("legend-persona").style.display = "none";
+            document.getElementById("legend-persona-juridica").style.display = "block";
+            document.getElementById("natural").style.display = "block";
+            document.getElementById("juridica").style.display = "none";
+        }
+    }
+    // function myFunction() {
+    //     let checkBox = document.getElementById("myCheck");
+    //     let checkBoxJuridica = document.getElementById("myCheckJuridica");
+
+    //     let natural = document.getElementById("natural");
+    //     let juridica = document.getElementById("juridica");
+
+    //     let persona = document.getElementById("legend-persona");
+    //     let socio = document.getElementById("legend-socio");
+    //     let personaJuridica = document.getElementById("legend-persona-juridica");
+
+    //     if (checkBox.checked == true) {
+
+    //         natural.style.display = "block";
+    //         juridica.style.display = "none";
+
+    //         persona.style.display = "block";
+    //         socio.style.display = "none";
+    //         personaJuridica.display = "none";
+
+    //     } else {
+    //         natural.style.display = "none";
+    //         juridica.style.display = "block";
+
+    //         persona.style.display = "none";
+    //         socio.style.display = "block";
+
+    //         // Pon el valor
+
+    //     }
+    // }
 </script>
 
-<script>
+{{-- <script>
     function myFunctionEdit() {
         let checkBox = document.getElementById("myCheck");
         let natural = document.getElementById("natural");
@@ -595,7 +781,7 @@
 
         }
     }
-</script>
+</script> --}}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://www.jqueryscript.net/demo/Bootstrap-4-Dropdown-Select-Plugin-jQuery/dist/js/bootstrap-select.js"></script>

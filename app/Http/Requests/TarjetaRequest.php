@@ -40,7 +40,8 @@ class TarjetaRequest extends FormRequest
             'vehiculo_id' => ['required'],
             'user_id' => ['nullable'],
             'descripcion' => ['nullable'],
-            'disenio_id' => ['nullable']
+            'disenio_id' => ['nullable'],
+            'renovado' => ['nullable'],
         ];
     }
 }

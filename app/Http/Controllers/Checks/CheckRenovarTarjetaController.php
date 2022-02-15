@@ -20,6 +20,8 @@ class CheckRenovarTarjetaController extends Controller
         $tarjeta->status = 0;
         $tarjeta->expedicion = NULL;
         $tarjeta->revalidacion = NULL;
+        $tarjeta->renovado = now();
+        $tarjeta->renovado_count = $tarjeta->renovado_count + 1;
         $tarjeta->save();
         return back();
     }

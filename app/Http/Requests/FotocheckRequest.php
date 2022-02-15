@@ -36,7 +36,8 @@ class FotocheckRequest extends FormRequest
             'socio_id' => ['nullable'],
             'vehiculo_id' => ['required'],
             'user_id' => ['nullable'],
-            'descripcion' => ['nullable']
+            'descripcion' => ['nullable'],
+            'renovado' => ['nullable'],
         ];
     }
 }
