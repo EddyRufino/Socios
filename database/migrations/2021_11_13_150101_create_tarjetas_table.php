@@ -24,6 +24,7 @@ class CreateTarjetasTable extends Migration
             $table->string('num_autorizacion', 120)->nullable();
             $table->string('vigencia_autorizacion', 120)->nullable();
             $table->integer('status')->nullable()->default(0);
+            $table->date('fecha_print')->nullable();
             $table->integer('tipo')->nullable()->default(1); // Tarjeta o Fotocheck
             $table->string('num_correlativo')->unique();
             $table->date('renovado')->nullable();

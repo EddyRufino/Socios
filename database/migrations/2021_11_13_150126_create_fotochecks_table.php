@@ -20,6 +20,7 @@ class CreateFotochecksTable extends Migration
             $table->date('revalidacion')->nullable();
             $table->string('image')->nullable();
             $table->integer('status')->nullable()->default(0);
+            $table->date('fecha_print')->nullable();
             $table->string('num_placa', 30)->nullable()->unique();
             $table->integer('tipo')->nullable()->default(2);
             $table->date('renovado')->nullable();

@@ -521,7 +521,7 @@
             </div>
 
 
-            <div class="col-md-6" style="{{ $tarjeta->socio->asociacione_id ? 'display: none' : 'display: block' }}">
+            <div class="col-md-6" id="showBlock" style="{{ $tarjeta->socio->asociacione_id ? 'display: none' : 'display: block' }}">
                 <fieldset class="boder-1" id="natural">
                     <legend class="text-legend-transportador legend p-2">
                         Persona Natural / Jurídica
@@ -702,6 +702,9 @@
             document.getElementById("legend-socio").style.display = "none";
             document.getElementById("legend-persona").style.display = "block";
             document.getElementById("legend-persona-juridica").style.display = "none";
+
+            document.getElementById('showBlock').removeAttribute("style");
+
             document.getElementById("natural").style.display = "block";
             document.getElementById("juridica").style.display = "none";
 
@@ -710,6 +713,9 @@
             document.getElementById("legend-socio").style.display = "none";
             document.getElementById("legend-persona").style.display = "none";
             document.getElementById("legend-persona-juridica").style.display = "block";
+
+            document.getElementById('showBlock').removeAttribute("style");
+
             document.getElementById("natural").style.display = "block";
             document.getElementById("juridica").style.display = "none";
         }
