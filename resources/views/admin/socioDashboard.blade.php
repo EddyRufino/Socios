@@ -2,69 +2,85 @@
 
 @section('content')
     <div class="container">
-    {{-- @if (auth()->user()->hasRoles(['admin', 'cobrador'])) --}}
-        <div class="row mt-2">
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-info" style="height: 6rem;">
-                    <div class="inner">
-                        <h3>1</h3>
+        {{-- <div class="row justify-content-center"> --}}
+            <div class="row justify-content-center mt-2">
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info" style="height: 6rem;">
+                        <div class="inner">
+                            <h3>{{ $countAllSocios->implode('') }}</h3>
 
-                        <p>Total Tarjetas</p>
+                            <p>Socios</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-id-card"></i>
+                        </div>
                     </div>
-                    <div class="icon">
-                        <i class="fas fa-print"></i>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-warning" style="height: 6rem;">
+                        <div class="inner">
+                            <h3>{{ $allNatural->implode('') }}</h3>
+
+                            <p>P. Natural</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-primary" style="height: 6rem;">
+                        <div class="inner">
+                            <h3>{{ $allJuridica->implode('') }}</h3>
+
+                            <p>P. Jurídica</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-secondary" style="height: 6rem;">
+                        <div class="inner">
+                            <h3>{{ $allExtranjeros->implode('')}}</h3>
+
+                            <p>Extranjeros</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-user"></i>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-warning" style="height: 6rem;">
-                    <div class="inner">
-                        <h3>1</h3>
+            <div class="row justify-content-center mt-3">
+                <div class="col-md-10">
+                    {!! $chart->container() !!}
 
-                        <p>Total Fotochecks</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-print"></i>
-                    </div>
+                    {!! $chart->script() !!}
                 </div>
             </div>
 
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-secondary" style="height: 6rem;">
-                    <div class="inner">
-                        <h3>1</h3>
+            <div class="row justify-content-center mt-4 mb-4">
+                <div class="col-md-10">
+                    {!! $chartPie->container() !!}
 
-                        <p>Total Toner</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
+                    {!! $chartPie->script() !!}
                 </div>
             </div>
 
-            {{-- <div class="col-lg-3 col-6">
-                <div class="small-box bg-danger" style="height: 6rem;">
-                    <div class="inner">
-                        <h3>S/. </h3>
+            <div class="row justify-content-center mt-4 mb-4">
+                <div class="col-md-10">
+                    {!! $chartYear->container() !!}
 
-                        <p>Total Deuda <strong>-</strong> {{ today()->format('m/y') }}</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
+                    {!! $chartYear->script() !!}
                 </div>
-            </div> --}}
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                {!! $chart->container() !!}
-
-                {!! $chart->script() !!}
             </div>
-        </div>
-    {{-- @endif --}}
+        {{-- </div> --}} 
     </div>
 @endsection
 

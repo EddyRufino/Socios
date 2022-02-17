@@ -87,6 +87,41 @@ class dashboardTarjetaController extends Controller
         $chartPie->title('Gráfico de Tarjetas');
         $chartPie->dataset("Tarjetas", 'doughnut', [$countAllTarjetas[0], $countNotPrint[0], $countPrint[0]])->color($borderColors)->backgroundColor($fillColors);
 
-        return view('admin.tarjetaDashboard', compact('chart', 'chartPie', 'countAllTarjetas', 'countNotPrint', 'countPrint'));
+        // Gráficos por año
+        $data = Tarjeta::whereYear('created_at', '<=', now()->format('Y'))->orderby('created_at')->get('created_at');
+
+        $flattened = $data->transform(function ($item) {
+            return substr($item, 15, -25);
+        });
+
+        $collection = collect($flattened);
+
+        $tarjetaYears = $collection->unique();
+        $tarjetaYears->values();
+
+        $allTarjetaYear = collect([]);
+        $printCountYear = collect([]);
+        $notPrintCountYear = collect([]);
+
+        $yearStart = 2021;
+        $yearLast = $tarjetaYears->last();
+        
+        for ($days_backwards = $yearStart; $days_backwards <= $yearLast; $days_backwards++)
+        {
+            $allTarjetaYear->push(Tarjeta::whereYear('created_at', $days_backwards)->select('id')->count());
+            $printCountYear->push(Tarjeta::whereYear('fecha_print', $days_backwards)->where('status', 1)->count());
+            $notPrintCountYear->push(Tarjeta::whereYear('created_at', $days_backwards)->where('status', 0)->count());
+
+        }
+    
+        $chartYear = new TarjetaChart;
+        $chartYear->labels($tarjetaYears->values());
+        $chartYear->title('Gráfico de Tarjetas Por Años');
+        $chartYear->dataset("Tarjetas", 'line', $allTarjetaYear)->backgroundColor("rgba(22,160,133, 0.4)");
+        $chartYear->dataset("Impresas", 'line', $printCountYear)->backgroundColor("rgba(255, 205, 86, 0.6)");
+        $chartYear->dataset("No Impresas", 'line', $notPrintCountYear)->backgroundColor("rgba(51,105,232, 0.6)");
+
+
+        return view('admin.tarjetaDashboard', compact('chart', 'chartPie', 'chartYear', 'countAllTarjetas', 'countNotPrint', 'countPrint'));
     }
 }

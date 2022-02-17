@@ -66,7 +66,7 @@
                                         Correlativo
                                     </a>
                                     @if (auth()->user()->name == 'Admin Informática')
-                                        <a class="dropdown-item" href="{{ route('admin.template') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.dashboard.socio') }}">
                                             Panel
                                         </a>
                                     @endif

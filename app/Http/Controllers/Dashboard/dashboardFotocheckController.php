@@ -89,6 +89,41 @@ class dashboardFotocheckController extends Controller
         // $chartPie->displayAxes(false);        
         $chartPie->displayLegend(true);
 
-        return view('admin.fotocheckDashboard', compact('chart', 'chartPie', 'countAllFotochecks', 'countNotPrint', 'countPrint'));
+        // Gráficos por año
+        $data = Fotocheck::whereYear('created_at', '<=', now()->format('Y'))->orderby('created_at')->get('created_at');
+
+        $flattened = $data->transform(function ($item) {
+            return substr($item, 15, -54);
+        });
+
+        $collection = collect($flattened);
+
+        $fotochecksYears = $collection->unique();
+        $fotochecksYears->values();
+
+        $allFotocheckYear = collect([]);
+        $printCountYear = collect([]);
+        $notPrintCountYear = collect([]);
+        // dd($fotochecksYears->values());
+        $yearStart = 2021;
+        $yearLast = $fotochecksYears->last();
+        
+        for ($days_backwards = $yearStart; $days_backwards <= $yearLast; $days_backwards++)
+        {
+            $allFotocheckYear->push(Fotocheck::whereYear('created_at', $days_backwards)->select('id')->count());
+            $printCountYear->push(Fotocheck::whereYear('fecha_print', $days_backwards)->where('status', 1)->count());
+            $notPrintCountYear->push(Fotocheck::whereYear('created_at', $days_backwards)->where('status', 0)->count());
+
+        }
+    
+        $chartYear = new FotocheckChart;
+        $chartYear->labels($fotochecksYears->values());
+        $chartYear->title('Gráfico de Fotochecks Por Años');
+        $chartYear->dataset("Fotochecks", 'line', $allFotocheckYear)->backgroundColor("rgba(22,160,133, 0.4)");
+        $chartYear->dataset("Impresas", 'line', $printCountYear)->backgroundColor("rgba(255, 205, 86, 0.6)");
+        $chartYear->dataset("No Impresas", 'line', $notPrintCountYear)->backgroundColor("rgba(51,105,232, 0.6)");
+
+
+        return view('admin.fotocheckDashboard', compact('chart', 'chartYear', 'chartPie', 'countAllFotochecks', 'countNotPrint', 'countPrint'));
     }
 }

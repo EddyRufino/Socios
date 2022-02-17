@@ -72,6 +72,14 @@
                     {!! $chartPie->script() !!}
                 </div>
             </div>
+
+            <div class="row justify-content-center mt-4 mb-4">
+                <div class="col-md-10">
+                    {!! $chartYear->container() !!}
+
+                    {!! $chartYear->script() !!}
+                </div>
+            </div>
         {{-- </div> --}}
     </div>
 @endsection

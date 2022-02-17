@@ -136,7 +136,7 @@ Route::get('admin/filtro-pdf', 'Export\Filtro\Pdf\PdfFiltroController@pdfFiltroS
 Route::get('admin/filtro-excel', 'Export\Filtro\Pdf\PdfFiltroController@excelFiltroSocioInfo')->name('filtro.socio.excel.info');
 
 // Charts
-Route::get('/admin', 'Dashboard\dashboardController@index')->name('admin.template');
+// Route::get('/admin', 'Dashboard\dashboardController@index')->name('admin.template');
 Route::get('/admin-dashboard-tarjetas', 'Dashboard\dashboardTarjetaController')->name('admin.dashboard.tarjeta');
 Route::get('/admin-dashboard-fotochecks', 'Dashboard\dashboardFotocheckController')->name('admin.dashboard.fotocheck');
 Route::get('/admin-dashboard-socios', 'Dashboard\dashboardSocioController')->name('admin.dashboard.socio');
