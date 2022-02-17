@@ -118,6 +118,7 @@ Route::get('/socios-fotochecks/{fotocheck}', 'FotocheckController@show')->name('
 Route::resource('admin/users', 'UserController');
 
 Route::resource('admin/disenios', 'DisenioController');
+Route::resource('admin/suministros', 'SuministroController');
 
 Route::resource('admin/areas', 'AreaController')->only(['index', 'edit', 'update']);
 

@@ -38,6 +38,8 @@ class FotocheckRequest extends FormRequest
             'user_id' => ['nullable'],
             'descripcion' => ['nullable'],
             'renovado' => ['nullable'],
+            'renovado_count' => ['nullable'],
+            'suministro_id' => ['nullable'],
         ];
     }
 }

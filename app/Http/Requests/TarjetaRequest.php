@@ -42,6 +42,8 @@ class TarjetaRequest extends FormRequest
             'descripcion' => ['nullable'],
             'disenio_id' => ['nullable'],
             'renovado' => ['nullable'],
+            'renovado_count' => ['nullable'],
+            'suministro_id' => ['nullable'],
         ];
     }
 }
