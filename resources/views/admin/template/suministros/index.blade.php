@@ -17,6 +17,16 @@
                         @include('icons.add')
                     </a></h6>
 
+                    <h6><a href="{{ route('suministro.pdf') }}" class="ml-3 text-danger text-decoration-none tooltipw" target="_blank">
+                        <span id="tooltipw" class="tooltiptext">Descarga Suministros - PDF</span>
+                        @include('icons.pdf')
+                    </a></h6>
+
+                    <h6><a href="{{ route('suministro.excel') }}" class="ml-3 text-success text-decoration-none tooltipw">
+                        <span id="tooltipw" class="tooltiptext">Descarga Suministros - EXCEL</span>
+                        @include('icons.excel')
+                    </a></h6>
+
                 </div>
         
             </div>

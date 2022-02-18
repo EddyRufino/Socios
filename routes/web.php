@@ -136,6 +136,9 @@ Route::get('admin/filtro-pdf', 'Export\Filtro\Pdf\PdfFiltroController@pdfFiltroS
 // Route::get('admin/filtro-pdf-graficos', 'Export\Filtro\Pdf\PdfFiltroController@pdfFiltroSocioGrafico')->name('filtro.socio.pdf.grafi');
 Route::get('admin/filtro-excel', 'Export\Filtro\Pdf\PdfFiltroController@excelFiltroSocioInfo')->name('filtro.socio.excel.info');
 
+Route::get('admin/suministro-pdf', 'Export\Suministro\PdfSuministroController')->name('suministro.pdf');
+Route::get('admin/suministro-excel', 'Export\Suministro\ExcelSuministroController')->name('suministro.excel');
+
 // Charts
 // Route::get('/admin', 'Dashboard\dashboardController@index')->name('admin.template');
 Route::get('/admin-dashboard-tarjetas', 'Dashboard\dashboardTarjetaController')->name('admin.dashboard.tarjeta');
