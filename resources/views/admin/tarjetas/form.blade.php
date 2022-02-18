@@ -16,6 +16,12 @@
     @error('disenio')
         <p style="color: red; display: block; margin-left: 20px; margin-bottom: 20px; background-color: navajowhite; padding: 5px; border-radius: 4px;">{{ $message }}</p>
     @enderror
+
+    <input type="hidden" name="suministro" class="@error('suministro') is-invalid @enderror">
+
+    @error('suministro')
+        <p style="color: red; display: block; margin-left: 20px; margin-bottom: 20px; background-color: navajowhite; padding: 5px; border-radius: 4px;">{{ $message }}</p>
+    @enderror    
 </div>
 
 @if (request()->routeIs('tarjetas.create'))

@@ -17,6 +17,14 @@
     @enderror
 </div>
 
+<div class="row">
+    <input type="hidden" name="suministro" class="@error('suministro') is-invalid @enderror">
+
+    @error('suministro')
+        <p style="color: red; display: block; margin-left: 20px; margin-bottom: 20px; background-color: navajowhite; padding: 5px; border-radius: 4px;">{{ $message }}</p>
+    @enderror
+</div>
+
 {{-- <div class="custom-control custom-checkbox mb-3">
     <input type="checkbox" class="custom-control-input" id="myCheck" onclick="myFunction()">
     <label class="custom-control-label" for="myCheck">Persona Natural / Jurídica</label>

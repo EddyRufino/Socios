@@ -141,6 +141,7 @@ Route::get('admin/filtro-excel', 'Export\Filtro\Pdf\PdfFiltroController@excelFil
 Route::get('/admin-dashboard-tarjetas', 'Dashboard\dashboardTarjetaController')->name('admin.dashboard.tarjeta');
 Route::get('/admin-dashboard-fotochecks', 'Dashboard\dashboardFotocheckController')->name('admin.dashboard.fotocheck');
 Route::get('/admin-dashboard-socios', 'Dashboard\dashboardSocioController')->name('admin.dashboard.socio');
+Route::get('/admin-dashboard-suministros', 'Dashboard\dashboardSuministroController')->name('admin.dashboard.suministro');
 
 Auth::routes(["register" => false]);
 

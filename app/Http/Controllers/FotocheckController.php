@@ -6,6 +6,7 @@ use App\Socio;
 use App\Disenio;
 use App\Vehiculo;
 use App\Fotocheck;
+use App\Suministro;
 use App\Asociacione;
 use App\TipoDocumento;
 use Illuminate\Support\Str;
@@ -41,7 +42,13 @@ class FotocheckController extends Controller
             ->first();
 
         $disenio = Disenio::select('id')->where('status', 1)->where('modelo', 0)->whereNull('deleted_at')->first();
-        //dd($socioGet);
+
+        $suministroQuery = Suministro::query();
+        $suministro = $suministroQuery->select(['id', 'fecha_utilizacion', 'conteo_monto_pvc', 'conteo_monto_cinta', 'conteo_monto_holograma'])
+            ->where('status', 1)
+            ->whereNull('deleted_at')
+            ->first();
+        
         if (is_null($socioGet)) {
             //dd($socioGet);
             $socio = Socio::updateOrCreate([
@@ -62,16 +69,30 @@ class FotocheckController extends Controller
                 'disenio' => "No hay diseño habilitado",
             ]);
         }
+
+        if (!isset($suministro->id)) {
+            throw ValidationException::withMessages([
+                'suministro' => "No hay suministro habilitado",
+            ]);
+        }
         //dd('paso');
         $data = array_merge($request->validated(), [
             'image' => '/storage/'.$request->file('image')->store('fotos'),
             'url' => is_null($socioGet) ? $socio->url : $socioGet->url,
             'socio_id' => is_null($socioGet) ? $socio->id : $socioGet->id,
             'user_id' => auth()->user()->id,
-            'disenio_id' => $disenio->id
+            'disenio_id' => $disenio->id,
+            'suministro_id' => $suministro->id
         ]);
 
         $socio = Fotocheck::create($data);
+
+        $suministroQuery->where('id', $suministro->id)->update([
+            'fecha_utilizacion' => is_null($suministro->fecha_utilizacion) ? now()->format('Y-m-d') : $suministro->fecha_utilizacion,
+            'conteo_monto_pvc' => $suministro->conteo_monto_pvc + 1,
+            'conteo_monto_cinta' => bcdiv($suministro->conteo_monto_pvc / 300, 1),
+            'conteo_monto_holograma' => bcdiv($suministro->conteo_monto_pvc / 300, 1)
+        ]);
 
         return redirect()->route('fotochecks.index')->with('status', $request->nombre_socio . ' fue registrado!');
     }

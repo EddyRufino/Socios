@@ -17,11 +17,11 @@ class CreateSuministrosTable extends Migration
             $table->id();
             $table->string('nombre', 100);
             $table->integer('monto_pvc');
-            $table->integer('conteo_monto_pvc')->nullable();
+            $table->integer('conteo_monto_pvc')->default(0)->nullable();
             $table->integer('monto_cinta');
-            $table->integer('conteo_monto_cinta')->nullable();
+            $table->integer('conteo_monto_cinta')->default(0)->nullable();
             $table->integer('monto_holograma');
-            $table->integer('conteo_monto_holograma')->nullable();
+            $table->integer('conteo_monto_holograma')->default(0)->nullable();
             $table->integer('monto_pruebas')->nullable();
             $table->date('fecha_adquisicion');
             $table->date('fecha_utilizacion')->nullable();

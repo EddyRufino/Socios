@@ -38,7 +38,7 @@ class dashboardTarjetaController extends Controller
         $chart->dataset("Impresas", 'bar', $printCount)->backgroundColor('#ffc107');
         $chart->dataset("No Impresas", 'bar', $notPrintCount)->backgroundColor('rgba(255, 99, 132, 0.8)');
         
-
+        // Torta
         $borderColors = [
             // "#17a2b8",
             // "#ffc107",

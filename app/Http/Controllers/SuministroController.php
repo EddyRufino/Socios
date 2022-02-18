@@ -15,8 +15,17 @@ class SuministroController extends Controller
 
     public function index()
     {
-        $suministros = Suministro::latest()->paginate(3);
-        return view('admin.template.suministros.index', compact('suministros'));
+        $suministroQuery = Suministro::query();
+        $suministros = $suministroQuery->latest()->paginate(3);
+        $countCinta = $suministroQuery->get('conteo_monto_cinta');
+        $countCinta = $suministroQuery->get('conteo_monto_holograma');
+
+        $cinta = $countCinta[0]->conteo_monto_cinta / 300;
+        $holograma = $countCinta[0]->conteo_monto_holograma / 300;
+
+        // dd();
+
+        return view('admin.template.suministros.index', compact('suministros', 'cinta', 'holograma'));
     }
 
     public function create()
@@ -28,13 +37,13 @@ class SuministroController extends Controller
 
     public function store(SuministroRequest $request)
     {
-        $data = array_merge($request->validated(), [
-            'conteo_monto_pvc' => $request->monto_pvc,
-            'conteo_monto_cinta' => $request->monto_cinta,
-            'conteo_monto_holograma' => $request->monto_holograma
-        ]);
+        // $data = array_merge($request->validated(), [
+        //     'conteo_monto_pvc' => $request->monto_pvc,
+        //     'conteo_monto_cinta' => $request->monto_cinta,
+        //     'conteo_monto_holograma' => $request->monto_holograma
+        // ]);
 
-        $socio = Suministro::create($data);
+        $socio = Suministro::create($request->validated());
 
         return redirect()->route('suministros.index')->with('status', $socio->nombre . ' fue registrado!');
     }

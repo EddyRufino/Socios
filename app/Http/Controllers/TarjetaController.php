@@ -12,6 +12,7 @@ use App\TipoDocumento;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\TarjetaRequest;
+use App\Suministro;
 use Illuminate\Validation\ValidationException;
 
 class TarjetaController extends Controller
@@ -42,10 +43,16 @@ class TarjetaController extends Controller
         $socioGet = Socio::where('url', 'LIKE', '%'. Str::slug($request->nombre_socio) .'%')
             ->doesnthave('tarjetas')
             ->first();
-        //dd($socioGet);
 
         $disenio = Disenio::select('id')->where('status', 1)->where('modelo', 1)->whereNull('deleted_at')->first();
-        // dd($disenio->id);
+
+        $suministroQuery = Suministro::query();
+        $suministro = $suministroQuery->select(['id', 'fecha_utilizacion', 'conteo_monto_pvc', 'conteo_monto_cinta', 'conteo_monto_holograma'])
+            ->where('status', 1)
+            ->whereNull('deleted_at')
+            ->first();
+        // dd(bcdiv($suministro->conteo_monto_pvc / 300,1));
+        // dd($suministro->id);
 
         if (is_null($socioGet)) {
             //dd('nulo');
@@ -84,18 +91,32 @@ class TarjetaController extends Controller
             ]);
         }
 
+        if (!isset($suministro->id)) {
+            throw ValidationException::withMessages([
+                'suministro' => "No hay suministro habilitado",
+            ]);
+        }
+
         Tarjeta::create(array_merge(
             $request->validated(), [
                 'socio_id' => is_null($socioGet) ? $socio->id : $socioGet->id,
                 'num_correlativo' => now()->format('Y') .'-'. $request->num_correlativo,
                 'url' => is_null($socioGet) ? $socio->url : $socioGet->url,
                 'user_id' => auth()->user()->id,
-                'disenio_id' => $disenio->id
+                'disenio_id' => $disenio->id,
+                'suministro_id' => $suministro->id
             ])
         );
 
         Correlativo::where('tipo', 1)->update([
             'num_correlativo' => $request->num_correlativo
+        ]);
+
+        $suministroQuery->where('id', $suministro->id)->update([
+            'fecha_utilizacion' => is_null($suministro->fecha_utilizacion) ? now()->format('Y-m-d') : $suministro->fecha_utilizacion,
+            'conteo_monto_pvc' => $suministro->conteo_monto_pvc + 1,
+            'conteo_monto_cinta' => bcdiv($suministro->conteo_monto_pvc / 300, 1),
+            'conteo_monto_holograma' => bcdiv($suministro->conteo_monto_pvc / 300, 1)
         ]);
 
         return redirect()->route('tarjetas.index')->with('status', $request->nombre_socio . ' fue registrado!');

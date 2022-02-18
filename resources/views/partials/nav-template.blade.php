@@ -43,7 +43,11 @@
                             <a href="{{ route('admin.dashboard.socio') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Socios</p>
-                            </a>                            
+                            </a>
+                            <a href="{{ route('admin.dashboard.suministro') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Suministro</p>
+                            </a>
                         </li>
                     </ul>
                 </li>
