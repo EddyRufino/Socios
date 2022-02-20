@@ -90,25 +90,6 @@ class ViewFiltroController extends Controller
 
             $datas = Socio::when($socio, function ($query) use ($vehiculo_id, $print, $dateStart, $dateLast, $dateStartVigencia, $dateLastVigencia) {
                 $query
-
-                // ->with([
-                //     'tarjetas' => function($query) use ($print, $vehiculo_id, $dateStartVigencia, $dateLastVigencia, $dateStart, $dateLast) {
-                //         $query->whereIn('status', $print)
-                //             ->whereIn('vehiculo_id', $vehiculo_id)
-                //             ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
-                //             ->whereBetween('created_at', [$dateStart, $dateLast])
-                //             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
-                //     },
-                //     'fotochecks' => function($query) use ($print, $vehiculo_id, $dateStartVigencia, $dateLastVigencia, $dateStart, $dateLast) {
-                //         $query->whereIn('status', $print)
-                //             ->whereIn('vehiculo_id', $vehiculo_id)
-                //             ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
-                //             ->whereBetween('created_at', [$dateStart, $dateLast])
-                //             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
-                //     },
-                //     'asociacione' => function($query) {
-                //         $query->select('id', 'nombre');
-                //     }])
                     ->orWhereHas('tarjetas', function($query) use ($print, $vehiculo_id, $dateStartVigencia, $dateLastVigencia, $dateStart, $dateLast) {
                         $query->whereHas('socio', function ($query) {
                                 $query->whereNotNull('asociacione_id');
@@ -128,10 +109,131 @@ class ViewFiltroController extends Controller
                             ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
                             ->whereBetween('created_at', [$dateStart, $dateLast])
                             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
-                    })
-                    ->whereNotNull('asociacione_id')
-                    ->whereIn('vehiculo_id', $vehiculo_id);
+                    });
             })
+            ->when($natural, function ($query) use ($vehiculo_id, $print, $dateStart, $dateLast, $dateStartVigencia, $dateLastVigencia) {
+                $query
+                    ->orWhereHas('tarjetas', function($query) use ($print, $vehiculo_id, $dateStartVigencia, $dateLastVigencia, $dateStart, $dateLast) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereNull('asociacione_id')
+                                    ->where('tipo_persona', 2);
+                            })
+                            ->whereIn('status', $print)
+                            ->whereIn('vehiculo_id', $vehiculo_id)
+                            ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
+                            ->whereBetween('created_at', [$dateStart, $dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                    })
+                    ->orWhereHas('fotochecks', function($query) use ($print, $vehiculo_id, $dateStartVigencia, $dateLastVigencia, $dateStart, $dateLast) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereNull('asociacione_id')
+                                    ->where('tipo_persona', 2);
+                            })
+                            ->whereIn('status', $print)
+                            ->whereIn('vehiculo_id', $vehiculo_id)
+                            ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
+                            ->whereBetween('created_at', [$dateStart, $dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                });
+            })
+            ->when($juridica, function ($query) use ($vehiculo_id, $print, $dateStart, $dateLast, $dateStartVigencia, $dateLastVigencia) {
+                $query
+                    ->orWhereHas('tarjetas', function($query) use ($print, $vehiculo_id, $dateStartVigencia, $dateLastVigencia, $dateStart, $dateLast) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereNull('asociacione_id')
+                                    ->where('tipo_persona', 3);
+                            })
+                            ->whereIn('status', $print)
+                            ->whereIn('vehiculo_id', $vehiculo_id)
+                            ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
+                            ->whereBetween('created_at', [$dateStart, $dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                    })
+                    ->orWhereHas('fotochecks', function($query) use ($print, $vehiculo_id, $dateStartVigencia, $dateLastVigencia, $dateStart, $dateLast) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereNull('asociacione_id')
+                                    ->where('tipo_persona', 3);
+                            })
+                            ->whereIn('status', $print)
+                            ->whereIn('vehiculo_id', $vehiculo_id)
+                            ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
+                            ->whereBetween('created_at', [$dateStart, $dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                });
+            })
+            ->when($socioNatural, function ($query) use ($vehiculo_id, $print, $dateStart, $dateLast, $dateStartVigencia, $dateLastVigencia) {
+                $query
+                    ->orWhereHas('tarjetas', function($query) use ($print, $vehiculo_id, $dateStartVigencia, $dateLastVigencia, $dateStart, $dateLast) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereIn('tipo_persona', [1,2]);
+                            })
+                            ->whereIn('status', $print)
+                            ->whereIn('vehiculo_id', $vehiculo_id)
+                            ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
+                            ->whereBetween('created_at', [$dateStart, $dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                    })
+                    ->orWhereHas('fotochecks', function($query) use ($print, $vehiculo_id, $dateStartVigencia, $dateLastVigencia, $dateStart, $dateLast) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereIn('tipo_persona', [1,2]);
+                            })
+                            ->whereIn('status', $print)
+                            ->whereIn('vehiculo_id', $vehiculo_id)
+                            ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
+                            ->whereBetween('created_at', [$dateStart, $dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                });
+            })
+            ->when($socioJuridica, function ($query) use ($vehiculo_id, $print, $dateStart, $dateLast, $dateStartVigencia, $dateLastVigencia) {
+                $query
+                    ->orWhereHas('tarjetas', function($query) use ($print, $vehiculo_id, $dateStartVigencia, $dateLastVigencia, $dateStart, $dateLast) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereIn('tipo_persona', [1,3]);
+                            })
+                            ->whereIn('status', $print)
+                            ->whereIn('vehiculo_id', $vehiculo_id)
+                            ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
+                            ->whereBetween('created_at', [$dateStart, $dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                    })
+                    ->orWhereHas('fotochecks', function($query) use ($print, $vehiculo_id, $dateStartVigencia, $dateLastVigencia, $dateStart, $dateLast) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereIn('tipo_persona', [1,3]);
+                            })
+                            ->whereIn('status', $print)
+                            ->whereIn('vehiculo_id', $vehiculo_id)
+                            ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
+                            ->whereBetween('created_at', [$dateStart, $dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                });
+            })
+            ->when($naturalJuridica, function ($query) use ($vehiculo_id, $print, $dateStart, $dateLast, $dateStartVigencia, $dateLastVigencia) {
+                $query
+                    ->orWhereHas('tarjetas', function($query) use ($print, $vehiculo_id, $dateStartVigencia, $dateLastVigencia, $dateStart, $dateLast) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereNull('asociacione_id')
+                                    ->whereIn('tipo_persona', [2,3]);
+                            })
+                            ->whereIn('status', $print)
+                            ->whereIn('vehiculo_id', $vehiculo_id)
+                            ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
+                            ->whereBetween('created_at', [$dateStart, $dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                    })
+                    ->orWhereHas('fotochecks', function($query) use ($print, $vehiculo_id, $dateStartVigencia, $dateLastVigencia, $dateStart, $dateLast) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereNull('asociacione_id')
+                                    ->whereIn('tipo_persona', [2,3]);
+                            })
+                            ->whereIn('status', $print)
+                            ->whereIn('vehiculo_id', $vehiculo_id)
+                            ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
+                            ->whereBetween('created_at', [$dateStart, $dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                });
+            })
+            ->whereNull('asociacione_id')
+            ->whereIn('vehiculo_id', $vehiculo_id)
             // ->get();
             ->paginate(15, ['id', 'nombre_socio', 'dni_socio', 'url', 'num_placa', 'vehiculo_id', 'asociacione_id', 'tipo_documento_id']);
 

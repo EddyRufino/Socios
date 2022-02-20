@@ -14,7 +14,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex justify-content-between align-items-center">
                     <h6>Exportar:</h6>
-                    {{-- <h6><a href="{{ route('filtro.socio.pdf.info', [
+                    <h6><a href="{{ route('filtro.socio.pdf.info', [
                             'vehiculo_id' => request()->vehiculo_id,
                             'print' => request()->print,
                             'dateStart' => request()->dateStart,
@@ -32,7 +32,7 @@
                         >
                         <span id="tooltipw" class="tooltiptext">Descargar PDF</span>
                         @include('icons.pdf')
-                    </a></h6> --}}
+                    </a></h6>
 
                     {{-- <h6><a href="{{ route('filtro.socio.pdf.grafi', [
                             'vehiculo_id' => request()->vehiculo_id,
@@ -52,9 +52,9 @@
                         >
                         <span id="tooltipw" class="tooltiptext">Descargar Gráficos</span>
                         @include('icons.graphic')
-                    </a></h6> --}} dsds
+                    </a></h6> --}} 
 
-                    {{-- <h6><a href="{{ route('filtro.socio.excel.info', [
+                    <h6><a href="{{ route('filtro.socio.excel.info', [
                             'vehiculo_id' => request()->vehiculo_id,
                             'print' => request()->print,
                             'dateStart' => request()->dateStart,
@@ -72,7 +72,7 @@
                         >
                         <span id="tooltipw" class="tooltiptext">Descargar EXCEL</span>
                         @include('icons.excel')
-                    </a></h6> --}}
+                    </a></h6>
 
                 </div>
         
@@ -88,7 +88,8 @@
                                 <th scope="col">N. Placa</th>
                                 <th scope="col">Asociación</th>
                                 <th scope="col">Vehículo</th>
-                                <th scope="col">Actividad</th>
+                                <th scope="col">Tarjeta</th>
+                                <th scope="col">Fotocheck</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -115,7 +116,6 @@
                                     @endif
 
                                     <td>
-                                        {{-- {{ dd(isset($data->fotochecks)) }} --}}
                                         <div class="d-flex">
                                             @if ($data->tarjetas()->exists())
                                                 <a href="{{ route('tarjetas.show', $data->url) }}"
@@ -133,10 +133,12 @@
                                                     <span id="tooltipw" class="tooltiptext">Ver Tarjeta Circulación</span>
                                                     @include('icons.tarjeta')
                                                 </a></h6>
-                                            @endif
-                                            
+                                            @endif                                            
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex">
                                             @if ($data->fotochecks()->exists())
-                                                {{-- {{dd($data->fotochecks()->pluck('status')->implode(''))}} --}}
                                                 @if ($data->fotochecks()->pluck('status')->implode(''))
                                                     <h6><a href="{{ route('fotochecks.show', $data->url) }}"
                                                         class="text-decoration-none tooltipw"
@@ -145,7 +147,6 @@
                                                         <span id="tooltipw" class="tooltiptext">Ver QR</span>
                                                         @include('icons.qr')
                                                     </a></h6>
-                                                    <span>Fotocheck Impreso</span>
                                                 @endif
 
                                                 <h6><a href="{{ route('fotocheck.anverso', $data->fotochecks()->pluck('id')->implode('')) }}"
@@ -156,7 +157,6 @@
                                                     @include('icons.fotocheck')
                                                 </a></h6>
                                             @endif
-
                                         </div>
                                     </td>
                                 </tr>

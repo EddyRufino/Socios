@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Area;
+use App\Socio;
 use App\Tarjeta;
 use App\Fotocheck;
 use Illuminate\Contracts\View\View;
@@ -51,7 +52,202 @@ class filtroSociosExport implements FromView
         
         if ($this->isTarjeta && $this->isFotocheck) {
 
-            dd('All');
+            if ($this->isTarjeta && $this->isFotocheck && request()->socio) {
+                $socio = true;
+            }
+    
+            if ($this->isTarjeta && $this->isFotocheck && request()->natural) {
+                $natural = true;
+            }
+    
+            if ($this->isTarjeta && $this->isFotocheck && request()->juridica) {
+                $juridica = true;
+            }
+    
+            if ($this->isTarjeta && $this->isFotocheck && request()->socio && request()->natural) {
+                $socioNatural = true;
+                $socio = false;
+                $natural = false;
+                $juridica = false;
+            }
+    
+            if ($this->isTarjeta && $this->isFotocheck && request()->socio && request()->juridica) {
+                $socioJuridica = true;
+                $socio = false;
+                $natural = false;
+                $juridica = false;
+            }
+    
+            if ($this->isTarjeta && $this->isFotocheck && request()->natural && request()->juridica) {
+                $naturalJuridica = true;
+                $socioJuridica = false;
+                $socioNatural = false;
+                $natural = false;
+                $juridica = false;
+                $socio = false;
+            }
+
+            if ($this->isTarjeta && $this->isFotocheck && request()->socio && request()->natural && request()->juridica) {
+                $todos = true;
+                $naturalJuridica = false;
+                $socioJuridica = false;
+                $socioNatural = false;
+                $natural = false;
+                $juridica = false;
+                $socio = false;
+            }
+
+            $datas = Socio::when($socio, function ($query) {
+                $query
+                    ->orWhereHas('tarjetas', function($query) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereNotNull('asociacione_id');
+                            })
+                            ->whereIn('status', $this->print)
+                            ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                            ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                    })
+                    ->orWhereHas('fotochecks', function($query) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereNotNull('asociacione_id');
+                            })
+                            ->whereIn('status', $this->print)
+                            ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                            ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                    });
+            })
+            ->when($natural, function ($query) {
+                $query
+                    ->orWhereHas('tarjetas', function($query) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereNull('asociacione_id')
+                                    ->where('tipo_persona', 2);
+                            })
+                            ->whereIn('status', $this->print)
+                            ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                            ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                    })
+                    ->orWhereHas('fotochecks', function($query) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereNull('asociacione_id')
+                                    ->where('tipo_persona', 2);
+                            })
+                            ->whereIn('status', $this->print)
+                            ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                            ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                });
+            })
+            ->when($juridica, function ($query) {
+                $query
+                    ->orWhereHas('tarjetas', function($query) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereNull('asociacione_id')
+                                    ->where('tipo_persona', 3);
+                            })
+                            ->whereIn('status', $this->print)
+                            ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                            ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                    })
+                    ->orWhereHas('fotochecks', function($query) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereNull('asociacione_id')
+                                    ->where('tipo_persona', 3);
+                            })
+                            ->whereIn('status', $this->print)
+                            ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                            ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                });
+            })
+            ->when($socioNatural, function ($query) {
+                $query
+                    ->orWhereHas('tarjetas', function($query) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereIn('tipo_persona', [1,2]);
+                            })
+                            ->whereIn('status', $this->print)
+                            ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                            ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                    })
+                    ->orWhereHas('fotochecks', function($query) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereIn('tipo_persona', [1,2]);
+                            })
+                            ->whereIn('status', $this->print)
+                            ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                            ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                });
+            })
+            ->when($socioJuridica, function ($query) {
+                $query
+                    ->orWhereHas('tarjetas', function($query) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereIn('tipo_persona', [1,3]);
+                            })
+                            ->whereIn('status', $this->print)
+                            ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                            ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                    })
+                    ->orWhereHas('fotochecks', function($query) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereIn('tipo_persona', [1,3]);
+                            })
+                            ->whereIn('status', $this->print)
+                            ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                            ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                });
+            })
+            ->when($naturalJuridica, function ($query) {
+                $query
+                    ->orWhereHas('tarjetas', function($query) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereNull('asociacione_id')
+                                    ->whereIn('tipo_persona', [2,3]);
+                            })
+                            ->whereIn('status', $this->print)
+                            ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                            ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                    })
+                    ->orWhereHas('fotochecks', function($query) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereNull('asociacione_id')
+                                    ->whereIn('tipo_persona', [2,3]);
+                            })
+                            ->whereIn('status', $this->print)
+                            ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                            ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                });
+            })
+            ->whereNull('asociacione_id')
+            ->whereIn('vehiculo_id', $this->vehiculo_id)
+            ->get(['id', 'nombre_socio', 'dni_socio', 'url', 'num_placa', 'vehiculo_id', 'asociacione_id', 'tipo_documento_id']);
+            
+            $area = Area::first();
+
+            return view('admin.template.filtros.tarjetasFotochecksExcelInfo', compact('datas', 'area'));
         
         } elseif($this->isFotocheck) {
 

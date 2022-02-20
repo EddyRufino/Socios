@@ -159,7 +159,7 @@
                                     </div>
                                 </div> --}}
                                 <div class="col-sm-3">
-                                    <label>Elija</label>
+                                    <label>Modelo</label>
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input class="form-check-input" name="tarjeta" value="1" type="checkbox" checked>
