@@ -19,6 +19,26 @@ class Tarjeta extends Model
       return 'url';
     }
 
+    public function getNumPlacaAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
+    public function getVigenciaOperacionAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
+    public function getNumAutorizacionAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
+    public function getVigenciaAutorizacionAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
     public function setNumPlacaAttribute($value)
     {
         $this->attributes['num_placa'] = strtoupper($value);

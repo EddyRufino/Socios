@@ -351,7 +351,7 @@
 
 .nombre-jefe-footer-reverso {
     position: absolute;
-    top: 100%;
+    top: 107%;
     left: 81%;
     height: 30%;
     width: 45%;
@@ -363,7 +363,7 @@
 
 .nombre-jefe-firma-footer-reverso {
     position: absolute;
-    top: 80%;
+    top: 86%;
     left: 81%;
     height: 30%;
     width: 45%;
@@ -375,7 +375,7 @@
 
 .nombre-area-footer-reverso {
     position: absolute;
-    top: 103%;
+    top: 110%;
     left: 81%;
     height: 30%;
     width: 45%;

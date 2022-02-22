@@ -22,6 +22,21 @@ class Socio extends Model
       return 'url';
     }
 
+    public function getNombreSocioAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
+    public function getNombrePropietarioAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
+    public function getNumPlacaAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
     public function setNombrePropietarioAttribute($value)
     {
         $this->attributes['nombre_propietario'] = ucwords($value);

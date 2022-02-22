@@ -76,9 +76,9 @@ class DisenioController extends Controller
     public function update(Request $request, Disenio $disenio)
     {
         $this->validate($request, [
-            'anverso' => 'required|mimes:jpeg,jpg,png',
-            'reverso' => 'required|mimes:jpeg,jpg,png',
-            'firma' => 'required|mimes:jpeg,jpg,png',
+            'anverso' => 'mimes:jpeg,jpg,png',
+            'reverso' => 'mimes:jpeg,jpg,png',
+            'firma' => 'mimes:jpeg,jpg,png',
         ]);
         
         $anverso = $request->file('anverso');

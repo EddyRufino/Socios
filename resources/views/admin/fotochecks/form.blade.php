@@ -377,22 +377,7 @@
                 @enderror
             </div>
 
-{{--             <div class="form-group pl-2 pr-2">
-                <label for="inputEmail1">N. Placa</label>
-                <input type="text"
-                    name="num_placa"
-                    class="form-control @error('num_placa') is-invalid  @enderror"
-                    value="{{ old('num_placa', $fotocheck->num_placa) }}"
-                    id="inputEmail1"
-                    placeholder="Ejm: 5816-4P"
-                >
 
-                @error('num_placa')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                @enderror
-            </div> --}}
         </fieldset>
     </div>
 </div>

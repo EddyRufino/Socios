@@ -234,6 +234,29 @@ class PdfFiltroController extends Controller
                             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
                 });
             })
+            ->when($todos, function ($query) use ($vehiculo_id, $print, $dateStart, $dateLast, $dateStartVigencia, $dateLastVigencia)  {
+                $query
+                    ->orWhereHas('tarjetas', function($query) use ($print, $vehiculo_id, $dateStartVigencia, $dateLastVigencia, $dateStart, $dateLast) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereIn('tipo_persona', [1,2,3]);
+                            })
+                            ->whereIn('status', $print)
+                            ->whereIn('vehiculo_id', $vehiculo_id)
+                            ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
+                            ->whereBetween('created_at', [$dateStart, $dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                    })
+                    ->orWhereHas('fotochecks', function($query) use ($print, $vehiculo_id, $dateStartVigencia, $dateLastVigencia, $dateStart, $dateLast) {
+                        $query->whereHas('socio', function ($query) {
+                                $query->whereIn('tipo_persona', [1,2,3]);
+                            })
+                            ->whereIn('status', $print)
+                            ->whereIn('vehiculo_id', $vehiculo_id)
+                            ->whereBetween('revalidacion', [$dateStartVigencia, $dateLastVigencia])
+                            ->whereBetween('created_at', [$dateStart, $dateLast])
+                            ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
+                    });
+            })
             ->whereNull('asociacione_id')
             ->whereIn('vehiculo_id', $vehiculo_id)
             ->get(['id', 'nombre_socio', 'dni_socio', 'url', 'num_placa', 'vehiculo_id', 'asociacione_id', 'tipo_documento_id']);

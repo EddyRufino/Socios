@@ -33,6 +33,7 @@ class SocioController extends Controller
                     $query->select('id', 'nombre');
                 },
             ])
+            ->latest()
             ->paginate(15, ['id', 'url', 'nombre_socio', 'dni_socio', 'num_placa', 'asociacione_id', 'tipo_documento_id', 'vehiculo_id']);
             // ->first(['id', 'url', 'nombre_socio', 'dni_socio', 'num_placa', 'asociacione_id', 'tipo_documento_id', 'vehiculo_id']);
         // dd($socios);

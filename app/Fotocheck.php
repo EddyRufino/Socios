@@ -19,6 +19,16 @@ class Fotocheck extends Model
       return 'url';
     }
 
+    public function getNumPlacaAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
+    public function getNumAutorizacionAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
     public function setNombreSocioAttribute($nombre_socio) {
 
         $this->attributes['nombre_socio'] = ucwords($nombre_socio);
