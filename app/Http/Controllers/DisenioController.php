@@ -16,7 +16,7 @@ class DisenioController extends Controller
     public function index()
     {
         return view('admin.template.disenios.index', [
-            'disenios' => Disenio::latest()->paginate(2)
+            'disenios' => Disenio::latest()->paginate()
         ]);
     }
 

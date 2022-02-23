@@ -15,94 +15,53 @@
                             @csrf
 
                             <div class="col-md-12 mb-3">
-                                <label>Ingresa Fecha de Creación</label>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label>Desde:</label>
-                                        <input class="form-control" type="date" name="dateStart" min="2018-01-01" max="2030-12-31" value="2019-01-01">
+                                        <label>Fecha de Creación</label>
+                                        <div class="col-md-">
+                                            <label>Desde:</label>
+                                            <input class="form-control" type="date" name="dateStart" min="2018-01-01" max="2030-12-31" value="2019-01-01">
+                                        </div>
+                                        
+                                        <div class="col-md-">
+                                            <label>Hasta:</label>
+                                            <input class="form-control" type="date" name="dateLast" min="2018-01-01" max="2030-12-31" value="<?php echo date("Y-m-d", strtotime("+4 year"));?>">
+                                        </div>
                                     </div>
-                                    
                                     <div class="col-md-4">
-                                        <label>Hasta:</label>
-                                        <input class="form-control" type="date" name="dateLast" min="2018-01-01" max="2030-12-31" value="<?php echo date("Y-m-d", strtotime("+4 year"));?>">
-                                    </div>
-                                    {{-- <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label>Año Inicio</label>
-                                            <select class="form-control" name="anio_start">
-                                                <option>-</option>
-                                                <option value="2019">2019</option>
-                                                <option value="2020">2020</option>
-                                                <option value="2021">2021</option>
-                                                <option value="2022">2022</option>
-                                                <option value="2023">2023</option>
-                                                <option value="2024">2024</option>
-                                                <option value="2025">2025</option>
-                                                <option value="2026">2026</option>
-                                            </select>
+                                        <label>Fecha de Vigencia</label>
+                                        <div class="col-md-">
+                                            <label>Desde:</label>
+                                            <input class="form-control" type="date" name="dateStartVigencia" min="2018-01-01" max="2030-12-31" value="2019-01-01">
+                                        </div>
+                                        
+                                        <div class="col-md-">
+                                            <label>Hasta:</label>
+                                            <input class="form-control" type="date" name="dateLastVigencia" min="2018-01-01" max="2030-12-31" value="<?php echo date("Y-m-d", strtotime("+4 year"));?>">
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label>Mes Inicio</label>
-                                            <select class="form-control" name="mes_start">
-                                                <option>-</option>
-                                                <option value="01">01</option>
-                                                <option value="02">02</option>
-                                                <option value="03">03</option>
-                                                <option value="04">04</option>
-                                                <option value="05">05</option>
-                                                <option value="06">06</option>
-                                                <option value="07">07</option>
-                                                <option value="08">08</option>
-                                                <option value="09">09</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                            </select>
+                                    <div class="col-md-4">
+                                        <div class="custom-control custom-checkbox d-flex">
+                            
+                                            <input type="checkbox" name="checkDatePrint" class="custom-control-input" id="myCheck" onclick="myFunction()">
+                                            <label class="custom-control-label" for="myCheck">Fecha de Impresión</label>
+                            
+                                        </div>
+                                        <div id="checkDatePrint" class="mt-2" style="display: none;">
+                                            <div class="col-md-">
+                                                <label>Desde:</label>
+                                                <input class="form-control" type="date" name="dateStartPrint" min="2018-01-01" max="2030-12-31" value="2019-01-01">
+                                            </div>
+                                            
+                                            <div class="col-md-">
+                                                <label>Hasta:</label>
+                                                <input class="form-control" type="date" name="dateLastPrint" min="2018-01-01" max="2030-12-31" value="<?php echo date("Y-m-d", strtotime("+4 year"));?>">
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-1"></div>
-
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label>Año Fin</label>
-                                            <select class="form-control" name="anio_last">
-                                                <option>-</option>
-                                                <option value="2019">2019</option>
-                                                <option value="2020">2020</option>
-                                                <option value="2021">2021</option>
-                                                <option value="2022">2022</option>
-                                                <option value="2023">2023</option>
-                                                <option value="2024">2024</option>
-                                                <option value="2025">2025</option>
-                                                <option value="2026">2026</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label>Mes Fin</label>
-                                            <select class="form-control" name="mes_last">
-                                                <option>-</option>
-                                                <option value="01">01</option>
-                                                <option value="02">02</option>
-                                                <option value="03">03</option>
-                                                <option value="04">04</option>
-                                                <option value="05">05</option>
-                                                <option value="06">06</option>
-                                                <option value="07">07</option>
-                                                <option value="08">08</option>
-                                                <option value="09">09</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                            </select>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
+                            
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label>Vehículo</label>
@@ -119,16 +78,6 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Tipo Socio</label>
-                                    {{-- <div class="form-group">
-                                        <div class="form-check">
-                                            <input class="form-check-input" name="impreso" type="radio" name="radio1">
-                                            <label class="form-check-label">Impreso</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" name="noImpreso" type="radio" name="radio1" checked="">
-                                            <label class="form-check-label">No Impreso</label>
-                                        </div>
-                                    </div> --}}
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input class="form-check-input" name="socio" value="1" type="checkbox" checked>
@@ -145,19 +94,23 @@
 
                                     </div>
                                 </div>
-                                {{-- <div class="col-sm-3">
-                                    <label>Asociación</label>
+                                <div class="col-sm-4">
+                                    <label>Diseño</label>
                                     <div class="form-group">
-                                        <div class="form-check">
-                                            <input class="form-check-input" name="vehiculo_id[]" value="1" type="checkbox" checked>
-                                            <label class="form-check-label">Sí</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" name="vehiculo_id[]" value="2" type="checkbox">
-                                            <label class="form-check-label">No</label>
-                                        </div>
+                                        @foreach ($disenios as $disenio)
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="disenio_id[]"
+                                                    value="{{ $disenio->id }}"
+                                                    type="checkbox"
+                                                    checked
+                                                >
+                                                <label class="form-check-label">{{ $disenio->nombre }}</label>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                </div> --}}
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-sm-3">
                                     <label>Modelo</label>
                                     <div class="form-group">
@@ -179,9 +132,26 @@
                                             <label class="form-check-label">No</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" name="print[]" value="1" type="checkbox">
+                                            <input class="form-check-input" name="print[]" value="1" type="checkbox" checked>
                                             <label class="form-check-label">Sí</label>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            {{-- <div class="col-md-12 mb-3">
+                                <label>Ingresa Fecha de Creación</label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Desde:</label>
+                                        <input class="form-control" type="date" name="dateStart" min="2018-01-01" max="2030-12-31" value="2019-01-01">
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <label>Hasta:</label>
+                                        <input class="form-control" type="date" name="dateLast" min="2018-01-01" max="2030-12-31" value="<?php echo date("Y-m-d", strtotime("+4 year"));?>">
                                     </div>
                                 </div>
                             </div>
@@ -198,7 +168,7 @@
                                         <input class="form-control" type="date" name="dateLastVigencia" min="2018-01-01" max="2030-12-31" value="<?php echo date("Y-m-d", strtotime("+4 year"));?>">
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group row mb-0 d-flex justify-content-end">
                                 <div class="col-md-6 offset-md-4 d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary">
@@ -214,3 +184,19 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script>
+    function myFunction() {
+        let check = document.getElementById("myCheck");
+        let checkDatePrint = document.getElementById("checkDatePrint");
+
+        if (check.checked == true){
+            checkDatePrint.style.display = "block";
+        } else {
+            checkDatePrint.style.display = "none";
+        }
+    }
+
+</script>
+@endpush

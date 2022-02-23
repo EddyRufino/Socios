@@ -587,7 +587,12 @@ html {
             EL TRANSPORTADOR DEBE DE PORTAR ESTE DOCUMENTO AL MOMENTO DE SER SOLICITADO POR LA AUTORIDAD COMPETENTE
         </p>
 
-        @if (isset($tarjeta[0]->disenio->firma))            
+        {{-- @if (isset($tarjeta[0]->disenio->firma))            
+            <p class="nombre-jefe-firma-footer-reverso">
+                <img src="{{ asset('disenios/' . $tarjeta[0]->disenio->firma) }}" alt="firma" style="width: 250px" height="150px">
+            </p>
+        @endif --}}
+        @if ($tarjeta[0]->disenio->id != 1)            
             <p class="nombre-jefe-firma-footer-reverso">
                 <img src="{{ asset('disenios/' . $tarjeta[0]->disenio->firma) }}" alt="firma" style="width: 250px" height="150px">
             </p>
@@ -595,7 +600,12 @@ html {
 
         <p class="nombre-jefe-footer-reverso" style="border-top: 1px solid black; width: 43%"></p>
         
-        @if (isset($tarjeta[0]->disenio->nombre_jefe))
+        {{-- @if (isset($tarjeta[0]->disenio->nombre_jefe))
+            <p class="nombre-jefe-footer-reverso">{{ $tarjeta[0]->disenio->nombre_jefe }}</p>
+            <p class="nombre-area-footer-reverso">SUB GERENTE DE TRANSPORTE</p>
+        @endif --}}
+
+        @if ($tarjeta[0]->disenio->id != 1)
             <p class="nombre-jefe-footer-reverso">{{ $tarjeta[0]->disenio->nombre_jefe }}</p>
             <p class="nombre-area-footer-reverso">SUB GERENTE DE TRANSPORTE</p>
         @endif

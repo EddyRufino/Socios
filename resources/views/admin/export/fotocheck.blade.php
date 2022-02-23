@@ -260,15 +260,26 @@ body{
         {{-- date('d/m/Y', strtotime("+1 years")) --}}
         <p class="texto-encima-revalidacion">F.REVALIDACIÓN: {{ date('d/m/Y', strtotime($fotocheck[0]->revalidacion)) }}</p>
 
-        @if (isset($fotocheck[0]->disenio->firma))
+        {{-- @if (isset($fotocheck[0]->disenio->firma))
+            <p class="firma-jefe-revalidacion">
+                <img src="{{ asset('disenios/' . $fotocheck[0]->disenio->firma) }}" alt="firma" style="width: 300px" height="200px">
+            </p>
+        @endif --}}
+        @if ($fotocheck[0]->disenio->id != 2))
             <p class="firma-jefe-revalidacion">
                 <img src="{{ asset('disenios/' . $fotocheck[0]->disenio->firma) }}" alt="firma" style="width: 300px" height="200px">
             </p>
         @endif
 
-        <p class="linea-firma-revalidacion"></p>
+        
+        {{-- @if (isset($fotocheck[0]->disenio->nombre_jefe))
+            <p class="linea-firma-revalidacion"></p> // iba a fuera
+            <p class="nombre-jefe-revalidacion">{{ $fotocheck[0]->disenio->nombre_jefe }}</p>
+            <p class="area-jefe-revalidacion">SUB GERENTE DE TRANSPORTE</p>
+        @endif --}}
 
-        @if (isset($fotocheck[0]->disenio->nombre_jefe))
+        @if ($fotocheck[0]->disenio->id != 2)
+            <p class="linea-firma-revalidacion"></p>
             <p class="nombre-jefe-revalidacion">{{ $fotocheck[0]->disenio->nombre_jefe }}</p>
             <p class="area-jefe-revalidacion">SUB GERENTE DE TRANSPORTE</p>
         @endif
