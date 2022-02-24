@@ -7,6 +7,7 @@ use App\Disenio;
 use App\Tarjeta;
 use App\Vehiculo;
 use App\Asociacione;
+use App\Bitacora;
 use App\Correlativo;
 use App\TipoDocumento;
 use Illuminate\Support\Str;
@@ -159,9 +160,41 @@ class TarjetaController extends Controller
 
         $tarjeta->url = $url;
 
-        //$tarjeta->asociacione_id = $socio->asociacione_id ? $socio->asociacione_id : 1;
-
         $tarjeta->save();
+        // dd($id);
+        Bitacora::create([
+            'id' => $tarjeta->id,
+            'url' => $url,
+            'nombre_socio' => $request->nombre_socio,
+            'dni_socio' => $request->dni_socio,
+            'nombre_propietario' => $request->nombre_propietario,
+            'dni_propietario' => $request->dni_propietario,
+            'asociacione_id' => $request->asociacione_id,
+            'vehiculo_id' => $request->vehiculo_id,
+            'tipo_documento_id' => $request->tipo_documento_id,
+            'tipo_persona' => $request->tipo_persona,
+            'num_placa' => $tarjeta->num_placa,
+            'expedicion' => $tarjeta->expedicion,
+            'revalidacion' => $tarjeta->revalidacion,
+            'num_operacion' => $tarjeta->num_operacion,
+            'vigencia_operacion' => $tarjeta->vigencia_operacion,
+            'num_autorizacion' => $tarjeta->num_autorizacion,
+            'vigencia_autorizacion' => $tarjeta->vigencia_autorizacion,
+            'status' => $tarjeta->status,
+            'fecha_print' => $tarjeta->fecha_print,
+            'tipo' => $tarjeta->tipo,
+            'num_correlativo' => $tarjeta->num_correlativo,
+            'socio_id' => $tarjeta->socio_id,
+            'user_id' => $tarjeta->user_id,
+            'descripcion' => $tarjeta->descripcion,
+            'renovado' => $tarjeta->renovado,
+            'disenio_id' => $tarjeta->disenio_id,
+            'renovado_count' => $tarjeta->renovado_count,
+            'suministro_id' => $tarjeta->suministro_id,
+            'user_modifico' => auth()->user()->id,
+            'image' => NULL,
+            'created_at' => now()->format('Y-m-d'),
+        ]);
 
         return redirect()->route('tarjetas.index')->with('status', $request->nombre_socio . ' fue modificado!');
     }

@@ -177,6 +177,32 @@
                 </li>
                 {{-- @endif --}}
 
+                {{-- @if (auth()->user()->hasRoles(['admin', 'secretaria'])) --}}
+                <li class="nav-item has-treeview ">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>
+                            Bitácora
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('bitacora.indexTarjeta') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tarjetas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('socios.delete') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Fotochecks</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {{-- @endif --}}
+
                 {{-- @if (auth()->user()->hasRoles(['admin'])) --}}
                 <li class="nav-item has-treeview ">
                     <a href="#" class="nav-link ">

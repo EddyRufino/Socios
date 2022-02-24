@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Socio;
 use App\Disenio;
+use App\Bitacora;
 use App\Vehiculo;
 use App\Fotocheck;
 use App\Suministro;
@@ -145,6 +146,40 @@ class FotocheckController extends Controller
         $fotocheck->url = $url;
 
         $fotocheck->save();
+
+        Bitacora::create([
+            'id' => $fotocheck->id,
+            'url' => $url,
+            'nombre_socio' => $request->nombre_socio,
+            'dni_socio' => $request->dni_socio,
+            'nombre_propietario' => ucwords($request->nombre_propietario),
+            'dni_propietario' => $request->dni_propietario,
+            'asociacione_id' => $request->asociacione_id,
+            'vehiculo_id' => $request->vehiculo_id,
+            'tipo_documento_id' => $request->tipo_documento_id,
+            'tipo_persona' => $request->tipo_persona,
+            'num_placa' => $fotocheck->num_placa,
+            'expedicion' => $fotocheck->expedicion,
+            'revalidacion' => $fotocheck->revalidacion,
+            'num_operacion' => $fotocheck->num_operacion,
+            'vigencia_operacion' => $fotocheck->vigencia_operacion,
+            'num_autorizacion' => $fotocheck->num_autorizacion,
+            'vigencia_autorizacion' => $fotocheck->vigencia_autorizacion,
+            'status' => $fotocheck->status,
+            'fecha_print' => $fotocheck->fecha_print,
+            'tipo' => $fotocheck->tipo,
+            'num_correlativo' => $fotocheck->num_correlativo,
+            'socio_id' => $fotocheck->socio_id,
+            'user_id' => $fotocheck->user_id,
+            'descripcion' => $fotocheck->descripcion,
+            'renovado' => $fotocheck->renovado,
+            'disenio_id' => $fotocheck->disenio_id,
+            'renovado_count' => $fotocheck->renovado_count,
+            'suministro_id' => $fotocheck->suministro_id,
+            'user_modifico' => auth()->user()->id,
+            'image' => $fotocheck->image,
+            'created_at' => now()->format('Y-m-d'),
+        ]);
 
         return redirect()->route('fotochecks.index')->with('status', $request->nombre_socio . ' fue modificado!');
     }

@@ -5,14 +5,13 @@ namespace App;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 
 class Tarjeta extends Model
 {
     use SoftDeletes;
 
     protected $guarded = [];
-
-    // public $with = ['vehiculo', 'socio'];
 
     public function getRouteKeyName()
     {
@@ -58,4 +57,26 @@ class Tarjeta extends Model
     {
         return $this->belongsTo(Disenio::class);
     }
+
+    // protected static function boot() {
+    //     parent::boot();
+    
+    //     self::updating(function($tarjeta) {
+    //         // dd($tarjeta);
+    //         Log::info($tarjeta);
+    //     });
+    // }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    // protected static function booted()
+    // {
+    //     static::updated(function ($socio) {
+    //         Log::info($this->socio);
+    //         // bitacora::create($tarjeta);
+    //     });
+    // }
 }

@@ -122,6 +122,9 @@ Route::resource('admin/suministros', 'SuministroController');
 
 Route::resource('admin/areas', 'AreaController')->only(['index', 'edit', 'update']);
 
+Route::get('bitacora-tarjetas', 'BitacoraController@indexTarjeta')->name('bitacora.indexTarjeta');
+Route::get('bitacora-tarjetas/{id}', 'BitacoraController@showTarjeta')->name('bitacora.showTarjeta');
+
 Route::get('admin/socios-delete', 'Export\Pdf\SociosDeletePdfController@sociosIndex')->name('socios.delete');
 Route::get('admin/tarjetas-delete', 'Export\Pdf\SociosDeletePdfController@tarjetasIndex')->name('tarjetas.delete');
 Route::get('admin/fotochecks-delete', 'Export\Pdf\SociosDeletePdfController@fotochecksIndex')->name('fotochecks.delete');

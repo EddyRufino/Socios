@@ -11,7 +11,7 @@
 
             <div class="card mt-4">
                 <div class="card-header bg-primary text-white">
-                    <h6 class="font-weight-bold">Modificar Fotocheck</h6>
+                    <h6 class="font-weight-bold">Modificar Tarjeta</h6>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('tarjetas.update', $tarjeta) }}" enctype="multipart/form-data">
