@@ -17,22 +17,30 @@ class filtroSociosExport implements FromView
     private $isTarjeta;
     private $isFotocheck;
     private $vehiculo_id;
+    private $disenio_id;
     private $print;
     private $dateStart;
     private $dateLast;
     private $dateStartVigencia;
-    // private $isTarjeta;
+    private $dateLastVigencia;
+    private $dateStartPrint;
+    private $dateLastPrint;
+    private $checkDatePrint;
 
-    public function forDate($isTarjeta, $isFotocheck, $vehiculo_id, $print, $dateStart, $dateLast, $dateStartVigencia, $dateLastVigencia)
+    public function forDate($isTarjeta, $isFotocheck, $vehiculo_id, $disenio_id, $print, $dateStart, $dateLast, $dateStartVigencia, $dateLastVigencia, $dateStartPrint, $dateLastPrint, $checkDatePrint)
     {
         $this->isTarjeta = $isTarjeta;
         $this->isFotocheck = $isFotocheck;
         $this->vehiculo_id = $vehiculo_id;
+        $this->disenio_id = $disenio_id;
         $this->print = $print;
         $this->dateStart = $dateStart;
         $this->dateLast = $dateLast;
         $this->dateStartVigencia = $dateStartVigencia;
         $this->dateLastVigencia = $dateLastVigencia;
+        $this->dateStartPrint = $dateStartPrint;
+        $this->dateLastPrint = $dateLastPrint;
+        $this->dateLastPrint = $checkDatePrint;
 
         return $this;
     }
@@ -105,8 +113,12 @@ class filtroSociosExport implements FromView
                             })
                             ->whereIn('status', $this->print)
                             ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereIn('disenio_id', $this->disenio_id)
                             ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
                             ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->when($this->checkDatePrint, function ($query) {
+                                $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                            })
                             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
                     })
                     ->orWhereHas('fotochecks', function($query) {
@@ -115,8 +127,12 @@ class filtroSociosExport implements FromView
                             })
                             ->whereIn('status', $this->print)
                             ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereIn('disenio_id', $this->disenio_id)
                             ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
                             ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->when($this->checkDatePrint, function ($query) {
+                                $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                            })
                             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
                     });
             })
@@ -129,8 +145,12 @@ class filtroSociosExport implements FromView
                             })
                             ->whereIn('status', $this->print)
                             ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereIn('disenio_id', $this->disenio_id)
                             ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
                             ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->when($this->checkDatePrint, function ($query) {
+                                $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                            })
                             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
                     })
                     ->orWhereHas('fotochecks', function($query) {
@@ -140,8 +160,12 @@ class filtroSociosExport implements FromView
                             })
                             ->whereIn('status', $this->print)
                             ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereIn('disenio_id', $this->disenio_id)
                             ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
                             ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->when($this->checkDatePrint, function ($query) {
+                                $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                            })
                             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
                 });
             })
@@ -154,8 +178,12 @@ class filtroSociosExport implements FromView
                             })
                             ->whereIn('status', $this->print)
                             ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereIn('disenio_id', $this->disenio_id)
                             ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
                             ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->when($this->checkDatePrint, function ($query) {
+                                $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                            })
                             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
                     })
                     ->orWhereHas('fotochecks', function($query) {
@@ -165,8 +193,12 @@ class filtroSociosExport implements FromView
                             })
                             ->whereIn('status', $this->print)
                             ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereIn('disenio_id', $this->disenio_id)
                             ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
                             ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->when($this->checkDatePrint, function ($query) {
+                                $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                            })
                             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
                 });
             })
@@ -178,8 +210,12 @@ class filtroSociosExport implements FromView
                             })
                             ->whereIn('status', $this->print)
                             ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereIn('disenio_id', $this->disenio_id)
                             ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
                             ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->when($this->checkDatePrint, function ($query) {
+                                $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                            })
                             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
                     })
                     ->orWhereHas('fotochecks', function($query) {
@@ -188,8 +224,12 @@ class filtroSociosExport implements FromView
                             })
                             ->whereIn('status', $this->print)
                             ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereIn('disenio_id', $this->disenio_id)
                             ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
                             ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->when($this->checkDatePrint, function ($query) {
+                                $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                            })
                             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
                 });
             })
@@ -201,8 +241,12 @@ class filtroSociosExport implements FromView
                             })
                             ->whereIn('status', $this->print)
                             ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereIn('disenio_id', $this->disenio_id)
                             ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
                             ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->when($this->checkDatePrint, function ($query) {
+                                $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                            })
                             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
                     })
                     ->orWhereHas('fotochecks', function($query) {
@@ -211,8 +255,12 @@ class filtroSociosExport implements FromView
                             })
                             ->whereIn('status', $this->print)
                             ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereIn('disenio_id', $this->disenio_id)
                             ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
                             ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->when($this->checkDatePrint, function ($query) {
+                                $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                            })
                             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
                 });
             })
@@ -225,8 +273,12 @@ class filtroSociosExport implements FromView
                             })
                             ->whereIn('status', $this->print)
                             ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereIn('disenio_id', $this->disenio_id)
                             ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
                             ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->when($this->checkDatePrint, function ($query) {
+                                $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                            })
                             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
                     })
                     ->orWhereHas('fotochecks', function($query) {
@@ -236,8 +288,12 @@ class filtroSociosExport implements FromView
                             })
                             ->whereIn('status', $this->print)
                             ->whereIn('vehiculo_id', $this->vehiculo_id)
+                            ->whereIn('disenio_id', $this->disenio_id)
                             ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
                             ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
+                            ->when($this->checkDatePrint, function ($query) {
+                                $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                            })
                             ->select(['id', 'socio_id', 'vehiculo_id', 'revalidacion']);
                 });
             })
@@ -301,8 +357,12 @@ class filtroSociosExport implements FromView
             $datas = Fotocheck::when($socio, function ($query) {
                 $query->whereIn('vehiculo_id', $this->vehiculo_id)
                     ->whereIn('status', $this->print)
+                    ->whereIn('disenio_id', $this->disenio_id)
                     ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
                     ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                    ->when($this->checkDatePrint, function ($query) {
+                        $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                    })
                     ->whereHas('socio', function($query) {
                         $query->whereNotNull('asociacione_id')->select(['id', 'asociacione_id']);
                     });
@@ -310,8 +370,12 @@ class filtroSociosExport implements FromView
             ->when($natural, function ($query) {
                 $query->whereIn('vehiculo_id', $this->vehiculo_id)
                     ->whereIn('status', $this->print)
+                    ->whereIn('disenio_id', $this->disenio_id)
                     ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
                     ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                    ->when($this->checkDatePrint, function ($query) {
+                        $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                    })
                     ->whereHas('socio', function($query) {
                         $query->whereNull('asociacione_id')
                             ->where('tipo_documento_id', '!=', 3)
@@ -321,8 +385,12 @@ class filtroSociosExport implements FromView
             ->when($juridica, function ($query) {
                 $query->whereIn('vehiculo_id', $this->vehiculo_id)
                     ->whereIn('status', $this->print)
+                    ->whereIn('disenio_id', $this->disenio_id)
                     ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
                     ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                    ->when($this->checkDatePrint, function ($query) {
+                        $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                    })
                     ->whereHas('socio', function($query) {
                         $query->whereNull('asociacione_id')
                             ->where('tipo_documento_id', 3)
@@ -332,8 +400,12 @@ class filtroSociosExport implements FromView
             ->when($socioNatural, function ($query) {
                 $query->whereIn('vehiculo_id', $this->vehiculo_id)
                     ->whereIn('status', $this->print)
+                    ->whereIn('disenio_id', $this->disenio_id)
                     ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
                     ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                    ->when($this->checkDatePrint, function ($query) {
+                        $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                    })
                     ->whereHas('socio', function($query) {
                         $query->where('tipo_documento_id', '!=', 3)->select(['id', 'tipo_documento_id']);
                     });
@@ -341,14 +413,22 @@ class filtroSociosExport implements FromView
             ->when($socioJuridica, function ($query) {
                 $query->whereIn('vehiculo_id', $this->vehiculo_id)
                     ->whereIn('status', $this->print)
+                    ->whereIn('disenio_id', $this->disenio_id)
                     ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
-                    ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia]);
+                    ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                    ->when($this->checkDatePrint, function ($query) {
+                        $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                    });
             })
             ->when($naturalJuridica, function ($query)  {
                 $query->whereIn('vehiculo_id', $this->vehiculo_id)
                     ->whereIn('status', $this->print)
+                    ->whereIn('disenio_id', $this->disenio_id)
                     ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
                     ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                    ->when($this->checkDatePrint, function ($query) {
+                        $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                    })
                     ->whereHas('socio', function($query) {
                         $query->whereNull('asociacione_id')->select(['id', 'asociacione_id']);
                     });
@@ -356,8 +436,12 @@ class filtroSociosExport implements FromView
             ->when($todos, function ($query)  {
                 $query->whereIn('vehiculo_id', $this->vehiculo_id)
                     ->whereIn('status', $this->print)
+                    ->whereIn('disenio_id', $this->disenio_id)
                     ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
-                    ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia]);
+                    ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                    ->when($this->checkDatePrint, function ($query) {
+                        $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                    });
             })
             ->get(['id', 'url', 'num_placa', 'revalidacion', 'socio_id', 'status', 'vehiculo_id', 'created_at']);
 
@@ -424,8 +508,12 @@ class filtroSociosExport implements FromView
             $datas = Tarjeta::when($socio, function ($query) {
                 $query->whereIn('vehiculo_id', $this->vehiculo_id)
                     ->whereIn('status', $this->print)
+                    ->whereIn('disenio_id', $this->disenio_id)
                     ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
                     ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                    ->when($this->checkDatePrint, function ($query) {
+                        $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                    })
                     ->whereHas('socio', function($query) {
                         $query->whereNotNull('asociacione_id')->select(['id', 'asociacione_id']);
                     });
@@ -433,8 +521,12 @@ class filtroSociosExport implements FromView
             ->when($natural, function ($query) {
                 $query->whereIn('vehiculo_id', $this->vehiculo_id)
                     ->whereIn('status', $this->print)
+                    ->whereIn('disenio_id', $this->disenio_id)
                     ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
                     ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                    ->when($this->checkDatePrint, function ($query) {
+                        $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                    })
                     ->whereHas('socio', function($query) {
                         $query->whereNull('asociacione_id')
                             ->where('tipo_documento_id', '!=', 3)
@@ -444,8 +536,12 @@ class filtroSociosExport implements FromView
             ->when($juridica, function ($query) {
                 $query->whereIn('vehiculo_id', $this->vehiculo_id)
                     ->whereIn('status', $this->print)
+                    ->whereIn('disenio_id', $this->disenio_id)
                     ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
                     ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                    ->when($this->checkDatePrint, function ($query) {
+                        $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                    })
                     ->whereHas('socio', function($query) {
                         $query->whereNull('asociacione_id')
                             ->where('tipo_documento_id', 3)
@@ -455,8 +551,12 @@ class filtroSociosExport implements FromView
             ->when($socioNatural, function ($query) {
                 $query->whereIn('vehiculo_id', $this->vehiculo_id)
                     ->whereIn('status', $this->print)
+                    ->whereIn('disenio_id', $this->disenio_id)
                     ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
                     ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                    ->when($this->checkDatePrint, function ($query) {
+                        $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                    })
                     ->whereHas('socio', function($query) {
                         $query->where('tipo_documento_id', '!=', 3)->select(['id', 'tipo_documento_id']);
                     });
@@ -464,14 +564,22 @@ class filtroSociosExport implements FromView
             ->when($socioJuridica, function ($query) {
                 $query->whereIn('vehiculo_id', $this->vehiculo_id)
                     ->whereIn('status', $this->print)
+                    ->whereIn('disenio_id', $this->disenio_id)
                     ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
-                    ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia]);
+                    ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                    ->when($this->checkDatePrint, function ($query) {
+                        $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                    });
             })
             ->when($naturalJuridica, function ($query)  {
                 $query->whereIn('vehiculo_id', $this->vehiculo_id)
                     ->whereIn('status', $this->print)
+                    ->whereIn('disenio_id', $this->disenio_id)
                     ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
                     ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                    ->when($this->checkDatePrint, function ($query) {
+                        $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                    })
                     ->whereHas('socio', function($query) {
                         $query->whereNull('asociacione_id')->select(['id', 'asociacione_id']);
                     });
@@ -479,10 +587,14 @@ class filtroSociosExport implements FromView
             ->when($todos, function ($query)  {
                 $query->whereIn('vehiculo_id', $this->vehiculo_id)
                     ->whereIn('status', $this->print)
+                    ->whereIn('disenio_id', $this->disenio_id)
                     ->whereBetween('created_at', [$this->dateStart, $this->dateLast])
-                    ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia]);
+                    ->whereBetween('revalidacion', [$this->dateStartVigencia, $this->dateLastVigencia])
+                    ->when($this->checkDatePrint, function ($query) {
+                        $query->whereBetween('fecha_print', [$this->dateStartPrint, $this->dateLastPrint]);
+                    });
             })
-            ->get(['id', 'url', 'num_placa', 'revalidacion', 'socio_id', 'status', 'vehiculo_id', 'created_at']);
+            ->get(['id', 'url', 'num_placa', 'revalidacion', 'socio_id', 'status', 'vehiculo_id', 'disenio_id', 'created_at']);
         }
         $area = Area::first();
 

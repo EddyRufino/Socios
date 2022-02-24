@@ -17,15 +17,19 @@
                     <h6><a href="{{ route('filtro.socio.pdf.info', [
                             'vehiculo_id' => request()->vehiculo_id,
                             'print' => request()->print,
+                            'disenio_id' => request()->disenio_id,
                             'dateStart' => request()->dateStart,
                             'dateLast' => request()->dateLast,
                             'dateStartVigencia' => request()->dateStartVigencia,
                             'dateLastVigencia' => request()->dateLastVigencia,
+                            'dateStartPrint' => request()->dateStartPrint,
+                            'dateLastPrint' => request()->dateLastPrint,
                             'isFotocheck' => request()->fotocheck,
                             'isTarjeta' => request()->tarjeta,
                             'natural' => request()->natural,
                             'juridica' => request()->juridica,
-                            'socio' => request()->socio,
+                            'checkDatePrint' => request()->checkDatePrint,
+                            'socio' => request()->socio
                         ]) }}"
                             class="text-danger ml-3 tooltipw"
                             target="_blank"
@@ -57,15 +61,19 @@
                     <h6><a href="{{ route('filtro.socio.excel.info', [
                             'vehiculo_id' => request()->vehiculo_id,
                             'print' => request()->print,
+                            'disenio_id' => request()->disenio_id,
                             'dateStart' => request()->dateStart,
                             'dateLast' => request()->dateLast,
                             'dateStartVigencia' => request()->dateStartVigencia,
                             'dateLastVigencia' => request()->dateLastVigencia,
+                            'dateStartPrint' => request()->dateStartPrint,
+                            'dateLastPrint' => request()->dateLastPrint,
                             'isFotocheck' => request()->fotocheck,
                             'isTarjeta' => request()->tarjeta,
                             'natural' => request()->natural,
                             'juridica' => request()->juridica,
-                            'socio' => request()->socio,
+                            'checkDatePrint' => request()->checkDatePrint,
+                            'socio' => request()->socio
                         ]) }}"
                             class="text-success ml-3 tooltipw"
                             target="_blank"

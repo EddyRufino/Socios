@@ -21,6 +21,7 @@ class ViewFiltroController extends Controller
 
     public function storeSocios(Request $request)
     {
+        // dd($request->all());
         $validated = $request->validate([
             'vehiculo_id' => 'required',
             'print' => 'required',
@@ -519,7 +520,6 @@ class ViewFiltroController extends Controller
             }
             
             $datas = Tarjeta::when($socio, function ($query) use ($request) {
-                // dd($request->disenio_id);
                 $query->whereIn('vehiculo_id', $request->vehiculo_id)
                     ->whereIn('status', $request->print)
                     ->whereIn('disenio_id', $request->disenio_id)
@@ -538,7 +538,7 @@ class ViewFiltroController extends Controller
                     ->whereIn('disenio_id', $request->disenio_id)
                     ->whereBetween('created_at', [$request->dateStart, $request->dateLast])
                     ->whereBetween('revalidacion', [$request->dateStartVigencia, $request->dateLastVigencia])
-                    ->when($request->checkDatePrint, function ($query) use ($request) {
+                    ->when($request->checkDatePrint == 'on', function ($query) use ($request) {
                         $query->whereBetween('fecha_print', [$request->dateStartPrint, $request->dateLastPrint]);
                     })
                     ->whereHas('socio', function($query) {
