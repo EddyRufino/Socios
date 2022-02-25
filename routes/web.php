@@ -122,8 +122,13 @@ Route::resource('admin/suministros', 'SuministroController');
 
 Route::resource('admin/areas', 'AreaController')->only(['index', 'edit', 'update']);
 
+// Tarjetas
 Route::get('bitacora-tarjetas', 'BitacoraController@indexTarjeta')->name('bitacora.indexTarjeta');
 Route::get('bitacora-tarjetas/{id}', 'BitacoraController@showTarjeta')->name('bitacora.showTarjeta');
+
+// Fotochecks
+Route::get('bitacora-fotochecks', 'BitacoraController@indexFotocheck')->name('bitacora.indexFotocheck');
+Route::get('bitacora-fotochecks/{id}', 'BitacoraController@showFotocheck')->name('bitacora.showFotocheck');
 
 Route::get('admin/socios-delete', 'Export\Pdf\SociosDeletePdfController@sociosIndex')->name('socios.delete');
 Route::get('admin/tarjetas-delete', 'Export\Pdf\SociosDeletePdfController@tarjetasIndex')->name('tarjetas.delete');

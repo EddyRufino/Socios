@@ -194,7 +194,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('socios.delete') }}" class="nav-link">
+                            <a href="{{ route('bitacora.indexFotocheck') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Fotochecks</p>
                             </a>

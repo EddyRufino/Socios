@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\User;
+use App\Vehiculo;
+use App\Asociacione;
 use Illuminate\Database\Eloquent\Model;
 
 class Bitacora extends Model
@@ -41,4 +44,22 @@ class Bitacora extends Model
     ];
 
     public $timestamps = false;
+
+    public function getAsociacion($id)
+    {
+        $name = Asociacione::where('id', $id)->get('nombre');
+        return $name[0]->nombre;
+    }
+
+    public function getVehiculo($id)
+    {
+        $vehiculo = Vehiculo::where('id', $id)->get('nombre');
+        return $vehiculo[0]->nombre;
+    }
+
+    public function getUser($id)
+    {
+        $user = User::where('id', $id)->get('name');
+        return $user[0]->name;
+    }
 }

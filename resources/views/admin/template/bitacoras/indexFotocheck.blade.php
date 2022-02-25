@@ -6,7 +6,7 @@
         <div class="col-md-10">
 
             <div class="d-flex mt-2 align-items-center justify-content-between">
-                <h2 class="mt-4 title-left pt-3 pb-2 font-weight-bold">Bitácora Tarjetas</h2>
+                <h2 class="mt-4 title-left pt-3 pb-2 font-weight-bold">Bitácora Fotochecks</h2>
             </div>
 
             <div class="d-flex justify-content-between align-items-center">
@@ -22,38 +22,36 @@
                                 <tr>
                                     <th scope="col">Nombres y Apellidos</th>
                                     <th scope="col">N. Doc</th>
-                                    <th scope="col" nowrap>N. Placa</th>
                                     <th scope="col">Asociación</th>
                                     <th scope="col">Vehículo</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($bitacoras as $tarjeta)
+                                @forelse ($bitacoras as $fotocheck)
                                 <tr>
-                                    <td>{{ $tarjeta->socio->nombre_socio }}</td>
+                                    <td>{{ $fotocheck->socio->nombre_socio }}</td>
         
-                                    <td>{{ $tarjeta->socio->dni_socio }}</td>
-                                    <td>{{ $tarjeta->num_placa }}</td>
+                                    <td>{{ $fotocheck->socio->dni_socio }}</td>
         
-                                    @if (empty($tarjeta->socio->asociacione_id)  && $tarjeta->socio->tipo_documento_id == 3)
+                                    @if (empty($fotocheck->socio->asociacione_id)  && $fotocheck->socio->tipo_documento_id == 3)
                                         <td class="text-secondary">Entidad Privada</td>
-                                    @elseif (empty($tarjeta->socio->asociacione_id))
+                                    @elseif (empty($fotocheck->socio->asociacione_id))
                                         <td class="text-secondary">Persona Natural</td>
                                     @else
-                                        <td>{{ optional($tarjeta->socio->asociacione)->nombre }}</td>
+                                        <td>{{ optional($fotocheck->socio->asociacione)->nombre }}</td>
                                     @endif
 
-                                    @if ($tarjeta->vehiculo_id == 1)
-                                        <td class="text-info">{{ $tarjeta->vehiculo->nombre }}</td>
-                                    @elseif($tarjeta->vehiculo_id === 2)
-                                        <td class="text-primary">{{ $tarjeta->vehiculo->nombre }}</td>
+                                    @if ($fotocheck->vehiculo_id == 1)
+                                        <td class="text-info">{{ $fotocheck->vehiculo->nombre }}</td>
+                                    @elseif($fotocheck->vehiculo_id === 2)
+                                        <td class="text-primary">{{ $fotocheck->vehiculo->nombre }}</td>
                                     @else
-                                        <td class="text-secondary">{{ $tarjeta->vehiculo->nombre }}</td>
+                                        <td class="text-secondary">{{ $fotocheck->vehiculo->nombre }}</td>
                                     @endif
 
                                     <td>
-                                        <a href="{{ route('bitacora.showTarjeta', $tarjeta->id) }}">
+                                        <a href="{{ route('bitacora.showFotocheck', $fotocheck->id) }}">
                                             @include('icons.arrow-right')
                                         </a>
                                     </td>
