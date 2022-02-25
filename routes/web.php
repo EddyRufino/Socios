@@ -141,7 +141,7 @@ Route::get('admin/fotochecks-delete-pdf', 'Export\Pdf\SociosDeletePdfController@
 Route::get('admin/filtros-socios', 'Export\Filtro\ViewFiltroController@createSocios')->name('filtro.socio.create');
 Route::get('admin/filtro', 'Export\Filtro\ViewFiltroController@storeSocios')->name('filtro.socio.store');
 Route::get('admin/filtro-pdf', 'Export\Filtro\Pdf\PdfFiltroController@pdfFiltroSocioInfo')->name('filtro.socio.pdf.info');
-// Route::get('admin/filtro-pdf-graficos', 'Export\Filtro\Pdf\PdfFiltroController@pdfFiltroSocioGrafico')->name('filtro.socio.pdf.grafi');
+// Route::get('admin/filtro-pdf-graficos', 'Export\Filtro\Pdf\PdfFiltroController@pdfFiltroSocioGrafico')->name('filtro.socio.pdf.grafi'); // Comentame
 Route::get('admin/filtro-excel', 'Export\Filtro\Pdf\PdfFiltroController@excelFiltroSocioInfo')->name('filtro.socio.excel.info');
 
 Route::get('admin/suministro-pdf', 'Export\Suministro\PdfSuministroController')->name('suministro.pdf');
@@ -149,7 +149,8 @@ Route::get('admin/suministro-excel', 'Export\Suministro\ExcelSuministroControlle
 
 // Charts
 // Route::get('/admin', 'Dashboard\dashboardController@index')->name('admin.template');
-Route::get('/admin-dashboard-tarjetas', 'Dashboard\dashboardTarjetaController')->name('admin.dashboard.tarjeta');
+Route::get('/admin-dashboard-tarjetas', 'Dashboard\dashboardTarjetaController@graphic')->name('admin.dashboard.tarjeta');
+Route::get('/admin-grafico-tarjetas', 'Dashboard\dashboardTarjetaController@graphicPdf')->name('admin.graphic.tarjeta');
 Route::get('/admin-dashboard-fotochecks', 'Dashboard\dashboardFotocheckController')->name('admin.dashboard.fotocheck');
 Route::get('/admin-dashboard-socios', 'Dashboard\dashboardSocioController')->name('admin.dashboard.socio');
 Route::get('/admin-dashboard-suministros', 'Dashboard\dashboardSuministroController')->name('admin.dashboard.suministro');

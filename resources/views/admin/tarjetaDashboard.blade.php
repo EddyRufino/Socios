@@ -42,20 +42,30 @@
                         </div>
                     </div>
                 </div>
-
-                {{-- <div class="col-lg-3 col-6">
-                    <div class="small-box bg-danger" style="height: 6rem;">
-                        <div class="inner">
-                            <h3>S/. </h3>
-
-                            <p>Total Deuda <strong>-</strong> {{ today()->format('m/y') }}</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
+            {{-- {{dd(request()->chart)}} --}}
+            <a href="{{ route('admin.graphic.tarjeta',
+                ['labelsBar'=> $labelsBar, 'datasetsBar'=> $datasetsBar,
+                'labelsPie'=> $labelsPie, 'datasetsPie'=> $datasetsPie, 'dataPieOptions'=> $dataPieOptions,
+                'labelsLine'=> $labelsLine, 'datasetsLine'=> $datasetsLine]) }}"
+                class="row justify-content-center mt-2"
+                target="_blank"
+            >
+                Descargar Reporte
+            </a>
+            {{-- <a href="https://quickchart.io/chart?c={{$json}}" target="_blank">Wee</a> --}}
+            {{-- <a href="https://quickchart.io/chart?c={
+                type:'bar',
+                data:{
+                    labels:[2012,2013,2014,2015,2016],
+                    datasets:[{
+                        label:'Users xD',data:[120,60,50,180,120]
+                        }]
+                    }}&format=pdf"
+                target="_blank"
+            >
+                Wee
+            </a> --}}
 
             <div class="row justify-content-center mt-3">
                 <div class="col-md-10">

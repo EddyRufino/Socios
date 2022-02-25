@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Tarjeta;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Charts\TarjetaChart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class dashboardTarjetaController extends Controller
 {
-    public function __invoke()
+    public function graphic()
     {
         $meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
         $etiquetas = ['Tarjetas', 'Impresas', 'No Impresas'];    
@@ -117,11 +118,32 @@ class dashboardTarjetaController extends Controller
         $chartYear = new TarjetaChart;
         $chartYear->labels($tarjetaYears->values());
         $chartYear->title('Gráfico de Tarjetas Por Años');
-        $chartYear->dataset("Tarjetas", 'line', $allTarjetaYear)->backgroundColor("rgba(22,160,133, 0.4)");
-        $chartYear->dataset("Impresas", 'line', $printCountYear)->backgroundColor("rgba(255, 205, 86, 0.6)");
-        $chartYear->dataset("No Impresas", 'line', $notPrintCountYear)->backgroundColor("rgba(51,105,232, 0.6)");
+        $chartYear->dataset("Tarjetas", 'line', $allTarjetaYear)->fill(false)->color("rgba(22,160,133, 0.4)");
+        $chartYear->dataset("Impresas", 'line', $printCountYear)->fill(false)->color("rgba(255, 205, 86, 0.6)");
+        $chartYear->dataset("No Impresas", 'line', $notPrintCountYear)->fill(false)->color("rgba(51,105,232, 0.6)");
 
+        // GRAFICOS BAR
+        $labelsBar = $chart->labels;
+        $datasetsBar = $chart->datasets;
 
-        return view('admin.tarjetaDashboard', compact('chart', 'chartPie', 'chartYear', 'countAllTarjetas', 'countNotPrint', 'countPrint'));
+        // GRAFICOS CIRCULAR
+        $labelsPie = $chartPie->labels;
+        $datasetsPie = $chartPie->datasets[0]->values;
+        $dataPieOptions = $chartPie->datasets[0]->options;
+
+        // GRAFICOS LINIA
+        $labelsLine = $chartYear->labels;
+        $datasetsLine = $chartYear->datasets;
+
+        // dd($chartYear->datasets);
+
+        return view('admin.tarjetaDashboard', compact('labelsLine', 'datasetsLine','labelsPie', 'datasetsPie', 'dataPieOptions' ,'labelsBar', 'datasetsBar' ,'chart', 'chartPie', 'chartYear', 'countAllTarjetas', 'countNotPrint', 'countPrint'));
+    }
+
+    public function graphicPdf()
+    {
+        $pdf = PDF::loadView('admin.template.graficos.graphicTarjeta');
+
+        return $pdf->stream();
     }
 }
