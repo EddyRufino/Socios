@@ -22,6 +22,8 @@
                         </p>
                     </a>
                 </li> --}}
+
+                @if (auth()->user()->hasRoles(['superadmin', 'dashboard']))
                 <li class="nav-item has-treeview ">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -51,7 +53,9 @@
                         </li>
                     </ul>
                 </li>
-                {{-- @if (auth()->user()->hasRoles(['admin', 'cobrador', 'secretaria'])) --}}
+                @endif
+
+                @if (auth()->user()->hasRoles(['superadmin', 'disenio']))
                     <li class="nav-item has-treeview ">
                         <a href="#" class="nav-link ">
                             <i class="nav-icon fa fa-list-alt"></i>
@@ -77,9 +81,9 @@
                             {{-- @endif --}}
                         </ul>
                     </li>
-                {{-- @endif --}}
+                @endif
 
-                {{-- @if (auth()->user()->hasRoles(['admin', 'secretaria'])) --}}
+                @if (auth()->user()->hasRoles(['superadmin', 'area']))
                 <li class="nav-item has-treeview ">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-university"></i>
@@ -97,8 +101,9 @@
                         </li>
                     </ul>
                 </li>
-                {{-- @endif --}}
+                @endif
 
+                @if (auth()->user()->hasRoles(['superadmin', 'suministro']))
                 <li class="nav-item has-treeview ">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -120,6 +125,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
                 {{-- <li class="nav-item has-treeview ">
                     <a href="#" class="nav-link ">
@@ -139,7 +145,7 @@
                     </ul>
                 </li> --}}
 
-                {{-- @if (auth()->user()->hasRoles(['admin', 'secretaria'])) --}}
+                @if (auth()->user()->hasRoles(['superadmin', 'reporte']))
                 <li class="nav-item has-treeview ">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-book"></i>
@@ -175,12 +181,12 @@
                         </li>
                     </ul>
                 </li>
-                {{-- @endif --}}
+                @endif
 
-                {{-- @if (auth()->user()->hasRoles(['admin', 'secretaria'])) --}}
+                @if (auth()->user()->hasRoles(['superadmin', 'bitacora']))
                 <li class="nav-item has-treeview ">
                     <a href="#" class="nav-link ">
-                        <i class="nav-icon fas fa-book"></i>
+                        <i class="nav-icon fas fa-address-book"></i>
                         <p>
                             Bitácora
                             <i class="right fas fa-angle-left"></i>
@@ -201,9 +207,9 @@
                         </li>
                     </ul>
                 </li>
-                {{-- @endif --}}
+                @endif
 
-                {{-- @if (auth()->user()->hasRoles(['admin'])) --}}
+                @if (auth()->user()->hasRoles(['superadmin']))
                 <li class="nav-item has-treeview ">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-users"></i>
@@ -227,7 +233,7 @@
                         </li>
                     </ul>
                 </li>
-                {{-- @endif --}}
+                @endif
 
             </ul>
         </nav>

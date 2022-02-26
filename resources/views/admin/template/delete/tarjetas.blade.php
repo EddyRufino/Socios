@@ -1,6 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
+@if (auth()->user()->hasRoles(['superadmin']))
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
@@ -21,78 +22,79 @@
         
             </div>
 
-            @if (auth()->user()->hasRoles(['superadmin']))
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-12 table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr >
-                                        <th scope="col">SOCIO</th>
-                                        <th scope="col">N° DOC.</th>
-                                        <th scope="col">PLACA</th>
-                                        <th scope="col">VEHIVULO</th>
-                                        <th scope="col">ASOCIACION</th>
-                                        <th scope="col">N° OPERAC.</th>
-                                        <th scope="col">N° AUTORIZAC.</th>
-                                        <th scope="col">ELIMINADO</th>
-                                        <th scope="col"></th>
+
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-12 table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr >
+                                    <th scope="col">SOCIO</th>
+                                    <th scope="col">N° DOC.</th>
+                                    <th scope="col">PLACA</th>
+                                    <th scope="col">VEHIVULO</th>
+                                    <th scope="col">ASOCIACION</th>
+                                    <th scope="col">N° OPERAC.</th>
+                                    <th scope="col">N° AUTORIZAC.</th>
+                                    <th scope="col">ELIMINADO</th>
+                                    <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($tarjetas as $tarjeta)
+                                <tr>
+                                    <td>{{ optional($tarjeta->socio)->nombre_socio }}</td>
+                
+                                    <td>{{ optional($tarjeta->socio)->dni_socio }}</td>
+                                    <td>{{ $tarjeta->num_placa ? $tarjeta->num_placa : '-' }}</td>
+                
+                                    @if ($tarjeta->vehiculo_id == 1)
+                                        <td class="text-info">{{ optional($tarjeta->vehiculo)->nombre }}</td>
+                                    @elseif($tarjeta->vehiculo_id === 2)
+                                        <td class="text-primary">{{ optional($tarjeta->vehiculo)->nombre }}</td>
+                                    @else
+                                        <td class="text-secondary">{{ optional($tarjeta->vehiculo)->nombre }}</td>
+                                    @endif
+                
+                                    @if (empty(optional($tarjeta->socio)->asociacione_id)  && optional($tarjeta->socio)->tipo_documento_id == 3)
+                                        <td class="text-secondary">Entidad Privada</td>
+                                    @elseif (empty(optional($tarjeta->socio)->asociacione_id))
+                                        <td class="text-secondary">Persona Natural</td>
+                                    @else
+                                        <td>{{ optional(optional($tarjeta->socio)->asociacione)->nombre }}</td>
+                                    @endif
+                
+                                    <td>{{ $tarjeta->num_operacion }}</td>
+                
+                                    <td>{{ $tarjeta->num_autorizacion }}</td>
+                
+                
+                                    <td>{{ \Carbon\Carbon::parse($tarjeta->deleted_at)->format('Y-m-d') }}</td>
+
+                                    @if ($tarjeta->status == 1)
+                                        <td><img src="{{ asset('img/printer.png') }}" alt="Impreso"></td>
+                                    @else
+                                        <td></td>
+                                    @endif
+
+                                    
+                
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($tarjetas as $tarjeta)
-                                    <tr>
-                                        <td>{{ optional($tarjeta->socio)->nombre_socio }}</td>
-                    
-                                        <td>{{ optional($tarjeta->socio)->dni_socio }}</td>
-                                        <td>{{ $tarjeta->num_placa ? $tarjeta->num_placa : '-' }}</td>
-                    
-                                        @if ($tarjeta->vehiculo_id == 1)
-                                            <td class="text-info">{{ optional($tarjeta->vehiculo)->nombre }}</td>
-                                        @elseif($tarjeta->vehiculo_id === 2)
-                                            <td class="text-primary">{{ optional($tarjeta->vehiculo)->nombre }}</td>
-                                        @else
-                                            <td class="text-secondary">{{ optional($tarjeta->vehiculo)->nombre }}</td>
-                                        @endif
-                    
-                                        @if (empty(optional($tarjeta->socio)->asociacione_id)  && optional($tarjeta->socio)->tipo_documento_id == 3)
-                                            <td class="text-secondary">Entidad Privada</td>
-                                        @elseif (empty(optional($tarjeta->socio)->asociacione_id))
-                                            <td class="text-secondary">Persona Natural</td>
-                                        @else
-                                            <td>{{ optional(optional($tarjeta->socio)->asociacione)->nombre }}</td>
-                                        @endif
-                    
-                                        <td>{{ $tarjeta->num_operacion }}</td>
-                    
-                                        <td>{{ $tarjeta->num_autorizacion }}</td>
-                    
-                    
-                                        <td>{{ \Carbon\Carbon::parse($tarjeta->deleted_at)->format('Y-m-d') }}</td>
+                
+                            @endforeach
+                
+                        </tbody>
+                    </table>
 
-                                        @if ($tarjeta->status == 1)
-                                            <td><img src="{{ asset('img/printer.png') }}" alt="Impreso"></td>
-                                        @else
-                                            <td></td>
-                                        @endif
-
-                                        
-                    
-                                    </tr>
-                    
-                                @endforeach
-                    
-                            </tbody>
-                        </table>
-
-                        <div class="overflow-auto mt-2">
-                            {{ $tarjetas->links() }}
-                        </div>
+                    <div class="overflow-auto mt-2">
+                        {{ $tarjetas->links() }}
                     </div>
                 </div>
-            @else
-                <h2 class="text-secondary p-2">No Tienes permisos para ver esta vista</h2>
-            @endif
+            </div>
+
     </div>
     </div>
 </div>
+@else
+    <h2 class="text-secondary p-2">No Tienes permisos para ver esta vista</h2>
+@endif
 @endsection

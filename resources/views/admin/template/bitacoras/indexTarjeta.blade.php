@@ -1,6 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
+@if (auth()->user()->hasRoles(['superadmin', 'bitacora']))
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
@@ -14,7 +15,7 @@
         
             </div>
 
-            @if (auth()->user()->hasRoles(['superadmin']))
+            
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-12 table-responsive">
                         <table class="table table-striped">
@@ -70,10 +71,12 @@
                         </div>
                     </div>
                 </div>
-            @else
-                <h2 class="text-secondary p-2">No Tienes permisos para ver esta vista</h2>
-            @endif
+            
+            
     </div>
     </div>
 </div>
+@else
+    <h2 class="text-secondary p-2">No Tienes permisos para ver esta vista</h2>
+@endif
 @endsection

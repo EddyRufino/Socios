@@ -32,7 +32,7 @@
 <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body class="hold-transition sidebar-mini">
-  @if (auth()->user()->hasRoles(['superadmin']))
+  {{-- @if (auth()->user()->hasRoles(['superadmin'])) --}}
   <div id="app">
 
     <div class="wrapper">
@@ -155,7 +155,7 @@
     </div>
 <!-- ./wrapper -->
   </div>
-  @endif
+  {{-- @endif --}}
 <!-- REQUIRED SCRIPTS -->
 @stack('scripts')
 <!-- jQuery -->

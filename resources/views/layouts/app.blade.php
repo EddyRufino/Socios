@@ -65,7 +65,7 @@
                                     <a class="dropdown-item" href="{{ route('correlativos.index') }}">
                                         Correlativo
                                     </a>
-                                    @if (auth()->user()->name == 'Admin Informática')
+                                    @if (auth()->user()->hasRoles(['superadmin', 'dashboard', 'disenio', 'area', 'suministro', 'reporte', 'bitacora']))
                                         <a class="dropdown-item" href="{{ route('admin.dashboard.socio') }}">
                                             Panel
                                         </a>

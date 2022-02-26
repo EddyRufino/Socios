@@ -40,7 +40,7 @@
                                         <th scope="row">{{ $user->id }}</th>
                                         <td>{{ $user->name }} {{ $user->apellido }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->roles->pluck('display_name')->implode(' - ') }}</td>
+                                        <td nowrap>{{ $user->roles->pluck('display_name')->implode(' - ') }}</td>
                                         <td>
                                             <div class="d-flex">
                                                 <a href="{{ route('users.edit', $user->id) }}" data-toggle="tooltip" data-placement="top" title="Editar" class="text-warning mr-2">

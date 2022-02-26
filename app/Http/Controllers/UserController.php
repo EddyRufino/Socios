@@ -26,7 +26,8 @@ class UserController extends Controller
     public function create()
     {
         return view('admin.users.create', [
-            'roles' => Role::pluck('display_name', 'id'),
+            'roles' => Role::pluck('display_name', 'id')->take(6),
+            'permissions' => Role::latest()->pluck('display_name', 'id')->take(6),
             'user' => new User
         ]);
     }
@@ -53,9 +54,10 @@ class UserController extends Controller
     {
         // $this->authorize('update', $user);
 
-        $roles = Role::pluck('display_name', 'id');
+        $roles = Role::pluck('display_name', 'id')->take(6);
+        $permissions = Role::latest()->pluck('display_name', 'id')->take(6);
 
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('admin.users.edit', compact('user', 'roles', 'permissions'));
     }
 
     public function update(ProfileRequest $request, User $user)

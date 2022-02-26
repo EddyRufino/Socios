@@ -82,4 +82,24 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label class="font-weight-bold">Puede Ver:</label>
+                @if (auth()->user()->hasRoles(['superadmin']))
+                    <div class="checkbox">
+                        @foreach ($permissions as $id => $name)
+                            <label class="font-weight-normal text-dark mr-1">
+                                <input type="checkbox"
+                                    value="{{ $id }}"
+                                    {{ $user->roles->pluck('id')->contains($id) ? 'checked' : '' }}
+                                    name="roles[]">
+                                {{ $name }}
+                            </label>
+                        @endforeach
+                    </div>
+                @endif
+        </div>
+    </div>
+</div>
 
