@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Area;
 use App\Tarjeta;
-use Barryvdh\DomPDF\Facade as PDF;
 use App\Charts\TarjetaChart;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
 
 class dashboardTarjetaController extends Controller
@@ -33,7 +34,7 @@ class dashboardTarjetaController extends Controller
         $chartPie = new TarjetaChart;
 
         $today = today()->format('M Y');
-        $chart->title('Gráfico de Tarjetas');
+        $chart->title('Gráfico de Tarjetas - '.now()->format('Y'));
         $chart->labels($meses);
         $chart->dataset("Tarjetas", 'bar', $allTarjetas)->backgroundColor('#17a2b8');
         $chart->dataset("Impresas", 'bar', $printCount)->backgroundColor('#ffc107');
@@ -118,9 +119,9 @@ class dashboardTarjetaController extends Controller
         $chartYear = new TarjetaChart;
         $chartYear->labels($tarjetaYears->values());
         $chartYear->title('Gráfico de Tarjetas Por Años');
-        $chartYear->dataset("Tarjetas", 'line', $allTarjetaYear)->fill(false)->color("rgba(22,160,133, 0.4)");
-        $chartYear->dataset("Impresas", 'line', $printCountYear)->fill(false)->color("rgba(255, 205, 86, 0.6)");
-        $chartYear->dataset("No Impresas", 'line', $notPrintCountYear)->fill(false)->color("rgba(51,105,232, 0.6)");
+        $chartYear->dataset("Tarjetas", 'line', $allTarjetaYear)->fill(false)->color("rgba(22,160,133, 0.4)")->backgroundColor("rgba(22,160,133, 0.4)");
+        $chartYear->dataset("Impresas", 'line', $printCountYear)->fill(false)->color("rgba(255, 205, 86, 0.6)")->backgroundColor("rgba(255, 205, 86, 0.6)");
+        $chartYear->dataset("No Impresas", 'line', $notPrintCountYear)->fill(false)->color("rgba(51,105,232, 0.6)")->backgroundColor("rgba(51,105,232, 0.6)");
 
         // GRAFICOS BAR
         $labelsBar = $chart->labels;
@@ -142,7 +143,9 @@ class dashboardTarjetaController extends Controller
 
     public function graphicPdf()
     {
-        $pdf = PDF::loadView('admin.template.graficos.graphicTarjeta');
+        $area = Area::first();
+        
+        $pdf = PDF::loadView('admin.template.graficos.graphicTarjeta', compact('area'));
 
         return $pdf->stream();
     }

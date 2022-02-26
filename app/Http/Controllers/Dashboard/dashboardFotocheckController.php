@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Area;
 use App\Fotocheck;
 use Illuminate\Http\Request;
 use App\Charts\FotocheckChart;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
 
 class dashboardFotocheckController extends Controller
 {
-    public function __invoke()
+    public function graphic()
     {
         $meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
         $etiquetas = ['Fotochecks', 'Impresas', 'No Impresas'];    
@@ -119,11 +121,32 @@ class dashboardFotocheckController extends Controller
         $chartYear = new FotocheckChart;
         $chartYear->labels($fotochecksYears->values());
         $chartYear->title('Gráfico de Fotochecks Por Años');
-        $chartYear->dataset("Fotochecks", 'line', $allFotocheckYear)->backgroundColor("rgba(22,160,133, 0.4)");
-        $chartYear->dataset("Impresas", 'line', $printCountYear)->backgroundColor("rgba(255, 205, 86, 0.6)");
-        $chartYear->dataset("No Impresas", 'line', $notPrintCountYear)->backgroundColor("rgba(51,105,232, 0.6)");
+        $chartYear->dataset("Fotochecks", 'line', $allFotocheckYear)->fill(false)->color("rgba(22,160,133, 0.4)")->backgroundColor("rgba(22,160,133, 0.4)");
+        $chartYear->dataset("Impresas", 'line', $printCountYear)->fill(false)->color("rgba(255, 205, 86, 0.6)")->backgroundColor("rgba(255, 205, 86, 0.6)");
+        $chartYear->dataset("No Impresas", 'line', $notPrintCountYear)->fill(false)->color("rgba(51,105,232, 0.6)")->backgroundColor("rgba(51,105,232, 0.6)");
 
+        // GRAFICOS BAR
+        $labelsBar = $chart->labels;
+        $datasetsBar = $chart->datasets;
 
-        return view('admin.fotocheckDashboard', compact('chart', 'chartYear', 'chartPie', 'countAllFotochecks', 'countNotPrint', 'countPrint'));
+        // GRAFICOS CIRCULAR
+        $labelsPie = $chartPie->labels;
+        $datasetsPie = $chartPie->datasets[0]->values;
+        $dataPieOptions = $chartPie->datasets[0]->options;
+
+        // GRAFICOS LINIA
+        $labelsLine = $chartYear->labels;
+        $datasetsLine = $chartYear->datasets;
+
+        return view('admin.fotocheckDashboard', compact('labelsLine', 'datasetsLine','labelsPie', 'datasetsPie', 'dataPieOptions' ,'labelsBar', 'datasetsBar' ,'chart', 'chartYear', 'chartPie', 'countAllFotochecks', 'countNotPrint', 'countPrint'));
+    }
+
+    public function graphicPdf()
+    {
+        $area = Area::first();
+
+        $pdf = PDF::loadView('admin.template.graficos.graphicFotocheck', compact('area'));
+
+        return $pdf->stream();
     }
 }

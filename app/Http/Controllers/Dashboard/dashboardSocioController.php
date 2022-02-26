@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Carbon\Carbon;
+use App\Area;
 use App\Socio;
+use Carbon\Carbon;
 use App\Charts\SocioChart;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
 
 class dashboardSocioController extends Controller
 {
-    public function __invoke()
+    public function graphic()
     {
         $meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
         $etiquetas = ['Tarjetas', 'Impresas', 'No Impresas'];    
@@ -126,11 +128,33 @@ class dashboardSocioController extends Controller
         $chartYear = new SocioChart;
         $chartYear->labels($socioYears->values());
         $chartYear->title('Gráfico de Socios Por Años');
-        $chartYear->dataset("Socios", 'line', $allSociosYear)->backgroundColor("rgba(22,160,133, 0.4)");
-        $chartYear->dataset("P. Natural", 'line', $allNaturalYear)->backgroundColor("rgba(255, 205, 86, 0.6)");
-        $chartYear->dataset("P. Jurídica", 'line', $allJuridicaYear)->backgroundColor("rgba(51,105,232, 0.6)");
-        $chartYear->dataset("P. Extranjero", 'line', $allExtranjerosYear)->backgroundColor("rgba(140, 140, 140, 0.6)");
+        $chartYear->dataset("Socios", 'line', $allSociosYear)->fill(false)->color("rgba(22,160,133, 0.4)")->backgroundColor("rgba(22,160,133, 0.4)");
+        $chartYear->dataset("P. Natural", 'line', $allNaturalYear)->fill(false)->color("rgba(255, 205, 86, 0.6)")->backgroundColor("rgba(255, 205, 86, 0.6)");
+        $chartYear->dataset("P. Jurídica", 'line', $allJuridicaYear)->fill(false)->color("rgba(51,105,232, 0.6)")->backgroundColor("rgba(51,105,232, 0.6)");
+        $chartYear->dataset("P. Extranjero", 'line', $allExtranjerosYear)->fill(false)->color("rgba(140, 140, 140, 0.6)")->backgroundColor("rgba(140, 140, 140, 0.6)");
 
-        return view('admin.socioDashboard', compact('chartYear','chart', 'chartPie', 'countAllSocios', 'allNatural', 'allJuridica', 'allExtranjeros'));
+        // GRAFICOS BAR
+        $labelsBar = $chart->labels;
+        $datasetsBar = $chart->datasets;
+
+        // GRAFICOS CIRCULAR
+        $labelsPie = $chartPie->labels;
+        $datasetsPie = $chartPie->datasets[0]->values;
+        $dataPieOptions = $chartPie->datasets[0]->options;
+
+        // GRAFICOS LINIA
+        $labelsLine = $chartYear->labels;
+        $datasetsLine = $chartYear->datasets;
+
+        return view('admin.socioDashboard', compact('labelsLine', 'datasetsLine','labelsPie', 'datasetsPie', 'dataPieOptions' ,'labelsBar', 'datasetsBar', 'chartYear', 'chart', 'chartPie', 'countAllSocios', 'allNatural', 'allJuridica', 'allExtranjeros'));
+    }
+
+    public function graphicPdf()
+    {
+        $area = Area::first();
+
+        $pdf = PDF::loadView('admin.template.graficos.graphicSocio', compact('area'));
+
+        return $pdf->stream();
     }
 }

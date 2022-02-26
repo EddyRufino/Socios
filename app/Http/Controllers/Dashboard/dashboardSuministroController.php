@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Area;
+use App\Suministro;
 use Illuminate\Http\Request;
 use App\Charts\SuministroChart;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
-use App\Suministro;
 
 class dashboardSuministroController extends Controller
 {
-    public function __invoke()
+    public function graphic()
     {
         $meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
         $etiquetas = ['Tarjetas', 'Impresas', 'No Impresas'];    
@@ -110,11 +112,32 @@ class dashboardSuministroController extends Controller
         $chartYear = new SuministroChart;
         $chartYear->labels($tarjetaYears->values());
         $chartYear->title('Gráfico de Suministro Por Años');
-        $chartYear->dataset("PVC", 'line', $allPvcYear)->backgroundColor("rgba(22,160,133, 0.4)");
-        $chartYear->dataset("Cintas", 'line', $allCountCintas)->backgroundColor("rgba(255, 205, 86, 0.6)");
-        $chartYear->dataset("Hologramas", 'line', $allCountHolograma)->backgroundColor("rgba(51,105,232, 0.6)");
+        $chartYear->dataset("PVC", 'line', $allPvcYear)->fill(false)->color("rgba(22,160,133, 0.4)")->backgroundColor("rgba(22,160,133, 0.4)");
+        $chartYear->dataset("Cintas", 'line', $allCountCintas)->fill(false)->color("rgba(255, 205, 86, 0.6)")->backgroundColor("rgba(255, 205, 86, 0.6)");
+        $chartYear->dataset("Hologramas", 'line', $allCountHolograma)->fill(false)->color("rgba(51,105,232, 0.6)")->backgroundColor("rgba(51,105,232, 0.6)");
 
+        // GRAFICOS BAR
+        $labelsBar = $chart->labels;
+        $datasetsBar = $chart->datasets;
+        // dd($datasetsBar);
+        // GRAFICOS CIRCULAR
+        $labelsPie = $chartPie->labels;
+        $datasetsPie = $chartPie->datasets[0]->values;
+        $dataPieOptions = $chartPie->datasets[0]->options;
 
-        return view('admin.suministroDashboard', compact('chart', 'chartPie', 'chartYear', 'countAllPvc'));
+        // GRAFICOS LINIA
+        $labelsLine = $chartYear->labels;
+        $datasetsLine = $chartYear->datasets;
+
+        return view('admin.suministroDashboard', compact('labelsLine', 'datasetsLine','labelsPie', 'datasetsPie', 'dataPieOptions' ,'labelsBar', 'datasetsBar' ,'chart', 'chartPie', 'chartYear', 'countAllPvc'));
+    }
+
+    public function graphicPdf()
+    {
+        $area = Area::first();
+
+        $pdf = PDF::loadView('admin.template.graficos.graphicSuministro', compact('area'));
+
+        return $pdf->stream();
     }
 }

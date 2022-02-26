@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gráfico Tarjetas</title>
+    <title>Gráficos Fotochecks</title>
 </head>
 
 <style>
@@ -35,7 +35,6 @@
     }
 </style>
 
-
 <body>
     <div class="header">
         <img src="{{ asset('img/logo.png') }}" alt="Minucipalidad De Castilla" class="circle">
@@ -64,9 +63,9 @@
                 data:{{json_encode(request()->datasetsBar[2]['values'])}},
                 backgroundColor:'rgba(255, 99, 132, 0.8)',
             }]
-        },options:{title:{display:true,text:'Gráfico de Tarjetas - {{now()->format('Y')}}'}}}"
+        },options:{title:{display:true,text:'Gráfico de Fotochecks - {{now()->format('Y')}}'}}}"
     />
-
+    
     <img src="https://quickchart.io/chart?w=350&h=350&format=svg&c={
         type:'doughnut',
         data:{
@@ -77,7 +76,7 @@
                 borderColor:{{json_encode(request()->dataPieOptions['borderColor'])}},
                 borderWidth: 1
             }]
-        },options:{title:{display:true,text:'Gráfico de Tarjetas'}}}"
+        },options:{title:{display:true,text:'Gráfico de Fotochecks'}}}"
     />
 
     <img src="https://quickchart.io/chart?w=350&h=350&format=svg&c={
@@ -100,7 +99,7 @@
                 borderColor:'rgba(255, 99, 132, 0.8)',
                 fill:false
             }]
-        },options:{title:{display:true,text:'Gráfico de Tarjetas Por Años'}}}"
+        },options:{title:{display:true,text:'Gráfico de Fotochecks Por Años'}}}"
     />
 </body>
 </html>

@@ -57,6 +57,16 @@
                 </div>
             </div>
 
+            <a href="{{ route('admin.graphic.socio',
+                ['labelsBar'=> $labelsBar, 'datasetsBar'=> $datasetsBar,
+                'labelsPie'=> $labelsPie, 'datasetsPie'=> $datasetsPie, 'dataPieOptions'=> $dataPieOptions,
+                'labelsLine'=> $labelsLine, 'datasetsLine'=> $datasetsLine]) }}"
+                class="row justify-content-center mt-2"
+                target="_blank"
+            >
+                Descargar Reporte
+            </a>
+
             <div class="row justify-content-center mt-3">
                 <div class="col-md-10">
                     {!! $chart->container() !!}

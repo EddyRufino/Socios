@@ -151,9 +151,15 @@ Route::get('admin/suministro-excel', 'Export\Suministro\ExcelSuministroControlle
 // Route::get('/admin', 'Dashboard\dashboardController@index')->name('admin.template');
 Route::get('/admin-dashboard-tarjetas', 'Dashboard\dashboardTarjetaController@graphic')->name('admin.dashboard.tarjeta');
 Route::get('/admin-grafico-tarjetas', 'Dashboard\dashboardTarjetaController@graphicPdf')->name('admin.graphic.tarjeta');
-Route::get('/admin-dashboard-fotochecks', 'Dashboard\dashboardFotocheckController')->name('admin.dashboard.fotocheck');
-Route::get('/admin-dashboard-socios', 'Dashboard\dashboardSocioController')->name('admin.dashboard.socio');
-Route::get('/admin-dashboard-suministros', 'Dashboard\dashboardSuministroController')->name('admin.dashboard.suministro');
+
+Route::get('/admin-dashboard-fotochecks', 'Dashboard\dashboardFotocheckController@graphic')->name('admin.dashboard.fotocheck');
+Route::get('/admin-grafico-fotochecks', 'Dashboard\dashboardFotocheckController@graphicPdf')->name('admin.graphic.fotocheck');
+
+Route::get('/admin-dashboard-socios', 'Dashboard\dashboardSocioController@graphic')->name('admin.dashboard.socio');
+Route::get('/admin-grafico-socios', 'Dashboard\dashboardSocioController@graphicPdf')->name('admin.graphic.socio');
+
+Route::get('/admin-dashboard-suministros', 'Dashboard\dashboardSuministroController@graphic')->name('admin.dashboard.suministro');
+Route::get('/admin-grafico-suministros', 'Dashboard\dashboardSuministroController@graphicPdf')->name('admin.graphic.suministro');
 
 Auth::routes(["register" => false]);
 
