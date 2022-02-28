@@ -53,7 +53,7 @@
                     @if (auth()->user()->hasRoles(['superadmin']))
                         <div class="checkbox">
                             @foreach ($roles as $id => $name)
-                                <label class="font-weight-normal text-dark mr-1">
+                                <label class="font-weight-normal text-dark mr-2">
                                     <input type="checkbox"
                                         value="{{ $id }}"
                                         {{ $user->roles->pluck('id')->contains($id) ? 'checked' : '' }}
@@ -89,7 +89,7 @@
                 @if (auth()->user()->hasRoles(['superadmin']))
                     <div class="checkbox">
                         @foreach ($permissions as $id => $name)
-                            <label class="font-weight-normal text-dark mr-1">
+                            <label class="font-weight-normal text-dark mr-2">
                                 <input type="checkbox"
                                     value="{{ $id }}"
                                     {{ $user->roles->pluck('id')->contains($id) ? 'checked' : '' }}

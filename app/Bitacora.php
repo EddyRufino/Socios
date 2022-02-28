@@ -41,6 +41,7 @@ class Bitacora extends Model
         'user_modifico',
         'image',
         'created_at',
+        'deleted_at',
     ];
 
     public $timestamps = false;
@@ -49,6 +50,24 @@ class Bitacora extends Model
     {
         $name = Asociacione::where('id', $id)->get('nombre');
         return $name[0]->nombre;
+    }
+
+    public function getAsociacionDelete($id)
+    {
+        $socioQuery = Socio::query();
+
+        $asociacione = clone($socioQuery)->where('id', $id)->with('asociacione')->get('asociacione_id');
+        $tipoPersona = clone($socioQuery)->where('id', $id)->get('tipo_persona');
+
+        if (isset($asociacione[0]->asociacione_id) && $tipoPersona[0]->tipo_persona == 1) {
+            return $asociacione[0]->asociacione->nombre;
+        }
+
+        if (is_null($asociacione[0]->asociacione_id) && $tipoPersona[0]->tipo_persona == 2) {
+            return 'Persona Natural';
+        } else {
+            return 'Persona Jurídica';
+        }
     }
 
     public function getVehiculo($id)
@@ -61,5 +80,21 @@ class Bitacora extends Model
     {
         $user = User::where('id', $id)->get('name');
         return $user[0]->name;
+    }
+
+    function getNombreSocioDelete($id) {
+        $name = Socio::where('id', $id)->get('nombre_socio');
+        return $name[0]->nombre_socio;
+    }
+
+    function getPropietarioDelete($id) {
+        $name = Socio::where('id', $id)->get('nombre_propietario');
+        return $name[0]->nombre_propietario;
+    }
+
+    function getDniDelete($id) {
+        $name = Socio::where('id', $id)->get('dni_socio');
+        // dd($name);
+        return $name[0]->dni_socio;
     }
 }

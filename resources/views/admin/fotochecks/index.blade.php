@@ -50,9 +50,9 @@
                             <td>{{ optional($fotocheck->socio)->nombre_socio }}</td>
                             <td>{{ optional($fotocheck->socio)->dni_socio }}</td>
 
-                            @if (empty(optional($fotocheck->socio)->asociacione_id)  && optional($fotocheck->socio)->tipo_documento_id == 3)
+                            @if ($fotocheck->socio->tipo_persona == 3)
                                 <td class="text-secondary">Entidad Privada</td>
-                            @elseif (empty(optional($fotocheck->socio)->asociacione_id))
+                            @elseif ($fotocheck->socio->tipo_persona == 2)
                                 <td class="text-secondary">Persona Natural</td>
                             @else
                                 <td>{{ optional(optional($fotocheck->socio)->asociacione)->nombre }}</td>

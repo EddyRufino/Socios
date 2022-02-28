@@ -64,9 +64,9 @@
                             <td>{{ $tarjeta->socio->dni_socio }}</td>
                             <td>{{ $tarjeta->num_placa }}</td>
 
-                            @if (empty($tarjeta->socio->asociacione_id)  && $tarjeta->socio->tipo_documento_id == 3)
+                            @if ($tarjeta->socio->tipo_persona == 3)
                                 <td class="text-secondary">Entidad Privada</td>
-                            @elseif (empty($tarjeta->socio->asociacione_id))
+                            @elseif ($tarjeta->socio->tipo_persona == 2)
                                 <td class="text-secondary">Persona Natural</td>
                             @else
                                 <td>{{ optional($tarjeta->socio->asociacione)->nombre }}</td>

@@ -71,11 +71,10 @@
                                 @endforelse
                             </tbody>
                         </table>
-
-                        <div class="overflow-auto mt-2">
-                            {{ $users->links() }}
-                        </div>
                     </div>
+                </div>
+                <div class="overflow-auto mt-2">
+                    {{ $users->links() }}
                 </div>
             @else
                 <h2 class="text-secondary p-2">No Tienes permisos para ver esta vista</h2>

@@ -13,7 +13,7 @@ class CreateBitacoraTable extends Migration
      */
     public function up()
     {
-        Schema::create('bitacora', function (Blueprint $table) {
+        Schema::create('bitacoras', function (Blueprint $table) {
             $table->integer('id');
             $table->string('url')->nullable();
             $table->integer('user_modifico')->nullable();
@@ -44,6 +44,7 @@ class CreateBitacoraTable extends Migration
             $table->integer('suministro_id')->nullable();
             $table->integer('disenio_id')->nullable();
             $table->date('created_at')->nullable();
+            $table->date('deleted_at')->nullable();
             $table->string('image')->nullable();
             $table->string('descripcion')->nullable();
         });

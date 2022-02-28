@@ -705,6 +705,13 @@
             vigencia_autorizacion.value = '';
         }
         if (dato == "2") {
+            // Quitar el valor
+            asociacione_id.value = '';
+            num_operacion.value = '';
+            vigencia_operacion.value = '';
+            num_autorizacion.value = '';
+            vigencia_autorizacion.value = '';
+
             document.getElementById("legend-socio").style.display = "none";
             document.getElementById("legend-persona").style.display = "block";
             document.getElementById("legend-persona-juridica").style.display = "none";
@@ -716,6 +723,13 @@
 
         }
         if (dato == "3") {
+            // Quitar el valor
+            asociacione_id.value = '';
+            num_operacion.value = '';
+            vigencia_operacion.value = '';
+            num_autorizacion.value = '';
+            vigencia_autorizacion.value = '';
+
             document.getElementById("legend-socio").style.display = "none";
             document.getElementById("legend-persona").style.display = "none";
             document.getElementById("legend-persona-juridica").style.display = "block";

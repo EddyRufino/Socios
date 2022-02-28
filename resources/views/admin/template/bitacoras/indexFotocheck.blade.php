@@ -16,59 +16,59 @@
                 </div>
 
                 
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-md-12 table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Nombres y Apellidos</th>
-                                        <th scope="col">N. Doc</th>
-                                        <th scope="col">Asociación</th>
-                                        <th scope="col">Vehículo</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($bitacoras as $fotocheck)
-                                    <tr>
-                                        <td>{{ $fotocheck->socio->nombre_socio }}</td>
-            
-                                        <td>{{ $fotocheck->socio->dni_socio }}</td>
-            
-                                        @if (empty($fotocheck->socio->asociacione_id)  && $fotocheck->socio->tipo_documento_id == 3)
-                                            <td class="text-secondary">Entidad Privada</td>
-                                        @elseif (empty($fotocheck->socio->asociacione_id))
-                                            <td class="text-secondary">Persona Natural</td>
-                                        @else
-                                            <td>{{ optional($fotocheck->socio->asociacione)->nombre }}</td>
-                                        @endif
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-12 table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombres y Apellidos</th>
+                                    <th scope="col">N. Doc</th>
+                                    <th scope="col">Asociación</th>
+                                    <th scope="col">Vehículo</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($bitacoras as $fotocheck)
+                                <tr>
+                                    <td>{{ $fotocheck->socio->nombre_socio }}</td>
+        
+                                    <td>{{ $fotocheck->socio->dni_socio }}</td>
+        
+                                    @if ($fotocheck->socio->tipo_persona == 3)
+                                        <td class="text-secondary">Entidad Privada</td>
+                                    @elseif ($fotocheck->socio->tipo_persona == 2)
+                                        <td class="text-secondary">Persona Natural</td>
+                                    @else
+                                        <td>{{ optional($fotocheck->socio->asociacione)->nombre }}</td>
+                                    @endif
 
-                                        @if ($fotocheck->vehiculo_id == 1)
-                                            <td class="text-info">{{ $fotocheck->vehiculo->nombre }}</td>
-                                        @elseif($fotocheck->vehiculo_id === 2)
-                                            <td class="text-primary">{{ $fotocheck->vehiculo->nombre }}</td>
-                                        @else
-                                            <td class="text-secondary">{{ $fotocheck->vehiculo->nombre }}</td>
-                                        @endif
+                                    @if ($fotocheck->vehiculo_id == 1)
+                                        <td class="text-info">{{ $fotocheck->vehiculo->nombre }}</td>
+                                    @elseif($fotocheck->vehiculo_id === 2)
+                                        <td class="text-primary">{{ $fotocheck->vehiculo->nombre }}</td>
+                                    @else
+                                        <td class="text-secondary">{{ $fotocheck->vehiculo->nombre }}</td>
+                                    @endif
 
-                                        <td>
-                                            <a href="{{ route('bitacora.showFotocheck', $fotocheck->id) }}">
-                                                @include('icons.arrow-right')
-                                            </a>
-                                        </td>
-            
-                                    </tr>
-                                    @empty
-                                        <li class="list-group-item border-0 mb-3 shadow-sm">No hay nada para mostrar</li>
-                                    @endforelse
-                                </tbody>
-                            </table>
+                                    <td>
+                                        <a href="{{ route('bitacora.showFotocheck', $fotocheck->id) }}">
+                                            @include('icons.arrow-right')
+                                        </a>
+                                    </td>
+        
+                                </tr>
+                                @empty
+                                    <li class="list-group-item border-0 mb-3 shadow-sm">No hay nada para mostrar</li>
+                                @endforelse
+                            </tbody>
+                        </table>
 
-                            <div class="overflow-auto mt-2">
-                                {{ $bitacoras->links() }}
-                            </div>
+                        <div class="overflow-auto mt-2">
+                            {{ $bitacoras->links() }}
                         </div>
                     </div>
+                </div>
 
         </div>
         </div>

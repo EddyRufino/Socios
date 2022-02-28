@@ -95,7 +95,7 @@
                 <thead>
                     <tr>
                         <th scope="col" class="bg-primary text-white">Nombre y Apellido</th>
-                        <th scope="col" class="bg-primary text-white">dni, ruc, carnet</th>
+                        <th scope="col" class="bg-primary text-white">Num. Doc</th>
                         <th scope="col" class="bg-primary text-white">Placa</th>
                         <th scope="col" class="bg-primary text-white">Asociación</th>
                         <th scope="col" class="bg-primary text-white">Vehículo</th>
@@ -109,15 +109,14 @@
                             <td>{{ $socio->dni_socio }}</td>
                             <td>{{ $socio->num_placa }}</td>
 
-                            @if (empty($socio->asociacione_id)  && $socio->tipo_documento_id == 3)
+                            @if ($socio->tipo_persona == 3)
                                 <td class="text-secondary">Entidad Privada</td>
-                            @elseif (empty($socio->asociacione_id))
+                            @elseif ($socio->tipo_persona == 2)
                                 <td class="text-secondary">Persona Natural</td>
                             @else
                                 <td>{{ optional($socio->asociacione)->nombre }}</td>
                             @endif
 
-                            {{-- {{ dd($socio->vehiculo) }} --}}
                             @if ($socio->vehiculo_id == 1)
                                 <td class="text-info">{{ $socio->vehiculo->nombre }}</td>
                             @elseif($socio->vehiculo_id == 2)

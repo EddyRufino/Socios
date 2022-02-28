@@ -14,36 +14,48 @@
                 </div>
 
                 
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-md-12 table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Modificado</th>
-                                        <th>Registrado</th>
-                                        <th>Socio</th>
-                                        <th>N. Doc</th>
-                                        <th>Asociación</th>
-                                        <th>Vehículo</th>
-                                        <th>Expedición</th>
-                                        <th>Revalidación</th>
-                                        <th>N. Autori</th>
-                                        <th>Impreso</th>
-                                        <th>Fecha Impreso</th>
-                                        <th>Renovado</th>
-                                        {{-- <th></th> --}}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($fotochecks as $fotocheck)
-                                    <tr>
-                                        <td nowrap><span class="text-secondary">El</span> {{ $fotocheck->created_at }} <span class="text-secondary">Por</span> {{ $fotocheck->getUser($fotocheck->user_modifico) }}</td>
-                                        <td nowrap>{{ $fotocheck->getUser($fotocheck->user_id) }}</td>
-                                        <td nowrap>{{ $fotocheck->nombre_socio }}</td>
-            
-                                        <td>{{ $fotocheck->dni_socio }}</td>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-12 table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Modificado</th>
+                                    <th>Registrado</th>
+                                    <th>Socio</th>
+                                    <th>N. Doc</th>
+                                    <th>Asociación</th>
+                                    <th>Vehículo</th>
+                                    <th>Expedición</th>
+                                    <th>Revalidación</th>
+                                    <th>N. Autori</th>
+                                    <th>Impreso</th>
+                                    <th>Fecha Impreso</th>
+                                    <th>Renovado</th>
+                                    {{-- <th></th> --}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($fotochecks as $fotocheck)
+                                <tr>
+                                    <td nowrap><span class="text-secondary">{{ isset($fotocheck->created_at) ? 'Editado ' . $fotocheck->created_at : 'Eliminado ' . $fotocheck->deleted_at }}</span>  <span class="text-secondary">Por</span> {{ $fotocheck->getUser($fotocheck->user_modifico) }}</td>
+                                    
+                                    <td nowrap>{{ $fotocheck->getUser($fotocheck->user_id) }}</td>
+                                    
+                                    <td nowrap>{{ isset($fotocheck->nombre_socio) ? $fotocheck->nombre_socio : $fotocheck->getNombreSocioDelete($fotocheck->socio_id) }}</td>
+        
+                                    <td>{{ isset($fotocheck->dni_socio) ? $fotocheck->dni_socio : $fotocheck->getDniDelete($fotocheck->socio_id) }}</td>
 
-                                        @if (empty($fotocheck->asociacione_id) && $fotocheck->tipo_persona == 2)
+                                    {{-- @if (empty($fotocheck->asociacione_id) && $fotocheck->tipo_persona == 2)
+                                        <td nowrap class="text-secondary">Persona Natural</td>
+                                    @elseif (empty($fotocheck->asociacione_id) && $fotocheck->tipo_persona == 3)
+                                        <td nowrap class="text-secondary">Persona Jurídica</td>
+                                    @else
+                                        <td nowrap>{{ $fotocheck->getAsociacion($fotocheck->asociacione_id) }}</td>
+                                    @endif --}}
+
+                                    @if (isset($fotocheck->created_at))
+
+                                        @if (empty($fotocheck->asociacione_id) && $fotocheck->tipo_persona == 2) 
                                             <td nowrap class="text-secondary">Persona Natural</td>
                                         @elseif (empty($fotocheck->asociacione_id) && $fotocheck->tipo_persona == 3)
                                             <td nowrap class="text-secondary">Persona Jurídica</td>
@@ -51,29 +63,33 @@
                                             <td nowrap>{{ $fotocheck->getAsociacion($fotocheck->asociacione_id) }}</td>
                                         @endif
 
-                                        <td nowrap>{{ $fotocheck->getVehiculo($fotocheck->vehiculo_id) }}</td>
-                                        <td>{{ $fotocheck->expedicion }}</td>
-                                        <td>{{ $fotocheck->revalidacion }}</td>
-                                        <td nowrap>{{ $fotocheck->num_autorizacion }}</td>
+                                    @else
+                                        <td nowrap>{{ $fotocheck->getAsociacionDelete($fotocheck->socio_id) }}</td>
+                                    @endif
 
-                                        @if ($fotocheck->status)
-                                            <td>Impreso</td>
-                                        @else
-                                            <td nowrap>No Impreso</td>
-                                        @endif
+                                    <td nowrap>{{ $fotocheck->getVehiculo($fotocheck->vehiculo_id) }}</td>
+                                    <td>{{ $fotocheck->expedicion }}</td>
+                                    <td>{{ $fotocheck->revalidacion }}</td>
+                                    <td nowrap>{{ $fotocheck->num_autorizacion }}</td>
 
-                                        <th>{{ $fotocheck->fecha_print }}</th>
-                                        <th>{{ $fotocheck->renovado }}</th>
+                                    @if ($fotocheck->status)
+                                        <td>Impreso</td>
+                                    @else
+                                        <td nowrap>No Impreso</td>
+                                    @endif
 
-                                    </tr>
-                                    @empty
-                                        <li class="list-group-item border-0 mb-3 shadow-sm">No hay nada para mostrar</li>
-                                    @endforelse
-                                </tbody>
-                            </table>
+                                    <th>{{ $fotocheck->fecha_print }}</th>
+                                    <th>{{ $fotocheck->renovado }}</th>
 
-                        </div>
+                                </tr>
+                                @empty
+                                    <li class="list-group-item border-0 mb-3 shadow-sm">No hay nada para mostrar</li>
+                                @endforelse
+                            </tbody>
+                        </table>
+
                     </div>
+                </div>
 
             </div>
         </div>

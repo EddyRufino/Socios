@@ -16,7 +16,7 @@ class SuministroController extends Controller
     public function index()
     {
         $suministroQuery = Suministro::query();
-        $suministros = $suministroQuery->latest()->paginate(3);
+        $suministros = $suministroQuery->latest()->paginate(1);
         $countCinta = $suministroQuery->get('conteo_monto_cinta');
         $countCinta = $suministroQuery->get('conteo_monto_holograma');
 

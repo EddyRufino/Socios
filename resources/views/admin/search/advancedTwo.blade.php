@@ -174,9 +174,9 @@
                                 {{-- <td class="text-secondary">{{ optional($socio->tarjetas->vehiculo)->nombre }}</td> --}}
                             {{-- @endif --}}
 
-                            @if (empty($socio->asociacione_id)  && $socio->tipo_documento_id == 3)
+                            @if ($socio->tipo_persona == 3)
                                 <td class="text-secondary">Entidad Privada</td>
-                            @elseif (empty($socio->asociacione_id))
+                            @elseif ($socio->tipo_persona == 2)
                                 <td class="text-secondary">Persona Natural</td>
                             @else
                                 <td>{{ optional($socio->asociacione)->nombre }}</td>

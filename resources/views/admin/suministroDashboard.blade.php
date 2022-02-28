@@ -43,16 +43,6 @@
             </div>
         </div>
 
-        <a href="{{ route('admin.graphic.suministro',
-            ['labelsBar'=> $labelsBar, 'datasetsBar'=> $datasetsBar,
-            'labelsPie'=> $labelsPie, 'datasetsPie'=> $datasetsPie, 'dataPieOptions'=> $dataPieOptions,
-            'labelsLine'=> $labelsLine, 'datasetsLine'=> $datasetsLine]) }}"
-            class="row justify-content-center mt-2"
-            target="_blank"
-        >
-            Descargar Reporte
-        </a>
-
         <div class="row justify-content-center mt-3">
             <div class="col-md-10">
                 {!! $chart->container() !!}
@@ -62,19 +52,31 @@
         </div>
 
         <div class="row justify-content-center mt-4 mb-4">
-            <div class="col-md-10">
+            <div class="col-md-6">
+                {!! $chartYear->container() !!}
+
+                {!! $chartYear->script() !!}
+            </div>
+
+            <div class="col-md-6">
                 {!! $chartPie->container() !!}
 
                 {!! $chartPie->script() !!}
             </div>
         </div>
 
-        <div class="row justify-content-center mt-4 mb-4">
-            <div class="col-md-10">
-                {!! $chartYear->container() !!}
-
-                {!! $chartYear->script() !!}
-            </div>
+        <div class="container d-flex justify-content-center align-items-center">
+            <p>Descarga los gráficos
+                <a class="block" href="{{ route('admin.graphic.suministro',
+                    ['labelsBar'=> $labelsBar, 'datasetsBar'=> $datasetsBar,
+                    'labelsPie'=> $labelsPie, 'datasetsPie'=> $datasetsPie, 'dataPieOptions'=> $dataPieOptions,
+                    'labelsLine'=> $labelsLine, 'datasetsLine'=> $datasetsLine]) }}"
+                    class="row justify-content-center mt-2"
+                    target="_blank"
+                >
+                    aquí
+                </a>
+            </p>
         </div>
     </div>
 @endsection

@@ -423,15 +423,21 @@
         asociacione_id.value = '';
 
         if (dato == "1") {
+            asociacione_id.value = '';
+            
             document.getElementById("natural").style.display = "block";
             document.getElementById("juridica").style.display = "none";
         }
         if (dato == "2") {
+            asociacione_id.value = '';
+
             document.getElementById("natural").style.display = "none";
             document.getElementById("juridica").style.display = "block";
 
         }
         if (dato == "3") {
+            asociacione_id.value = '';
+
             document.getElementById("natural").style.display = "none";
             document.getElementById("juridica").style.display = "block";
         }

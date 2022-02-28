@@ -107,7 +107,7 @@
                                 <tr>
                                     <td>{{ optional($data->socio)->nombre_socio }}</td>
                                     <td>{{ optional($data->socio)->dni_socio }}</td>
-                                    <td>{{ $data->num_placa }}</td>
+                                    <td nowrap>{{ $data->num_placa }}</td>
 
                                     @if (empty(optional($data->socio)->asociacione_id)  && optional($data->socio)->tipo_documento_id == 3)
                                         <td class="text-secondary">Entidad Privada</td>

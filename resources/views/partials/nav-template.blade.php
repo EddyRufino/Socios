@@ -161,7 +161,7 @@
                                 <p>Filtros</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('socios.delete') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Socios Eliminados</p>
@@ -178,7 +178,7 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Fotochecks Eliminados</p>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                 @endif

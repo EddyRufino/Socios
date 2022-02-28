@@ -80,14 +80,12 @@
                             @endforelse
                         </tbody>
                     </table>
-
-                    <div class="overflow-auto mt-2">
-                        {{ $suministros->links() }}
-                    </div>
                 </div>
             </div>
-
-    </div>
+            <div class="overflow-auto mt-2">
+                {{ $suministros->links() }}
+            </div>
+        </div>
     </div>
 </div>
 @else

@@ -187,6 +187,29 @@ class FotocheckController extends Controller
     public function destroy(Fotocheck $fotocheck)
     {
         //unlink(public_path($fotocheck->image)); // Elimina la imagen
+        Bitacora::create([
+            'id' => $fotocheck->id,
+            'url' => $fotocheck->url,
+            'vehiculo_id' => $fotocheck->vehiculo_id,
+            'num_placa' => $fotocheck->num_placa,
+            'expedicion' => $fotocheck->expedicion,
+            'revalidacion' => $fotocheck->revalidacion,
+            'num_autorizacion' => $fotocheck->num_autorizacion,
+            'status' => $fotocheck->status,
+            'fecha_print' => $fotocheck->fecha_print,
+            'tipo' => $fotocheck->tipo,
+            'socio_id' => $fotocheck->socio_id,
+            'user_id' => $fotocheck->user_id,
+            'descripcion' => $fotocheck->descripcion,
+            'renovado' => $fotocheck->renovado,
+            'disenio_id' => $fotocheck->disenio_id,
+            'renovado_count' => $fotocheck->renovado_count,
+            'suministro_id' => $fotocheck->suministro_id,
+            'user_modifico' => auth()->user()->id,
+            'image' => $fotocheck->image,
+            'deleted_at' => now()->format('Y-m-d'),
+        ]);
+
         $fotocheck->delete();
 
         return redirect()->route('fotochecks.index')->with('status', ' Fue eliminado!');

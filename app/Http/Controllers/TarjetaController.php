@@ -201,6 +201,33 @@ class TarjetaController extends Controller
 
     public function destroy(Tarjeta $tarjeta)
     {
+        Bitacora::create([
+            'id' => $tarjeta->id,
+            'url' => $tarjeta->url,
+            'vehiculo_id' => $tarjeta->vehiculo_id,
+            'num_placa' => $tarjeta->num_placa,
+            'expedicion' => $tarjeta->expedicion,
+            'revalidacion' => $tarjeta->revalidacion,
+            'num_operacion' => $tarjeta->num_operacion,
+            'vigencia_operacion' => $tarjeta->vigencia_operacion,
+            'num_autorizacion' => $tarjeta->num_autorizacion,
+            'vigencia_autorizacion' => $tarjeta->vigencia_autorizacion,
+            'status' => $tarjeta->status,
+            'fecha_print' => $tarjeta->fecha_print,
+            'tipo' => $tarjeta->tipo,
+            'num_correlativo' => $tarjeta->num_correlativo,
+            'socio_id' => $tarjeta->socio_id,
+            'user_id' => $tarjeta->user_id,
+            'descripcion' => $tarjeta->descripcion,
+            'renovado' => $tarjeta->renovado,
+            'disenio_id' => $tarjeta->disenio_id,
+            'renovado_count' => $tarjeta->renovado_count,
+            'suministro_id' => $tarjeta->suministro_id,
+            'user_modifico' => auth()->user()->id,
+            'image' => NULL,
+            'deleted_at' => now()->format('Y-m-d'),
+        ]);
+        
         $tarjeta = $tarjeta->delete();
 
         return redirect()->route('tarjetas.index')->with('status', 'Fue eliminado!');
