@@ -43,6 +43,30 @@ class Tarjeta extends Model
         $this->attributes['num_placa'] = strtoupper($value);
     }
 
+    public function getAsociacion($id)
+    {
+        $name = Asociacione::where('id', $id)->get('nombre');
+        return $name[0]->nombre;
+    }
+
+    public function getAsociacionDewlete($id)
+    {
+        $socioQuery = Socio::query();
+
+        $asociacione = clone($socioQuery)->where('id', $id)->with('asociacione')->pluck('asociacione_id');
+        $tipoPersona = clone($socioQuery)->where('id', $id)->pluck('tipo_persona');
+
+        if ($tipoPersona->implode('') == '1') {
+            return $this->getAsociacion($asociacione->implode(''));
+        }
+
+        if ($tipoPersona->implode('') == '2') {
+            return 'Persona Natural';
+        } else {
+            return 'Persona Jurídica';
+        }
+    }
+
     public function vehiculo()
     {
         return $this->belongsTo(Vehiculo::class);

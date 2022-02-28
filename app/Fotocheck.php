@@ -10,9 +10,13 @@ class Fotocheck extends Model
 {
     use SoftDeletes;
 
+    // protected $table = 'fotochecks';
+
+    // protected $primaryKey = 'id';
+
     protected $guarded = [];
 
-    public $with = ['vehiculo', 'socio'];
+    // public $with = ['vehiculo', 'socio'];
 
     public function getRouteKeyName()
     {
@@ -45,6 +49,30 @@ class Fotocheck extends Model
         }
     }
 
+    public function getAsociacion($id)
+    {
+        $name = Asociacione::where('id', $id)->get('nombre');
+        return $name[0]->nombre;
+    }
+
+    public function getAsociacionDewlete($id)
+    {
+        $socioQuery = Socio::query();
+
+        $asociacione = clone($socioQuery)->where('id', $id)->with('asociacione')->pluck('asociacione_id');
+        $tipoPersona = clone($socioQuery)->where('id', $id)->pluck('tipo_persona');
+
+        if ($tipoPersona->implode('') == '1') {
+            return $this->getAsociacion($asociacione->implode(''));
+        }
+
+        if ($tipoPersona->implode('') == '2') {
+            return 'Persona Natural';
+        } else {
+            return 'Persona Jurídica';
+        }
+    }
+
     public function vehiculo()
     {
         return $this->belongsTo(Vehiculo::class);
@@ -58,5 +86,5 @@ class Fotocheck extends Model
     public function disenio()
     {
         return $this->belongsTo(Disenio::class);
-    }    
+    }
 }

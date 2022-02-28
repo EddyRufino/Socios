@@ -23,13 +23,15 @@ class dashboardTarjetaController extends Controller
         $printCount = collect([]);
         $notPrintCount = collect([]);
 
+        // $tarjetaQuery = Tarjeta::query();
+
         for ($days_backwards = $dateStart; $days_backwards <= $dateLast; $days_backwards++)
         {
             $allTarjetas->push(Tarjeta::whereYear('created_at', now()->format('Y'))->whereMonth('created_at', $days_backwards)->select('id')->count());
             $printCount->push(Tarjeta::whereYear('fecha_print', now()->format('Y'))->whereMonth('fecha_print', $days_backwards)->where('status', 1)->count());
             $notPrintCount->push(Tarjeta::whereYear('created_at', now()->format('Y'))->whereMonth('created_at', $days_backwards)->where('status', 0)->count());
         }
-        // dd($printCount);
+        
         $chart = new TarjetaChart;
         $chartPie = new TarjetaChart;
 
@@ -87,7 +89,7 @@ class dashboardTarjetaController extends Controller
         // $chartPie->minimalist(true);
         $chartPie->labels(['Tarjetas', 'Impresas', 'No Impresas']);
         $chartPie->title('Gráfico de Tarjetas');
-        $chartPie->dataset("Tarjetas", 'doughnut', [$countAllTarjetas[0], $countNotPrint[0], $countPrint[0]])->color($borderColors)->backgroundColor($fillColors);
+        $chartPie->dataset("Tarjetas", 'doughnut', [$countAllTarjetas[0], $countPrint[0], $countNotPrint[0]])->color($borderColors)->backgroundColor($fillColors);
 
         // Gráficos por año
         $data = Tarjeta::whereYear('created_at', '<=', now()->format('Y'))->orderby('created_at')->get('created_at');

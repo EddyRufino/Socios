@@ -16,7 +16,21 @@ class TodoTarjetasExport implements FromView
     */
     public function view(): View
     {
-        $attributes = Tarjeta::whereNull('deleted_at')->get();
+        // $attributes = Tarjeta::whereNull('deleted_at')->get();
+        $attributes = Tarjeta::whereNull('deleted_at')
+            ->with([
+                'socio' => function($query) {
+                    $query->select(['id', 'asociacione_id', 'nombre_socio', 'nombre_propietario', 'dni_socio', 'tipo_persona'])
+                        ->with(['asociacione' => function($query) {
+                            $query->select(['id', 'nombre']);
+                        }]);
+                },
+                'vehiculo' => function($query) {
+                    $query->select(['id', 'nombre']);
+                }
+            ])
+            ->get(['id', 'socio_id', 'vehiculo_id', 'num_placa', 'num_autorizacion', 'vigencia_autorizacion', 'num_operacion', 'vigencia_operacion', 'num_correlativo', 'expedicion', 'revalidacion', 'status']);
+
 
         return view('admin.export.excel.todoTarjetas', compact('attributes'));
     }

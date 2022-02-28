@@ -24,40 +24,27 @@
         </thead>
         <tbody>
             @foreach ($attributes as $fotocheck)
-                <tr>
-                    <td>{{ $fotocheck->socio->nombre_socio }}</td>
-                    <td>{{ $fotocheck->socio->nombre_propietario }}</td>
-                    <td>{{ $fotocheck->socio->documento->nombre }}</td>
+            <tr>
+                <td>{{ $fotocheck->socio ? $fotocheck->socio->nombre_socio : '' }}</td>
+                <td>{{ $fotocheck->socio ? $fotocheck->socio->nombre_propietario : '' }}</td>
 
-                    <td>{{ $fotocheck->socio->dni_socio }}</td>
-                    <td>{{ $fotocheck->num_autorizacion }}</td>
+                <td>{{ $fotocheck->socio ? $fotocheck->socio->dni_socio : '' }}</td>
+                <td>{{ $fotocheck->num_autorizacion }}</td>
 
-                    @if ($fotocheck->vehiculo_id == 1)
-                        <td class="text-info">{{ $fotocheck->vehiculo->nombre }}</td>
-                    @elseif($fotocheck->vehiculo_id === 2)
-                        <td class="text-primary">{{ $fotocheck->vehiculo->nombre }}</td>
-                    @else
-                        <td class="text-secondary">{{ $fotocheck->vehiculo->nombre }}</td>
-                    @endif
+                <td>{{ $fotocheck->vehiculo->nombre }}</td>
 
-                    @if (empty($fotocheck->socio->asociacione_id)  && $fotocheck->socio->tipo_documento_id == 3)
-                        <td>Entidad Privada</td>
-                    @elseif (empty($fotocheck->socio->asociacione_id))
-                        <td>Persona Natural</td>
-                    @else
-                        <td>{{ optional($fotocheck->socio->asociacione)->nombre }}</td>
-                    @endif
+                <td>{{ $fotocheck->getAsociacionDewlete($fotocheck->socio_id) }}</td>
 
-                    <td>{{ $fotocheck->expedicion }}</td>
-                    <td>{{ $fotocheck->revalidacion }}</td>
+                <td>{{ $fotocheck->expedicion }}</td>
+                <td>{{ $fotocheck->revalidacion }}</td>
 
-                   @if ($fotocheck->status == 1)
-                        <td>IMPRESO</td>
-                    @else
-                        <td>NO IMPRESO</td>
-                    @endif
+                @if ($fotocheck->status == 1)
+                     <td>IMPRESO</td>
+                 @else
+                     <td>NO IMPRESO</td>
+                 @endif
 
-                </tr>
+            </tr>
 
             @endforeach
 

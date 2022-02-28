@@ -265,7 +265,7 @@ body{
                 <img src="{{ asset('disenios/' . $fotocheck[0]->disenio->firma) }}" alt="firma" style="width: 300px" height="200px">
             </p>
         @endif --}}
-        @if ($fotocheck[0]->disenio->id != 2))
+        @if ($fotocheck[0]->disenio->id != 2)
             <p class="firma-jefe-revalidacion">
                 <img src="{{ asset('disenios/' . $fotocheck[0]->disenio->firma) }}" alt="firma" style="width: 300px" height="200px">
             </p>

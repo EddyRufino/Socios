@@ -86,27 +86,15 @@
         <tbody>
             @foreach ($tarjetas as $tarjeta)
                 <tr>
-                    <td>{{ $tarjeta->socio->nombre_socio }}</td>
-                    <td>{{ $tarjeta->socio->nombre_propietario }}</td>
+                    <td>{{ $tarjeta->socio ? $tarjeta->socio->nombre_socio : '' }}</td>
+                    <td>{{ $tarjeta->socio ? $tarjeta->socio->nombre_propietario : '' }}</td>
 
-                    <td>{{ $tarjeta->socio->dni_socio }}</td>
-                    <td>{{ $tarjeta->num_placa ? $tarjeta->num_placa : '-' }}</td>
+                    <td>{{ $tarjeta->socio ? $tarjeta->socio->dni_socio : '' }}</td>
+                    <td>{{ $tarjeta->num_placa }}</td>
 
-                    @if ($tarjeta->vehiculo_id == 1)
-                        <td class="text-info">{{ $tarjeta->vehiculo->nombre }}</td>
-                    @elseif($tarjeta->vehiculo_id === 2)
-                        <td class="text-primary">{{ $tarjeta->vehiculo->nombre }}</td>
-                    @else
-                        <td class="text-secondary">{{ $tarjeta->vehiculo->nombre }}</td>
-                    @endif
+                    <td>{{ $tarjeta->vehiculo->nombre }}</td>
 
-                    @if (empty($tarjeta->socio->asociacione_id)  && $tarjeta->socio->tipo_documento_id == 3)
-                        <td class="text-secondary">Entidad Privada</td>
-                    @elseif (empty($tarjeta->socio->asociacione_id))
-                        <td class="text-secondary">Persona Natural</td>
-                    @else
-                        <td>{{ optional($tarjeta->socio->asociacione)->nombre }}</td>
-                    @endif
+                    <td>{{ $tarjeta->getAsociacionDewlete($tarjeta->socio_id) }}</td>
 
                     <td>{{ $tarjeta->expedicion }}</td>
                     <td>{{ $tarjeta->revalidacion }}</td>

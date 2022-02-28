@@ -43,8 +43,13 @@
                             <tbody>
                                 @forelse ($tarjetas as $tarjeta)
                                 <tr>
-                                    <td nowrap><span class="text-secondary">{{ isset($tarjeta->created_at) ? 'Editado ' . $tarjeta->created_at : 'Eliminado ' . $tarjeta->deleted_at }}</span>  <span class="text-secondary">Por</span> {{ $tarjeta->getUser($tarjeta->user_modifico) }}</td>
-                                    
+                                    <td nowrap>
+                                        <span class="{{ isset($tarjeta->created_at) ? 'text-warning' : 'text-danger' }}">
+                                            {{ isset($tarjeta->created_at) ? 'Editado ' . $tarjeta->created_at : 'Eliminado ' . $tarjeta->deleted_at }}
+                                        </span> 
+                                        <span class="text-secondary">Por</span> {{ $tarjeta->getUser($tarjeta->user_modifico) }}
+                                    </td>
+
                                     <td nowrap>{{ $tarjeta->getUser($tarjeta->user_id) }}</td>
 
                                     <td nowrap>{{ isset($tarjeta->nombre_socio) ? $tarjeta->nombre_socio : $tarjeta->getNombreSocioDelete($tarjeta->socio_id) }}</td>
