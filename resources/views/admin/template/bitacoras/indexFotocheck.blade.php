@@ -52,7 +52,8 @@
                                     @endif
 
                                     <td>
-                                        <a href="{{ route('bitacora.showFotocheck', $fotocheck->id) }}">
+                                        <a class="tooltipw" href="{{ route('bitacora.showFotocheck', $fotocheck->id) }}">
+                                            <span id="tooltipw" class="tooltiptext">Ver más</span>
                                             @include('icons.arrow-right')
                                         </a>
                                     </td>

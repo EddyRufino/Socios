@@ -37,7 +37,7 @@ class dashboardFotocheckController extends Controller
         $chart->title('Gráfico de Fotochecks');
         $chart->labels($meses);
         $chart->dataset("Fotochecks", 'bar', $allFotochecks)->backgroundColor('#17a2b8');
-        $chart->dataset("Impresas", 'bar', $printCount)->backgroundColor('rgba(255, 99, 132, 0.8)');
+        $chart->dataset("Impresas", 'bar', $printCount)->backgroundColor('#ffc107');
         $chart->dataset("No Impresas", 'bar', $notPrintCount)->backgroundColor('#dc3545');
         
 

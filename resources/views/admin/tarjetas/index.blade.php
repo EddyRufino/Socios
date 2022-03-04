@@ -40,7 +40,7 @@
                     <tr>
                         <th scope="col" class="bg-primary text-white">Nombres y Apellidos</th>
                         <th scope="col" class="bg-primary text-white">Propietario</th>
-                        <th scope="col" class="bg-primary text-white">dni, ruc, carnet</th>
+                        <th scope="col" class="bg-primary text-white">Num. Doc</th>
                         <th scope="col" class="bg-primary text-white">N. Placa</th>
                         <th scope="col" class="bg-primary text-white">Asociación</th>
                         <th scope="col" class="bg-primary text-white">Vehículo</th>
@@ -92,7 +92,7 @@
                                             class="ml-3 text-decoration-none tooltipw"
                                             target="_blank"
                                         >
-                                            <span id="tooltipw" class="tooltiptext">Imprimir Carnet</span>
+                                            <span id="tooltipw" class="tooltiptext">Imprimir Tarjeta</span>
                                             @include('icons.download')
                                         </a></h6>
                                     @endcanPrint

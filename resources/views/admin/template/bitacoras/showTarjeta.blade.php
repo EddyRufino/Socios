@@ -55,9 +55,9 @@
                                     <td nowrap>{{ isset($tarjeta->nombre_socio) ? $tarjeta->nombre_socio : $tarjeta->getNombreSocioDelete($tarjeta->socio_id) }}</td>
                                     
                                      @if (isset($tarjeta->created_at))
-                                        <td>{{ $tarjeta->nombre_propietario }}</td>
+                                        <td nowrap>{{ $tarjeta->nombre_propietario }}</td>
                                     @else
-                                        <td class="text-secondary">{{ $tarjeta->getPropietarioDelete($tarjeta->socio_id) }}</td>
+                                        <td nowrap class="text-secondary">{{ $tarjeta->getPropietarioDelete($tarjeta->socio_id) }}</td>
                                     @endif
         
                                     <td>{{ isset($tarjeta->dni_socio) ? $tarjeta->dni_socio : $tarjeta->getDniDelete($tarjeta->socio_id) }}</td>

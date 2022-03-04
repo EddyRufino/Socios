@@ -53,9 +53,16 @@
                             @forelse ($suministros as $suministro)
                                 <tr>
                                     <td nowrap>{{ $suministro->nombre }}</td>
-                                    <td nowrap>{{ $suministro->monto_pvc }} <strong class="text-secondary">-</strong> {{ $suministro->conteo_monto_pvc }} <span class="text-secondary">@include('icons.top')</span></td>
-                                    <td nowrap>{{ $suministro->monto_cinta }} <strong class="text-secondary">-</strong> {{ number_format($cinta) }} <span class="text-secondary">@include('icons.top')</td>
-                                    <td nowrap>{{ $suministro->monto_holograma }} <strong class="text-secondary">-</strong> {{ number_format($holograma) }} <span class="text-secondary">@include('icons.top')</td>
+                                    <td nowrap>{{ $suministro->monto_pvc }} 
+                                        <strong class="text-secondary">-</strong> 
+                                        {{ $suministro->conteo_monto_pvc }} 
+                                        <span class="text-secondary tooltipw">
+                                            <span id="tooltipw" class="tooltiptext">PVC Utilzados</span>
+                                            @include('icons.top')
+                                        </span>
+                                    </td>
+                                    <td nowrap>{{ $suministro->monto_cinta }} <strong class="text-secondary">-</strong> {{ number_format($cinta) }} <span class="text-secondary tooltipw"><span id="tooltipw" class="tooltiptext">Cinta Utilzada</span>@include('icons.top')</td>
+                                    <td nowrap>{{ $suministro->monto_holograma }} <strong class="text-secondary">-</strong> {{ number_format($holograma) }} <span class="text-secondary tooltipw"><span id="tooltipw" class="tooltiptext">Holograma</span>@include('icons.top')</td>
                                     <td nowrap>{{ $suministro->fecha_adquisicion }}</td>
                                     <td nowrap>{{ $suministro->fecha_utilizacion }}</td>
                                     @if ($suministro->status == 1)

@@ -29,7 +29,7 @@ class dashboardSocioController extends Controller
             $allSocios->push(Socio::whereYear('created_at', now()->format('Y'))->whereMonth('created_at', $days_backwards)->where('tipo_persona', 1)->count());
             $allNatural->push(Socio::whereYear('created_at', now()->format('Y'))->whereMonth('created_at', $days_backwards)->where('tipo_persona', 2)->count());
             $allJuridica->push(Socio::whereYear('created_at', now()->format('Y'))->whereMonth('created_at', $days_backwards)->where('tipo_persona', 3)->count());
-            $allExtranjeros->push(Socio::whereYear('created_at', now()->format('Y'))->whereMonth('created_at', $days_backwards)->where('tipo_documento_id', 3)->count());
+            $allExtranjeros->push(Socio::whereYear('created_at', now()->format('Y'))->whereMonth('created_at', $days_backwards)->where('tipo_documento_id', 2)->count());
         }
         
         $chart = new SocioChart;
@@ -89,7 +89,7 @@ class dashboardSocioController extends Controller
         $countAllSocios->push(Socio::where('tipo_persona', 1)->count());
         $allNatural->push(Socio::where('tipo_persona', 2)->count());
         $allJuridica->push(Socio::where('tipo_persona', 3)->count());
-        $allExtranjeros->push(Socio::where('tipo_documento_id', 3)->count());
+        $allExtranjeros->push(Socio::where('tipo_documento_id', 2)->count());
         
         // $chartPie->minimalist(true);
         $chartPie->labels(['Socios', 'P. Natural', 'P. Jurídica', 'P. Extranjero']);
@@ -121,7 +121,7 @@ class dashboardSocioController extends Controller
             $allSociosYear->push(Socio::whereYear('created_at', $days_backwards)->where('tipo_persona', 1)->count());
             $allNaturalYear->push(Socio::whereYear('created_at', $days_backwards)->where('tipo_persona', 2)->count());
             $allJuridicaYear->push(Socio::whereYear('created_at', $days_backwards)->where('tipo_persona', 3)->count());
-            $allExtranjerosYear->push(Socio::whereYear('created_at', $days_backwards)->where('tipo_documento_id', 3)->count());
+            $allExtranjerosYear->push(Socio::whereYear('created_at', $days_backwards)->where('tipo_documento_id', 2)->count());
         }
         
     

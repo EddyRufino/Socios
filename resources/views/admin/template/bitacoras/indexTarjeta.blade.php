@@ -54,7 +54,8 @@
                                 @endif
 
                                 <td>
-                                    <a href="{{ route('bitacora.showTarjeta', $tarjeta->id) }}">
+                                    <a class="tooltipw" href="{{ route('bitacora.showTarjeta', $tarjeta->id) }}">
+                                        <span id="tooltipw" class="tooltiptext">Ver más</span>
                                         @include('icons.arrow-right')
                                     </a>
                                 </td>
