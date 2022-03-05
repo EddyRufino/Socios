@@ -37,8 +37,13 @@
                             <tbody>
                                 @forelse ($fotochecks as $fotocheck)
                                 <tr>
-                                    <td nowrap><span class="{{ isset($fotocheck->created_at) ? 'text-warning' : 'text-danger' }}">{{ isset($fotocheck->created_at) ? 'Editado ' . $fotocheck->created_at : 'Eliminado ' . $fotocheck->deleted_at }}</span>  <span class="text-secondary">Por</span> {{ $fotocheck->getUser($fotocheck->user_modifico) }}</td>
-                                    
+                                    <td nowrap>
+                                        <span class="{{ isset($fotocheck->created_at) ? 'text-primary' : (isset($fotocheck->updated_at) ? 'text-warning' : 'text-danger') }}">
+                                            {{ isset($fotocheck->created_at) ? 'Creado ' . $fotocheck->created_at : (isset($fotocheck->updated_at) ? 'Editado ' . $fotocheck->updated_at . ' -' : 'Eliminado ' . $fotocheck->deleted_at . ' -') }}
+                                        </span> 
+                                        <span class="text-secondary"></span> {{ $fotocheck->getUser($fotocheck->user_modifico) }}
+                                    </td>
+
                                     <td nowrap>{{ $fotocheck->getUser($fotocheck->user_id) }}</td>
                                     
                                     <td nowrap>{{ isset($fotocheck->nombre_socio) ? $fotocheck->nombre_socio : $fotocheck->getNombreSocioDelete($fotocheck->socio_id) }}</td>

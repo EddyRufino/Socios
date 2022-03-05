@@ -32,7 +32,7 @@ class BitacoraController extends Controller
 
     public function indexFotocheck()
     {
-        $ids = Bitacora::where('tipo', 2)->pluck('id')->unique();
+        $ids = Bitacora::where('tipo', 2)->whereNull('created_at')->pluck('id')->unique();
         $bitacoras = Fotocheck::whereIn('id', $ids)->withTrashed()->where('tipo', 2)->paginate();
         
         return view('admin.template.bitacoras.indexFotocheck', compact('bitacoras'));

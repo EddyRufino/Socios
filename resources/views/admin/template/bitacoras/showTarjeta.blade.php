@@ -44,7 +44,6 @@
                                 @forelse ($tarjetas as $tarjeta)
                                 <tr>
                                     <td nowrap>
-                                        {{-- {{dd(isset($tarjeta->updated_at))}} --}}
                                         <span class="{{ isset($tarjeta->created_at) ? 'text-primary' : (isset($tarjeta->updated_at) ? 'text-warning' : 'text-danger') }}">
                                             {{ isset($tarjeta->created_at) ? 'Creado ' . $tarjeta->created_at : (isset($tarjeta->updated_at) ? 'Editado ' . $tarjeta->updated_at . ' -' : 'Eliminado ' . $tarjeta->deleted_at . ' -') }}
                                         </span> 
