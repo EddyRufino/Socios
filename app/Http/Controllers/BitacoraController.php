@@ -12,7 +12,8 @@ class BitacoraController extends Controller
 {
     public function indexTarjeta()
     {
-        $ids = Bitacora::where('tipo', 1)->pluck('id')->unique();
+        $ids = Bitacora::where('tipo', 1)->whereNull('created_at')->pluck('id')->unique();
+        // dd($ids);
         $bitacoras = Tarjeta::whereIn('id', $ids)->withTrashed()->where('tipo', 1)->paginate();
         // dd($bitacoras);
         return view('admin.template.bitacoras.indexTarjeta', compact('bitacoras'));

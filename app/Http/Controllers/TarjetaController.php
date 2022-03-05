@@ -98,7 +98,7 @@ class TarjetaController extends Controller
             ]);
         }
 
-        Tarjeta::create(array_merge(
+        $tarjeta = Tarjeta::create(array_merge(
             $request->validated(), [
                 'socio_id' => is_null($socioGet) ? $socio->id : $socioGet->id,
                 'num_correlativo' => now()->format('Y') .'-'. $request->num_correlativo,
@@ -118,6 +118,56 @@ class TarjetaController extends Controller
             'conteo_monto_pvc' => $suministro->conteo_monto_pvc + 1,
             'conteo_monto_cinta' => bcdiv($suministro->conteo_monto_pvc / 300, 1),
             'conteo_monto_holograma' => bcdiv($suministro->conteo_monto_pvc / 300, 1)
+        ]);
+
+        // $dataTarjetaBitacora = array_merge([$socio[0], $tarjeta[0]]);
+        // dd($dataTarjetaBitacora);
+        // Bitacora::create(array_merge([$tarjeta, 
+        //         'status' => 0,
+        //         'tipo' => 1,
+        //         'created_at' => now()->format('Y-m-d'),
+        //         'nombre_socio' => $request->nombre_socio,
+        //         'dni_socio' => $request->dni_socio,
+        //         'nombre_propietario' => $request->nombre_propietario,
+        //         'dni_propietario' => $request->dni_propietario,
+        //         'asociacione_id' => $request->asociacione_id,
+        //         'vehiculo_id' => $request->vehiculo_id,
+        //         'tipo_documento_id' => $request->tipo_documento_id,
+        //         'tipo_persona' => $request->tipo_persona,
+        //     ])
+        // );
+        Bitacora::create([
+            'id' => $tarjeta->id,
+            'url' => $tarjeta->url,
+            'num_placa' => $tarjeta->num_placa,
+            'expedicion' => $tarjeta->expedicion,
+            'revalidacion' => $tarjeta->revalidacion,
+            'num_operacion' => $tarjeta->num_operacion,
+            'vigencia_operacion' => $tarjeta->vigencia_operacion,
+            'num_autorizacion' => $tarjeta->num_autorizacion,
+            'vigencia_autorizacion' => $tarjeta->vigencia_autorizacion,
+            'status' => 0,
+            'fecha_print' => $tarjeta->fecha_print,
+            'tipo' => 1,
+            'num_correlativo' => $tarjeta->num_correlativo,
+            'socio_id' => $tarjeta->socio_id,
+            'user_id' => $tarjeta->user_id,
+            'descripcion' => $tarjeta->descripcion,
+            'renovado' => $tarjeta->renovado,
+            'disenio_id' => $tarjeta->disenio_id,
+            'renovado_count' => 0,
+            'suministro_id' => $tarjeta->suministro_id,
+            'user_modifico' => NULL,
+            'image' => NULL,
+            'created_at' => now()->format('Y-m-d'),
+            'nombre_socio' => $request->nombre_socio,
+            'dni_socio' => $request->dni_socio,
+            'nombre_propietario' => $request->nombre_propietario,
+            'dni_propietario' => $request->dni_propietario,
+            'asociacione_id' => $request->asociacione_id,
+            'vehiculo_id' => $request->vehiculo_id,
+            'tipo_documento_id' => $request->tipo_documento_id,
+            'tipo_persona' => $request->tipo_persona,
         ]);
 
         return redirect()->route('tarjetas.index')->with('status', $request->nombre_socio . ' fue registrado!');
@@ -142,7 +192,7 @@ class TarjetaController extends Controller
     public function update(TarjetaRequest $request, Tarjeta $tarjeta)
     {
         $url = $tarjeta->url; // OJO que si cambias el nombre también cambia la url y cuando generes el QR no saldran los datos
-
+        
         $socio = Socio::where('url', $url)->update([
             'nombre_socio' => ucwords($request->nombre_socio),
             'dni_socio' => $request->dni_socio,
@@ -193,7 +243,7 @@ class TarjetaController extends Controller
             'suministro_id' => $tarjeta->suministro_id,
             'user_modifico' => auth()->user()->id,
             'image' => NULL,
-            'created_at' => now()->format('Y-m-d'),
+            'updated_at' => now()->format('Y-m-d'),
         ]);
 
         return redirect()->route('tarjetas.index')->with('status', $request->nombre_socio . ' fue modificado!');

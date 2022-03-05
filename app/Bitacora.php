@@ -41,6 +41,7 @@ class Bitacora extends Model
         'user_modifico',
         'image',
         'created_at',
+        'updated_at',
         'deleted_at',
     ];
 
@@ -78,6 +79,8 @@ class Bitacora extends Model
 
     public function getUser($id)
     {
+        if (!isset($id)) return '';
+        
         $user = User::where('id', $id)->get('name');
         return $user[0]->name;
     }

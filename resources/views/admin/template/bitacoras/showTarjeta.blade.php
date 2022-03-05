@@ -44,10 +44,11 @@
                                 @forelse ($tarjetas as $tarjeta)
                                 <tr>
                                     <td nowrap>
-                                        <span class="{{ isset($tarjeta->created_at) ? 'text-warning' : 'text-danger' }}">
-                                            {{ isset($tarjeta->created_at) ? 'Editado ' . $tarjeta->created_at : 'Eliminado ' . $tarjeta->deleted_at }}
+                                        {{-- {{dd(isset($tarjeta->updated_at))}} --}}
+                                        <span class="{{ isset($tarjeta->created_at) ? 'text-primary' : (isset($tarjeta->updated_at) ? 'text-warning' : 'text-danger') }}">
+                                            {{ isset($tarjeta->created_at) ? 'Creado ' . $tarjeta->created_at : (isset($tarjeta->updated_at) ? 'Editado ' . $tarjeta->updated_at . ' -' : 'Eliminado ' . $tarjeta->deleted_at . ' -') }}
                                         </span> 
-                                        <span class="text-secondary">Por</span> {{ $tarjeta->getUser($tarjeta->user_modifico) }}
+                                        <span class="text-secondary"></span> {{ $tarjeta->getUser($tarjeta->user_modifico) }}
                                     </td>
 
                                     <td nowrap>{{ $tarjeta->getUser($tarjeta->user_id) }}</td>
