@@ -37,4 +37,13 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function authenticated()
+    {
+        if (auth()->user()->hasRoles(['superadmin'])) {
+            return redirect('/admin-dashboard-socios');
+        }
+
+        return redirect('/socios');
+    }
 }
